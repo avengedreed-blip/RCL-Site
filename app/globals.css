@@ -1,0 +1,530 @@
+@import "tailwindcss";
+
+@theme {
+  --color-rcl-black: #050505;
+  --color-rcl-surface: #0b0b0d;
+  --color-rcl-elevated: #121216;
+  --color-rcl-red: #ff2020;
+  --color-rcl-muted: #b8b8b8;
+  --color-rcl-dim: #777780;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  background: #050505;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  overflow-x: clip;
+  overflow-y: visible;
+  background:
+    linear-gradient(180deg, rgba(255, 32, 32, 0.075), transparent 460px),
+    radial-gradient(circle at 74% 18%, rgba(255, 32, 32, 0.18), transparent 320px),
+    radial-gradient(circle at 50% 58%, rgba(255, 32, 32, 0.055), transparent 520px),
+    #050505;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+  text-rendering: geometricPrecision;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(255, 32, 32, 0.78);
+  color: #ffffff;
+}
+
+.brand-heading {
+  font-family: "Arial Black", Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.product-page-title {
+  font-size: clamp(3rem, 4.35vw, 5.7rem);
+  line-height: 0.92;
+}
+
+.info-page-title {
+  font-size: clamp(3rem, 5.9vw, 5.85rem);
+  line-height: 0.94;
+}
+
+.page-shell {
+  position: relative;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.page-shell::before {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.page-shell::after {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(90deg, #050505 0%, transparent 18%, transparent 82%, #050505 100%),
+    radial-gradient(circle at 50% 0%, transparent, #050505 74%);
+}
+
+.hero-section {
+  position: relative;
+  display: grid;
+  width: min(100%, 1760px);
+  min-height: 80vh;
+  margin: 0 auto;
+  padding: 72px 20px 96px;
+  overflow: hidden;
+  gap: 40px;
+  align-items: start;
+}
+
+.hero-section::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 66% 69%, rgba(255, 32, 32, 0.24), transparent 22%),
+    radial-gradient(circle at 70% 42%, rgba(255, 32, 32, 0.11), transparent 36%),
+    linear-gradient(90deg, #050505 0%, rgba(5, 5, 5, 0.98) 34%, rgba(22, 2, 2, 0.86) 72%, #050505 100%);
+}
+
+.hero-copy {
+  max-width: 650px;
+}
+
+.hero-mark {
+  position: relative;
+  min-height: 430px;
+  overflow: visible;
+  pointer-events: none;
+  border-radius: 0;
+  background: transparent;
+  isolation: isolate;
+  mask-image:
+    radial-gradient(ellipse at 52% 54%, black 0 42%, rgba(0, 0, 0, 0.68) 60%, transparent 84%),
+    linear-gradient(90deg, transparent 0%, black 18%, black 84%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, black 16%, black 78%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.hero-title {
+  transform: scaleX(1.08);
+  transform-origin: left center;
+}
+
+.rcl-motif {
+  --motif-size: 74%;
+  --motif-center-y: 51%;
+  --motif-line: rgba(255, 255, 255, 0.16);
+  --motif-line-soft: rgba(255, 255, 255, 0.085);
+  --motif-red: rgba(255, 32, 32, 0.74);
+  --motif-red-soft: rgba(255, 32, 32, 0.16);
+  position: absolute;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.rcl-motif--hero {
+  --motif-size: 82%;
+  --motif-center-y: 51%;
+  --motif-line: rgba(255, 255, 255, 0.2);
+  --motif-line-soft: rgba(255, 255, 255, 0.11);
+  --motif-red-soft: rgba(255, 32, 32, 0.2);
+}
+
+.rcl-motif--panel {
+  --motif-size: 88%;
+  --motif-center-y: 50%;
+  --motif-line: rgba(255, 255, 255, 0.1);
+  --motif-line-soft: rgba(255, 255, 255, 0.052);
+  --motif-red-soft: rgba(255, 32, 32, 0.13);
+}
+
+.rcl-motif--compact {
+  --motif-size: 70%;
+  --motif-center-y: 50%;
+  --motif-line: rgba(255, 255, 255, 0.14);
+  --motif-line-soft: rgba(255, 255, 255, 0.07);
+  --motif-red-soft: rgba(255, 32, 32, 0.18);
+}
+
+.rcl-motif__glow,
+.rcl-motif__grid,
+.rcl-motif__ring,
+.rcl-motif__axis,
+.rcl-motif__guide,
+.rcl-motif__node {
+  position: absolute;
+}
+
+.rcl-motif__glow {
+  left: 50%;
+  top: var(--motif-center-y);
+  width: calc(var(--motif-size) * 0.86);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 68%, rgba(255, 32, 32, 0.22), transparent 35%),
+    radial-gradient(circle at 50% 50%, rgba(255, 32, 32, 0.11), transparent 58%);
+  filter: blur(2px);
+  transform: translate(-50%, -50%);
+}
+
+.rcl-motif__grid {
+  inset: 8%;
+  opacity: 0.66;
+  background-image:
+    linear-gradient(var(--motif-line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--motif-line-soft) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image:
+    radial-gradient(circle at 50% var(--motif-center-y), black 0 42%, transparent 72%),
+    linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+}
+
+.rcl-motif__ring {
+  left: 50%;
+  top: var(--motif-center-y);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.rcl-motif__ring--outer {
+  width: var(--motif-size);
+  border: 1px solid var(--motif-line);
+  box-shadow:
+    inset 0 0 80px rgba(255, 255, 255, 0.035),
+    0 0 80px rgba(255, 32, 32, 0.085);
+}
+
+.rcl-motif__ring--inner {
+  width: calc(var(--motif-size) * 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.rcl-motif__axis--vertical {
+  top: 7%;
+  bottom: 9%;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--motif-red), rgba(255, 255, 255, 0.62), var(--motif-red), transparent);
+  box-shadow: 0 0 26px var(--motif-red-soft);
+}
+
+.rcl-motif__axis--horizontal {
+  left: 8%;
+  right: 8%;
+  top: var(--motif-center-y);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--motif-line), rgba(255, 255, 255, 0.32), var(--motif-line), transparent);
+}
+
+.rcl-motif__guide {
+  background: var(--motif-line-soft);
+}
+
+.rcl-motif__guide--top,
+.rcl-motif__guide--bottom {
+  left: 18%;
+  right: 18%;
+  height: 1px;
+}
+
+.rcl-motif__guide--top {
+  top: calc(var(--motif-center-y) - 25%);
+}
+
+.rcl-motif__guide--bottom {
+  top: calc(var(--motif-center-y) + 25%);
+}
+
+.rcl-motif__guide--left,
+.rcl-motif__guide--right {
+  top: 22%;
+  bottom: 22%;
+  width: 1px;
+}
+
+.rcl-motif__guide--left {
+  left: 27%;
+}
+
+.rcl-motif__guide--right {
+  right: 27%;
+}
+
+.rcl-motif__node {
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(255, 32, 32, 0.55);
+  background: rgba(255, 32, 32, 0.34);
+  box-shadow: 0 0 18px rgba(255, 32, 32, 0.5);
+  transform: translate(-50%, -50%);
+}
+
+.rcl-motif__node--center {
+  left: 50%;
+  top: var(--motif-center-y);
+}
+
+.rcl-motif__node--north {
+  left: 50%;
+  top: calc(var(--motif-center-y) - 25%);
+}
+
+.rcl-motif__node--east {
+  left: 73%;
+  top: var(--motif-center-y);
+}
+
+.rcl-motif__node--south {
+  left: 50%;
+  top: calc(var(--motif-center-y) + 25%);
+}
+
+.rcl-motif__node--west {
+  left: 27%;
+  top: var(--motif-center-y);
+}
+
+.hero-mark::before {
+  position: absolute;
+  inset: -12%;
+  pointer-events: none;
+  content: "";
+  z-index: 1;
+  background:
+    linear-gradient(90deg, #050505 0%, rgba(5, 5, 5, 0.92) 18%, rgba(5, 5, 5, 0.38) 34%, transparent 54%, rgba(5, 5, 5, 0.58) 78%, #050505 100%),
+    linear-gradient(180deg, #050505 0%, rgba(5, 5, 5, 0.62) 18%, transparent 36%, transparent 62%, rgba(5, 5, 5, 0.82) 82%, #050505 100%),
+    radial-gradient(circle at 50% 78%, rgba(255, 32, 32, 0.22), transparent 38%);
+}
+
+.hero-mark .rcl-motif::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: url("/images/home/rcl-technical-orb.jpg") center / cover no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.58;
+  mask-image: radial-gradient(ellipse at 50% 48%, black 0 35%, rgba(0, 0, 0, 0.52) 54%, transparent 75%);
+}
+
+.hero-mark::after {
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  content: "";
+  z-index: 2;
+  background:
+    radial-gradient(ellipse at 50% 77%, rgba(255, 32, 32, 0.18), transparent 28%),
+    radial-gradient(ellipse at 50% 50%, transparent 0 44%, rgba(5, 5, 5, 0.48) 76%, #050505 100%);
+}
+
+.hero-cinematic-image {
+  z-index: 0;
+  object-fit: contain;
+  object-position: center center;
+  filter: saturate(1.05) contrast(1.05);
+  mask-image:
+    radial-gradient(ellipse at 51% 53%, black 0 38%, rgba(0, 0, 0, 0.68) 56%, transparent 82%),
+    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.35) 12%, black 27%, black 72%, rgba(0, 0, 0, 0.36) 88%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.34) 12%, black 24%, black 72%, rgba(0, 0, 0, 0.3) 86%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.hero-cinematic-vignette {
+  position: absolute;
+  inset: -14%;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #050505, rgba(5, 5, 5, 0.78) 16%, rgba(5, 5, 5, 0.18) 34%, transparent 53%, rgba(5, 5, 5, 0.46) 78%, #050505),
+    linear-gradient(180deg, #050505, rgba(5, 5, 5, 0.64) 16%, transparent 35%, transparent 62%, rgba(5, 5, 5, 0.72) 82%, #050505),
+    radial-gradient(circle at 50% 80%, rgba(255, 32, 32, 0.2), transparent 34%);
+}
+
+.hero-atmosphere,
+.hero-energy-core,
+.hero-reflective-floor {
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero-atmosphere {
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 52% 50%, rgba(255, 32, 32, 0.16), transparent 34%),
+    radial-gradient(circle at 72% 64%, rgba(255, 32, 32, 0.09), transparent 28%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.46), transparent 28%, transparent 72%, rgba(0, 0, 0, 0.55));
+}
+
+.hero-energy-core {
+  left: 50%;
+  bottom: 16%;
+  z-index: 7;
+  width: min(18vw, 260px);
+  height: 2px;
+  background: #fff;
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.95),
+    0 0 34px rgba(255, 32, 32, 0.95),
+    0 0 92px rgba(255, 32, 32, 0.78),
+    0 0 170px rgba(255, 32, 32, 0.52);
+  transform: translateX(-50%);
+}
+
+.hero-energy-core::before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  content: "";
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.95),
+    0 0 42px rgba(255, 32, 32, 1),
+    0 0 120px rgba(255, 32, 32, 0.85);
+  transform: translate(-50%, -50%);
+}
+
+.hero-reflective-floor {
+  left: 4%;
+  right: 4%;
+  bottom: 0;
+  z-index: 2;
+  height: 31%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 2px),
+    radial-gradient(ellipse at 50% 10%, rgba(255, 32, 32, 0.44), transparent 22%),
+    radial-gradient(ellipse at 50% 56%, rgba(255, 32, 32, 0.18), transparent 38%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 18px),
+    linear-gradient(180deg, rgba(255, 32, 32, 0.06), rgba(0, 0, 0, 0.82));
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+  mask-image: linear-gradient(180deg, black, transparent 88%);
+}
+
+.hero-ring {
+  position: absolute;
+  left: 18%;
+  top: 19%;
+  width: 72%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    grid-template-columns: 0.66fr 1.34fr;
+    min-height: 80vh;
+    padding: 96px 32px 116px;
+  }
+
+  .hero-mark {
+    min-height: 680px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-section {
+    padding-inline: 56px;
+  }
+
+  .hero-mark {
+    min-height: 780px;
+  }
+}
+
+@media (max-width: 767px) {
+  .product-page-title,
+  .info-page-title {
+    font-size: clamp(2.75rem, 13vw, 4.35rem);
+  }
+
+  .hero-title {
+    max-width: 100%;
+    transform: none;
+  }
+
+  .hero-mark {
+    min-height: 360px;
+  }
+
+  .hero-logo {
+    width: 102%;
+  }
+
+  .hero-energy-core {
+    bottom: 15%;
+    width: 46vw;
+  }
+
+  .rcl-motif--hero {
+    --motif-size: 88%;
+  }
+}
+
+.philosophy-panel::before,
+.final-cta-panel::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(5, 5, 5, 0.88), rgba(5, 5, 5, 0.52) 55%, rgba(5, 5, 5, 0.38)),
+    url("/images/home/red-floor-glow.jpg");
+  background-position: center;
+  background-size: cover;
+  opacity: 0.46;
+}
+
+.final-cta-panel::before {
+  opacity: 0.58;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

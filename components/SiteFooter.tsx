@@ -1,0 +1,62 @@
+import Link from "next/link";
+import { Mail } from "lucide-react";
+import { Logo } from "@/components/Logo";
+import { studioEmailHref } from "@/content/contact";
+
+const footerLinks = [
+  { href: "/projects", label: "Products" },
+  { href: "/about", label: "About" },
+  { href: "/press", label: "Press" },
+  { href: "/contact", label: "Contact" },
+];
+
+const socialLinks = [
+  { href: studioEmailHref, label: "Email", icon: Mail },
+];
+
+export function SiteFooter() {
+  return (
+    <footer className="border-t border-white/[0.08] bg-rcl-black">
+      <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-10 md:grid-cols-[1.15fr_1fr_1fr] md:px-8">
+        <div className="flex items-center gap-7">
+          <Logo className="w-[150px]" />
+          <div className="h-12 w-px bg-white/15" />
+          <p className="max-w-[260px] text-sm leading-6 text-rcl-dim">
+            Independent software and game studio.
+          </p>
+        </div>
+        <nav className="flex flex-wrap items-center gap-5 md:justify-center" aria-label="Footer">
+          {footerLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-xs font-black uppercase text-rcl-muted transition hover:text-rcl-red"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex flex-col gap-5 md:items-end">
+          <div className="flex gap-4">
+            {socialLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  aria-label={link.label}
+                  className="text-white transition hover:text-rcl-red"
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </a>
+              );
+            })}
+          </div>
+          <p className="text-sm leading-6 text-rcl-dim">
+            &copy; 2026 Reed Creative Labs. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
