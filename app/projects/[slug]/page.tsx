@@ -64,7 +64,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <p className="mb-5 text-sm font-black uppercase text-rcl-red">
             {getProjectDateLabel(project)}
           </p>
-          <h1 className="brand-heading product-page-title max-w-[920px] break-words text-white">
+          <h1 className="brand-heading product-page-title max-w-[920px] text-white">
             {project.name}
           </h1>
           <p className="mt-6 max-w-[780px] text-xl leading-8 text-white">

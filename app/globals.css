@@ -52,6 +52,10 @@ a {
   font-family: "Arial Black", Arial, Helvetica, sans-serif;
   letter-spacing: 0;
   text-transform: uppercase;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  text-wrap: balance;
 }
 
 .product-page-title {
@@ -472,13 +476,26 @@ a {
 }
 
 @media (max-width: 767px) {
+  h1,
+  h2,
+  h3,
+  .brand-heading {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
+  }
+
   .product-page-title,
   .info-page-title {
-    font-size: clamp(2.75rem, 13vw, 4.35rem);
+    font-size: clamp(2.25rem, 10.5vw, 4rem);
+    line-height: 1;
   }
 
   .hero-title {
     max-width: 100%;
+    font-size: clamp(3rem, 16vw, 4rem) !important;
+    line-height: 0.94;
     transform: none;
   }
 

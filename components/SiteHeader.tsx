@@ -36,14 +36,14 @@ export function SiteHeader() {
         </Link>
       </div>
       <nav
-        className="mx-auto flex max-w-[1500px] gap-5 overflow-x-auto px-5 pb-4 md:hidden"
+        className="mx-auto flex max-w-[1500px] justify-between gap-3 overflow-x-auto px-4 pb-4 md:hidden"
         aria-label="Mobile navigation"
       >
         {navItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="shrink-0 text-xs font-black uppercase text-rcl-muted"
+            className="shrink-0 text-[0.68rem] font-black uppercase text-rcl-muted min-[375px]:text-xs"
           >
             {item.label}
           </Link>

@@ -18,9 +18,9 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-white/[0.08] bg-rcl-black">
       <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-10 md:grid-cols-[1.15fr_1fr_1fr] md:px-8">
-        <div className="flex items-center gap-7">
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
           <Logo className="w-[150px]" />
-          <div className="h-12 w-px bg-white/15" />
+          <div className="hidden h-12 w-px bg-white/15 sm:block" />
           <p className="max-w-[260px] text-sm leading-6 text-rcl-dim">
             Independent software and game studio.
           </p>

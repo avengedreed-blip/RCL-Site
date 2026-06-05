@@ -46,9 +46,9 @@ export default function ContactPage() {
                 <p className="text-sm font-black uppercase text-rcl-red">
                   {contact.label}
                 </p>
-                <h2 className="mt-4 max-w-full text-lg font-black text-white [overflow-wrap:anywhere] sm:text-2xl">
+                <p className="mt-4 max-w-full text-lg font-black text-white [overflow-wrap:anywhere] sm:text-2xl">
                   {contact.value}
-                </h2>
+                </p>
                 <p className="mt-5 text-base leading-8 text-rcl-muted">
                   {contact.body}
                 </p>
