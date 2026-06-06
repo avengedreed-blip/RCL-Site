@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Archive, LockKeyhole, ScanLine, WifiOff } from "lucide-react";
+import { Archive, LockKeyhole, ScanLine, UsersRound, WifiOff } from "lucide-react";
+import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
+import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { buildMetadata } from "@/lib/seo";
@@ -71,6 +73,41 @@ export default function AboutPage() {
                 whole catalog: local control, clean interaction, durable value,
                 and restrained presentation.
               </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 sm:p-8 md:grid md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
+            <RclTechnicalMotif
+              className="right-[-20%] top-[-38%] h-[380px] w-[380px] opacity-30"
+              variant="compact"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_8%,rgba(255,32,32,0.16),transparent_36%),linear-gradient(90deg,rgba(255,255,255,0.04),transparent_45%)]" />
+            <div className="relative">
+              <UsersRound
+                className="mb-7 h-8 w-8 text-rcl-red"
+                strokeWidth={1.5}
+                aria-hidden="true"
+              />
+              <p className="text-sm font-black uppercase text-rcl-red">
+                Founder story
+              </p>
+              <h2 className="brand-heading mt-4 text-3xl leading-none text-white sm:text-4xl">
+                The People Behind Reed Creative Labs
+              </h2>
+            </div>
+            <div className="relative mt-6 md:mt-0">
+              <p className="max-w-[760px] text-base leading-8 text-rcl-muted">
+                Meet Aaron and Katy Reed, the husband-and-wife team building
+                Reed Creative Labs around real life, full-time work, and a
+                belief that small teams can still build meaningful things.
+              </p>
+              <ButtonLink href="/about/founder" variant="secondary" className="mt-7">
+                Read the Story
+              </ButtonLink>
             </div>
           </div>
         </Reveal>
