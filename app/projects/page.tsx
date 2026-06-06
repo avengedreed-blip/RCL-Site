@@ -16,6 +16,10 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Explore Reed Creative Labs software, games, active development projects, and future roadmap.",
   path: "/projects",
+  image: {
+    url: "/images/home/phase-arcade-card.jpg",
+    alt: "Phase Arcade cabinet artwork representing Reed Creative Labs featured releases.",
+  },
 });
 
 export default function ProjectsPage() {

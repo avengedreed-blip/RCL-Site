@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CompactProjectCard } from "@/components/ProjectCard";
 import { getProjectVisualImage, ProjectMediaImage } from "@/components/ProjectMedia";
+import { StructuredData } from "@/components/StructuredData";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import {
@@ -13,6 +14,7 @@ import {
   projects,
 } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
+import { projectJsonLd } from "@/lib/structured-data";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -42,6 +44,10 @@ export async function generateMetadata({
     title: project.name,
     description: project.shortDescription,
     path: project.route,
+    image: {
+      url: getProjectVisualImage(project.visual)?.src ?? "/og-image.jpg",
+      alt: `${project.name} preview image`,
+    },
   });
 }
 
@@ -59,6 +65,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <main>
+      <StructuredData data={projectJsonLd(project)} />
       <section className="mx-auto grid max-w-[1500px] gap-10 px-5 pb-14 pt-12 md:grid-cols-[minmax(0,1fr)_minmax(460px,1fr)] md:px-8 md:pb-18 md:pt-16 xl:gap-14">
         <Reveal className="min-w-0 self-center">
           <p className="mb-5 text-sm font-black uppercase text-rcl-red">

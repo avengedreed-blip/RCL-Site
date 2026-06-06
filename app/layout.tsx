@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { StructuredData } from "@/components/StructuredData";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { defaultSeo, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
@@ -43,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className="page-shell bg-rcl-black text-white antialiased">
+        <StructuredData data={[organizationJsonLd(), websiteJsonLd()]} />
         <SiteHeader />
         {children}
         <SiteFooter />

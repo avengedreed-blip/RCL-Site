@@ -10,6 +10,12 @@ type SeoOptions = {
   title: string;
   description: string;
   path?: string;
+  image?: {
+    url: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+  };
 };
 
 export function absoluteUrl(path = "/") {
@@ -20,10 +26,17 @@ export function buildMetadata({
   title,
   description,
   path = "/",
+  image = {
+    url: "/og-image.jpg",
+    alt: `${siteName} social preview`,
+    width: 1200,
+    height: 630,
+  },
 }: SeoOptions): Metadata {
   const url = absoluteUrl(path);
   const isHome = path === "/";
   const resolvedTitle = isHome ? title : `${title} | ${siteName}`;
+  const imageUrl = absoluteUrl(image.url);
 
   return {
     title: isHome ? { absolute: title } : title.replace(` | ${siteName}`, ""),
@@ -38,10 +51,10 @@ export function buildMetadata({
       siteName,
       images: [
         {
-          url: "/og-image.jpg",
-          width: 1200,
-          height: 630,
-          alt: `${siteName} social preview`,
+          url: imageUrl,
+          width: image.width,
+          height: image.height,
+          alt: image.alt ?? resolvedTitle,
         },
       ],
       locale: "en_US",
@@ -51,7 +64,7 @@ export function buildMetadata({
       card: "summary_large_image",
       title: resolvedTitle,
       description,
-      images: ["/social-preview.jpg"],
+      images: [imageUrl],
     },
   };
 }

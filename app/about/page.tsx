@@ -10,6 +10,10 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Reed Creative Labs is an independent software and game studio building offline-first products with privacy and ownership at the center.",
   path: "/about",
+  image: {
+    url: "/images/home/rcl-technical-orb.jpg",
+    alt: "Red technical circular graphic representing the Reed Creative Labs operating philosophy.",
+  },
 });
 
 const principles = [

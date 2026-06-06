@@ -13,6 +13,10 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Press information, studio boilerplate, and product references for Reed Creative Labs.",
   path: "/press",
+  image: {
+    url: "/social-preview.jpg",
+    alt: "Reed Creative Labs social preview artwork for press references.",
+  },
 });
 
 export default function PressPage() {

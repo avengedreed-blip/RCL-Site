@@ -10,6 +10,10 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Contact Reed Creative Labs for product, press, and studio inquiries.",
   path: "/contact",
+  image: {
+    url: "/images/home/red-floor-glow.jpg",
+    alt: "Dark Reed Creative Labs red floor glow visual used for studio contact pages.",
+  },
 });
 
 const contacts = [
@@ -17,7 +21,7 @@ const contacts = [
     label: "Studio Email",
     href: studioEmailHref,
     value: studioEmail,
-    body: "Use this address for product questions, press requests, studio inquiries, and general communication until dedicated addresses are configured.",
+    body: "Use this address for press, support, business, product, and general studio inquiries.",
   },
 ];
 
@@ -27,17 +31,14 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Reach the studio directly"
-        body="No contact form and no account system. Just direct studio contact for the right kind of inquiry."
+        body="For press, support, business, and general inquiries, contact Reed Creative Labs directly by email."
       />
 
       <section className="mx-auto max-w-[1500px] px-5 pb-20 pt-8 md:px-8">
         <div className="grid gap-4 md:grid-cols-[minmax(0,0.78fr)]">
           {contacts.map((contact, index) => (
             <Reveal key={contact.label} delay={index * 0.06}>
-              <a
-                href={contact.href}
-                className="group block min-h-[260px] min-w-0 rounded-[6px] border border-white/14 bg-rcl-surface p-6 transition hover:border-rcl-red/70 hover:bg-rcl-elevated sm:p-7"
-              >
+              <div className="block min-h-[260px] min-w-0 rounded-[6px] border border-white/14 bg-rcl-surface p-6 transition hover:border-rcl-red/70 hover:bg-rcl-elevated sm:p-7">
                 <Mail
                   className="mb-8 h-8 w-8 text-rcl-red"
                   strokeWidth={1.5}
@@ -46,13 +47,24 @@ export default function ContactPage() {
                 <p className="text-sm font-black uppercase text-rcl-red">
                   {contact.label}
                 </p>
-                <p className="mt-4 max-w-full text-lg font-black text-white [overflow-wrap:anywhere] sm:text-2xl">
+                <a
+                  href={contact.href}
+                  className="mt-4 inline-flex max-w-full text-lg font-black text-white [overflow-wrap:anywhere] transition hover:text-rcl-red sm:text-2xl"
+                >
                   {contact.value}
-                </p>
+                </a>
+                <div className="mt-5 rounded-[4px] border border-white/10 bg-black/25 p-4">
+                  <p className="text-xs font-black uppercase text-rcl-dim">
+                    Plain-text email
+                  </p>
+                  <code className="mt-2 block text-sm font-bold text-white [overflow-wrap:anywhere]">
+                    {contact.value}
+                  </code>
+                </div>
                 <p className="mt-5 text-base leading-8 text-rcl-muted">
                   {contact.body}
                 </p>
-              </a>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -65,8 +77,8 @@ export default function ContactPage() {
             />
             <p className="max-w-[760px] text-sm leading-7">
               Reed Creative Labs does not run a public account system or
-              on-site contact form. Direct email keeps communication simple
-              while the studio prepares its first public releases.
+              on-site contact form. Direct email keeps communication simple and
+              avoids unnecessary data collection.
             </p>
           </div>
         </Reveal>

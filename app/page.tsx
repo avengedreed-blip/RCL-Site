@@ -29,6 +29,12 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Independent software and games built for ownership, privacy, and lasting value.",
   path: "/",
+  image: {
+    url: "/og-image.jpg",
+    alt: "Reed Creative Labs social preview with black, white, and red branding.",
+    width: 1200,
+    height: 630,
+  },
 });
 
 const philosophy = [
