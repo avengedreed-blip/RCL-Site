@@ -68,6 +68,18 @@ a {
   line-height: 0.94;
 }
 
+.philosophy-heading {
+  max-width: min(100%, 760px);
+  font-size: clamp(2.6rem, 13vw, 5.6rem);
+  line-height: 0.9;
+}
+
+@media (min-width: 1536px) {
+  .philosophy-heading {
+    font-size: clamp(5.8rem, 7vw, 7.25rem);
+  }
+}
+
 .page-shell {
   position: relative;
   overflow-x: clip;

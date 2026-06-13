@@ -6,12 +6,22 @@ type VisualImage = {
   src: string;
   alt: string;
   position?: string;
+  fit?: "cover" | "contain";
+  detailSrc?: string;
+  detailAlt?: string;
+  detailFit?: "cover" | "contain";
+  detailPosition?: string;
 };
 
 const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
   echo: {
-    src: "/images/home/echo-card.jpg",
-    alt: "A family standing together in warm window light, suggesting memory, legacy, and preservation.",
+    src: "/images/projects/echo-start-screen.jpg",
+    alt: "Echo cinematic slideshow application start screen",
+    position: "object-center",
+    detailSrc: "/images/projects/echo-editor-screen.jpg",
+    detailAlt: "Echo story card editor interface",
+    detailFit: "contain",
+    detailPosition: "object-center",
   },
   "phase-arcade": {
     src: "/images/home/phase-arcade-card.jpg",
@@ -39,9 +49,10 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     position: "object-center",
   },
   "science-lab": {
-    src: "/images/home/rcl-technical-orb.jpg",
-    alt: "A red circular technical graphic representing interactive scientific simulation and visualization.",
+    src: "/images/projects/rcl-science-lab-stable-orbits.jpg",
+    alt: "RCL Science Lab stable orbits simulation interface",
     position: "object-center",
+    detailFit: "contain",
   },
   "neon-drift": {
     src: "/images/home/red-grid-tech.jpg",
@@ -83,12 +94,14 @@ type ProjectMediaImageProps = {
   visual: ProjectVisual;
   className?: string;
   priority?: boolean;
+  variant?: "card" | "detail";
 };
 
 export function ProjectMediaImage({
   visual,
   className,
   priority = false,
+  variant = "card",
 }: ProjectMediaImageProps) {
   const image = getProjectVisualImage(visual);
 
@@ -96,14 +109,25 @@ export function ProjectMediaImage({
     return null;
   }
 
+  const isDetail = variant === "detail";
+  const src = isDetail && image.detailSrc ? image.detailSrc : image.src;
+  const alt = isDetail && image.detailAlt ? image.detailAlt : image.alt;
+  const fit = isDetail ? image.detailFit ?? image.fit ?? "cover" : image.fit ?? "cover";
+  const position =
+    isDetail && image.detailPosition ? image.detailPosition : image.position;
+
   return (
     <Image
-      src={image.src}
-      alt={image.alt}
+      src={src}
+      alt={alt}
       fill
       priority={priority}
       sizes="(min-width: 1024px) 50vw, 100vw"
-      className={cn("object-cover", image.position, className)}
+      className={cn(
+        fit === "contain" ? "object-contain" : "object-cover",
+        position,
+        className,
+      )}
     />
   );
 }

@@ -196,15 +196,15 @@ export default function Home() {
               variant="panel"
               className="absolute -right-20 top-1/2 hidden h-[520px] w-[520px] -translate-y-1/2 opacity-55 lg:block"
             />
-            <div className="relative z-10 grid gap-10 xl:grid-cols-[minmax(0,0.82fr)_minmax(620px,1.18fr)] xl:items-center xl:gap-16">
-              <div className="min-w-0">
+            <div className="relative z-10 grid gap-10 2xl:grid-cols-[minmax(0,720px)_minmax(0,1fr)] 2xl:items-center 2xl:gap-16">
+              <div className="min-w-0 max-w-[760px]">
                 <div className="mb-7 flex items-center gap-4">
                   <span className="h-3 w-3 bg-rcl-red shadow-[0_0_20px_rgba(255,32,32,0.8)]" />
                   <p className="text-sm font-black uppercase text-rcl-red">
                     Studio Philosophy
                   </p>
                 </div>
-                <h2 className="brand-heading max-w-[520px] text-5xl leading-[0.92] text-white md:text-7xl xl:text-8xl">
+                <h2 className="brand-heading philosophy-heading text-white">
                   Built Different
                 </h2>
                 <p className="mt-7 max-w-[520px] text-base leading-8 text-rcl-muted md:text-lg md:leading-9">

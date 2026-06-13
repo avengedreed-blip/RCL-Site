@@ -96,10 +96,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </Reveal>
         <Reveal delay={0.08}>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated">
+          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated shadow-[0_0_72px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.06)]">
             {visualImage ? (
-              <div className="relative min-h-[430px] xl:min-h-[560px]">
-                <ProjectMediaImage visual={project.visual} priority />
+              <div className="relative min-h-[430px] bg-black xl:min-h-[560px]">
+                <ProjectMediaImage visual={project.visual} priority variant="detail" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/74 via-black/16 to-transparent" />
                 <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black/45 to-transparent" />
               </div>
