@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CompactProjectCard } from "@/components/ProjectCard";
-import { getProjectVisualImage, ProjectMediaImage } from "@/components/ProjectMedia";
+import {
+  getProjectScreenshots,
+  getProjectVisualImage,
+  ProjectMediaImage,
+} from "@/components/ProjectMedia";
 import { StructuredData } from "@/components/StructuredData";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -63,6 +68,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     project.slug === "phase-arcade-volume-1" ? includedGames : [];
   const parentProject = project.parentProject ? getProject(project.parentProject) : undefined;
   const visualImage = getProjectVisualImage(project.visual);
+  const screenshots = getProjectScreenshots(project.visual);
 
   return (
     <main>
@@ -109,6 +115,30 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </Reveal>
       </section>
+
+      {screenshots.length > 1 ? (
+        <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+          <Reveal>
+            <SectionHeader title="Product Screenshots" />
+          </Reveal>
+          <div className="grid gap-4 md:grid-cols-2">
+            {screenshots.map((screenshot) => (
+              <Reveal key={screenshot.src}>
+                <div className="relative aspect-video overflow-hidden rounded-[6px] border border-white/14 bg-black shadow-[0_0_56px_rgba(0,0,0,0.36),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                  <Image
+                    src={screenshot.src}
+                    alt={screenshot.alt}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-contain"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-white/[0.03]" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
         <Reveal>

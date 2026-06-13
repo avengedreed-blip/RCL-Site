@@ -11,50 +11,102 @@ type VisualImage = {
   detailAlt?: string;
   detailFit?: "cover" | "contain";
   detailPosition?: string;
+  screenshots?: {
+    src: string;
+    alt: string;
+  }[];
 };
 
 const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
   echo: {
-    src: "/images/projects/echo-start-screen.jpg",
-    alt: "Echo cinematic slideshow application start screen",
+    src: "/images/home/echo-card.jpg",
+    alt: "Warm cinematic family memory artwork representing Echo storytelling.",
     position: "object-center",
     detailSrc: "/images/projects/echo-editor-screen.jpg",
     detailAlt: "Echo story card editor interface",
     detailFit: "contain",
     detailPosition: "object-center",
+    screenshots: [
+      {
+        src: "/images/projects/echo-start-screen.jpg",
+        alt: "Echo cinematic slideshow application start screen",
+      },
+      {
+        src: "/images/projects/echo-editor-screen.jpg",
+        alt: "Echo story card editor interface",
+      },
+    ],
   },
   "phase-arcade": {
     src: "/images/home/phase-arcade-card.jpg",
     alt: "A premium neon arcade cabinet in a dark arcade, representing Phase Arcade Volume 1.",
     position: "object-center",
+    screenshots: [
+      {
+        src: "/images/projects/phase-shift-gameplay-card.jpg",
+        alt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
+      },
+      {
+        src: "/images/projects/phase-defense-gameplay-card.jpg",
+        alt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
+      },
+      {
+        src: "/images/projects/phase-court-gameplay-card.jpg",
+        alt: "Phase Court gameplay screenshot with opposing cyan and magenta sides.",
+      },
+    ],
   },
   "phase-shift": {
-    src: "/images/projects/phase-shift-gameplay-card.jpg",
-    alt: "A cyan and magenta neon tunnel from Phase Shift, emphasizing speed, timing, and forward motion.",
+    src: "/images/home/red-grid-tech.jpg",
+    alt: "Abstract neon technical grid artwork representing speed, timing, and forward motion.",
     position: "object-center",
+    detailSrc: "/images/projects/phase-shift-gameplay-card.jpg",
+    detailAlt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
+    detailFit: "contain",
   },
   "phase-defense": {
-    src: "/images/projects/phase-defense-gameplay-card.jpg",
-    alt: "A defensive neon lane with a central reticle from Phase Defense, emphasizing pressure and target prioritization.",
+    src: "/images/home/rcl-technical-orb.jpg",
+    alt: "Abstract red targeting system artwork representing defense, pressure, and survival.",
     position: "object-center",
+    detailSrc: "/images/projects/phase-defense-gameplay-card.jpg",
+    detailAlt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
+    detailFit: "contain",
   },
   "phase-court": {
-    src: "/images/projects/phase-court-gameplay-card.jpg",
-    alt: "A cyan and magenta arcade court from Phase Court, emphasizing opposing sides and competitive reaction play.",
+    src: "/images/home/phase-arcade-card.jpg",
+    alt: "Arcade key art representing competitive reaction play and opposing sides.",
     position: "object-center",
+    detailSrc: "/images/projects/phase-court-gameplay-card.jpg",
+    detailAlt: "Phase Court gameplay screenshot with opposing cyan and magenta sides.",
+    detailFit: "contain",
   },
   workspace: {
-    src: "/images/projects/rcl-workspace-dashboard.jpg",
-    alt: "RCL Workspace project dashboard interface",
+    src: "/images/home/red-grid-tech.jpg",
+    alt: "Abstract connected knowledge grid artwork representing RCL Workspace organization.",
     position: "object-center",
-    fit: "contain",
+    detailSrc: "/images/projects/rcl-workspace-dashboard.jpg",
+    detailAlt: "RCL Workspace project dashboard interface",
     detailFit: "contain",
+    screenshots: [
+      {
+        src: "/images/projects/rcl-workspace-dashboard.jpg",
+        alt: "RCL Workspace project dashboard interface",
+      },
+    ],
   },
   "science-lab": {
-    src: "/images/projects/rcl-science-lab-stable-orbits.jpg",
-    alt: "RCL Science Lab stable orbits simulation interface",
+    src: "/images/home/rcl-technical-orb.jpg",
+    alt: "Abstract orbital science artwork representing experimentation and visualization.",
     position: "object-center",
+    detailSrc: "/images/projects/rcl-science-lab-stable-orbits.jpg",
+    detailAlt: "RCL Science Lab stable orbits simulation interface",
     detailFit: "contain",
+    screenshots: [
+      {
+        src: "/images/projects/rcl-science-lab-stable-orbits.jpg",
+        alt: "RCL Science Lab stable orbits simulation interface",
+      },
+    ],
   },
   "neon-drift": {
     src: "/images/home/red-grid-tech.jpg",
@@ -90,6 +142,10 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
 
 export function getProjectVisualImage(visual: ProjectVisual) {
   return visualImages[visual];
+}
+
+export function getProjectScreenshots(visual: ProjectVisual) {
+  return visualImages[visual]?.screenshots ?? [];
 }
 
 type ProjectMediaImageProps = {
