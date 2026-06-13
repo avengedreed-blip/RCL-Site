@@ -44,9 +44,11 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     position: "object-center",
   },
   workspace: {
-    src: "/images/home/red-grid-tech.jpg",
-    alt: "A dark red technical grid representing a local-first creative workspace.",
+    src: "/images/projects/rcl-workspace-dashboard.jpg",
+    alt: "RCL Workspace project dashboard interface",
     position: "object-center",
+    fit: "contain",
+    detailFit: "contain",
   },
   "science-lab": {
     src: "/images/projects/rcl-science-lab-stable-orbits.jpg",
