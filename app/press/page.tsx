@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { studioEmail, studioEmailHref } from "@/content/contact";
-import { featuredProjects } from "@/content/projects";
+import { featuredProjects, getProjectDateLabel } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -77,7 +77,7 @@ export default function PressPage() {
                 className="group block rounded-[6px] border border-white/12 bg-rcl-surface p-7 transition hover:border-rcl-red/70"
               >
                 <p className="text-xs font-black uppercase text-rcl-red">
-                  {project.launchDate ? `Launching ${project.launchDate}` : "Featured"}
+                  {getProjectDateLabel(project)}
                 </p>
                 <div className="mt-4 flex items-start justify-between gap-5">
                   <h3 className="text-2xl font-black uppercase text-white">

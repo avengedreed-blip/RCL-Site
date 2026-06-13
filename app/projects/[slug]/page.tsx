@@ -61,6 +61,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const relatedIncludedGames =
     project.slug === "phase-arcade-volume-1" ? includedGames : [];
+  const parentProject = project.parentProject ? getProject(project.parentProject) : undefined;
   const visualImage = getProjectVisualImage(project.visual);
 
   return (
@@ -81,6 +82,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.longDescription}
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
+            {parentProject ? (
+              <ButtonLink href={parentProject.route} variant="secondary">
+                View Collection
+              </ButtonLink>
+            ) : null}
             <ButtonLink href="/projects" variant="secondary">
               All Products
             </ButtonLink>
@@ -110,7 +116,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div>
               <p className="text-xs font-black uppercase text-rcl-dim">Category</p>
               <p className="mt-2 font-black uppercase text-white">
-                {project.category.replace("-", " ")}
+                {project.categoryLabel}
               </p>
             </div>
             <div>
@@ -120,13 +126,59 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </p>
             </div>
             <div>
-              <p className="text-xs font-black uppercase text-rcl-dim">Launch</p>
-              <p className="mt-2 font-black uppercase text-white">
-                {project.launchDate ?? "Not announced"}
-              </p>
+              <p className="text-xs font-black uppercase text-rcl-dim">Platforms</p>
+              <ul className="mt-2 flex flex-wrap gap-2" aria-label="Platforms">
+                {project.platforms.map((platform) => (
+                  <li
+                    key={platform}
+                    className="rounded-[3px] border border-white/12 bg-rcl-surface px-2.5 py-1 text-xs font-black uppercase text-white"
+                  >
+                    {platform}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </Reveal>
+      </section>
+
+      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+        <div className="grid gap-8 md:grid-cols-2">
+          {project.idealFor?.length ? (
+            <Reveal>
+              <div className="rounded-[6px] border border-white/12 bg-rcl-surface p-6">
+                <h2 className="text-2xl font-black uppercase text-white">
+                  Who it is for
+                </h2>
+                <ul className="mt-5 grid gap-3 text-base leading-7 text-rcl-muted">
+                  {project.idealFor.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-3 h-1.5 w-1.5 shrink-0 bg-rcl-red" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ) : null}
+          {project.usersCan?.length ? (
+            <Reveal delay={0.06}>
+              <div className="rounded-[6px] border border-white/12 bg-rcl-surface p-6">
+                <h2 className="text-2xl font-black uppercase text-white">
+                  What users can do
+                </h2>
+                <ul className="mt-5 grid gap-3 text-base leading-7 text-rcl-muted">
+                  {project.usersCan.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-3 h-1.5 w-1.5 shrink-0 bg-rcl-red" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ) : null}
+        </div>
       </section>
 
       <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">

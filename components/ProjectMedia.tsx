@@ -38,6 +38,21 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     alt: "A dark red technical grid representing a local-first creative workspace.",
     position: "object-center",
   },
+  "science-lab": {
+    src: "/images/home/rcl-technical-orb.jpg",
+    alt: "A red circular technical graphic representing interactive scientific simulation and visualization.",
+    position: "object-center",
+  },
+  "neon-drift": {
+    src: "/images/home/red-grid-tech.jpg",
+    alt: "A dark red technical grid used as abstract visual identity for Neon Drift.",
+    position: "object-center",
+  },
+  "falling-from-the-sky": {
+    src: "/images/home/red-floor-glow.jpg",
+    alt: "A dark red floor glow used as abstract visual identity for Falling From The Sky.",
+    position: "object-center",
+  },
   darren: {
     src: "/images/home/red-atmosphere.jpg",
     alt: "A dark red atmospheric field suggesting fog, tension, and wilderness horror.",
@@ -48,9 +63,9 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     alt: "An abstract communication board with structured speech tiles and a soft red glow.",
     position: "object-center",
   },
-  "phase-arcade-2": {
-    src: "/images/projects/phase-arcade-v2-card.jpg",
-    alt: "Futuristic arcade cabinet silhouettes with red and blue neon lighting.",
+  bloom: {
+    src: "/images/home/red-atmosphere.jpg",
+    alt: "A soft dark red atmosphere used as abstract visual identity for Bloom.",
     position: "object-center",
   },
   misread: {

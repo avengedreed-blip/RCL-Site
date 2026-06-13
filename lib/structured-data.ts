@@ -24,8 +24,16 @@ function applicationCategory(project: Project) {
     return "ProductivityApplication";
   }
 
+  if (project.slug === "rcl-science-lab") {
+    return "EducationalApplication";
+  }
+
   if (project.slug === "talk-to-me") {
     return "CommunicationApplication";
+  }
+
+  if (project.slug === "bloom") {
+    return "HealthApplication";
   }
 
   return "Application";
@@ -62,11 +70,17 @@ export function projectJsonLd(project: Project) {
     creator: organization,
   };
 
-  if (project.category === "software" || project.category === "tool" || project.category === "app") {
+  if (
+    project.category === "software" ||
+    project.category === "tool" ||
+    project.category === "app" ||
+    project.category === "simulation"
+  ) {
     return {
       ...base,
       "@type": "SoftwareApplication",
       applicationCategory: applicationCategory(project),
+      operatingSystem: project.platforms.join(", "),
     };
   }
 

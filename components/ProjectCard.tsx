@@ -5,6 +5,21 @@ import type { Project } from "@/content/projects";
 import { getProjectDateLabel } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
+function PlatformList({ platforms, className }: { platforms: string[]; className?: string }) {
+  return (
+    <ul className={cn("flex flex-wrap gap-2", className)} aria-label="Platforms">
+      {platforms.map((platform) => (
+        <li
+          key={platform}
+          className="rounded-[3px] border border-white/12 bg-black/30 px-2.5 py-1 text-[0.68rem] font-black uppercase tracking-normal text-white/78"
+        >
+          {platform}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 type FeaturedProjectCardProps = {
   project: Project;
   className?: string;
@@ -35,16 +50,17 @@ export function FeaturedProjectCard({ project, className }: FeaturedProjectCardP
       <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-black/62 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent" />
       <div className="absolute inset-0 z-10 flex flex-col justify-end p-7 md:p-10 xl:p-12">
-        <p className="mb-2 max-w-[420px] text-xs font-black uppercase leading-5 text-rcl-red">
-          <span className="block text-white/75">{project.name}</span>
+        <p className="mb-3 max-w-[520px] text-xs font-black uppercase leading-5 text-rcl-red">
+          <span className="block text-white/75">{project.categoryLabel}</span>
           <span className="block">{getProjectDateLabel(project)}</span>
         </p>
         <h3 className="max-w-[600px] text-4xl font-black leading-[0.95] text-white md:text-5xl xl:text-6xl">
-          {project.headline}
+          {project.name}
         </h3>
         <p className="mt-5 max-w-[430px] text-base leading-7 text-white xl:text-lg xl:leading-8">
           {project.shortDescription}
         </p>
+        <PlatformList platforms={project.platforms} className="mt-5 max-w-[520px]" />
         <span className="absolute bottom-7 right-7 flex h-10 w-10 items-center justify-center text-white transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-rcl-red">
           <ArrowUpRight className="h-6 w-6" aria-hidden="true" />
         </span>
@@ -96,6 +112,9 @@ export function CompactProjectCard({
         <p className="text-xs font-black uppercase text-rcl-red">
           {getProjectDateLabel(project)}
         </p>
+        <p className="mt-2 text-[0.68rem] font-black uppercase leading-5 text-white/62">
+          {project.categoryLabel}
+        </p>
         <div className="mt-3 flex items-start justify-between gap-4">
           <h3 className="text-xl font-black text-white">{project.name}</h3>
           <ArrowUpRight
@@ -104,6 +123,7 @@ export function CompactProjectCard({
           />
         </div>
         <p className="mt-3 text-sm leading-6 text-rcl-muted">{project.shortDescription}</p>
+        <PlatformList platforms={project.platforms} className="mt-4" />
       </div>
     </Link>
   );

@@ -1,7 +1,14 @@
-export type ProjectStatus = "launching" | "active-development" | "future";
+export type ProjectStatus = "coming-soon" | "active-development" | "planned";
+
+export type RoadmapGroup =
+  | "coming-soon"
+  | "active-development"
+  | "planned"
+  | "included-game";
 
 export type ProjectCategory =
   | "software"
+  | "simulation"
   | "game-collection"
   | "included-game"
   | "tool"
@@ -15,277 +22,466 @@ export type ProjectVisual =
   | "phase-defense"
   | "phase-court"
   | "workspace"
+  | "science-lab"
+  | "neon-drift"
+  | "falling-from-the-sky"
   | "darren"
   | "talk-to-me"
-  | "phase-arcade-2"
+  | "bloom"
   | "misread";
 
 export type Project = {
   name: string;
   slug: string;
   status: ProjectStatus;
+  roadmapGroup: RoadmapGroup;
   category: ProjectCategory;
+  categoryLabel: string;
   headline: string;
   tagline: string;
   shortDescription: string;
   longDescription: string;
-  launchDate?: string;
+  platforms: string[];
+  idealFor?: string[];
+  usersCan?: string[];
   route: string;
   visual: ProjectVisual;
   featured?: boolean;
   includedGames?: string[];
+  parentProject?: string;
   pageSections: {
     title: string;
     body: string;
   }[];
 };
 
+export const roadmapDisclaimer =
+  "Projects and priorities may evolve as development continues. Availability and platform support are subject to change.";
+
 export const projects: Project[] = [
   {
     name: "Echo",
     slug: "echo",
-    status: "launching",
+    status: "coming-soon",
+    roadmapGroup: "coming-soon",
     category: "software",
-    headline: "Preserve What Matters.",
-    tagline: "Preserve What Matters.",
+    categoryLabel: "Cinematic Slideshow & Memory Presentation Software",
+    headline: "Cinematic memory presentations.",
+    tagline: "Turn important photos and moments into polished visual stories.",
     shortDescription:
-      "Create meaningful presentations from photos, music, and memories without cloud accounts, subscriptions, or distractions.",
+      "Echo is a cinematic slideshow application for transforming photos, memories, milestones, and meaningful moments into polished visual presentations.",
     longDescription:
-      "Echo is a private place for life's most important moments. It turns photos, music, and memories into meaningful presentations built around family, legacy, and preservation without cloud accounts, subscriptions, or distractions.",
-    launchDate: "June 11, 2026",
+      "Echo is a cinematic slideshow and memory presentation application designed for emotional storytelling. It focuses on atmosphere, pacing, music, and presentation quality rather than traditional slide decks.",
+    platforms: ["Windows", "macOS", "Linux"],
+    idealFor: [
+      "Families",
+      "Couples",
+      "Memorials",
+      "Graduations",
+      "Weddings",
+      "Anniversaries",
+      "Personal storytelling",
+    ],
+    usersCan: [
+      "Create visual presentations from meaningful photos and memories.",
+      "Build presentations around pacing, music, and atmosphere.",
+      "Use Echo for personal milestones, memorials, celebrations, and family stories.",
+    ],
     route: "/projects/echo",
     visual: "echo",
     featured: true,
     pageSections: [
       {
-        title: "Made for memory",
-        body: "Echo is built for the moments people want to keep close: family milestones, personal stories, and the pieces of a life worth preserving.",
+        title: "What it is",
+        body: "Echo is built for people who want a presentation to feel personal, cinematic, and carefully paced instead of looking like a conventional slide deck.",
       },
       {
-        title: "No account required",
-        body: "The product stays focused on the presentation itself, not feeds, profiles, subscriptions, or cloud-first ceremony.",
-      },
-    ],
-  },
-  {
-    name: "Phase Arcade Volume 1",
-    slug: "phase-arcade-volume-1",
-    status: "launching",
-    category: "game-collection",
-    headline: "Three Games. One Arcade Collection.",
-    tagline: "Three Games. One Arcade Collection.",
-    shortDescription:
-      "Three focused arcade experiences built around skill, speed, and replayability.",
-    longDescription:
-      "Phase Arcade Volume 1 brings Phase Shift, Phase Defense, and Phase Court into one focused collection. Fast sessions, clean mechanics, and replayable challenge define the release.",
-    launchDate: "June 18, 2026",
-    route: "/projects/phase-arcade-volume-1",
-    visual: "phase-arcade",
-    featured: true,
-    includedGames: ["phase-shift", "phase-defense", "phase-court"],
-    pageSections: [
-      {
-        title: "Three distinct games",
-        body: "Phase Shift, Phase Defense, and Phase Court each center on a clear arcade idea: timing, pressure, and competitive control.",
-      },
-      {
-        title: "Built for replay",
-        body: "The collection favors short sessions, immediate reads, and mechanics players can return to without friction.",
-      },
-    ],
-  },
-  {
-    name: "Phase Shift",
-    slug: "phase-shift",
-    status: "launching",
-    category: "included-game",
-    headline: "Thread Impossible Gaps.",
-    tagline: "Thread Impossible Gaps.",
-    shortDescription:
-      "Survive increasingly chaotic patterns by moving at exactly the right moment.",
-    longDescription:
-      "Phase Shift is momentum, timing, and split-second decisions. One mistake ends the run.",
-    launchDate: "June 18, 2026",
-    route: "/projects/phase-shift",
-    visual: "phase-shift",
-    pageSections: [
-      {
-        title: "Move at the moment",
-        body: "Success comes from reading the gap, trusting the timing, and committing before the pattern closes.",
-      },
-      {
-        title: "One more run",
-        body: "Clean restarts and escalating patterns keep the focus on mastery, not waiting.",
-      },
-    ],
-  },
-  {
-    name: "Phase Defense",
-    slug: "phase-defense",
-    status: "launching",
-    category: "included-game",
-    headline: "Hold The Line.",
-    tagline: "Hold The Line.",
-    shortDescription:
-      "Read threats, prioritize targets, and survive the escalating assault.",
-    longDescription:
-      "Phase Defense is simple rules under relentless pressure. Every second matters.",
-    launchDate: "June 18, 2026",
-    route: "/projects/phase-defense",
-    visual: "phase-defense",
-    pageSections: [
-      {
-        title: "Read the assault",
-        body: "The playfield is built for fast decisions: what matters now, what can wait, and what will break the line.",
-      },
-      {
-        title: "Pressure without clutter",
-        body: "The rules stay simple so the escalation can do the work.",
-      },
-    ],
-  },
-  {
-    name: "Phase Court",
-    slug: "phase-court",
-    status: "launching",
-    category: "included-game",
-    headline: "Own The Angle.",
-    tagline: "Own The Angle.",
-    shortDescription:
-      "Outmaneuver your opponent through positioning, reaction speed, and fast arcade control.",
-    longDescription:
-      "Phase Court is easy to learn and hard to dominate: a fast arcade duel built around angles, space, and timing.",
-    launchDate: "June 18, 2026",
-    route: "/projects/phase-court",
-    visual: "phase-court",
-    pageSections: [
-      {
-        title: "Fast to understand",
-        body: "The rules are direct enough to read immediately, then deep enough to reward better positioning.",
-      },
-      {
-        title: "Built for dominance",
-        body: "Every exchange is a test of angle control, reaction speed, and whether you can stay one move ahead.",
+        title: "Who it is for",
+        body: "The application is intended for families, couples, memorials, graduations, weddings, anniversaries, and personal storytelling projects where presentation quality matters.",
       },
     ],
   },
   {
     name: "RCL Workspace",
     slug: "rcl-workspace",
-    status: "active-development",
+    status: "coming-soon",
+    roadmapGroup: "coming-soon",
     category: "tool",
-    headline: "Never Lose The Thread.",
-    tagline: "Never Lose The Thread.",
+    categoryLabel: "Productivity & Project Management Software",
+    headline: "Local-first project organization.",
+    tagline: "Plan, document, and organize complex work in one local-first workspace.",
     shortDescription:
-      "A local-first workspace designed to preserve context, organize projects, and help creators return to complex work without starting over.",
+      "RCL Workspace combines project management, notes, planning, documentation, and organizational tools into a single local-first productivity environment.",
     longDescription:
-      "RCL Workspace is being built for creative projects that take time, context, and a clear path back in. It is a local-first workspace for organizing notes, references, decisions, and project state so creators can return to complex work without starting over.",
+      "RCL Workspace is productivity and project-management software for creators, developers, students, researchers, and professionals who want ownership of their project data without relying on cloud subscriptions.",
+    platforms: ["Windows", "macOS", "Linux"],
+    idealFor: ["Creators", "Developers", "Students", "Researchers", "Professionals"],
+    usersCan: [
+      "Organize notes, documentation, plans, and project context.",
+      "Keep project information local-first and under user control.",
+      "Return to complex work without losing the thread of decisions and next steps.",
+    ],
     route: "/projects/rcl-workspace",
     visual: "workspace",
+    featured: true,
     pageSections: [
       {
-        title: "Context has value",
-        body: "The product treats notes, decisions, references, and project state as part of the work itself.",
+        title: "What it is",
+        body: "RCL Workspace is a local-first productivity environment that brings project planning, notes, documentation, and organization into one workspace.",
       },
       {
-        title: "Built for long projects",
-        body: "The direction is a quiet workspace that helps creators reconnect with the decisions, references, and next steps that make a project possible.",
+        title: "Who it is for",
+        body: "It is designed for people managing complex creative, technical, academic, or professional work who want structure without surrendering ownership of their data.",
       },
     ],
   },
   {
-    name: "Darren in the Woods 2",
+    name: "RCL Science Lab",
+    slug: "rcl-science-lab",
+    status: "coming-soon",
+    roadmapGroup: "coming-soon",
+    category: "simulation",
+    categoryLabel: "Educational Software & Scientific Simulation Platform",
+    headline: "Science you can manipulate.",
+    tagline: "Explore scientific ideas through real-time simulation and visualization.",
+    shortDescription:
+      "RCL Science Lab is an educational simulation platform for exploring scientific concepts through real-time visualization, experimentation, and variable control.",
+    longDescription:
+      "RCL Science Lab helps users explore science through interactive simulations covering physics, astronomy, cosmology, mathematics, chemistry, and other scientific concepts. Users can manipulate variables, observe outcomes, and build intuition for how complex systems behave.",
+    platforms: ["Windows", "macOS", "Linux"],
+    idealFor: [
+      "Students",
+      "Educators",
+      "Homeschool families",
+      "Self-learners",
+      "Science enthusiasts",
+    ],
+    usersCan: [
+      "Manipulate simulation variables and observe outcomes.",
+      "Explore scientific concepts through visual experimentation.",
+      "Build intuition for systems that are easier to understand when seen in motion.",
+    ],
+    route: "/projects/rcl-science-lab",
+    visual: "science-lab",
+    featured: true,
+    pageSections: [
+      {
+        title: "What it is",
+        body: "RCL Science Lab is educational software and a scientific simulation platform focused on interactive exploration rather than passive reading.",
+      },
+      {
+        title: "What users can do",
+        body: "Users can adjust variables, compare outcomes, and observe scientific systems through real-time visual feedback.",
+      },
+    ],
+  },
+  {
+    name: "Neon Drift",
+    slug: "neon-drift",
+    status: "coming-soon",
+    roadmapGroup: "coming-soon",
+    category: "game",
+    categoryLabel: "Mobile Arcade Game",
+    headline: "Forward motion under pressure.",
+    tagline: "A mobile arcade game about thrust, timing, and precision navigation.",
+    shortDescription:
+      "Neon Drift is a mobile-first arcade game built around constant forward movement, vertical thrust controls, obstacle avoidance, and precision navigation.",
+    longDescription:
+      "Neon Drift uses simple controls that are easy to learn while increasingly difficult gameplay rewards mastery, fast reflexes, and careful movement through a stylized neon environment.",
+    platforms: ["Android", "Potential future iOS release"],
+    usersCan: [
+      "Control vertical thrust through a neon obstacle course.",
+      "Avoid hazards while maintaining forward momentum.",
+      "Improve through short, repeatable arcade runs.",
+    ],
+    route: "/projects/neon-drift",
+    visual: "neon-drift",
+    pageSections: [
+      {
+        title: "What it is",
+        body: "Neon Drift is a mobile arcade game, not a racing game. The focus is forward movement, vertical thrust control, obstacle avoidance, and precise navigation.",
+      },
+      {
+        title: "Who it is for",
+        body: "It is for mobile players who want a fast arcade challenge that can be learned quickly and improved through repeated play.",
+      },
+    ],
+  },
+  {
+    name: "Falling From The Sky",
+    slug: "falling-from-the-sky",
+    status: "coming-soon",
+    roadmapGroup: "coming-soon",
+    category: "game",
+    categoryLabel: "Mobile Action Platformer",
+    headline: "Freeform aerial movement.",
+    tagline: "A mobile action game focused on movement, aerial control, and reaction timing.",
+    shortDescription:
+      "Falling From The Sky is a fast-paced mobile action game focused on fluid movement, aerial control, freeform navigation, and reaction-based gameplay.",
+    longDescription:
+      "Falling From The Sky gives players freedom of movement instead of lane-based runner structure. Players maneuver through hazards using timing, control, and quick reactions.",
+    platforms: ["Android", "Potential future iOS release"],
+    usersCan: [
+      "Move freely through airborne hazards.",
+      "Use timing and aerial control to survive reaction-based challenges.",
+      "Play short mobile sessions built around movement skill.",
+    ],
+    route: "/projects/falling-from-the-sky",
+    visual: "falling-from-the-sky",
+    pageSections: [
+      {
+        title: "What it is",
+        body: "Falling From The Sky is a mobile action platformer centered on fluid movement, aerial control, and reaction-based navigation.",
+      },
+      {
+        title: "What it is not",
+        body: "The project is not positioned as a lane-based runner. Its public direction emphasizes freeform movement and player control.",
+      },
+    ],
+  },
+  {
+    name: "Phase Arcade Volume 1",
+    slug: "phase-arcade-volume-1",
+    status: "coming-soon",
+    roadmapGroup: "coming-soon",
+    category: "game-collection",
+    categoryLabel: "Arcade Game Collection",
+    headline: "Three focused arcade games.",
+    tagline: "Phase Shift, Phase Defense, and Phase Court in one arcade collection.",
+    shortDescription:
+      "Phase Arcade Volume 1 is a collection of fast, focused arcade games built around short-session gameplay, clean mechanics, and replayable score-chasing loops.",
+    longDescription:
+      "Phase Arcade Volume 1 includes Phase Shift, Phase Defense, and Phase Court. Each game is designed as a distinct arcade experience under the broader Phase Arcade identity.",
+    platforms: ["PC", "Potential future Android release"],
+    usersCan: [
+      "Play three distinct arcade games in one collection.",
+      "Practice short-session gameplay built around replayable score-chasing loops.",
+      "Move between Phase Shift, Phase Defense, and Phase Court under one shared arcade identity.",
+    ],
+    route: "/projects/phase-arcade-volume-1",
+    visual: "phase-arcade",
+    includedGames: ["phase-shift", "phase-defense", "phase-court"],
+    pageSections: [
+      {
+        title: "Included games",
+        body: "The first volume includes Phase Shift, Phase Defense, and Phase Court. Each game has its own core arcade focus while remaining part of the Phase Arcade collection.",
+      },
+      {
+        title: "Who it is for",
+        body: "The collection is for players who like short, focused arcade sessions with clean mechanics and repeatable score-chasing goals.",
+      },
+    ],
+  },
+  {
+    name: "Phase Shift",
+    slug: "phase-shift",
+    status: "coming-soon",
+    roadmapGroup: "included-game",
+    category: "included-game",
+    categoryLabel: "Included Game in Phase Arcade Volume 1",
+    headline: "Movement and timing.",
+    tagline: "An included Phase Arcade game focused on movement, timing, and momentum.",
+    shortDescription:
+      "Phase Shift is included in Phase Arcade Volume 1 and focuses on movement, timing, momentum, and avoiding failure through precise control.",
+    longDescription:
+      "Phase Shift is one of the three games included in Phase Arcade Volume 1. It is presented as part of the collection rather than a separate standalone roadmap priority.",
+    platforms: ["PC", "Potential future Android release"],
+    parentProject: "phase-arcade-volume-1",
+    route: "/projects/phase-shift",
+    visual: "phase-shift",
+    pageSections: [
+      {
+        title: "Collection context",
+        body: "Phase Shift is part of Phase Arcade Volume 1 alongside Phase Defense and Phase Court.",
+      },
+      {
+        title: "Core focus",
+        body: "The game emphasizes movement, timing, momentum, and quick recovery inside a short-session arcade format.",
+      },
+    ],
+  },
+  {
+    name: "Phase Defense",
+    slug: "phase-defense",
+    status: "coming-soon",
+    roadmapGroup: "included-game",
+    category: "included-game",
+    categoryLabel: "Included Game in Phase Arcade Volume 1",
+    headline: "Defense and survival.",
+    tagline: "An included Phase Arcade game focused on defense, pressure, and target priority.",
+    shortDescription:
+      "Phase Defense is included in Phase Arcade Volume 1 and focuses on defensive play, pressure, target priority, and survival.",
+    longDescription:
+      "Phase Defense is one of the three games included in Phase Arcade Volume 1. It is presented as part of the collection rather than a separate standalone roadmap priority.",
+    platforms: ["PC", "Potential future Android release"],
+    parentProject: "phase-arcade-volume-1",
+    route: "/projects/phase-defense",
+    visual: "phase-defense",
+    pageSections: [
+      {
+        title: "Collection context",
+        body: "Phase Defense is part of Phase Arcade Volume 1 alongside Phase Shift and Phase Court.",
+      },
+      {
+        title: "Core focus",
+        body: "The game emphasizes defensive decision-making, pressure management, target priority, and survival.",
+      },
+    ],
+  },
+  {
+    name: "Phase Court",
+    slug: "phase-court",
+    status: "coming-soon",
+    roadmapGroup: "included-game",
+    category: "included-game",
+    categoryLabel: "Included Game in Phase Arcade Volume 1",
+    headline: "Competition and reaction.",
+    tagline: "An included Phase Arcade game focused on competition, positioning, and reaction speed.",
+    shortDescription:
+      "Phase Court is included in Phase Arcade Volume 1 and focuses on opposing sides, competitive positioning, reaction speed, and arcade control.",
+    longDescription:
+      "Phase Court is one of the three games included in Phase Arcade Volume 1. It is presented as part of the collection rather than a separate standalone roadmap priority.",
+    platforms: ["PC", "Potential future Android release"],
+    parentProject: "phase-arcade-volume-1",
+    route: "/projects/phase-court",
+    visual: "phase-court",
+    pageSections: [
+      {
+        title: "Collection context",
+        body: "Phase Court is part of Phase Arcade Volume 1 alongside Phase Shift and Phase Defense.",
+      },
+      {
+        title: "Core focus",
+        body: "The game emphasizes competitive arcade play, positioning, reaction speed, and control.",
+      },
+    ],
+  },
+  {
+    name: "Darren In The Woods 2",
     slug: "darren-in-the-woods-2",
     status: "active-development",
+    roadmapGroup: "active-development",
     category: "game",
-    headline: "Something Is Waiting In The Woods.",
-    tagline: "Something Is Waiting In The Woods.",
+    categoryLabel: "Atmospheric Horror Game",
+    headline: "Atmospheric Appalachian horror.",
+    tagline: "A stylized horror experience built around atmosphere, discovery, and tension.",
     shortDescription:
-      "A psychological horror experience inspired by Appalachian wilderness, isolation, and the feeling of being watched.",
+      "Darren In The Woods 2 is a stylized horror experience inspired by Appalachian folklore, wilderness exploration, environmental storytelling, and psychological tension.",
     longDescription:
-      "Darren in the Woods 2 is a psychological horror experience shaped by Appalachian wilderness, isolation, and the feeling of being watched. The project is currently in active development, with atmosphere, restraint, and tension guiding the public direction.",
+      "Darren In The Woods 2 focuses on atmosphere, discovery, and unsettling encounters rather than constant combat. The project is built around wilderness exploration, environmental storytelling, and psychological tension.",
+    platforms: ["PC"],
+    usersCan: [
+      "Explore a stylized wilderness horror setting.",
+      "Discover environmental details and unsettling encounters.",
+      "Experience tension shaped by atmosphere rather than constant combat.",
+    ],
     route: "/projects/darren-in-the-woods-2",
     visual: "darren",
     pageSections: [
       {
-        title: "The woods are not empty",
-        body: "The project leans on atmosphere, distance, and the fear of noticing something too late.",
+        title: "What it is",
+        body: "Darren In The Woods 2 is an atmospheric horror game inspired by Appalachian folklore and wilderness unease.",
       },
       {
-        title: "Atmosphere first",
-        body: "The experience is being shaped around silhouettes, fog, distance, and the slow realization that something in the woods has noticed you.",
+        title: "Design focus",
+        body: "The public direction centers on exploration, environmental storytelling, psychological tension, and unsettling encounters.",
       },
     ],
   },
   {
-    name: "Talk To Me",
+    name: "Talk To Me AAC",
     slug: "talk-to-me",
-    status: "future",
+    status: "active-development",
+    roadmapGroup: "active-development",
     category: "app",
-    headline: "Communication Without Compromise.",
-    tagline: "Communication Without Compromise.",
+    categoryLabel: "Accessibility & Communication Software",
+    headline: "Communication support built for real use.",
+    tagline: "AAC software focused on accessibility, usability, affordability, and family needs.",
     shortDescription:
-      "An offline-first AAC platform designed to help autistic and nonverbal users communicate clearly while keeping data private and local.",
+      "Talk To Me AAC is an augmentative and alternative communication application for nonverbal and minimally verbal users.",
     longDescription:
-      "Talk To Me is a planned offline-first AAC communication platform designed to support autistic and nonverbal users with accessible communication tools while keeping data private and local. The goal is calm, respectful software that helps people communicate clearly without turning personal expression into a cloud service.",
+      "Talk To Me AAC is accessibility and communication software designed to help nonverbal and minimally verbal users communicate through customizable visual and speech-based tools. The project focuses on accessibility, usability, affordability, and real-world family needs.",
+    platforms: ["Android", "iOS", "Tablets"],
+    idealFor: ["Nonverbal users", "Minimally verbal users", "Families", "Caregivers"],
+    usersCan: [
+      "Use customizable visual communication tools.",
+      "Communicate through speech-based support features.",
+      "Use the application on mobile and tablet devices when available.",
+    ],
     route: "/projects/talk-to-me",
     visual: "talk-to-me",
     pageSections: [
       {
-        title: "Local by default",
-        body: "Communication tools should remain useful without depending on an account, a signal, or a remote service.",
+        title: "What it is",
+        body: "Talk To Me AAC is an augmentative and alternative communication application for accessibility and everyday communication support.",
       },
       {
-        title: "Designed around expression",
-        body: "The goal is calm, practical software that keeps the person using it at the center.",
+        title: "Who it is for",
+        body: "The project is intended for nonverbal and minimally verbal users, families, and caregivers who need practical communication tools.",
       },
     ],
   },
   {
-    name: "Phase Arcade Volume 2",
-    slug: "phase-arcade-volume-2",
-    status: "future",
-    category: "game-collection",
-    headline: "More Games. More Challenge. More Arcade.",
-    tagline: "More Games. More Challenge. More Arcade.",
+    name: "Bloom",
+    slug: "bloom",
+    status: "planned",
+    roadmapGroup: "planned",
+    category: "app",
+    categoryLabel: "Recovery & Sobriety Support App",
+    headline: "Support for long-term recovery.",
+    tagline: "A sobriety and recovery support app being developed by Aaron and Katy.",
     shortDescription:
-      "The next collection of focused arcade experiences built on the foundation of Volume 1.",
+      "Bloom is a sobriety and recovery support application being developed by Aaron and Katy.",
     longDescription:
-      "Phase Arcade Volume 2 is the planned follow-up to Phase Arcade Volume 1, expanding the collection with additional focused arcade experiences while preserving the fast-session philosophy of the original release. The direction is more challenge, more variety, and the same commitment to clean mechanics.",
-    route: "/projects/phase-arcade-volume-2",
-    visual: "phase-arcade-2",
+      "Bloom is planned to help users track progress, build healthier habits, celebrate milestones, and stay motivated during long-term recovery journeys.",
+    platforms: ["Android", "iOS"],
+    usersCan: [
+      "Track recovery progress.",
+      "Build healthier habits.",
+      "Recognize milestones and stay motivated during long-term recovery.",
+    ],
+    route: "/projects/bloom",
+    visual: "bloom",
     pageSections: [
       {
-        title: "Built from Volume 1",
-        body: "The follow-up keeps the arcade line moving while preserving the fast-session philosophy of the first collection.",
+        title: "What it is",
+        body: "Bloom is a planned recovery and sobriety support application being developed by Aaron and Katy.",
       },
       {
-        title: "More without clutter",
-        body: "The direction is more challenge, more variety, and the same commitment to focused mechanics.",
+        title: "Who it is for",
+        body: "The project is intended for people who want simple support for tracking progress, building habits, and staying motivated during recovery.",
       },
     ],
   },
   {
     name: "Misread",
     slug: "misread",
-    status: "future",
+    status: "planned",
+    roadmapGroup: "planned",
     category: "game",
-    headline: "What Did They Really Mean?",
-    tagline: "What Did They Really Mean?",
+    categoryLabel: "Narrative Psychological Experience",
+    headline: "Perception, memory, and misunderstanding.",
+    tagline: "A narrative psychological experience about communication and what people think they understand.",
     shortDescription:
-      "A communication-focused game built around misunderstanding, hidden intent, interpretation, and uncertainty.",
+      "Misread is a narrative-focused project exploring perception, communication, misunderstanding, memory, and human psychology.",
     longDescription:
-      "Misread is a communication-focused game built around misunderstanding, interpretation, hidden intent, and the challenge of determining what people actually mean. It explores the unstable space between what someone says, what they leave out, and what the player thinks they heard.",
+      "Misread is intended as one of Reed Creative Labs' largest creative efforts. The project explores how people interpret what is said, what is remembered, what is misunderstood, and what is left unsaid.",
+    platforms: ["PC"],
+    usersCan: [
+      "Experience a narrative centered on interpretation and uncertainty.",
+      "Engage with themes of communication, misunderstanding, memory, and human psychology.",
+      "Follow a project designed around psychological tension rather than conventional action.",
+    ],
     route: "/projects/misread",
     visual: "misread",
     pageSections: [
       {
-        title: "Meaning is unstable",
-        body: "The game is built around interpretation, hidden intent, and the uncertainty inside ordinary conversation.",
+        title: "What it is",
+        body: "Misread is a narrative psychological experience focused on perception, communication, misunderstanding, memory, and human psychology.",
       },
       {
-        title: "Quiet tension",
-        body: "Misread is planned as a smaller, stranger project where reading people becomes the central challenge.",
+        title: "Creative direction",
+        body: "The project is planned as a major creative effort for Reed Creative Labs, with emphasis on interpretation, ambiguity, and psychological tension.",
       },
     ],
   },
@@ -294,15 +490,23 @@ export const projects: Project[] = [
 export const featuredProjects = projects.filter((project) => project.featured);
 
 export const includedGames = projects.filter(
-  (project) => project.category === "included-game",
+  (project) => project.roadmapGroup === "included-game",
+);
+
+export const roadmapProjects = projects.filter(
+  (project) => project.roadmapGroup !== "included-game",
+);
+
+export const comingSoonProjects = projects.filter(
+  (project) => project.roadmapGroup === "coming-soon",
 );
 
 export const activeDevelopmentProjects = projects.filter(
-  (project) => project.status === "active-development",
+  (project) => project.roadmapGroup === "active-development",
 );
 
-export const futureProjects = projects.filter(
-  (project) => project.status === "future",
+export const plannedProjects = projects.filter(
+  (project) => project.roadmapGroup === "planned",
 );
 
 export function getProject(slug: string) {
@@ -310,25 +514,17 @@ export function getProject(slug: string) {
 }
 
 export function getStatusLabel(status: ProjectStatus) {
-  if (status === "launching") {
-    return "Launching";
+  if (status === "coming-soon") {
+    return "Coming Soon";
   }
 
   if (status === "active-development") {
-    return "Active development";
-  }
-
-  if (status === "future") {
-    return "Planned";
+    return "Active Development";
   }
 
   return "Planned";
 }
 
 export function getProjectDateLabel(project: Project) {
-  if (project.launchDate) {
-    return `Launching ${project.launchDate}`;
-  }
-
   return getStatusLabel(project.status);
 }

@@ -5,16 +5,18 @@ import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import {
   activeDevelopmentProjects,
+  comingSoonProjects,
   featuredProjects,
-  futureProjects,
   includedGames,
+  plannedProjects,
+  roadmapDisclaimer,
 } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Products",
   description:
-    "Explore Reed Creative Labs software, games, active development projects, and future roadmap.",
+    "Explore Reed Creative Labs software, games, tools, active development projects, and future roadmap.",
   path: "/projects",
   image: {
     url: "/images/home/phase-arcade-card.jpg",
@@ -27,15 +29,15 @@ export default function ProjectsPage() {
     <main>
       <PageHeader
         eyebrow="Products"
-        title="Software and games with a shared standard"
-        body="Reed Creative Labs builds across software, games, and creative tools with one point of view: private by default, offline first, owned by the person using it."
+        title="Software, games, and tools with a shared standard"
+        body="Reed Creative Labs builds products with clear purpose, practical design, and respect for the people using them."
       />
 
       <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
         <Reveal>
-          <SectionHeader title="Featured Launches" />
+          <SectionHeader title="Featured Products" />
         </Reveal>
-        <div className="grid gap-2 md:grid-cols-2">
+        <div className="grid gap-3 lg:grid-cols-3">
           {featuredProjects.map((project, index) => (
             <Reveal key={project.slug} delay={index * 0.06}>
               <FeaturedProjectCard project={project} />
@@ -46,7 +48,20 @@ export default function ProjectsPage() {
 
       <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
         <Reveal>
-          <SectionHeader title="Phase Arcade Included Games" />
+          <SectionHeader title="Coming Soon" />
+        </Reveal>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {comingSoonProjects.map((project, index) => (
+            <Reveal key={project.slug} delay={index * 0.04}>
+              <CompactProjectCard project={project} />
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+        <Reveal>
+          <SectionHeader title="Phase Arcade Volume 1 Included Games" />
         </Reveal>
         <div className="grid gap-4 md:grid-cols-3">
           {includedGames.map((project, index) => (
@@ -72,16 +87,19 @@ export default function ProjectsPage() {
         </div>
         <div>
           <Reveal>
-            <SectionHeader title="Coming Next" />
+            <SectionHeader title="Planned" />
           </Reveal>
           <div className="grid gap-4">
-            {futureProjects.map((project, index) => (
+            {plannedProjects.map((project, index) => (
               <Reveal key={project.slug} delay={index * 0.06}>
                 <CompactProjectCard project={project} emphasis="quiet" />
               </Reveal>
             ))}
           </div>
         </div>
+        <p className="text-xs leading-6 text-rcl-dim md:col-span-2">
+          {roadmapDisclaimer}
+        </p>
       </section>
     </main>
   );
