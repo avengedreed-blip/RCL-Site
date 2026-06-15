@@ -180,6 +180,7 @@ export function ProjectMediaImage({
       alt={alt}
       fill
       priority={priority}
+      loading={priority ? "eager" : undefined}
       sizes="(min-width: 1024px) 50vw, 100vw"
       className={cn(
         fit === "contain" ? "object-contain" : "object-cover",

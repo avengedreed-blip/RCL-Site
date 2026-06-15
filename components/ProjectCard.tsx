@@ -23,9 +23,14 @@ function PlatformList({ platforms, className }: { platforms: string[]; className
 type FeaturedProjectCardProps = {
   project: Project;
   className?: string;
+  priority?: boolean;
 };
 
-export function FeaturedProjectCard({ project, className }: FeaturedProjectCardProps) {
+export function FeaturedProjectCard({
+  project,
+  className,
+  priority = false,
+}: FeaturedProjectCardProps) {
   const visualImage = getProjectVisualImage(project.visual);
 
   return (
@@ -40,6 +45,7 @@ export function FeaturedProjectCard({ project, className }: FeaturedProjectCardP
         {visualImage ? (
           <ProjectMediaImage
             visual={project.visual}
+            priority={priority}
             className="transition duration-700 ease-out group-hover:scale-[1.035]"
           />
         ) : (
