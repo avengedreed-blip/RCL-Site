@@ -5,6 +5,7 @@ import { studioEmailHref } from "@/content/contact";
 
 const footerLinks = [
   { href: "/projects", label: "Products" },
+  { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },

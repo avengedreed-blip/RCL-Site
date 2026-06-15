@@ -4,6 +4,7 @@ import { Logo } from "@/components/Logo";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Products" },
+  { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },
@@ -15,7 +16,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-5 px-5 py-5 md:px-8">
         <Logo priority />
         <nav
-          className="hidden items-center gap-9 md:flex"
+          className="hidden items-center gap-5 lg:gap-9 md:flex"
           aria-label="Primary navigation"
         >
           {navItems.map((item) => (
@@ -30,7 +31,7 @@ export function SiteHeader() {
         </nav>
         <Link
           href="/contact"
-          className="hidden h-11 items-center justify-center rounded-[3px] border border-rcl-red px-8 text-xs font-black uppercase text-white transition hover:bg-rcl-red md:inline-flex"
+          className="hidden h-11 items-center justify-center rounded-[3px] border border-rcl-red px-6 text-xs font-black uppercase text-white transition hover:bg-rcl-red md:inline-flex lg:px-8"
         >
           Contact
         </Link>
