@@ -29,7 +29,7 @@ export const metadata: Metadata = buildMetadata({
 const websiteServices = [
   "Responsive design",
   "Mobile-friendly layouts",
-  "Contact forms and direct contact sections",
+  "Contact links and inquiry paths",
   "Content pages and galleries",
   "Performance-focused development",
   "Accessibility-conscious design",
@@ -91,7 +91,7 @@ const faqs = [
   {
     question: "Do you offer maintenance and updates?",
     answer:
-      "Yes. Ongoing support and future enhancements can be provided after launch if needed.",
+      "Yes. Ongoing support and future enhancements can be quoted separately after launch if needed.",
   },
   {
     question: "Do I own the final product?",

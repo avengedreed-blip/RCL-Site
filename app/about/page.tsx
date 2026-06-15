@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "About",
   description:
-    "Reed Creative Labs is an independent software and game studio building offline-first products with privacy and ownership at the center.",
+    "Reed Creative Labs is an independent creative technology studio building privacy-conscious software, games, educational tools, websites, and custom software.",
   path: "/about",
   image: {
     url: "/images/home/rcl-technical-orb.jpg",

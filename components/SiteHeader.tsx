@@ -16,7 +16,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-5 px-5 py-5 md:px-8">
         <Logo priority />
         <nav
-          className="hidden items-center gap-5 lg:gap-9 md:flex"
+          className="hidden items-center gap-5 lg:flex lg:gap-9"
           aria-label="Primary navigation"
         >
           {navItems.map((item) => (
@@ -31,13 +31,13 @@ export function SiteHeader() {
         </nav>
         <Link
           href="/contact"
-          className="hidden h-11 items-center justify-center rounded-[3px] border border-rcl-red px-6 text-xs font-black uppercase text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-rcl-red hover:shadow-[0_0_24px_rgba(255,32,32,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red md:inline-flex lg:px-8"
+          className="hidden h-11 items-center justify-center rounded-[3px] border border-rcl-red px-6 text-xs font-black uppercase text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-rcl-red hover:shadow-[0_0_24px_rgba(255,32,32,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red lg:inline-flex lg:px-8"
         >
           Contact
         </Link>
       </div>
       <nav
-        className="mx-auto flex max-w-[1500px] justify-between gap-3 overflow-x-auto px-4 pb-4 md:hidden"
+        className="mx-auto flex max-w-[1500px] flex-wrap justify-center gap-x-4 gap-y-3 px-4 pb-4 md:px-8 lg:hidden"
         aria-label="Mobile navigation"
       >
         {navItems.map((item) => (

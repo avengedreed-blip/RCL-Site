@@ -108,7 +108,7 @@ export default function Home() {
         <div className="grid gap-3 lg:grid-cols-3">
           {featuredProjects.map((project, index) => (
             <Reveal key={project.slug} delay={index * 0.06}>
-              <FeaturedProjectCard project={project} />
+              <FeaturedProjectCard project={project} priority={index < 3} />
             </Reveal>
           ))}
         </div>

@@ -18,6 +18,27 @@ type SeoOptions = {
   };
 };
 
+const imageDimensions: Record<string, { width: number; height: number }> = {
+  "/og-image.jpg": { width: 1200, height: 630 },
+  "/social-preview.jpg": { width: 1200, height: 630 },
+  "/images/home/echo-card.jpg": { width: 727, height: 404 },
+  "/images/home/phase-arcade-card.jpg": { width: 723, height: 404 },
+  "/images/home/rcl-hero-cinematic.jpg": { width: 1375, height: 1266 },
+  "/images/home/rcl-technical-orb.jpg": { width: 350, height: 203 },
+  "/images/home/red-atmosphere.jpg": { width: 352, height: 203 },
+  "/images/home/red-floor-glow.jpg": { width: 359, height: 203 },
+  "/images/home/red-grid-tech.jpg": { width: 361, height: 203 },
+  "/images/projects/misread-card.jpg": { width: 1600, height: 900 },
+  "/images/projects/talk-to-me-card.jpg": { width: 1600, height: 900 },
+  "/images/projects/rcl-science-lab-stable-orbits.jpg": { width: 1276, height: 717 },
+  "/images/projects/rcl-workspace-dashboard.jpg": { width: 1420, height: 960 },
+  "/images/projects/echo-editor-screen.jpg": { width: 2496, height: 1302 },
+  "/images/projects/echo-start-screen.jpg": { width: 2195, height: 1097 },
+  "/images/projects/phase-shift-gameplay-card.jpg": { width: 1600, height: 720 },
+  "/images/projects/phase-defense-gameplay-card.jpg": { width: 1600, height: 720 },
+  "/images/projects/phase-court-gameplay-card.jpg": { width: 1600, height: 720 },
+};
+
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();
 }
@@ -37,6 +58,7 @@ export function buildMetadata({
   const isHome = path === "/";
   const resolvedTitle = isHome ? title : `${title} | ${siteName}`;
   const imageUrl = absoluteUrl(image.url);
+  const dimensions = imageDimensions[image.url];
 
   return {
     title: isHome ? { absolute: title } : title.replace(` | ${siteName}`, ""),
@@ -52,8 +74,8 @@ export function buildMetadata({
       images: [
         {
           url: imageUrl,
-          width: image.width,
-          height: image.height,
+          width: image.width ?? dimensions?.width,
+          height: image.height ?? dimensions?.height,
           alt: image.alt ?? resolvedTitle,
         },
       ],

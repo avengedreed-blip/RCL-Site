@@ -20,6 +20,12 @@ export const metadata: Metadata = {
     "Phase Arcade",
     "offline-first software",
     "privacy-first software",
+    "local-first software",
+    "educational software",
+    "custom software",
+    "websites",
+    "small business websites",
+    "custom tools",
     "independent game studio",
   ],
   icons: {

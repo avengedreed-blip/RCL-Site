@@ -28,9 +28,9 @@ export default function PressPage() {
         body="A concise reference for coverage, listings, and product context. For media requests, use the studio contact address."
       />
 
-      <section className="mx-auto grid max-w-[1500px] gap-8 px-5 py-8 md:grid-cols-[0.9fr_1.1fr] md:px-8">
-        <Reveal>
-          <div className="rounded-[6px] border border-white/14 bg-rcl-surface p-7 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)]">
+      <section className="mx-auto grid max-w-[1500px] min-w-0 gap-8 px-5 py-8 md:grid-cols-[0.9fr_1.1fr] md:px-8">
+        <Reveal className="min-w-0">
+          <div className="min-w-0 rounded-[6px] border border-white/14 bg-rcl-surface p-7 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)]">
             <Download
               className="mb-8 h-8 w-8 text-rcl-red"
               strokeWidth={1.5}
@@ -44,22 +44,23 @@ export default function PressPage() {
             </p>
             <a
               href={studioEmailHref}
-              className="mt-6 inline-flex text-sm font-black uppercase text-rcl-red hover:text-white"
+              className="mt-6 inline-flex max-w-full break-all text-sm font-black uppercase text-rcl-red transition duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red"
             >
               {studioEmail}
             </a>
           </div>
         </Reveal>
-        <Reveal delay={0.08}>
-          <div className="rounded-[6px] border border-white/14 bg-rcl-elevated p-7 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)]">
+        <Reveal className="min-w-0" delay={0.08}>
+          <div className="min-w-0 rounded-[6px] border border-white/14 bg-rcl-elevated p-7 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)]">
             <h2 className="text-2xl font-black uppercase text-white">
               Studio Boilerplate
             </h2>
             <p className="mt-5 text-base leading-8 text-rcl-muted">
-              Reed Creative Labs is an independent software and game studio
-              building offline-first products with a focus on privacy,
-              ownership, and lasting value. Its upcoming launches include Echo
-              and Phase Arcade Volume 1.
+              Reed Creative Labs is an independent software studio building
+              software products, games, educational tools, websites, and custom
+              software with a focus on privacy, ownership, and lasting value.
+              Current featured products include Echo, Phase Arcade Volume 1,
+              RCL Workspace, and RCL Science Lab.
             </p>
           </div>
         </Reveal>
