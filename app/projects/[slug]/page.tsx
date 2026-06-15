@@ -102,7 +102,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </Reveal>
         <Reveal delay={0.08}>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated shadow-[0_0_72px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.06)]">
+          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated shadow-[0_0_72px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_0_86px_rgba(0,0,0,0.48),0_0_30px_rgba(255,32,32,0.08),inset_0_1px_0_rgba(255,255,255,0.06)]">
             {visualImage ? (
               <div className="relative min-h-[430px] bg-black xl:min-h-[560px]">
                 <ProjectMediaImage visual={project.visual} priority variant="detail" />
@@ -124,7 +124,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="grid gap-4 md:grid-cols-2">
             {screenshots.map((screenshot) => (
               <Reveal key={screenshot.src}>
-                <div className="relative aspect-video overflow-hidden rounded-[6px] border border-white/14 bg-black shadow-[0_0_56px_rgba(0,0,0,0.36),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                <div className="relative aspect-video overflow-hidden rounded-[6px] border border-white/14 bg-black shadow-[0_0_56px_rgba(0,0,0,0.36),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_0_66px_rgba(0,0,0,0.42),0_0_24px_rgba(255,32,32,0.07),inset_0_1px_0_rgba(255,255,255,0.06)]">
                   <Image
                     src={screenshot.src}
                     alt={screenshot.alt}
@@ -176,7 +176,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="grid gap-8 md:grid-cols-2">
           {project.idealFor?.length ? (
             <Reveal>
-              <div className="rounded-[6px] border border-white/12 bg-rcl-surface p-6">
+              <div className="rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]">
                 <h2 className="text-2xl font-black uppercase text-white">
                   Who it is for
                 </h2>
@@ -193,7 +193,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ) : null}
           {project.usersCan?.length ? (
             <Reveal delay={0.06}>
-              <div className="rounded-[6px] border border-white/12 bg-rcl-surface p-6">
+              <div className="rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]">
                 <h2 className="text-2xl font-black uppercase text-white">
                   What users can do
                 </h2>

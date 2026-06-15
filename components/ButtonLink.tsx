@@ -20,12 +20,12 @@ export function ButtonLink({
     <Link
       href={href}
       className={cn(
-        "group inline-flex h-12 items-center justify-center gap-3 whitespace-nowrap rounded-[3px] px-7 text-sm font-black uppercase transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red",
+        "group inline-flex h-12 items-center justify-center gap-3 whitespace-nowrap rounded-[3px] px-7 text-sm font-black uppercase transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red",
         variant === "primary" &&
-          "bg-rcl-red text-white shadow-[0_0_26px_rgba(255,32,32,0.22)] hover:bg-white hover:text-rcl-black",
+          "bg-rcl-red text-white shadow-[0_0_26px_rgba(255,32,32,0.22)] hover:bg-white hover:text-rcl-black hover:shadow-[0_0_34px_rgba(255,32,32,0.28)]",
         variant === "secondary" &&
-          "border border-white/35 bg-transparent text-white hover:border-rcl-red hover:text-rcl-red",
-        variant === "ghost" && "text-rcl-muted hover:text-white",
+          "border border-white/35 bg-transparent text-white hover:border-rcl-red hover:bg-rcl-red/[0.04] hover:text-rcl-red hover:shadow-[0_0_24px_rgba(255,32,32,0.1)]",
+        variant === "ghost" && "text-rcl-muted hover:text-white hover:translate-y-0",
         className,
       )}
     >

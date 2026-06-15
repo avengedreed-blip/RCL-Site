@@ -133,7 +133,7 @@ export default function ServicesPage() {
 
       <section className="mx-auto max-w-[1500px] px-5 pb-8 md:px-8 md:pb-12">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-surface p-6 shadow-[0_0_72px_rgba(0,0,0,0.38)] sm:p-8 md:p-10">
+          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-surface p-6 shadow-[0_0_72px_rgba(0,0,0,0.38)] transition duration-300 ease-out hover:shadow-[0_0_84px_rgba(0,0,0,0.44),0_0_28px_rgba(255,32,32,0.08)] sm:p-8 md:p-10">
             <RclTechnicalMotif
               className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-30 md:block"
               variant="panel"
@@ -161,7 +161,7 @@ export default function ServicesPage() {
       <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
         <div className="grid gap-4 lg:grid-cols-2">
           <Reveal>
-            <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6 sm:p-8">
+            <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/45 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-8">
               <MonitorSmartphone
                 className="mb-8 h-8 w-8 text-rcl-red"
                 strokeWidth={1.5}
@@ -195,7 +195,7 @@ export default function ServicesPage() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6 sm:p-8">
+            <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/45 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-8">
               <Code2
                 className="mb-8 h-8 w-8 text-rcl-red"
                 strokeWidth={1.5}
@@ -298,7 +298,7 @@ export default function ServicesPage() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {processSteps.map((step, index) => (
             <Reveal key={step.title} delay={index * 0.05}>
-              <div className="min-h-[230px] rounded-[6px] border border-white/12 bg-rcl-surface p-6">
+              <div className="min-h-[230px] rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-white/20 hover:shadow-[0_12px_34px_rgba(0,0,0,0.22)]">
                 <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-[4px] border border-white/12 bg-black/30 text-sm font-black text-rcl-red">
                   {index + 1}
                 </div>
@@ -321,7 +321,7 @@ export default function ServicesPage() {
         <div className="grid gap-4 lg:grid-cols-2">
           {faqs.map((faq, index) => (
             <Reveal key={faq.question} delay={index * 0.04}>
-              <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6">
+              <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_12px_34px_rgba(0,0,0,0.2)]">
                 <h3 className="text-base font-black uppercase text-white">
                   {faq.question}
                 </h3>
@@ -336,7 +336,7 @@ export default function ServicesPage() {
 
       <section className="mx-auto max-w-[1500px] px-5 pb-20 pt-10 md:px-8 md:pb-24">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated p-6 shadow-[0_0_72px_rgba(0,0,0,0.42)] sm:p-8 md:p-10">
+          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated p-6 shadow-[0_0_72px_rgba(0,0,0,0.42)] transition duration-300 ease-out hover:shadow-[0_0_86px_rgba(0,0,0,0.48),0_0_30px_rgba(255,32,32,0.1)] sm:p-8 md:p-10">
             <RclTechnicalMotif
               className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-30 md:block"
               variant="panel"

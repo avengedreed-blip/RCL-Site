@@ -32,7 +32,7 @@ export function SiteFooter() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs font-black uppercase text-rcl-muted transition hover:text-rcl-red"
+              className="text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red"
             >
               {link.label}
             </Link>
@@ -47,7 +47,7 @@ export function SiteFooter() {
                   key={link.label}
                   href={link.href}
                   aria-label={link.label}
-                  className="text-white transition hover:text-rcl-red"
+                  className="text-white transition duration-300 hover:-translate-y-0.5 hover:text-rcl-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red"
                 >
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </a>

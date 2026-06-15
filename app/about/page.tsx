@@ -80,7 +80,7 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 sm:p-8 md:grid md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
+          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-white/18 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)] sm:p-8 md:grid md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
             <RclTechnicalMotif
               className="right-[-20%] top-[-38%] h-[380px] w-[380px] opacity-30"
               variant="compact"
@@ -122,7 +122,7 @@ export default function AboutPage() {
             const Icon = principle.icon;
             return (
               <Reveal key={principle.title} delay={index * 0.06}>
-                <div className="min-h-[240px] rounded-[6px] border border-white/12 bg-rcl-surface p-6">
+                <div className="min-h-[240px] rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/45 hover:bg-rcl-elevated hover:shadow-[0_12px_36px_rgba(0,0,0,0.22)]">
                   <Icon
                     className="mb-8 h-8 w-8 text-rcl-red"
                     strokeWidth={1.5}

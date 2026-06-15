@@ -32,7 +32,7 @@ export function FeaturedProjectCard({ project, className }: FeaturedProjectCardP
     <Link
       href={project.route}
       className={cn(
-        "group relative block min-h-[420px] overflow-hidden rounded-[6px] border border-white/16 bg-rcl-elevated transition duration-300 hover:border-rcl-red/70 hover:shadow-[0_0_64px_rgba(255,32,32,0.18)]",
+        "group relative block min-h-[420px] overflow-hidden rounded-[6px] border border-white/16 bg-rcl-elevated transition duration-300 ease-out hover:-translate-y-1 hover:border-rcl-red/70 hover:shadow-[0_18px_70px_rgba(0,0,0,0.34),0_0_64px_rgba(255,32,32,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red",
         className,
       )}
     >
@@ -40,7 +40,7 @@ export function FeaturedProjectCard({ project, className }: FeaturedProjectCardP
         {visualImage ? (
           <ProjectMediaImage
             visual={project.visual}
-            className="transition duration-700 group-hover:scale-[1.035]"
+            className="transition duration-700 ease-out group-hover:scale-[1.035]"
           />
         ) : (
           <div className="h-full bg-rcl-elevated" />
@@ -61,7 +61,7 @@ export function FeaturedProjectCard({ project, className }: FeaturedProjectCardP
           {project.shortDescription}
         </p>
         <PlatformList platforms={project.platforms} className="mt-5 max-w-[520px]" />
-        <span className="absolute bottom-7 right-7 flex h-10 w-10 items-center justify-center text-white transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-rcl-red">
+        <span className="absolute bottom-7 right-7 flex h-10 w-10 items-center justify-center text-white transition duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-rcl-red">
           <ArrowUpRight className="h-6 w-6" aria-hidden="true" />
         </span>
       </div>
@@ -85,7 +85,7 @@ export function CompactProjectCard({
     <Link
       href={project.route}
       className={cn(
-        "group grid overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface transition duration-300 hover:border-rcl-red/70 hover:bg-rcl-elevated hover:shadow-[0_0_42px_rgba(255,32,32,0.1)]",
+        "group grid overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/70 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.28),0_0_42px_rgba(255,32,32,0.1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red",
         isIncludedGame ? "min-h-[350px]" : "min-h-[230px]",
         emphasis === "quiet" && "opacity-85 hover:opacity-100",
       )}
@@ -99,7 +99,7 @@ export function CompactProjectCard({
         >
           <ProjectMediaImage
             visual={project.visual}
-            className="transition duration-700 group-hover:scale-[1.045]"
+            className="transition duration-700 ease-out group-hover:scale-[1.045]"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/78 via-black/18 to-black/14" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/88 to-transparent" />
@@ -118,7 +118,7 @@ export function CompactProjectCard({
         <div className="mt-3 flex items-start justify-between gap-4">
           <h3 className="text-xl font-black text-white">{project.name}</h3>
           <ArrowUpRight
-            className="mt-1 h-5 w-5 shrink-0 text-rcl-muted transition group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-rcl-red"
+            className="mt-1 h-5 w-5 shrink-0 text-rcl-muted transition duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-rcl-red"
             aria-hidden="true"
           />
         </div>

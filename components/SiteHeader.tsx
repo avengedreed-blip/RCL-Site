@@ -23,7 +23,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="relative py-2 text-xs font-black uppercase text-white transition hover:text-rcl-red"
+              className="relative py-2 text-xs font-black uppercase text-white transition duration-300 ease-out after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-rcl-red after:transition-transform after:duration-300 after:ease-out hover:text-rcl-red hover:after:scale-x-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red"
             >
               {item.label}
             </Link>
@@ -31,7 +31,7 @@ export function SiteHeader() {
         </nav>
         <Link
           href="/contact"
-          className="hidden h-11 items-center justify-center rounded-[3px] border border-rcl-red px-6 text-xs font-black uppercase text-white transition hover:bg-rcl-red md:inline-flex lg:px-8"
+          className="hidden h-11 items-center justify-center rounded-[3px] border border-rcl-red px-6 text-xs font-black uppercase text-white transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-rcl-red hover:shadow-[0_0_24px_rgba(255,32,32,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red md:inline-flex lg:px-8"
         >
           Contact
         </Link>
@@ -44,7 +44,7 @@ export function SiteHeader() {
           <Link
             key={item.href}
             href={item.href}
-            className="shrink-0 text-[0.68rem] font-black uppercase text-rcl-muted min-[375px]:text-xs"
+            className="shrink-0 text-[0.68rem] font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red min-[375px]:text-xs"
           >
             {item.label}
           </Link>

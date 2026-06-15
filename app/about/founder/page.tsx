@@ -36,7 +36,7 @@ export default function FounderPage() {
             const Icon = founderIcons[index] ?? Compass;
             return (
               <Reveal key={founder.name} delay={index * 0.06}>
-                <article className="relative min-h-full overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 hover:border-rcl-red/55 hover:bg-rcl-elevated sm:p-8">
+                <article className="relative min-h-full overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/55 hover:bg-rcl-elevated hover:shadow-[0_14px_42px_rgba(0,0,0,0.24)] sm:p-8">
                   <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,32,32,0.18),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.045),transparent_38%)]" />
                   <div className="relative">
                     <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-[4px] border border-rcl-red/45 bg-rcl-red/10 text-rcl-red shadow-[0_0_30px_rgba(255,32,32,0.16)]">
@@ -73,7 +73,7 @@ export default function FounderPage() {
 
       <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8 md:py-14">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 sm:p-8 lg:grid lg:grid-cols-[0.78fr_1.22fr] lg:gap-12 lg:p-10">
+          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-white/18 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)] sm:p-8 lg:grid lg:grid-cols-[0.78fr_1.22fr] lg:gap-12 lg:p-10">
             <RclTechnicalMotif
               className="right-[-18%] top-[-24%] h-[460px] w-[460px] opacity-35"
               variant="panel"
