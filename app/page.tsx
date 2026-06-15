@@ -59,7 +59,7 @@ const philosophy = [
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <section className="hero-section" style={{ alignItems: "start", minHeight: "80vh" }}>
         <Reveal className="hero-copy relative z-10">
           <p className="mb-6 text-sm font-black uppercase text-rcl-red">
@@ -112,6 +112,32 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 shadow-[0_0_54px_rgba(0,0,0,0.34)] sm:p-8">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_86%_24%,rgba(255,32,32,0.16),transparent_34%),linear-gradient(90deg,rgba(255,255,255,0.04),transparent_55%)]" />
+            <div className="relative z-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <p className="mb-4 text-xs font-black uppercase text-rcl-red">
+                  Studio Services
+                </p>
+                <h2 className="text-3xl font-black uppercase text-white md:text-4xl">
+                  Websites &amp; Custom Software
+                </h2>
+                <p className="mt-4 max-w-[820px] text-base leading-8 text-rcl-muted">
+                  Reed Creative Labs builds professional websites and practical
+                  custom software for small businesses, organizations,
+                  professionals, and independent creators.
+                </p>
+              </div>
+              <ButtonLink href="/services" variant="secondary">
+                Explore Services
+              </ButtonLink>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section className="mx-auto max-w-[1500px] px-5 py-12 md:px-8 md:py-16">

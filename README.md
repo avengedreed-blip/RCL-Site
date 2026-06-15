@@ -26,7 +26,7 @@ npm run build
 
 ## Deployment
 
-Deploy on Vercel as a Next.js project. The production domain is planned for:
+Deploy on Vercel as a Next.js project. The production domain is:
 
 ```text
 reedcreativelabs.com

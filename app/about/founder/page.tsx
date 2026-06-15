@@ -22,7 +22,7 @@ const founderIcons = [Hammer, Sparkles] as const;
 
 export default function FounderPage() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHeader
         eyebrow="Studio Story"
         title={founderStory.hero.title}

@@ -9,9 +9,11 @@ type SectionHeaderProps = {
 
 export function SectionHeader({ title, href, action }: SectionHeaderProps) {
   return (
-    <div className="mb-7 flex items-center gap-5">
-      <h2 className="shrink-0 text-sm font-black uppercase text-white">{title}</h2>
-      <div className="h-px flex-1 bg-white/25" />
+    <div className="mb-7 flex flex-wrap items-center gap-4 sm:gap-5">
+      <h2 className="min-w-0 max-w-full text-sm font-black uppercase leading-5 text-white [text-wrap:balance]">
+        {title}
+      </h2>
+      <div className="h-px min-w-12 flex-1 bg-white/25" />
       {href && action ? (
         <Link
           href={href}

@@ -43,7 +43,7 @@ const principles = [
 
 export default function AboutPage() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHeader
         eyebrow="About"
         title="A creative technology studio with one standard"

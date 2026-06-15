@@ -44,7 +44,7 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     ...organization,
     description:
-      "Reed Creative Labs is an independent software and game studio building offline-first products with privacy and ownership at the center.",
+      "Reed Creative Labs is an independent software studio building products, websites, and custom tools with privacy, ownership, and lasting value in mind.",
   };
 }
 

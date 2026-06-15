@@ -27,7 +27,7 @@ const contacts = [
 
 export default function ContactPage() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHeader
         eyebrow="Contact"
         title="Reach the studio directly"

@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function PressPage() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHeader
         eyebrow="Press"
         title="Reed Creative Labs press information"

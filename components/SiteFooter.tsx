@@ -23,7 +23,8 @@ export function SiteFooter() {
           <Logo className="w-[150px]" />
           <div className="hidden h-12 w-px bg-white/15 sm:block" />
           <p className="max-w-[260px] text-sm leading-6 text-rcl-dim">
-            Independent software and game studio.
+            Independent software studio building products, websites, and custom
+            tools.
           </p>
         </div>
         <nav className="flex flex-wrap items-center gap-5 md:justify-center" aria-label="Footer">

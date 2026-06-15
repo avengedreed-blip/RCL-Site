@@ -26,7 +26,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function ProjectsPage() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHeader
         eyebrow="Products"
         title="Software, games, and tools with a shared standard"

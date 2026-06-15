@@ -124,7 +124,7 @@ function FeatureList({ items }: { items: string[] }) {
 
 export default function ServicesPage() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <PageHeader
         eyebrow="Studio Services"
         title="Services"

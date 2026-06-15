@@ -71,7 +71,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const screenshots = getProjectScreenshots(project.visual);
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <StructuredData data={projectJsonLd(project)} />
       <section className="mx-auto grid max-w-[1500px] gap-10 px-5 pb-14 pt-12 md:grid-cols-[minmax(0,1fr)_minmax(460px,1fr)] md:px-8 md:pb-18 md:pt-16 xl:gap-14">
         <Reveal className="min-w-0 self-center">
