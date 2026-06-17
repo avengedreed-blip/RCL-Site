@@ -29,20 +29,20 @@ export default function FounderPage() {
         body={founderStory.hero.subtitle}
       />
 
-      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
         <h2 className="sr-only">Founder profiles</h2>
         <div className="grid gap-5 lg:grid-cols-2">
           {founderStory.founders.map((founder, index) => {
             const Icon = founderIcons[index] ?? Compass;
             return (
               <Reveal key={founder.name} delay={index * 0.06}>
-                <article className="relative min-h-full overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/55 hover:bg-rcl-elevated hover:shadow-[0_14px_42px_rgba(0,0,0,0.24)] sm:p-8">
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(255,32,32,0.18),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.045),transparent_38%)]" />
+                <article className="surface-panel relative min-h-full overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/55 hover:bg-rcl-elevated hover:shadow-[0_14px_42px_rgba(0,0,0,0.24)] sm:p-8">
+                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(132deg,rgba(255,255,255,0.03),transparent_38%),linear-gradient(28deg,transparent_0_72%,rgba(238,154,82,0.05)_73%,transparent_74.2%)]" />
                   <div className="relative">
-                    <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-[4px] border border-rcl-red/45 bg-rcl-red/10 text-rcl-red shadow-[0_0_30px_rgba(255,32,32,0.16)]">
+                    <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-[4px] border border-rcl-copper/40 bg-rcl-copper/8 text-rcl-amber shadow-[0_0_20px_rgba(210,115,59,0.1)]">
                       <Icon className="h-6 w-6" strokeWidth={1.5} aria-hidden="true" />
                     </div>
-                    <p className="text-sm font-black uppercase text-rcl-red">
+                      <p className="text-sm font-black uppercase text-rcl-amber">
                       {founder.title}
                     </p>
                     <h3 className="brand-heading mt-4 text-4xl leading-none text-white sm:text-5xl">
@@ -59,7 +59,7 @@ export default function FounderPage() {
                       ))}
                     </div>
                     {"quote" in founder ? (
-                      <blockquote className="mt-7 border-l-2 border-rcl-red pl-5 text-xl font-black leading-8 text-white">
+                      <blockquote className="mt-7 border-l-2 border-rcl-copper pl-5 text-xl font-black leading-8 text-white">
                         &quot;{founder.quote}&quot;
                       </blockquote>
                     ) : null}
@@ -71,16 +71,16 @@ export default function FounderPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8 md:py-14">
+      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-14 xl:px-0">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-white/18 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)] sm:p-8 lg:grid lg:grid-cols-[0.78fr_1.22fr] lg:gap-12 lg:p-10">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-rcl-copper/50 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)] sm:p-8 lg:grid lg:grid-cols-[0.78fr_1.22fr] lg:gap-12 lg:p-10">
             <RclTechnicalMotif
               className="right-[-18%] top-[-24%] h-[460px] w-[460px] opacity-35"
               variant="panel"
             />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,5,0.92),rgba(5,5,5,0.72)_52%,rgba(255,32,32,0.08)),radial-gradient(circle_at_82%_18%,rgba(255,32,32,0.16),transparent_34%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,5,0.94),rgba(5,5,5,0.78)_52%,rgba(8,10,12,0.62)),linear-gradient(132deg,transparent_0_76%,rgba(238,154,82,0.052)_77%,transparent_78.5%)]" />
             <div className="relative">
-              <p className="text-sm font-black uppercase text-rcl-red">
+              <p className="text-sm font-black uppercase text-rcl-amber">
                 Family-Built Studio
               </p>
               <h2 className="brand-heading mt-5 text-4xl leading-none text-white sm:text-5xl md:text-6xl">
@@ -105,11 +105,11 @@ export default function FounderPage() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 pb-20 pt-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-8 md:px-8 xl:px-0">
         <Reveal>
-          <div className="grid gap-8 border-t border-white/10 pt-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
+          <div className="grid gap-8 border-t border-rcl-copper/18 pt-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
             <div>
-              <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-[4px] border border-rcl-red/45 bg-rcl-red/10 text-rcl-red">
+              <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-[4px] border border-rcl-copper/45 bg-rcl-copper/10 text-rcl-amber">
                 <HeartHandshake
                   className="h-6 w-6"
                   strokeWidth={1.5}
@@ -126,7 +126,11 @@ export default function FounderPage() {
               </p>
               <div className="mt-7 flex flex-wrap gap-4">
                 {founderStory.support.ctas.map((cta) => (
-                  <ButtonLink key={cta.href} href={cta.href} variant={cta.variant}>
+                  <ButtonLink
+                    key={cta.href}
+                    href={cta.href}
+                    variant={cta.href === "/contact" ? "contact" : cta.variant}
+                  >
                     {cta.label}
                   </ButtonLink>
                 ))}

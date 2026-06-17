@@ -54,7 +54,7 @@ export default function RootLayout({
         <StructuredData data={[organizationJsonLd(), websiteJsonLd()]} />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-5 focus:top-5 focus:z-[100] focus:rounded-[3px] focus:bg-rcl-red focus:px-4 focus:py-3 focus:text-sm focus:font-black focus:uppercase focus:text-white focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-5 focus:top-5 focus:z-[100] focus:rounded-[3px] focus:bg-rcl-copper focus:px-4 focus:py-3 focus:text-sm focus:font-black focus:uppercase focus:text-white focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
         >
           Skip to content
         </a>

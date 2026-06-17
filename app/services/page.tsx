@@ -113,9 +113,8 @@ function FeatureList({ items }: { items: string[] }) {
   return (
     <ul className="grid gap-3">
       {items.map((item) => (
-        <li key={item} className="flex gap-3 text-sm leading-6 text-rcl-muted">
-          <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-rcl-red shadow-[0_0_14px_rgba(255,32,32,0.75)]" />
-          <span>{item}</span>
+        <li key={item} className="text-sm leading-6 text-rcl-muted">
+          {item}
         </li>
       ))}
     </ul>
@@ -131,14 +130,14 @@ export default function ServicesPage() {
         body="Professional websites and custom software for small businesses, organizations, professionals, and independent creators."
       />
 
-      <section className="mx-auto max-w-[1500px] px-5 pb-8 md:px-8 md:pb-12">
+      <section className="mx-auto max-w-[1240px] px-5 pb-8 md:px-8 md:pb-12 xl:px-0">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-surface p-6 shadow-[0_0_72px_rgba(0,0,0,0.38)] transition duration-300 ease-out hover:shadow-[0_0_84px_rgba(0,0,0,0.44),0_0_28px_rgba(255,32,32,0.08)] sm:p-8 md:p-10">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-6 shadow-[0_0_66px_rgba(0,0,0,0.46)] transition duration-300 ease-out hover:shadow-[0_0_78px_rgba(0,0,0,0.5),0_0_26px_rgba(210,115,59,0.075)] sm:p-8 md:p-10">
             <RclTechnicalMotif
               className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-30 md:block"
               variant="panel"
             />
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_40%,rgba(255,32,32,0.16),transparent_34%),linear-gradient(90deg,rgba(255,255,255,0.04),transparent_52%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.026),transparent_52%),linear-gradient(135deg,transparent_0_76%,rgba(210,115,59,0.055)_78%,transparent_82%)]" />
             <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
                 <p className="max-w-[800px] text-base leading-8 text-rcl-muted md:text-lg md:leading-9">
@@ -148,7 +147,9 @@ export default function ServicesPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-4 sm:flex-row">
-                <ButtonLink href="/contact">Request a Quote</ButtonLink>
+                <ButtonLink href="/contact" variant="contact">
+                  Request a Quote
+                </ButtonLink>
                 <ButtonLink href="/projects" variant="secondary">
                   View Products
                 </ButtonLink>
@@ -158,12 +159,12 @@ export default function ServicesPage() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <div className="grid gap-4 lg:grid-cols-2">
           <Reveal>
-            <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/45 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-8">
+            <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/45 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-8">
               <MonitorSmartphone
-                className="mb-8 h-8 w-8 text-rcl-red"
+                className="mb-8 h-8 w-8 text-rcl-amber"
                 strokeWidth={1.5}
                 aria-hidden="true"
               />
@@ -178,9 +179,9 @@ export default function ServicesPage() {
               <div className="mt-7">
                 <FeatureList items={websiteServices} />
               </div>
-              <div className="mt-8 rounded-[4px] border border-rcl-red/35 bg-rcl-red/[0.08] p-5">
+              <div className="mt-8 rounded-[4px] border border-rcl-copper/35 bg-rcl-copper/[0.08] p-5">
                 <ShieldCheck
-                  className="mb-4 h-6 w-6 text-rcl-red"
+                  className="mb-4 h-6 w-6 text-rcl-amber"
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
@@ -195,9 +196,9 @@ export default function ServicesPage() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/45 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-8">
+            <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/45 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-8">
               <Code2
-                className="mb-8 h-8 w-8 text-rcl-red"
+                className="mb-8 h-8 w-8 text-rcl-amber"
                 strokeWidth={1.5}
                 aria-hidden="true"
               />
@@ -213,9 +214,9 @@ export default function ServicesPage() {
               <div className="mt-7">
                 <FeatureList items={softwareServices} />
               </div>
-              <div className="mt-8 rounded-[4px] border border-white/12 bg-black/25 p-5">
+              <div className="mt-8 rounded-[4px] border border-rcl-copper/18 bg-black/25 p-5">
                 <Laptop
-                  className="mb-4 h-6 w-6 text-rcl-red"
+                  className="mb-4 h-6 w-6 text-rcl-amber"
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
@@ -233,7 +234,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <Reveal>
@@ -246,9 +247,9 @@ export default function ServicesPage() {
             <div className="grid gap-3">
               {focusAreas.map((item, index) => (
                 <Reveal key={item} delay={index * 0.035}>
-                  <div className="flex items-center gap-4 rounded-[6px] border border-white/10 bg-rcl-surface px-5 py-4">
+                  <div className="surface-panel flex items-center gap-4 rounded-[6px] border border-rcl-copper/16 bg-rcl-surface px-5 py-4">
                     <BadgeCheck
-                      className="h-5 w-5 shrink-0 text-rcl-red"
+                      className="h-5 w-5 shrink-0 text-rcl-amber"
                       strokeWidth={1.5}
                       aria-hidden="true"
                     />
@@ -270,7 +271,7 @@ export default function ServicesPage() {
             <div className="grid gap-3">
               {outOfScope.map((item, index) => (
                 <Reveal key={item} delay={index * 0.035}>
-                  <div className="flex items-center gap-4 rounded-[6px] border border-white/10 bg-rcl-surface px-5 py-4">
+                  <div className="surface-panel flex items-center gap-4 rounded-[6px] border border-rcl-copper/16 bg-rcl-surface px-5 py-4">
                     <CircleSlash
                       className="h-5 w-5 shrink-0 text-rcl-dim"
                       strokeWidth={1.5}
@@ -282,7 +283,7 @@ export default function ServicesPage() {
               ))}
             </div>
             <Reveal delay={0.18}>
-              <p className="mt-6 border-l border-rcl-red/70 pl-5 text-sm leading-7 text-rcl-muted">
+              <p className="mt-6 border-l border-rcl-copper/70 pl-5 text-sm leading-7 text-rcl-muted">
                 If a project falls outside the current scope, Reed Creative Labs
                 will be honest about it.
               </p>
@@ -291,15 +292,15 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <Reveal>
           <SectionHeader title="Project Process" />
         </Reveal>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {processSteps.map((step, index) => (
             <Reveal key={step.title} delay={index * 0.05}>
-              <div className="min-h-[230px] rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-white/20 hover:shadow-[0_12px_34px_rgba(0,0,0,0.22)]">
-                <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-[4px] border border-white/12 bg-black/30 text-sm font-black text-rcl-red">
+              <div className="surface-panel min-h-[230px] rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/55 hover:shadow-[0_12px_34px_rgba(0,0,0,0.22)]">
+                <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-[4px] border border-rcl-copper/18 bg-black/30 text-sm font-black text-rcl-amber">
                   {index + 1}
                 </div>
                 <h3 className="text-lg font-black uppercase text-white">
@@ -314,14 +315,14 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <Reveal>
           <SectionHeader title="Frequently Asked Questions" />
         </Reveal>
         <div className="grid gap-4 lg:grid-cols-2">
           {faqs.map((faq, index) => (
             <Reveal key={faq.question} delay={index * 0.04}>
-              <div className="min-h-full rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_12px_34px_rgba(0,0,0,0.2)]">
+              <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-rcl-copper/55 hover:shadow-[0_12px_34px_rgba(0,0,0,0.2)]">
                 <h3 className="text-base font-black uppercase text-white">
                   {faq.question}
                 </h3>
@@ -334,18 +335,18 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 pb-20 pt-10 md:px-8 md:pb-24">
+      <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-10 md:px-8 md:pb-24 xl:px-0">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated p-6 shadow-[0_0_72px_rgba(0,0,0,0.42)] transition duration-300 ease-out hover:shadow-[0_0_86px_rgba(0,0,0,0.48),0_0_30px_rgba(255,32,32,0.1)] sm:p-8 md:p-10">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-rcl-elevated p-6 shadow-[0_0_66px_rgba(0,0,0,0.48)] transition duration-300 ease-out hover:shadow-[0_0_82px_rgba(0,0,0,0.52),0_0_28px_rgba(210,115,59,0.085)] sm:p-8 md:p-10">
             <RclTechnicalMotif
               className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-30 md:block"
               variant="panel"
             />
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_45%,rgba(255,32,32,0.2),transparent_34%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,transparent_0_76%,rgba(210,115,59,0.06)_78%,transparent_82%)]" />
             <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
                 <Mail
-                  className="mb-7 h-8 w-8 text-rcl-red"
+                  className="mb-7 h-8 w-8 text-rcl-amber"
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
@@ -358,7 +359,9 @@ export default function ServicesPage() {
                   happy to hear about it.
                 </p>
               </div>
-              <ButtonLink href="/contact">Request a Quote</ButtonLink>
+              <ButtonLink href="/contact" variant="contact">
+                Request a Quote
+              </ButtonLink>
             </div>
           </div>
         </Reveal>

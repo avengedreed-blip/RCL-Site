@@ -50,11 +50,11 @@ export default function AboutPage() {
         body="Reed Creative Labs builds software, games, and tools that respect time, privacy, and ownership. The products are different on purpose. The principles are shared."
       />
 
-      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
         <Reveal>
-          <div className="grid gap-8 border-y border-white/10 py-10 md:grid-cols-[0.8fr_1.2fr]">
+          <div className="grid gap-8 border-y border-rcl-copper/18 py-10 md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-sm font-black uppercase text-rcl-red">
+              <p className="text-sm font-black uppercase text-rcl-amber">
                 Studio identity
               </p>
               <h2 className="mt-5 text-3xl font-black uppercase text-white md:text-4xl">
@@ -78,21 +78,21 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-white/18 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)] sm:p-8 md:grid md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-rcl-copper/50 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)] sm:p-8 md:grid md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
             <RclTechnicalMotif
               className="right-[-20%] top-[-38%] h-[380px] w-[380px] opacity-30"
               variant="compact"
             />
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_8%,rgba(255,32,32,0.16),transparent_36%),linear-gradient(90deg,rgba(255,255,255,0.04),transparent_45%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(132deg,transparent_0_76%,rgba(238,154,82,0.055)_77%,transparent_78.2%),linear-gradient(90deg,rgba(255,255,255,0.024),transparent_45%)]" />
             <div className="relative">
               <UsersRound
-                className="mb-7 h-8 w-8 text-rcl-red"
+                className="mb-7 h-8 w-8 text-rcl-amber"
                 strokeWidth={1.5}
                 aria-hidden="true"
               />
-              <p className="text-sm font-black uppercase text-rcl-red">
+              <p className="text-sm font-black uppercase text-rcl-amber">
                 Founder story
               </p>
               <h2 className="brand-heading mt-4 text-3xl leading-none text-white sm:text-4xl">
@@ -113,7 +113,7 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-12 md:px-8 md:pb-20">
+      <section className="mx-auto max-w-[1240px] px-5 py-12 md:px-8 md:pb-20 xl:px-0">
         <Reveal>
           <SectionHeader title="Principles" />
         </Reveal>
@@ -122,9 +122,9 @@ export default function AboutPage() {
             const Icon = principle.icon;
             return (
               <Reveal key={principle.title} delay={index * 0.06}>
-                <div className="min-h-[240px] rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/45 hover:bg-rcl-elevated hover:shadow-[0_12px_36px_rgba(0,0,0,0.22)]">
+                <div className="surface-panel min-h-[240px] rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/45 hover:bg-rcl-elevated hover:shadow-[0_12px_36px_rgba(0,0,0,0.22)]">
                   <Icon
-                    className="mb-8 h-8 w-8 text-rcl-red"
+                    className="mb-8 h-8 w-8 text-rcl-amber"
                     strokeWidth={1.5}
                     aria-hidden="true"
                   />

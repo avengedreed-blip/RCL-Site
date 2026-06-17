@@ -12,7 +12,7 @@ const organization = {
 
 function projectImage(project: Project) {
   const image = getProjectVisualImage(project.visual);
-  return image ? absoluteUrl(image.src) : absoluteUrl("/og-image.jpg");
+  return image?.src ? absoluteUrl(image.src) : absoluteUrl("/og-image.jpg");
 }
 
 function applicationCategory(project: Project) {

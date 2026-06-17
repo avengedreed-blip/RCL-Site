@@ -24,11 +24,6 @@ export function RclTechnicalMotif({
       <div className="rcl-motif__guide rcl-motif__guide--bottom" />
       <div className="rcl-motif__guide rcl-motif__guide--left" />
       <div className="rcl-motif__guide rcl-motif__guide--right" />
-      <div className="rcl-motif__node rcl-motif__node--center" />
-      <div className="rcl-motif__node rcl-motif__node--north" />
-      <div className="rcl-motif__node rcl-motif__node--east" />
-      <div className="rcl-motif__node rcl-motif__node--south" />
-      <div className="rcl-motif__node rcl-motif__node--west" />
     </div>
   );
 }

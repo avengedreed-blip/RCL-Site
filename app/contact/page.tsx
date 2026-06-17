@@ -34,26 +34,26 @@ export default function ContactPage() {
         body="For press, support, business, and general inquiries, contact Reed Creative Labs directly by email."
       />
 
-      <section className="mx-auto max-w-[1500px] px-5 pb-20 pt-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-8 md:px-8 xl:px-0">
         <div className="grid gap-4 md:grid-cols-[minmax(0,0.78fr)]">
           {contacts.map((contact, index) => (
             <Reveal key={contact.label} delay={index * 0.06}>
-              <div className="block min-h-[260px] min-w-0 rounded-[6px] border border-white/14 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-red/70 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-7">
+              <div className="surface-panel block min-h-[260px] min-w-0 rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/70 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-7">
                 <Mail
-                  className="mb-8 h-8 w-8 text-rcl-red"
+                  className="mb-8 h-8 w-8 text-rcl-amber"
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
-                <p className="text-sm font-black uppercase text-rcl-red">
+                <p className="text-sm font-black uppercase text-rcl-amber">
                   {contact.label}
                 </p>
                 <a
                   href={contact.href}
-                  className="mt-4 inline-flex max-w-full text-lg font-black text-white [overflow-wrap:anywhere] transition duration-300 hover:text-rcl-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red sm:text-2xl"
+                  className="mt-4 inline-flex max-w-full text-lg font-black text-white [overflow-wrap:anywhere] transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper sm:text-2xl"
                 >
                   {contact.value}
                 </a>
-                <div className="mt-5 rounded-[4px] border border-white/10 bg-black/25 p-4">
+                <div className="mt-5 rounded-[4px] border border-rcl-copper/18 bg-black/28 p-4">
                   <p className="text-xs font-black uppercase text-rcl-dim">
                     Plain-text email
                   </p>
@@ -69,9 +69,9 @@ export default function ContactPage() {
           ))}
         </div>
         <Reveal delay={0.12}>
-          <div className="mt-8 flex items-start gap-5 border-t border-white/10 pt-8 text-rcl-muted">
+          <div className="mt-8 flex items-start gap-5 border-t border-rcl-copper/18 pt-8 text-rcl-muted">
             <MessageSquareText
-              className="mt-1 h-6 w-6 shrink-0 text-rcl-red"
+              className="mt-1 h-6 w-6 shrink-0 text-rcl-amber"
               strokeWidth={1.5}
               aria-hidden="true"
             />

@@ -13,7 +13,7 @@ export function Logo({ compact = false, className, priority = false }: LogoProps
     <Link
       href="/"
       className={cn(
-        "block shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red",
+        "block shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper",
         className,
       )}
       aria-label="Reed Creative Labs home"
@@ -24,7 +24,7 @@ export function Logo({ compact = false, className, priority = false }: LogoProps
         width={compact ? 260 : 360}
         height={compact ? 91 : 174}
         priority={priority}
-        className={cn("h-auto w-[132px] object-contain md:w-[156px]", compact && "md:w-[148px]")}
+        className={cn("h-auto w-[106px] object-contain md:w-[112px]", compact && "md:w-[140px]")}
       />
     </Link>
   );

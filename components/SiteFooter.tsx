@@ -17,11 +17,11 @@ const socialLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/[0.08] bg-rcl-black">
-      <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-10 md:grid-cols-[1.15fr_1fr_1fr] md:px-8">
+    <footer className="footer-shell border-t border-rcl-copper/20 bg-rcl-black">
+      <div className="mx-auto grid max-w-[1240px] gap-8 px-5 py-10 md:grid-cols-[1.15fr_1fr_1fr] md:px-8 xl:px-0">
         <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
           <Logo className="w-[150px]" />
-          <div className="hidden h-12 w-px bg-white/15 sm:block" />
+          <div className="hidden h-12 w-px bg-gradient-to-b from-transparent via-rcl-copper/55 to-transparent sm:block" />
           <p className="max-w-[260px] text-sm leading-6 text-rcl-dim">
             Independent software studio building products, websites, and custom
             tools.
@@ -32,7 +32,7 @@ export function SiteFooter() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red"
+              className="text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
             >
               {link.label}
             </Link>
@@ -47,7 +47,7 @@ export function SiteFooter() {
                   key={link.label}
                   href={link.href}
                   aria-label={link.label}
-                  className="text-white transition duration-300 hover:-translate-y-0.5 hover:text-rcl-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red"
+                  className="text-white transition duration-300 hover:-translate-y-0.5 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
                 >
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </a>
