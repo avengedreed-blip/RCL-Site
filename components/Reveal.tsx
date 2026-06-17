@@ -7,5 +7,5 @@ type RevealProps = {
 };
 
 export function Reveal({ children, className }: RevealProps) {
-  return <div className={className}>{children}</div>;
+  return <div className={["reveal-enter", className].filter(Boolean).join(" ")}>{children}</div>;
 }

@@ -9,15 +9,15 @@ type SectionHeaderProps = {
 
 export function SectionHeader({ title, href, action }: SectionHeaderProps) {
   return (
-    <div className="mb-7 flex flex-wrap items-center gap-4 sm:gap-5">
-      <h2 className="min-w-0 max-w-full text-sm font-black uppercase leading-5 text-white [text-wrap:balance]">
+    <div className="mb-7 grid grid-cols-[auto_minmax(3rem,1fr)] items-center gap-4 sm:grid-cols-[auto_minmax(3rem,1fr)_auto] sm:gap-5">
+      <h2 className="section-title min-w-0 max-w-full text-sm font-black uppercase leading-5 text-white [text-wrap:balance]">
         {title}
       </h2>
-      <div className="h-px min-w-12 flex-1 bg-white/25" />
+      <div className="section-divider h-px min-w-12 flex-1 bg-white/25" />
       {href && action ? (
         <Link
           href={href}
-          className="group hidden items-center gap-3 text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red sm:inline-flex"
+          className="group hidden items-center gap-3 text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper sm:inline-flex"
         >
           <span>{action}</span>
           <ArrowRight

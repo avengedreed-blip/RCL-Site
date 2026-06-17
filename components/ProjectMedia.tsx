@@ -3,10 +3,11 @@ import type { ProjectVisual } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
 type VisualImage = {
-  src: string;
+  src?: string;
   alt: string;
   position?: string;
   fit?: "cover" | "contain";
+  cardMode?: "image" | "abstract";
   detailSrc?: string;
   detailAlt?: string;
   detailFit?: "cover" | "contain";
@@ -19,8 +20,8 @@ type VisualImage = {
 
 const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
   echo: {
-    src: "/images/home/echo-card.jpg",
-    alt: "Warm cinematic family memory artwork representing Echo storytelling.",
+    src: "/images/projects/echo-start-screen.jpg",
+    alt: "Echo cinematic slideshow application start screen",
     position: "object-center",
     detailSrc: "/images/projects/echo-editor-screen.jpg",
     detailAlt: "Echo story card editor interface",
@@ -39,8 +40,9 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
   },
   "phase-arcade": {
     src: "/images/home/phase-arcade-card.jpg",
-    alt: "A premium neon arcade cabinet in a dark arcade, representing Phase Arcade Volume 1.",
+    alt: "Abstract arcade collection identity artwork representing Phase Arcade Volume 1.",
     position: "object-center",
+    cardMode: "abstract",
     screenshots: [
       {
         src: "/images/projects/phase-shift-gameplay-card.jpg",
@@ -57,32 +59,32 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     ],
   },
   "phase-shift": {
-    src: "/images/home/red-grid-tech.jpg",
-    alt: "Abstract neon technical grid artwork representing speed, timing, and forward motion.",
+    src: "/images/projects/phase-shift-gameplay-card.jpg",
+    alt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
     position: "object-center",
     detailSrc: "/images/projects/phase-shift-gameplay-card.jpg",
     detailAlt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
     detailFit: "contain",
   },
   "phase-defense": {
-    src: "/images/home/rcl-technical-orb.jpg",
-    alt: "Abstract red targeting system artwork representing defense, pressure, and survival.",
+    src: "/images/projects/phase-defense-gameplay-card.jpg",
+    alt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
     position: "object-center",
     detailSrc: "/images/projects/phase-defense-gameplay-card.jpg",
     detailAlt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
     detailFit: "contain",
   },
   "phase-court": {
-    src: "/images/home/phase-arcade-card.jpg",
-    alt: "Arcade key art representing competitive reaction play and opposing sides.",
+    src: "/images/projects/phase-court-gameplay-card.jpg",
+    alt: "Phase Court gameplay screenshot with opposing cyan and magenta sides.",
     position: "object-center",
     detailSrc: "/images/projects/phase-court-gameplay-card.jpg",
     detailAlt: "Phase Court gameplay screenshot with opposing cyan and magenta sides.",
     detailFit: "contain",
   },
   workspace: {
-    src: "/images/home/red-grid-tech.jpg",
-    alt: "Abstract connected knowledge grid artwork representing RCL Workspace organization.",
+    src: "/images/projects/rcl-workspace-dashboard.jpg",
+    alt: "RCL Workspace project dashboard interface",
     position: "object-center",
     detailSrc: "/images/projects/rcl-workspace-dashboard.jpg",
     detailAlt: "RCL Workspace project dashboard interface",
@@ -95,8 +97,8 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     ],
   },
   "science-lab": {
-    src: "/images/home/rcl-technical-orb.jpg",
-    alt: "Abstract orbital science artwork representing experimentation and visualization.",
+    src: "/images/projects/rcl-science-lab-stable-orbits.jpg",
+    alt: "RCL Science Lab stable orbits simulation interface",
     position: "object-center",
     detailSrc: "/images/projects/rcl-science-lab-stable-orbits.jpg",
     detailAlt: "RCL Science Lab stable orbits simulation interface",
@@ -110,33 +112,39 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
   },
   "neon-drift": {
     src: "/images/home/red-grid-tech.jpg",
-    alt: "A dark red technical grid used as abstract visual identity for Neon Drift.",
+    alt: "Abstract graphite and copper motion identity artwork for Neon Drift.",
     position: "object-center",
+    cardMode: "abstract",
   },
   "falling-from-the-sky": {
     src: "/images/home/red-floor-glow.jpg",
-    alt: "A dark red floor glow used as abstract visual identity for Falling From The Sky.",
+    alt: "Abstract graphite and copper aerial movement identity artwork for Falling From The Sky.",
     position: "object-center",
+    cardMode: "abstract",
   },
   darren: {
     src: "/images/home/red-atmosphere.jpg",
-    alt: "A dark red atmospheric field suggesting fog, tension, and wilderness horror.",
+    alt: "Abstract dark graphite and copper atmosphere identity artwork for Darren In The Woods 2.",
     position: "object-center",
+    cardMode: "abstract",
   },
   "talk-to-me": {
     src: "/images/projects/talk-to-me-card.jpg",
-    alt: "An abstract communication board with structured speech tiles and a soft red glow.",
+    alt: "Abstract graphite and copper communication identity artwork for Talk To Me AAC.",
     position: "object-center",
+    cardMode: "abstract",
   },
   bloom: {
     src: "/images/home/red-atmosphere.jpg",
-    alt: "A soft dark red atmosphere used as abstract visual identity for Bloom.",
+    alt: "Abstract graphite and copper milestone identity artwork for Bloom.",
     position: "object-center",
+    cardMode: "abstract",
   },
   misread: {
     src: "/images/projects/misread-card.jpg",
-    alt: "Overlapping speech forms and obscured signals suggesting ambiguity and hidden intent.",
+    alt: "Abstract graphite and copper signal ambiguity identity artwork for Misread.",
     position: "object-center",
+    cardMode: "abstract",
   },
 };
 
@@ -153,13 +161,46 @@ type ProjectMediaImageProps = {
   className?: string;
   priority?: boolean;
   variant?: "card" | "detail";
+  fitOverride?: "cover" | "contain";
+  decorative?: boolean;
 };
+
+function ProjectAbstractVisual({
+  visual,
+  alt,
+  className,
+  decorative,
+}: {
+  visual: ProjectVisual;
+  alt: string;
+  className?: string;
+  decorative?: boolean;
+}) {
+  return (
+    <div
+      role={decorative ? undefined : "img"}
+      aria-label={decorative ? undefined : alt}
+      aria-hidden={decorative ? "true" : undefined}
+      data-abstract-visual={visual}
+      className={cn("abstract-product-visual", className)}
+    >
+      <span className="abstract-product-visual__grid" aria-hidden="true" />
+      <span className="abstract-product-visual__arc abstract-product-visual__arc--outer" aria-hidden="true" />
+      <span className="abstract-product-visual__arc abstract-product-visual__arc--inner" aria-hidden="true" />
+      <span className="abstract-product-visual__axis abstract-product-visual__axis--x" aria-hidden="true" />
+      <span className="abstract-product-visual__axis abstract-product-visual__axis--y" aria-hidden="true" />
+      <span className="abstract-product-visual__motif" aria-hidden="true" />
+    </div>
+  );
+}
 
 export function ProjectMediaImage({
   visual,
   className,
   priority = false,
   variant = "card",
+  fitOverride,
+  decorative = false,
 }: ProjectMediaImageProps) {
   const image = getProjectVisualImage(visual);
 
@@ -170,14 +211,35 @@ export function ProjectMediaImage({
   const isDetail = variant === "detail";
   const src = isDetail && image.detailSrc ? image.detailSrc : image.src;
   const alt = isDetail && image.detailAlt ? image.detailAlt : image.alt;
-  const fit = isDetail ? image.detailFit ?? image.fit ?? "cover" : image.fit ?? "cover";
+  const shouldUseAbstract =
+    image.cardMode === "abstract" && (!isDetail || !image.detailSrc);
+
+  if (shouldUseAbstract) {
+    return (
+      <ProjectAbstractVisual
+        visual={visual}
+        alt={alt}
+        decorative={decorative}
+        className={className}
+      />
+    );
+  }
+
+  if (!src) {
+    return null;
+  }
+
+  const fit =
+    fitOverride ??
+    (isDetail ? image.detailFit ?? image.fit ?? "cover" : image.fit ?? "cover");
   const position =
     isDetail && image.detailPosition ? image.detailPosition : image.position;
 
   return (
     <Image
       src={src}
-      alt={alt}
+      alt={decorative ? "" : alt}
+      aria-hidden={decorative ? "true" : undefined}
       fill
       priority={priority}
       loading={priority ? "eager" : undefined}

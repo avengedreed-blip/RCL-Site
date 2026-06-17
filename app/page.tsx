@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import {
   Archive,
-  ArrowRight,
+  Code2,
+  Globe2,
   Heart,
   LockKeyhole,
   WifiOff,
 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
-import { CompactProjectCard, FeaturedProjectCard } from "@/components/ProjectCard";
+import { FeaturedProjectCard } from "@/components/ProjectCard";
 import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
-import {
-  activeDevelopmentProjects,
-  comingSoonProjects,
-  featuredProjects,
-  plannedProjects,
-  roadmapDisclaimer,
-} from "@/content/projects";
+import { featuredProjects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -57,70 +51,76 @@ const philosophy = [
   },
 ];
 
+function HeroOrbitalGraphic() {
+  return (
+    <div className="hero-orbital" aria-hidden="true">
+      <span className="hero-orbital__grid" />
+      <span className="hero-orbital__ring hero-orbital__ring--outer" />
+      <span className="hero-orbital__ring hero-orbital__ring--mid" />
+      <span className="hero-orbital__ring hero-orbital__ring--inner" />
+      <span className="hero-orbital__arc hero-orbital__arc--primary" />
+      <span className="hero-orbital__arc hero-orbital__arc--secondary" />
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main id="main-content" tabIndex={-1}>
-      <section className="hero-section" style={{ alignItems: "start", minHeight: "80vh" }}>
+      <section className="hero-section">
         <Reveal className="hero-copy relative z-10">
-          <p className="mb-6 text-sm font-black uppercase text-rcl-red">
+          <p className="mb-4 text-xs font-black uppercase text-rcl-amber">
             Offline-first software, games, and tools
           </p>
-          <h1 className="brand-heading hero-title max-w-[780px] text-6xl leading-[0.92] text-white md:text-7xl lg:text-8xl">
-            <span className="block">Reed</span>
-            <span className="block">Creative</span>
+          <h1 className="brand-heading hero-title max-w-[920px] text-6xl leading-[0.92] text-white md:text-7xl lg:text-8xl">
+            <span className="block">Reed Creative</span>
             <span className="block">Labs</span>
           </h1>
-          <p className="mt-5 max-w-[440px] text-lg leading-8 text-rcl-muted">
+          <p className="mt-5 max-w-[690px] text-sm leading-7 text-rcl-muted">
             Independent software, games, and tools built for ownership,
             privacy, and lasting value.
           </p>
-          <div className="mt-7 flex flex-col gap-4 sm:flex-row">
-            <ButtonLink href="#featured">Explore Products</ButtonLink>
-            <ButtonLink href="#philosophy" variant="secondary">
-              Our Philosophy
+          <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <ButtonLink href="/projects">Explore Projects</ButtonLink>
+            <ButtonLink href="/services" variant="secondary">
+              Services
             </ButtonLink>
           </div>
         </Reveal>
-        <Reveal delay={0.08} className="hero-mark">
-          <Image
-            src="/images/home/rcl-hero-cinematic.jpg"
-            alt=""
-            fill
-            priority
-            sizes="(min-width: 1024px) 58vw, 100vw"
-            className="hero-cinematic-image"
-          />
-          <div className="hero-cinematic-vignette" />
-        </Reveal>
+        <HeroOrbitalGraphic />
       </section>
 
       <section
         id="featured"
-        className="mx-auto max-w-[1500px] px-5 py-8 md:px-8 md:py-10"
+        className="home-featured-section mx-auto max-w-[1240px] px-5 pb-7 pt-2 md:px-8 md:pb-8 md:pt-3 xl:px-0"
       >
         <Reveal>
           <SectionHeader
             title="Featured Products"
             href="/projects"
-            action="View all products"
+            action="View all projects"
           />
         </Reveal>
-        <div className="grid gap-3 lg:grid-cols-3">
+        <div className="grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-4">
           {featuredProjects.map((project, index) => (
             <Reveal key={project.slug} delay={index * 0.06}>
-              <FeaturedProjectCard project={project} priority={index < 3} />
+              <FeaturedProjectCard
+                project={project}
+                priority={index < 4}
+                variant="gallery"
+              />
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 pb-10 pt-0 md:px-8 md:pt-1 xl:px-0">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/12 bg-rcl-surface p-6 shadow-[0_0_54px_rgba(0,0,0,0.34)] sm:p-8">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_86%_24%,rgba(255,32,32,0.16),transparent_34%),linear-gradient(90deg,rgba(255,255,255,0.04),transparent_55%)]" />
-            <div className="relative z-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/25 bg-rcl-surface/95 p-6 shadow-[0_0_48px_rgba(0,0,0,0.46)] sm:p-7 md:p-8">
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.026),transparent_48%),linear-gradient(135deg,transparent_0_76%,rgba(210,115,59,0.06)_78%,transparent_82%)]" />
+            <div className="relative z-10 grid gap-7 lg:grid-cols-[0.9fr_auto_1.25fr] lg:items-stretch">
               <div>
-                <p className="mb-4 text-xs font-black uppercase text-rcl-red">
+                <p className="mb-4 text-xs font-black uppercase text-rcl-amber">
                   Studio Services
                 </p>
                 <h2 className="text-3xl font-black uppercase text-white md:text-4xl">
@@ -131,132 +131,81 @@ export default function Home() {
                   custom software for small businesses, organizations,
                   professionals, and independent creators.
                 </p>
+                <ButtonLink href="/services" variant="secondary" className="mt-6">
+                  Learn More
+                </ButtonLink>
               </div>
-              <ButtonLink href="/services" variant="secondary">
-                Explore Services
-              </ButtonLink>
+              <div className="hidden w-px bg-gradient-to-b from-transparent via-rcl-copper/55 to-transparent lg:block" />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="surface-panel rounded-[4px] border border-rcl-copper/16 bg-black/24 p-5">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-[3px] border border-rcl-copper/50 text-rcl-amber shadow-[0_0_18px_rgba(210,115,59,0.08)]">
+                    <Globe2 className="h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-sm font-black uppercase text-white">
+                    Websites
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-rcl-muted">
+                    Polished, mobile-friendly sites for small businesses and creators.
+                  </p>
+                </div>
+                <div className="surface-panel rounded-[4px] border border-rcl-copper/16 bg-black/24 p-5">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-[3px] border border-rcl-copper/50 text-rcl-amber shadow-[0_0_18px_rgba(210,115,59,0.08)]">
+                    <Code2 className="h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-sm font-black uppercase text-white">
+                    Custom Software
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-rcl-muted">
+                    Focused tools, utilities, simulations, and practical applications.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-12 md:px-8 md:py-16">
+      <section className="mx-auto max-w-[1240px] px-5 py-11 md:px-8 md:py-14 xl:px-0">
         <Reveal>
-          <div className="mb-7 grid gap-3 md:grid-cols-[auto_1fr] md:items-end md:gap-5">
-            <div>
-              <h2 className="text-sm font-black uppercase text-white">
-                Coming Soon
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-rcl-muted">
-                Products currently being prepared for public release.
-              </p>
-            </div>
-            <div className="hidden h-px bg-white/25 md:block" />
-          </div>
-        </Reveal>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {comingSoonProjects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.04}>
-              <CompactProjectCard project={project} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1500px] px-5 py-12 md:px-8 md:py-16">
-        <Reveal>
-          <div className="mb-7 grid gap-3 md:grid-cols-[auto_1fr] md:items-end md:gap-5">
-            <div>
-              <h2 className="text-sm font-black uppercase text-white">
-                Active Development
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-rcl-muted">
-                Projects currently being built.
-              </p>
-            </div>
-            <div className="hidden h-px bg-white/25 md:block" />
-          </div>
-        </Reveal>
-        <div className="grid gap-4 md:grid-cols-2">
-          {activeDevelopmentProjects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.04}>
-              <CompactProjectCard project={project} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1500px] px-5 py-12 md:px-8 md:py-16">
-        <Reveal>
-          <div className="mb-7 grid gap-3 md:grid-cols-[auto_1fr] md:items-end md:gap-5">
-            <div>
-              <h2 className="text-sm font-black uppercase text-white">Planned</h2>
-              <p className="mt-3 text-sm leading-6 text-rcl-muted">
-                Projects planned for future development.
-              </p>
-            </div>
-            <div className="hidden h-px bg-white/25 md:block" />
-          </div>
-        </Reveal>
-        <div className="grid gap-4 md:grid-cols-2">
-          {plannedProjects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.04}>
-              <CompactProjectCard project={project} emphasis="quiet" />
-            </Reveal>
-          ))}
-        </div>
-        <p className="mt-7 max-w-[760px] text-xs leading-6 text-rcl-dim">
-          {roadmapDisclaimer}
-        </p>
-      </section>
-
-      <section
-        id="philosophy"
-        className="mx-auto max-w-[1500px] px-5 py-14 md:px-8 md:py-20"
-      >
-        <Reveal>
-          <div className="philosophy-panel relative overflow-hidden rounded-[6px] border border-white/16 bg-rcl-surface/95 p-7 shadow-[0_0_90px_rgba(0,0,0,0.48)] md:p-10 xl:p-12">
-            <div className="absolute inset-y-0 left-0 w-1 bg-rcl-red shadow-[0_0_32px_rgba(255,32,32,0.75)]" />
-            <div className="absolute -right-24 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-rcl-red/10 blur-3xl" />
+          <div className="surface-panel philosophy-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/25 bg-rcl-surface/95 p-7 shadow-[0_0_78px_rgba(0,0,0,0.5)] transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/70 hover:shadow-[0_22px_72px_rgba(0,0,0,0.46),0_0_44px_rgba(210,115,59,0.105)] md:p-9">
             <RclTechnicalMotif
               variant="panel"
-              className="absolute -right-20 top-1/2 hidden h-[520px] w-[520px] -translate-y-1/2 opacity-55 lg:block"
+              className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-35 lg:block"
             />
-            <div className="relative z-10 grid gap-10 2xl:grid-cols-[minmax(0,720px)_minmax(0,1fr)] 2xl:items-center 2xl:gap-16">
-              <div className="min-w-0 max-w-[760px]">
-                <div className="mb-7 flex items-center gap-4">
-                  <span className="h-3 w-3 bg-rcl-red shadow-[0_0_20px_rgba(255,32,32,0.8)]" />
-                  <p className="text-sm font-black uppercase text-rcl-red">
+            <div className="relative z-10 grid gap-9 xl:grid-cols-[minmax(0,520px)_minmax(0,1fr)] xl:items-center xl:gap-16">
+              <div className="min-w-0 max-w-[520px]">
+                <div className="mb-5 flex items-center">
+                  <p className="text-sm font-black uppercase text-rcl-amber">
                     Studio Philosophy
                   </p>
                 </div>
                 <h2 className="brand-heading philosophy-heading text-white">
                   Built Different
                 </h2>
-                <p className="mt-7 max-w-[520px] text-base leading-8 text-rcl-muted md:text-lg md:leading-9">
-                  We build software, games, and tools that respect your time,
-                  your privacy, and your ownership.
+                <p className="mt-5 max-w-[500px] text-base leading-8 text-rcl-muted">
+                  Local-first thinking, private-by-default design, ownership,
+                  and practical craftsmanship guide the work.
                 </p>
               </div>
-              <div className="grid min-w-0 gap-4 sm:grid-cols-2">
+              <div className="grid min-w-0 gap-3 sm:grid-cols-2">
                 {philosophy.map((item) => {
                   const Icon = item.icon;
                   return (
                     <div
                       key={item.title}
-                      className="group min-h-[230px] rounded-[6px] border border-white/12 bg-rcl-elevated/80 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition duration-300 hover:border-rcl-red/60 hover:bg-rcl-elevated hover:shadow-[0_0_36px_rgba(255,32,32,0.12)]"
+                      className="surface-panel group rounded-[6px] border border-rcl-copper/18 bg-rcl-elevated/80 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition duration-300 hover:border-rcl-copper/65 hover:bg-rcl-elevated hover:shadow-[0_0_32px_rgba(210,115,59,0.1)]"
                     >
-                      <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-[4px] border border-white/14 bg-black/35 text-white transition duration-300 group-hover:border-rcl-red/70 group-hover:text-rcl-red group-hover:shadow-[0_0_24px_rgba(255,32,32,0.18)]">
+                      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[4px] border border-rcl-copper/22 bg-black/35 text-white transition duration-300 group-hover:border-rcl-copper/70 group-hover:text-rcl-amber group-hover:shadow-[0_0_22px_rgba(210,115,59,0.14)]">
                         <Icon
-                          className="h-7 w-7"
+                          className="h-5 w-5"
                           strokeWidth={1.5}
                           aria-hidden="true"
                         />
                       </div>
-                      <h3 className="text-lg font-black uppercase text-white">
+                      <h3 className="text-sm font-black uppercase text-white">
                         {item.title}
                       </h3>
-                      <p className="mt-4 text-sm leading-7 text-rcl-muted">
+                      <p className="mt-3 text-sm leading-6 text-rcl-muted">
                         {item.body}
                       </p>
                     </div>
@@ -268,39 +217,28 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 pb-16 pt-6 md:px-8 md:pb-24">
+      <section className="mx-auto max-w-[900px] px-5 pb-16 pt-6 md:px-0 md:pb-24">
         <Reveal>
-          <div className="final-cta-panel relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated px-6 py-10 md:px-10 md:py-12">
-            <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-[radial-gradient(circle_at_70%_50%,rgba(255,32,32,0.22),transparent_34%)] md:block" />
-            <RclTechnicalMotif
-              variant="panel"
-              className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-35 md:block"
-            />
+          <div className="surface-panel final-cta-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/25 bg-rcl-elevated px-6 py-10 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/70 hover:shadow-[0_22px_72px_rgba(0,0,0,0.46),0_0_44px_rgba(210,115,59,0.105)] md:px-9 md:py-11">
+            <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-[linear-gradient(128deg,transparent_0_62%,rgba(238,154,82,0.085)_63%,transparent_64%),linear-gradient(90deg,transparent,rgba(255,255,255,0.026),transparent)] md:block" />
             <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <div className="mb-5 flex items-center gap-3 text-rcl-red">
+                <div className="mb-5 flex items-center gap-3 text-rcl-amber">
                   <Heart className="h-5 w-5" aria-hidden="true" />
                   <p className="text-sm font-black uppercase">Reed Creative Labs</p>
                 </div>
-                <h2 className="brand-heading max-w-[740px] text-4xl leading-none md:text-6xl">
-                  Explore the Lab
+                <h2 className="brand-heading max-w-[620px] text-4xl leading-none md:text-5xl">
+                  Contact the Studio
                 </h2>
                 <p className="mt-5 max-w-[540px] text-base leading-8 text-rcl-muted">
-                  See the software, games, and tools Reed Creative Labs is
-                  releasing, building, and planning next.
+                  Reach out about products, services, press, or project
+                  inquiries.
                 </p>
               </div>
-              <div className="flex flex-col gap-4 sm:flex-row lg:self-end">
-                <ButtonLink href="/projects">View Products</ButtonLink>
-                <ButtonLink href="/contact" variant="secondary">
-                  Contact
-                </ButtonLink>
-              </div>
+              <ButtonLink href="/contact" variant="contact">
+                Contact
+              </ButtonLink>
             </div>
-            <ArrowRight
-              className="absolute bottom-6 right-6 h-8 w-8 text-rcl-red/60"
-              aria-hidden="true"
-            />
           </div>
         </Reveal>
       </section>

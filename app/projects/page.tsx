@@ -29,11 +29,11 @@ export default function ProjectsPage() {
     <main id="main-content" tabIndex={-1}>
       <PageHeader
         eyebrow="Products"
-        title="Software, games, and tools with a shared standard"
-        body="Reed Creative Labs builds products with clear purpose, practical design, and respect for the people using them."
+        title="Products and Roadmap"
+        body="Explore Reed Creative Labs software, games, tools, active development projects, and future roadmap."
       />
 
-      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
         <Reveal>
           <SectionHeader title="Featured Products" />
         </Reveal>
@@ -46,7 +46,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <Reveal>
           <SectionHeader title="Coming Soon" />
         </Reveal>
@@ -59,7 +59,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <Reveal>
           <SectionHeader title="Phase Arcade Volume 1 Included Games" />
         </Reveal>
@@ -72,7 +72,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1500px] gap-10 px-5 py-10 md:grid-cols-2 md:px-8 md:pb-20">
+      <section className="mx-auto grid max-w-[1240px] gap-10 px-5 py-10 md:grid-cols-2 md:px-8 md:pb-20 xl:px-0">
         <div>
           <Reveal>
             <SectionHeader title="Active Development" />

@@ -260,6 +260,7 @@ export const projects: Project[] = [
     ],
     route: "/projects/phase-arcade-volume-1",
     visual: "phase-arcade",
+    featured: true,
     includedGames: ["phase-shift", "phase-defense", "phase-court"],
     pageSections: [
       {
@@ -487,7 +488,16 @@ export const projects: Project[] = [
   },
 ];
 
-export const featuredProjects = projects.filter((project) => project.featured);
+export const featuredProjectSlugs = [
+  "rcl-workspace",
+  "echo",
+  "rcl-science-lab",
+  "phase-arcade-volume-1",
+] as const;
+
+export const featuredProjects = featuredProjectSlugs
+  .map((slug) => getProject(slug))
+  .filter((project): project is Project => Boolean(project));
 
 export const includedGames = projects.filter(
   (project) => project.roadmapGroup === "included-game",

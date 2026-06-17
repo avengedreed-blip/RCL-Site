@@ -73,9 +73,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <main id="main-content" tabIndex={-1}>
       <StructuredData data={projectJsonLd(project)} />
-      <section className="mx-auto grid max-w-[1500px] gap-10 px-5 pb-14 pt-12 md:grid-cols-[minmax(0,1fr)_minmax(460px,1fr)] md:px-8 md:pb-18 md:pt-16 xl:gap-14">
+      <section className="mx-auto grid max-w-[1240px] gap-10 px-5 pb-14 pt-12 md:grid-cols-[minmax(0,1fr)_minmax(460px,1fr)] md:px-8 md:pb-18 md:pt-16 xl:gap-14 xl:px-0">
         <Reveal className="min-w-0 self-center">
-          <p className="mb-5 text-sm font-black uppercase text-rcl-red">
+          <p className="mb-5 text-sm font-black uppercase text-rcl-amber">
             {getProjectDateLabel(project)}
           </p>
           <h1 className="brand-heading product-page-title max-w-[920px] text-white">
@@ -96,35 +96,45 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <ButtonLink href="/projects" variant="secondary">
               All Products
             </ButtonLink>
-            <ButtonLink href="/contact" variant="secondary">
+            <ButtonLink href="/contact" variant="contact">
               Contact
             </ButtonLink>
           </div>
         </Reveal>
         <Reveal delay={0.08}>
-          <div className="relative overflow-hidden rounded-[6px] border border-white/14 bg-rcl-elevated shadow-[0_0_72px_rgba(0,0,0,0.42),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_0_86px_rgba(0,0,0,0.48),0_0_30px_rgba(255,32,32,0.08),inset_0_1px_0_rgba(255,255,255,0.06)]">
+          <div className="detail-hero-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/24 bg-rcl-elevated shadow-[0_0_68px_rgba(0,0,0,0.44),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-rcl-copper/58 hover:shadow-[0_0_82px_rgba(0,0,0,0.5),0_0_24px_rgba(210,115,59,0.08),inset_0_1px_0_rgba(255,255,255,0.06)]">
             {visualImage ? (
-              <div className="relative min-h-[430px] bg-black xl:min-h-[560px]">
+              <div className="project-media-frame relative min-h-[260px] bg-black sm:min-h-[340px] md:min-h-[390px] xl:min-h-[430px]">
+                {visualImage.detailFit === "contain" || visualImage.fit === "contain" ? (
+                  <ProjectMediaImage
+                    visual={project.visual}
+                    priority={false}
+                    variant="detail"
+                    fitOverride="cover"
+                    decorative
+                    className="scale-110 opacity-28 blur-xl saturate-125"
+                  />
+                ) : null}
                 <ProjectMediaImage visual={project.visual} priority variant="detail" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/74 via-black/16 to-transparent" />
-                <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black/45 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-white/[0.03]" />
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-black/14 to-transparent" />
               </div>
             ) : (
-              <div className="min-h-[430px] bg-rcl-elevated xl:min-h-[560px]" />
+              <div className="min-h-[260px] bg-rcl-elevated sm:min-h-[340px] md:min-h-[390px] xl:min-h-[430px]" />
             )}
           </div>
         </Reveal>
       </section>
 
       {screenshots.length > 1 ? (
-        <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+        <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
           <Reveal>
             <SectionHeader title="Product Screenshots" />
           </Reveal>
           <div className="grid gap-4 md:grid-cols-2">
             {screenshots.map((screenshot) => (
               <Reveal key={screenshot.src}>
-                <div className="relative aspect-video overflow-hidden rounded-[6px] border border-white/14 bg-black shadow-[0_0_56px_rgba(0,0,0,0.36),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_0_66px_rgba(0,0,0,0.42),0_0_24px_rgba(255,32,32,0.07),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                <div className="screenshot-frame relative aspect-video overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-black shadow-[0_0_54px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-rcl-copper/58 hover:shadow-[0_0_64px_rgba(0,0,0,0.44),0_0_18px_rgba(210,115,59,0.08),inset_0_1px_0_rgba(255,255,255,0.06)]">
                   <Image
                     src={screenshot.src}
                     alt={screenshot.alt}
@@ -140,9 +150,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </section>
       ) : null}
 
-      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
         <Reveal>
-          <div className="grid gap-6 border-y border-white/10 py-7 md:grid-cols-3">
+          <div className="grid gap-6 border-y border-rcl-copper/18 py-7 md:grid-cols-3">
             <div>
               <p className="text-xs font-black uppercase text-rcl-dim">Category</p>
               <p className="mt-2 font-black uppercase text-white">
@@ -161,7 +171,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 {project.platforms.map((platform) => (
                   <li
                     key={platform}
-                    className="rounded-[3px] border border-white/12 bg-rcl-surface px-2.5 py-1 text-xs font-black uppercase text-white"
+                    className="platform-chip rounded-[3px] border border-rcl-copper/18 bg-rcl-surface px-2.5 py-1 text-xs font-black uppercase text-white"
                   >
                     {platform}
                   </li>
@@ -172,19 +182,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-8 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
         <div className="grid gap-8 md:grid-cols-2">
           {project.idealFor?.length ? (
             <Reveal>
-              <div className="rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]">
+              <div className="surface-panel rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-rcl-copper/55 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]">
                 <h2 className="text-2xl font-black uppercase text-white">
                   Who it is for
                 </h2>
                 <ul className="mt-5 grid gap-3 text-base leading-7 text-rcl-muted">
                   {project.idealFor.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-3 h-1.5 w-1.5 shrink-0 bg-rcl-red" />
-                      <span>{item}</span>
+                    <li key={item}>
+                      {item}
                     </li>
                   ))}
                 </ul>
@@ -193,15 +202,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ) : null}
           {project.usersCan?.length ? (
             <Reveal delay={0.06}>
-              <div className="rounded-[6px] border border-white/12 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-white/20 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]">
+              <div className="surface-panel rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-rcl-copper/55 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]">
                 <h2 className="text-2xl font-black uppercase text-white">
                   What users can do
                 </h2>
                 <ul className="mt-5 grid gap-3 text-base leading-7 text-rcl-muted">
                   {project.usersCan.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-3 h-1.5 w-1.5 shrink-0 bg-rcl-red" />
-                      <span>{item}</span>
+                    <li key={item}>
+                      {item}
                     </li>
                   ))}
                 </ul>
@@ -211,11 +219,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-5 py-10 md:px-8">
+      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <div className="grid gap-8 md:grid-cols-2">
           {project.pageSections.map((section, index) => (
             <Reveal key={section.title} delay={index * 0.06}>
-              <div className="border-t border-white/12 pt-6">
+              <div className="border-t border-rcl-copper/18 pt-6">
                 <h2 className="text-2xl font-black uppercase text-white">
                   {section.title}
                 </h2>
@@ -229,7 +237,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
 
       {relatedIncludedGames.length > 0 ? (
-        <section className="mx-auto max-w-[1500px] px-5 pb-20 pt-8 md:px-8">
+        <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-8 md:px-8 xl:px-0">
           <Reveal>
             <SectionHeader title="Included Games" />
           </Reveal>

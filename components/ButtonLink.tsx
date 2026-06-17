@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 type ButtonLinkProps = {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "contact";
   className?: string;
 };
 
@@ -20,12 +20,15 @@ export function ButtonLink({
     <Link
       href={href}
       className={cn(
-        "group inline-flex h-12 items-center justify-center gap-3 whitespace-nowrap rounded-[3px] px-7 text-sm font-black uppercase transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-red",
+        "exhibit-button group inline-flex h-12 items-center justify-center gap-3 whitespace-nowrap rounded-[3px] px-7 text-sm font-black uppercase transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper",
+        "relative overflow-hidden",
         variant === "primary" &&
-          "bg-rcl-red text-white shadow-[0_0_26px_rgba(255,32,32,0.22)] hover:bg-white hover:text-rcl-black hover:shadow-[0_0_34px_rgba(255,32,32,0.28)]",
+          "exhibit-button--primary bg-rcl-copper text-white shadow-[0_0_22px_rgba(210,115,59,0.18)] hover:text-white hover:shadow-[0_0_32px_rgba(210,115,59,0.25)]",
         variant === "secondary" &&
-          "border border-white/35 bg-transparent text-white hover:border-rcl-red hover:bg-rcl-red/[0.04] hover:text-rcl-red hover:shadow-[0_0_24px_rgba(255,32,32,0.1)]",
-        variant === "ghost" && "text-rcl-muted hover:text-white hover:translate-y-0",
+          "border border-rcl-copper/35 bg-black/20 text-white hover:border-rcl-copper hover:bg-rcl-copper/[0.05] hover:text-rcl-amber hover:shadow-[0_0_22px_rgba(210,115,59,0.11)]",
+        variant === "ghost" && "border-0 bg-transparent text-rcl-muted shadow-none hover:translate-y-0 hover:text-white",
+        variant === "contact" &&
+          "site-contact-link border border-rcl-copper bg-[linear-gradient(135deg,rgba(210,115,59,0.14),rgba(5,7,9,0.2))] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_20px_rgba(210,115,59,0.13)] hover:border-rcl-amber hover:text-white hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_28px_rgba(210,115,59,0.2)]",
         className,
       )}
     >
