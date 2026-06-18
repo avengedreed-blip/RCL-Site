@@ -86,12 +86,16 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     src: "/images/projects/rcl-workspace-dashboard.jpg",
     alt: "RCL Workspace project dashboard interface",
     position: "object-center",
-    detailSrc: "/images/projects/rcl-workspace-dashboard.jpg",
-    detailAlt: "RCL Workspace project dashboard interface",
+    detailSrc: "/images/projects/rcl-workspace-start-screen.jpg",
+    detailAlt: "RCL Workspace start screen",
     detailFit: "contain",
     screenshots: [
       {
-        src: "/images/projects/rcl-workspace-dashboard.jpg",
+        src: "/images/projects/rcl-workspace-start-screen.jpg",
+        alt: "RCL Workspace start screen",
+      },
+      {
+        src: "/images/projects/rcl-workspace-dashboard-v2.jpg",
         alt: "RCL Workspace project dashboard interface",
       },
     ],
@@ -100,13 +104,21 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     src: "/images/projects/rcl-science-lab-stable-orbits.jpg",
     alt: "RCL Science Lab stable orbits simulation interface",
     position: "object-center",
-    detailSrc: "/images/projects/rcl-science-lab-stable-orbits.jpg",
-    detailAlt: "RCL Science Lab stable orbits simulation interface",
+    detailSrc: "/images/projects/rcl-science-lab-observatory.jpg",
+    detailAlt: "RCL Science Lab observatory launch screen",
     detailFit: "contain",
     screenshots: [
       {
-        src: "/images/projects/rcl-science-lab-stable-orbits.jpg",
-        alt: "RCL Science Lab stable orbits simulation interface",
+        src: "/images/projects/rcl-science-lab-observatory.jpg",
+        alt: "RCL Science Lab observatory launch screen",
+      },
+      {
+        src: "/images/projects/rcl-science-lab-protostar-formation.jpg",
+        alt: "RCL Science Lab protostar formation simulation interface",
+      },
+      {
+        src: "/images/projects/rcl-science-lab-catalog-browser.jpg",
+        alt: "RCL Science Lab simulation catalog browser interface",
       },
     ],
   },
