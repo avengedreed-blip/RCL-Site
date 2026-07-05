@@ -49,7 +49,7 @@ export function buildMetadata({
   path = "/",
   image = {
     url: "/og-image.jpg",
-    alt: `${siteName} social preview`,
+    alt: `${siteName} dark, silver, and gold social preview`,
     width: 1200,
     height: 630,
   },

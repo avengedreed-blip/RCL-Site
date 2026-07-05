@@ -7,7 +7,7 @@ const organization = {
   name: siteName,
   url: siteUrl,
   email: "reedcreativelabs@gmail.com",
-  logo: absoluteUrl("/images/rcl-logo-cropped.png"),
+  logo: absoluteUrl("/images/rcl-logo-mark.png"),
 };
 
 function projectImage(project: Project) {

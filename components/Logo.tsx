@@ -19,12 +19,12 @@ export function Logo({ compact = false, className, priority = false }: LogoProps
       aria-label="Reed Creative Labs home"
     >
       <Image
-        src={compact ? "/images/rcl-logo-wordmark.png" : "/images/rcl-logo-cropped.png"}
+        src={compact ? "/images/rcl-logo-full.png" : "/images/rcl-logo-mark.png"}
         alt="Reed Creative Labs"
-        width={compact ? 260 : 360}
-        height={compact ? 91 : 174}
+        width={720}
+        height={compact ? 350 : 254}
         priority={priority}
-        className={cn("h-auto w-[106px] object-contain md:w-[112px]", compact && "md:w-[140px]")}
+        className={cn("h-auto w-[126px] object-contain md:w-[148px]", compact && "md:w-[156px]")}
       />
     </Link>
   );

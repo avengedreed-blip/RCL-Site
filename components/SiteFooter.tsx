@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { studioEmailHref } from "@/content/contact";
+import { studioEmail, studioEmailHref } from "@/content/contact";
 
 const footerLinks = [
   { href: "/projects", label: "Products" },
@@ -9,6 +9,8 @@ const footerLinks = [
   { href: "/about", label: "About" },
   { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
 ];
 
 const socialLinks = [
@@ -54,6 +56,12 @@ export function SiteFooter() {
               );
             })}
           </div>
+          <a
+            href={studioEmailHref}
+            className="max-w-full text-xs font-black uppercase text-rcl-muted [overflow-wrap:anywhere] transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
+          >
+            {studioEmail}
+          </a>
           <p className="text-sm leading-6 text-rcl-dim">
             &copy; 2026 Reed Creative Labs. All rights reserved.
           </p>

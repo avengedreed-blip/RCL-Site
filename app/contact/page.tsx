@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Mail, MessageSquareText } from "lucide-react";
+import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { studioEmail, studioEmailHref } from "@/content/contact";
@@ -60,6 +61,7 @@ export default function ContactPage() {
                   <code className="mt-2 block text-sm font-bold text-white [overflow-wrap:anywhere]">
                     {contact.value}
                   </code>
+                  <CopyEmailButton email={contact.value} />
                 </div>
                 <p className="mt-5 text-base leading-8 text-rcl-muted">
                   {contact.body}

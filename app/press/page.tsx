@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Download } from "lucide-react";
+import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -15,7 +16,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/press",
   image: {
     url: "/social-preview.jpg",
-    alt: "Reed Creative Labs social preview artwork for press references.",
+    alt: "Reed Creative Labs dark, silver, and gold social preview artwork.",
   },
 });
 
@@ -48,6 +49,15 @@ export default function PressPage() {
             >
               {studioEmail}
             </a>
+            <div className="mt-5 rounded-[4px] border border-rcl-copper/18 bg-black/28 p-4">
+              <p className="text-xs font-black uppercase text-rcl-dim">
+                Plain-text email
+              </p>
+              <code className="mt-2 block text-sm font-bold text-white [overflow-wrap:anywhere]">
+                {studioEmail}
+              </code>
+              <CopyEmailButton email={studioEmail} />
+            </div>
           </div>
         </Reveal>
         <Reveal className="min-w-0" delay={0.08}>

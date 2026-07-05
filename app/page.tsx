@@ -22,7 +22,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/",
   image: {
     url: "/og-image.jpg",
-    alt: "Reed Creative Labs social preview with black, white, and red branding.",
+    alt: "Reed Creative Labs social preview with dark, silver, and gold branding.",
     width: 1200,
     height: 630,
   },
@@ -72,8 +72,12 @@ export default function Home() {
           <p className="mb-4 text-xs font-black uppercase text-rcl-amber">
             Offline-first software, games, and tools
           </p>
-          <h1 className="brand-heading hero-title max-w-[920px] text-6xl leading-[0.92] text-white md:text-7xl lg:text-8xl">
+          <h1
+            aria-label="Reed Creative Labs"
+            className="brand-heading hero-title max-w-[920px] text-6xl leading-[0.92] text-white md:text-7xl lg:text-8xl"
+          >
             <span className="block">Reed Creative</span>
+            {" "}
             <span className="block">Labs</span>
           </h1>
           <p className="mt-5 max-w-[690px] text-sm leading-7 text-rcl-muted">

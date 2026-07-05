@@ -13,6 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about/founder",
     "/press",
     "/contact",
+    "/privacy",
+    "/privacy-policy",
+    "/terms",
   ];
 
   return [
