@@ -15,90 +15,72 @@ type VisualImage = {
   screenshots?: {
     src: string;
     alt: string;
+    caption?: string;
   }[];
 };
 
 const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
-  echo: {
-    src: "/images/projects/echo-start-screen.jpg",
-    alt: "Echo cinematic slideshow application start screen",
-    position: "object-center",
-    detailSrc: "/images/projects/echo-editor-screen.jpg",
-    detailAlt: "Echo story card editor interface",
-    detailFit: "contain",
-    detailPosition: "object-center",
-    screenshots: [
-      {
-        src: "/images/projects/echo-start-screen.jpg",
-        alt: "Echo cinematic slideshow application start screen",
-      },
-      {
-        src: "/images/projects/echo-editor-screen.jpg",
-        alt: "Echo story card editor interface",
-      },
-    ],
+  forge: {
+    src: "/images/social/forge.jpg",
+    alt: "Abstract Forge brand artwork.",
+    cardMode: "abstract",
   },
   "phase-arcade": {
     src: "/images/home/phase-arcade-card.jpg",
-    alt: "Abstract arcade collection identity artwork representing Phase Arcade Volume 1.",
+    alt: "Abstract arcade collection identity artwork representing Phase Arcade Volume I.",
     position: "object-center",
     cardMode: "abstract",
     screenshots: [
       {
-        src: "/images/projects/phase-shift-gameplay-card.jpg",
-        alt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
+        src: "/images/projects/phase-shift-gameplay-01.webp",
+        alt: "Phase Shift gameplay with a photon moving through a cyan and magenta tunnel.",
+        caption: "Phase Shift — desktop gameplay capture from the current build.",
       },
       {
-        src: "/images/projects/phase-defense-gameplay-card.jpg",
-        alt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
+        src: "/images/projects/phase-breaker-gameplay-01.webp",
+        alt: "Phase Breaker gameplay inside a cyan and magenta containment chamber.",
+        caption: "Phase Breaker — desktop gameplay capture from the current build.",
       },
       {
-        src: "/images/projects/phase-court-gameplay-card.jpg",
-        alt: "Phase Court gameplay screenshot with opposing cyan and magenta sides.",
+        src: "/images/projects/phase-court-gameplay-01.webp",
+        alt: "Phase Court gameplay showing the court, paddles, and ball in motion.",
+        caption: "Phase Court — desktop gameplay capture from the current build.",
       },
     ],
   },
   "phase-shift": {
-    src: "/images/projects/phase-shift-gameplay-card.jpg",
-    alt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
+    src: "/images/projects/phase-shift-gameplay-01.webp",
+    alt: "Phase Shift gameplay with a photon moving through a cyan and magenta tunnel.",
     position: "object-center",
-    detailSrc: "/images/projects/phase-shift-gameplay-card.jpg",
-    detailAlt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
+    detailSrc: "/images/projects/phase-shift-gameplay-01.webp",
+    detailAlt: "Phase Shift gameplay with a photon moving through a cyan and magenta tunnel.",
     detailFit: "contain",
   },
-  "phase-defense": {
-    src: "/images/projects/phase-defense-gameplay-card.jpg",
-    alt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
-    position: "object-center",
-    detailSrc: "/images/projects/phase-defense-gameplay-card.jpg",
-    detailAlt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
+  "phase-breaker": {
+    src: "/images/social/phase-breaker-coming-soon.jpg",
+    alt: "Abstract Phase Breaker brand artwork.",
+    cardMode: "abstract",
+    detailSrc: "/images/projects/phase-breaker-gameplay-01.webp",
+    detailAlt: "Phase Breaker gameplay inside a cyan and magenta containment chamber.",
     detailFit: "contain",
   },
   "phase-court": {
-    src: "/images/projects/phase-court-gameplay-card.jpg",
-    alt: "Phase Court gameplay screenshot with opposing cyan and magenta sides.",
+    src: "/images/projects/phase-court-gameplay-01.webp",
+    alt: "Phase Court gameplay showing the court, paddles, and ball in motion.",
     position: "object-center",
-    detailSrc: "/images/projects/phase-court-gameplay-card.jpg",
-    detailAlt: "Phase Court gameplay screenshot with opposing cyan and magenta sides.",
+    detailSrc: "/images/projects/phase-court-gameplay-01.webp",
+    detailAlt: "Phase Court gameplay showing the court, paddles, and ball in motion.",
     detailFit: "contain",
   },
-  workspace: {
-    src: "/images/projects/rcl-workspace-dashboard.jpg",
-    alt: "RCL Workspace project dashboard interface",
-    position: "object-center",
-    detailSrc: "/images/projects/rcl-workspace-start-screen.jpg",
-    detailAlt: "RCL Workspace start screen",
-    detailFit: "contain",
-    screenshots: [
-      {
-        src: "/images/projects/rcl-workspace-start-screen.jpg",
-        alt: "RCL Workspace start screen",
-      },
-      {
-        src: "/images/projects/rcl-workspace-dashboard-v2.jpg",
-        alt: "RCL Workspace project dashboard interface",
-      },
-    ],
+  "phase-arcade-2": {
+    src: "/images/social/phase-arcade-volume-2.jpg",
+    alt: "Phase Arcade Volume II social preview artwork.",
+    cardMode: "abstract",
+  },
+  "pigs-can-fly": {
+    src: "/images/social/pigs-can-fly.jpg",
+    alt: "Pigs Can Fly? social preview artwork.",
+    cardMode: "abstract",
   },
   "science-lab": {
     src: "/images/projects/rcl-science-lab-stable-orbits.jpg",
@@ -111,14 +93,17 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
       {
         src: "/images/projects/rcl-science-lab-observatory.jpg",
         alt: "RCL Science Lab observatory launch screen",
+        caption: "The observatory organizes simulations, learning paths, and local study progress.",
       },
       {
         src: "/images/projects/rcl-science-lab-protostar-formation.jpg",
         alt: "RCL Science Lab protostar formation simulation interface",
+        caption: "A protostar formation simulation shown in the current application.",
       },
       {
         src: "/images/projects/rcl-science-lab-catalog-browser.jpg",
         alt: "RCL Science Lab simulation catalog browser interface",
+        caption: "The local catalog provides structured access to scientific simulations.",
       },
     ],
   },
@@ -160,12 +145,27 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
   },
 };
 
+const projectSocialImages: Record<string, string> = {
+  forge: "/images/social/forge.jpg",
+  "phase-arcade-volume-1": "/images/social/phase-arcade-volume-1.jpg",
+  "rcl-science-lab": "/images/social/rcl-science-lab.jpg",
+  "phase-shift": "/images/social/phase-shift.jpg",
+  "phase-breaker": "/images/social/phase-breaker.jpg",
+  "phase-court": "/images/social/phase-court.jpg",
+  "phase-arcade-volume-2": "/images/social/phase-arcade-volume-2.jpg",
+  "pigs-can-fly": "/images/social/pigs-can-fly.jpg",
+};
+
 export function getProjectVisualImage(visual: ProjectVisual) {
   return visualImages[visual];
 }
 
 export function getProjectScreenshots(visual: ProjectVisual) {
   return visualImages[visual]?.screenshots ?? [];
+}
+
+export function getProjectSocialImage(slug: string) {
+  return projectSocialImages[slug] ?? "/social-preview.jpg";
 }
 
 type ProjectMediaImageProps = {

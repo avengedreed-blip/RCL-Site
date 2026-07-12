@@ -34,7 +34,7 @@ export function SiteFooter() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
+              className="inline-flex min-h-10 items-center text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
             >
               {link.label}
             </Link>
@@ -49,7 +49,7 @@ export function SiteFooter() {
                   key={link.label}
                   href={link.href}
                   aria-label={link.label}
-                  className="text-white transition duration-300 hover:-translate-y-0.5 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center text-white transition duration-300 hover:-translate-y-0.5 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
                 >
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </a>
@@ -58,7 +58,7 @@ export function SiteFooter() {
           </div>
           <a
             href={studioEmailHref}
-            className="max-w-full text-xs font-black uppercase text-rcl-muted [overflow-wrap:anywhere] transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
+            className="inline-flex min-h-10 max-w-full items-center text-xs font-black uppercase text-rcl-muted [overflow-wrap:anywhere] transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
           >
             {studioEmail}
           </a>

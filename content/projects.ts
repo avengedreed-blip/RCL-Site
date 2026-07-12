@@ -16,12 +16,13 @@ export type ProjectCategory =
   | "app";
 
 export type ProjectVisual =
-  | "echo"
+  | "forge"
   | "phase-arcade"
+  | "phase-arcade-2"
   | "phase-shift"
-  | "phase-defense"
+  | "phase-breaker"
   | "phase-court"
-  | "workspace"
+  | "pigs-can-fly"
   | "science-lab"
   | "neon-drift"
   | "falling-from-the-sky"
@@ -60,78 +61,85 @@ export const roadmapDisclaimer =
 
 export const projects: Project[] = [
   {
-    name: "Echo",
-    slug: "echo",
-    status: "coming-soon",
-    roadmapGroup: "coming-soon",
-    category: "software",
-    categoryLabel: "Cinematic Slideshow & Memory Presentation Software",
-    headline: "Cinematic memory presentations.",
-    tagline: "Turn important photos and moments into polished visual stories.",
+    name: "Forge",
+    slug: "forge",
+    status: "active-development",
+    roadmapGroup: "active-development",
+    category: "tool",
+    categoryLabel: "Software Engineering Environment",
+    headline: "Serious engineering work, kept in context.",
+    tagline:
+      "A local-first engineering environment for sustained work on real repositories and codebases.",
     shortDescription:
-      "Echo is a cinematic slideshow application for transforming photos, memories, milestones, and meaningful moments into polished visual presentations.",
+      "Forge helps developers inspect, plan, build, audit, repair, and improve real codebases while coordinating models, tools, tasks, and engineering context.",
     longDescription:
-      "Echo is a cinematic slideshow and memory presentation application designed for emotional storytelling. It focuses on atmosphere, pacing, music, and presentation quality rather than traditional slide decks.",
-    platforms: ["Windows", "macOS", "Linux"],
+      "Forge is a local-first software engineering environment for sustained project work. It combines repository inspection, planning, implementation, review, and repair in one continuous workflow while keeping consequential changes visible for user approval.",
+    platforms: ["Windows"],
     idealFor: [
-      "Families",
-      "Couples",
-      "Memorials",
-      "Graduations",
-      "Weddings",
-      "Anniversaries",
-      "Personal storytelling",
+      "Developers working across real repositories",
+      "Software maintainers",
+      "Privacy-conscious engineers",
+      "People managing long-running technical projects",
     ],
     usersCan: [
-      "Create visual presentations from meaningful photos and memories.",
-      "Build presentations around pacing, music, and atmosphere.",
-      "Use Echo for personal milestones, memorials, celebrations, and family stories.",
+      "Inspect a repository and keep project context connected to the work.",
+      "Plan, build, audit, repair, and improve codebases through one sustained workflow.",
+      "Coordinate supported models, tools, and tasks while reviewing consequential changes before approval.",
+      "Choose Dale, Iris, or Victor as the engineering colleague communication style.",
     ],
-    route: "/projects/echo",
-    visual: "echo",
+    route: "/projects/forge",
+    visual: "forge",
     featured: true,
     pageSections: [
       {
-        title: "What it is",
-        body: "Echo is built for people who want a presentation to feel personal, cinematic, and carefully paced instead of looking like a conventional slide deck.",
+        title: "How Forge works",
+        body: "Forge keeps repository context, engineering decisions, plans, evidence, and proposed changes connected to one project thread. It is designed for continued work rather than disposable prompts.",
       },
       {
-        title: "Who it is for",
-        body: "The application is intended for families, couples, memorials, graduations, weddings, anniversaries, and personal storytelling projects where presentation quality matters.",
+        title: "Engineering colleagues",
+        body: "Dale, Iris, and Victor are selectable communication profiles applied across supported reasoning models. Dale is the default. They are not separate AI models, and changing colleagues does not change Forge's routing or engineering rules.",
+      },
+      {
+        title: "Review before change",
+        body: "Forge is designed to show plans, evidence, affected files, and proposed changes before consequential work is applied. User approval remains the trust boundary.",
+      },
+      {
+        title: "Development state",
+        body: "Forge is in active development. Product behavior, supported integrations, and release plans may change as the engineering workflow is tested and refined.",
       },
     ],
   },
   {
-    name: "RCL Workspace",
-    slug: "rcl-workspace",
+    name: "Phase Arcade Volume I",
+    slug: "phase-arcade-volume-1",
     status: "coming-soon",
     roadmapGroup: "coming-soon",
-    category: "tool",
-    categoryLabel: "Productivity & Project Management Software",
-    headline: "Local-first project organization.",
-    tagline: "Plan, document, and organize complex work in one local-first workspace.",
+    category: "game-collection",
+    categoryLabel: "Desktop & VR Arcade Game Collection",
+    headline: "Three focused arcade games for desktop and VR.",
+    tagline: "Phase Shift, Phase Breaker, and Phase Court in one arcade collection.",
     shortDescription:
-      "RCL Workspace combines project management, notes, planning, documentation, and organizational tools into a single local-first productivity environment.",
+      "Phase Arcade Volume I is a collection of three focused arcade games built around short sessions, clean mechanics, and replayable score-chasing loops for desktop and VR.",
     longDescription:
-      "RCL Workspace is productivity and project-management software for creators, developers, students, researchers, and professionals who want ownership of their project data without relying on cloud subscriptions.",
-    platforms: ["Windows", "macOS", "Linux"],
-    idealFor: ["Creators", "Developers", "Students", "Researchers", "Professionals"],
+      "Phase Arcade Volume I includes Phase Shift, Phase Breaker, and Phase Court. Each game is a distinct arcade experience under the broader Phase Arcade identity, with both traditional desktop play and VR support.",
+    platforms: ["PC", "VR"],
     usersCan: [
-      "Organize notes, documentation, plans, and project context.",
-      "Keep project information local-first and under user control.",
-      "Return to complex work without losing the thread of decisions and next steps.",
+      "Play three distinct arcade games in one collection.",
+      "Practice short-session gameplay built around replayable score-chasing loops.",
+      "Play Phase Shift, Phase Breaker, and Phase Court through traditional desktop play or VR.",
     ],
-    route: "/projects/rcl-workspace",
-    visual: "workspace",
+    route: "/projects/phase-arcade-volume-1",
+    visual: "phase-arcade",
     featured: true,
+    includedGames: ["phase-shift", "phase-breaker", "phase-court"],
     pageSections: [
       {
-        title: "What it is",
-        body: "RCL Workspace is a local-first productivity environment that brings project planning, notes, documentation, and organization into one workspace.",
+        title: "Included games",
+        body: "Volume I includes exactly three games: Phase Shift, Phase Breaker, and Phase Court. Each has its own arcade focus while remaining part of one collection.",
       },
       {
-        title: "Who it is for",
-        body: "It is designed for people managing complex creative, technical, academic, or professional work who want structure without surrendering ownership of their data.",
+        title: "Desktop and VR",
+        body: "The collection supports traditional desktop play and VR. Specific headset support and release details have not been announced.",
       },
     ],
   },
@@ -240,92 +248,58 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: "Phase Arcade Volume 1",
-    slug: "phase-arcade-volume-1",
-    status: "coming-soon",
-    roadmapGroup: "coming-soon",
-    category: "game-collection",
-    categoryLabel: "Arcade Game Collection",
-    headline: "Three focused arcade games.",
-    tagline: "Phase Shift, Phase Defense, and Phase Court in one arcade collection.",
-    shortDescription:
-      "Phase Arcade Volume 1 is a collection of fast, focused arcade games built around short-session gameplay, clean mechanics, and replayable score-chasing loops.",
-    longDescription:
-      "Phase Arcade Volume 1 includes Phase Shift, Phase Defense, and Phase Court. Each game is designed as a distinct arcade experience under the broader Phase Arcade identity.",
-    platforms: ["PC", "Potential future Android release"],
-    usersCan: [
-      "Play three distinct arcade games in one collection.",
-      "Practice short-session gameplay built around replayable score-chasing loops.",
-      "Move between Phase Shift, Phase Defense, and Phase Court under one shared arcade identity.",
-    ],
-    route: "/projects/phase-arcade-volume-1",
-    visual: "phase-arcade",
-    featured: true,
-    includedGames: ["phase-shift", "phase-defense", "phase-court"],
-    pageSections: [
-      {
-        title: "Included games",
-        body: "The first volume includes Phase Shift, Phase Defense, and Phase Court. Each game has its own core arcade focus while remaining part of the Phase Arcade collection.",
-      },
-      {
-        title: "Who it is for",
-        body: "The collection is for players who like short, focused arcade sessions with clean mechanics and repeatable score-chasing goals.",
-      },
-    ],
-  },
-  {
     name: "Phase Shift",
     slug: "phase-shift",
     status: "coming-soon",
     roadmapGroup: "included-game",
     category: "included-game",
-    categoryLabel: "Included Game in Phase Arcade Volume 1",
+    categoryLabel: "Included Game in Phase Arcade Volume I",
     headline: "Movement and timing.",
-    tagline: "An included Phase Arcade game focused on movement, timing, and momentum.",
+    tagline: "A neon tunnel runner built around movement, timing, and state switching.",
     shortDescription:
-      "Phase Shift is included in Phase Arcade Volume 1 and focuses on movement, timing, momentum, and avoiding failure through precise control.",
+      "Phase Shift is a tunnel runner where forward motion, lane control, and switching between measured and unmeasured states determine each run.",
     longDescription:
-      "Phase Shift is one of the three games included in Phase Arcade Volume 1. It is presented as part of the collection rather than a separate standalone roadmap priority.",
-    platforms: ["PC", "Potential future Android release"],
+      "Phase Shift is one of the three games included in Phase Arcade Volume I. Players move through a neon corridor, read incoming gates, and switch state at the right moment to keep the run alive.",
+    platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-shift",
     visual: "phase-shift",
     pageSections: [
       {
         title: "Collection context",
-        body: "Phase Shift is part of Phase Arcade Volume 1 alongside Phase Defense and Phase Court.",
+        body: "Phase Shift is part of Phase Arcade Volume I alongside Phase Breaker and Phase Court.",
       },
       {
         title: "Core focus",
-        body: "The game emphasizes movement, timing, momentum, and quick recovery inside a short-session arcade format.",
+        body: "The game emphasizes forward movement, lane control, timing, and switching between measured and unmeasured states inside a short-session arcade format.",
       },
     ],
   },
   {
-    name: "Phase Defense",
-    slug: "phase-defense",
+    name: "Phase Breaker",
+    slug: "phase-breaker",
     status: "coming-soon",
     roadmapGroup: "included-game",
     category: "included-game",
-    categoryLabel: "Included Game in Phase Arcade Volume 1",
-    headline: "Defense and survival.",
-    tagline: "An included Phase Arcade game focused on defense, pressure, and target priority.",
+    categoryLabel: "Included Game in Phase Arcade Volume I",
+    headline: "Redirect energy. Hold the chamber.",
+    tagline: "A reflector survival game built around positioning and pressure.",
     shortDescription:
-      "Phase Defense is included in Phase Arcade Volume 1 and focuses on defensive play, pressure, target priority, and survival.",
+      "Phase Breaker is a reflector survival game where the player redirects energy through a containment chamber while managing pressure and positioning.",
     longDescription:
-      "Phase Defense is one of the three games included in Phase Arcade Volume 1. It is presented as part of the collection rather than a separate standalone roadmap priority.",
-    platforms: ["PC", "Potential future Android release"],
+      "Phase Breaker is one of the three games included in Phase Arcade Volume I. Its contained arena, readable targets, and reflector-driven play give it a distinct identity within the collection.",
+    platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
-    route: "/projects/phase-defense",
-    visual: "phase-defense",
+    route: "/projects/phase-breaker",
+    visual: "phase-breaker",
     pageSections: [
       {
         title: "Collection context",
-        body: "Phase Defense is part of Phase Arcade Volume 1 alongside Phase Shift and Phase Court.",
+        body: "Phase Breaker is part of Phase Arcade Volume I alongside Phase Shift and Phase Court.",
       },
       {
         title: "Core focus",
-        body: "The game emphasizes defensive decision-making, pressure management, target priority, and survival.",
+        body: "The game centers on redirecting energy, maintaining control of the chamber, and surviving mounting arcade pressure.",
       },
     ],
   },
@@ -335,25 +309,90 @@ export const projects: Project[] = [
     status: "coming-soon",
     roadmapGroup: "included-game",
     category: "included-game",
-    categoryLabel: "Included Game in Phase Arcade Volume 1",
+    categoryLabel: "Included Game in Phase Arcade Volume I",
     headline: "Competition and reaction.",
-    tagline: "An included Phase Arcade game focused on competition, positioning, and reaction speed.",
+    tagline: "An arcade paddle duel focused on positioning, angles, and reaction speed.",
     shortDescription:
-      "Phase Court is included in Phase Arcade Volume 1 and focuses on opposing sides, competitive positioning, reaction speed, and arcade control.",
+      "Phase Court is an arcade paddle duel where court positioning, reaction speed, and the angle of each return shape the rally.",
     longDescription:
-      "Phase Court is one of the three games included in Phase Arcade Volume 1. It is presented as part of the collection rather than a separate standalone roadmap priority.",
-    platforms: ["PC", "Potential future Android release"],
+      "Phase Court is one of the three games included in Phase Arcade Volume I. Opposing cyan and magenta sides keep the competitive relationship clear while each rally rewards timing and control.",
+    platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-court",
     visual: "phase-court",
     pageSections: [
       {
         title: "Collection context",
-        body: "Phase Court is part of Phase Arcade Volume 1 alongside Phase Shift and Phase Defense.",
+        body: "Phase Court is part of Phase Arcade Volume I alongside Phase Shift and Phase Breaker.",
       },
       {
         title: "Core focus",
-        body: "The game emphasizes competitive arcade play, positioning, reaction speed, and control.",
+        body: "The game emphasizes competitive arcade play, court positioning, return angles, reaction speed, and control.",
+      },
+    ],
+  },
+  {
+    name: "Pigs Can Fly?",
+    slug: "pigs-can-fly",
+    status: "active-development",
+    roadmapGroup: "active-development",
+    category: "game",
+    categoryLabel: "Mobile Vertical Arcade Game",
+    headline: "Climb higher, one run at a time.",
+    tagline: "A mobile arcade game built around upward movement, altitude, and limited lives.",
+    shortDescription:
+      "Pigs Can Fly? is a mobile arcade game about propelling a pig upward, managing a limited run, and pushing for a higher altitude.",
+    longDescription:
+      "Pigs Can Fly? is a mobile arcade game with touch-focused play, character selection, lives, and current and best altitude tracking. It remains in active development while release systems and representative device testing are completed.",
+    platforms: ["Mobile"],
+    idealFor: ["Mobile arcade players", "Players who enjoy short score-driven runs"],
+    usersCan: [
+      "Control upward movement during a mobile arcade run.",
+      "Track current and best altitude across attempts.",
+      "Choose a character and improve through repeatable sessions.",
+    ],
+    route: "/projects/pigs-can-fly",
+    visual: "pigs-can-fly",
+    pageSections: [
+      {
+        title: "What it is",
+        body: "Pigs Can Fly? is built around upward movement, altitude tracking, limited lives, character selection, and repeatable mobile runs.",
+      },
+      {
+        title: "Development state",
+        body: "The project remains in active development. Final store systems, platform packaging, and representative Android and iPhone device testing are not yet complete.",
+      },
+    ],
+  },
+  {
+    name: "Phase Arcade Volume II",
+    slug: "phase-arcade-volume-2",
+    status: "active-development",
+    roadmapGroup: "active-development",
+    category: "game-collection",
+    categoryLabel: "VR Arcade Game Collection",
+    headline: "The next Phase Arcade collection.",
+    tagline: "A VR-focused follow-up collection in active development.",
+    shortDescription:
+      "Phase Arcade Volume II is a VR-focused follow-up collection currently being built on a shared Phase Arcade framework.",
+    longDescription:
+      "Phase Arcade Volume II continues the Phase Arcade identity in a VR-focused collection. Its final lineup, release timing, and detailed platform support have not been announced.",
+    platforms: ["VR"],
+    idealFor: ["VR arcade players", "Players interested in focused short-session games"],
+    usersCan: [
+      "Follow development of the next Phase Arcade collection.",
+      "Expect distinct games to share a consistent Phase Arcade interaction and presentation framework.",
+    ],
+    route: "/projects/phase-arcade-volume-2",
+    visual: "phase-arcade-2",
+    pageSections: [
+      {
+        title: "What it is",
+        body: "Phase Arcade Volume II is a VR-focused follow-up collection built around the shared design and interaction language of Phase Arcade.",
+      },
+      {
+        title: "Development state",
+        body: "The collection is in active development. Its included games, final platforms, pricing, and release timing have not been announced.",
       },
     ],
   },
@@ -429,7 +468,7 @@ export const projects: Project[] = [
     roadmapGroup: "planned",
     category: "app",
     categoryLabel: "Recovery & Sobriety Support App",
-    headline: "Support for long-term recovery.",
+    headline: "Support for recovery milestones.",
     tagline: "A sobriety and recovery support app being developed by Aaron and Katy.",
     shortDescription:
       "Bloom is a sobriety and recovery support application being developed by Aaron and Katy.",
@@ -461,8 +500,8 @@ export const projects: Project[] = [
     roadmapGroup: "planned",
     category: "game",
     categoryLabel: "Narrative Psychological Experience",
-    headline: "Perception, memory, and misunderstanding.",
-    tagline: "A narrative psychological experience about communication and what people think they understand.",
+    headline: "What people mean. What others hear.",
+    tagline: "A narrative psychological experience about communication and interpretation.",
     shortDescription:
       "Misread is a narrative-focused project exploring perception, communication, misunderstanding, memory, and human psychology.",
     longDescription:
@@ -489,22 +528,19 @@ export const projects: Project[] = [
 ];
 
 export const featuredProjectSlugs = [
-  "rcl-workspace",
-  "echo",
-  "rcl-science-lab",
+  "forge",
   "phase-arcade-volume-1",
+  "rcl-science-lab",
 ] as const;
 
 export const featuredProjects = featuredProjectSlugs
   .map((slug) => getProject(slug))
   .filter((project): project is Project => Boolean(project));
 
+const featuredProjectSlugSet = new Set<string>(featuredProjectSlugs);
+
 export const includedGames = projects.filter(
   (project) => project.roadmapGroup === "included-game",
-);
-
-export const roadmapProjects = projects.filter(
-  (project) => project.roadmapGroup !== "included-game",
 );
 
 export const comingSoonProjects = projects.filter(
@@ -517,6 +553,14 @@ export const activeDevelopmentProjects = projects.filter(
 
 export const plannedProjects = projects.filter(
   (project) => project.roadmapGroup === "planned",
+);
+
+export const comingSoonRoadmapProjects = comingSoonProjects.filter(
+  (project) => !featuredProjectSlugSet.has(project.slug),
+);
+
+export const activeDevelopmentRoadmapProjects = activeDevelopmentProjects.filter(
+  (project) => !featuredProjectSlugSet.has(project.slug),
 );
 
 export function getProject(slug: string) {

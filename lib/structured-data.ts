@@ -1,5 +1,5 @@
 import type { Project } from "@/content/projects";
-import { getProjectVisualImage } from "@/components/ProjectMedia";
+import { getProjectSocialImage } from "@/components/ProjectMedia";
 import { absoluteUrl, siteName, siteUrl } from "@/lib/seo";
 
 const organization = {
@@ -11,17 +11,12 @@ const organization = {
 };
 
 function projectImage(project: Project) {
-  const image = getProjectVisualImage(project.visual);
-  return image?.src ? absoluteUrl(image.src) : absoluteUrl("/og-image.jpg");
+  return absoluteUrl(getProjectSocialImage(project.slug));
 }
 
 function applicationCategory(project: Project) {
-  if (project.slug === "echo") {
-    return "MultimediaApplication";
-  }
-
-  if (project.slug === "rcl-workspace") {
-    return "ProductivityApplication";
+  if (project.slug === "forge") {
+    return "DeveloperApplication";
   }
 
   if (project.slug === "rcl-science-lab") {
@@ -88,6 +83,7 @@ export function projectJsonLd(project: Project) {
     return {
       ...base,
       "@type": "VideoGame",
+      gamePlatform: project.platforms,
       hasPart: project.includedGames.map((slug) => ({
         "@type": "VideoGame",
         name: slug
@@ -102,5 +98,6 @@ export function projectJsonLd(project: Project) {
   return {
     ...base,
     "@type": "VideoGame",
+    gamePlatform: project.platforms,
   };
 }

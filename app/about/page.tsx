@@ -68,10 +68,11 @@ export default function AboutPage() {
                 with a consistent point of view.
               </p>
               <p>
-                The work ranges from private software like Echo to arcade
-                collections like Phase Arcade, but the same principles guide the
-                whole catalog: local control, clean interaction, durable value,
-                and restrained presentation.
+                The work ranges from software engineering tools like Forge to
+                arcade collections like Phase Arcade and educational software
+                like RCL Science Lab. The same principles guide the whole
+                catalog: local control, clean interaction, durable value, and
+                restrained presentation.
               </p>
             </div>
           </div>
@@ -105,7 +106,7 @@ export default function AboutPage() {
                 Reed Creative Labs around real life, full-time work, and a
                 belief that small teams can still build meaningful things.
               </p>
-              <ButtonLink href="/about/founder" variant="secondary" className="mt-7">
+              <ButtonLink href="/about/founder" variant="secondary" className="mt-7" prefetch={false}>
                 Read the Story
               </ButtonLink>
             </div>

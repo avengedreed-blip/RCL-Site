@@ -16,8 +16,9 @@ export const metadata: Metadata = {
   applicationName: "Reed Creative Labs",
   keywords: [
     "Reed Creative Labs",
-    "Echo",
+    "Forge",
     "Phase Arcade",
+    "VR arcade games",
     "offline-first software",
     "privacy-first software",
     "local-first software",

@@ -21,7 +21,6 @@ type SeoOptions = {
 const imageDimensions: Record<string, { width: number; height: number }> = {
   "/og-image.jpg": { width: 1200, height: 630 },
   "/social-preview.jpg": { width: 1200, height: 630 },
-  "/images/home/echo-card.jpg": { width: 727, height: 404 },
   "/images/home/phase-arcade-card.jpg": { width: 723, height: 404 },
   "/images/home/rcl-hero-cinematic.jpg": { width: 1375, height: 1266 },
   "/images/home/rcl-technical-orb.jpg": { width: 350, height: 203 },
@@ -31,12 +30,18 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
   "/images/projects/misread-card.jpg": { width: 1600, height: 900 },
   "/images/projects/talk-to-me-card.jpg": { width: 1600, height: 900 },
   "/images/projects/rcl-science-lab-stable-orbits.jpg": { width: 1276, height: 717 },
-  "/images/projects/rcl-workspace-dashboard.jpg": { width: 1420, height: 960 },
-  "/images/projects/echo-editor-screen.jpg": { width: 2496, height: 1302 },
-  "/images/projects/echo-start-screen.jpg": { width: 2195, height: 1097 },
-  "/images/projects/phase-shift-gameplay-card.jpg": { width: 1600, height: 720 },
-  "/images/projects/phase-defense-gameplay-card.jpg": { width: 1600, height: 720 },
-  "/images/projects/phase-court-gameplay-card.jpg": { width: 1600, height: 720 },
+  "/images/projects/phase-shift-gameplay-01.webp": { width: 1920, height: 1080 },
+  "/images/projects/phase-breaker-gameplay-01.webp": { width: 1920, height: 1080 },
+  "/images/projects/phase-court-gameplay-01.webp": { width: 1920, height: 1080 },
+  "/images/social/forge.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-arcade-volume-1.jpg": { width: 1200, height: 630 },
+  "/images/social/rcl-science-lab.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-shift.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-breaker.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-court.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-arcade-volume-2.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-breaker-coming-soon.jpg": { width: 1200, height: 630 },
+  "/images/social/pigs-can-fly.jpg": { width: 1200, height: 630 },
 };
 
 export function absoluteUrl(path = "/") {

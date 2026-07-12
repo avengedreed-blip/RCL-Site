@@ -2,8 +2,8 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   Atom,
+  Code2,
   Gamepad2,
-  ImageIcon,
   LayoutGrid,
 } from "lucide-react";
 import type { Project } from "@/content/projects";
@@ -45,15 +45,18 @@ function ProductCardMotif({
 
 function ProductCardIcon({ visual }: { visual: Project["visual"] }) {
   const Icon =
-    visual === "workspace"
-      ? LayoutGrid
-      : visual === "echo"
-        ? ImageIcon
-        : visual === "science-lab"
-          ? Atom
-          : visual === "phase-arcade"
-            ? Gamepad2
-            : LayoutGrid;
+    visual === "forge"
+      ? Code2
+      : visual === "science-lab"
+        ? Atom
+        : visual === "phase-arcade" ||
+            visual === "phase-arcade-2" ||
+            visual === "phase-shift" ||
+            visual === "phase-breaker" ||
+            visual === "phase-court" ||
+            visual === "pigs-can-fly"
+          ? Gamepad2
+          : LayoutGrid;
 
   return (
     <span className="product-card-icon" aria-hidden="true">
@@ -65,7 +68,6 @@ function ProductCardIcon({ visual }: { visual: Project["visual"] }) {
 type FeaturedProjectCardProps = {
   project: Project;
   className?: string;
-  priority?: boolean;
   variant?: "showcase" | "gallery";
 };
 
@@ -79,6 +81,7 @@ export function FeaturedProjectCard({
   return (
     <Link
       href={project.route}
+      data-product-slug={project.slug}
       data-card-kind="hardware"
       className={cn(
         "featured-exhibit-card group relative flex h-full flex-col overflow-hidden rounded-[4px] border border-rcl-copper/25 bg-rcl-elevated p-5 transition duration-300 ease-out hover:-translate-y-1 hover:border-rcl-copper/70 hover:shadow-[0_20px_72px_rgba(0,0,0,0.42),0_0_42px_rgba(210,115,59,0.11)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-amber",
@@ -142,6 +145,7 @@ export function CompactProjectCard({
   return (
     <Link
       href={project.route}
+      data-product-slug={project.slug}
       data-card-kind="hardware"
       className={cn(
         "compact-exhibit-card group flex h-full flex-col overflow-hidden rounded-[6px] border border-rcl-copper/20 bg-rcl-surface p-4 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/65 hover:bg-rcl-elevated hover:shadow-[0_16px_46px_rgba(0,0,0,0.32),0_0_30px_rgba(210,115,59,0.085)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-amber",
