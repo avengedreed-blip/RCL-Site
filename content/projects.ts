@@ -255,11 +255,11 @@ export const projects: Project[] = [
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
     headline: "Movement and timing.",
-    tagline: "An included Phase Arcade game focused on movement, timing, and momentum.",
+    tagline: "A neon tunnel runner built around movement, timing, and state switching.",
     shortDescription:
-      "Phase Shift is included in Phase Arcade Volume I and focuses on movement, timing, momentum, and avoiding failure through precise control.",
+      "Phase Shift is a tunnel runner where forward motion, lane control, and switching between measured and unmeasured states determine each run.",
     longDescription:
-      "Phase Shift is one of the three games included in Phase Arcade Volume I. It is part of the collection rather than a separate roadmap priority.",
+      "Phase Shift is one of the three games included in Phase Arcade Volume I. Players move through a neon corridor, read incoming gates, and switch state at the right moment to keep the run alive.",
     platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-shift",
@@ -271,7 +271,7 @@ export const projects: Project[] = [
       },
       {
         title: "Core focus",
-        body: "The game emphasizes movement, timing, momentum, and quick recovery inside a short-session arcade format.",
+        body: "The game emphasizes forward movement, lane control, timing, and switching between measured and unmeasured states inside a short-session arcade format.",
       },
     ],
   },
@@ -282,12 +282,12 @@ export const projects: Project[] = [
     roadmapGroup: "included-game",
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
-    headline: "Part of the Volume I collection.",
-    tagline: "One of the three games included in Phase Arcade Volume I.",
+    headline: "Redirect energy. Hold the chamber.",
+    tagline: "A reflector survival game built around positioning and pressure.",
     shortDescription:
-      "Phase Breaker is included in Phase Arcade Volume I as one of the collection's three distinct arcade games.",
+      "Phase Breaker is a reflector survival game where the player redirects energy through a containment chamber while managing pressure and positioning.",
     longDescription:
-      "Phase Breaker is presented publicly as part of Phase Arcade Volume I rather than as a separate roadmap priority. Additional gameplay details have not been announced.",
+      "Phase Breaker is one of the three games included in Phase Arcade Volume I. Its contained arena, readable targets, and reflector-driven play give it a distinct identity within the collection.",
     platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-breaker",
@@ -298,8 +298,8 @@ export const projects: Project[] = [
         body: "Phase Breaker is part of Phase Arcade Volume I alongside Phase Shift and Phase Court.",
       },
       {
-        title: "Development state",
-        body: "Phase Breaker is represented as an included game only. Public gameplay details and release information have not been announced.",
+        title: "Core focus",
+        body: "The game centers on redirecting energy, maintaining control of the chamber, and surviving mounting arcade pressure.",
       },
     ],
   },
@@ -311,11 +311,11 @@ export const projects: Project[] = [
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
     headline: "Competition and reaction.",
-    tagline: "An included Phase Arcade game focused on competition, positioning, and reaction speed.",
+    tagline: "An arcade paddle duel focused on positioning, angles, and reaction speed.",
     shortDescription:
-      "Phase Court is included in Phase Arcade Volume I and focuses on opposing sides, competitive positioning, reaction speed, and arcade control.",
+      "Phase Court is an arcade paddle duel where court positioning, reaction speed, and the angle of each return shape the rally.",
     longDescription:
-      "Phase Court is one of the three games included in Phase Arcade Volume I. It is part of the collection rather than a separate roadmap priority.",
+      "Phase Court is one of the three games included in Phase Arcade Volume I. Opposing cyan and magenta sides keep the competitive relationship clear while each rally rewards timing and control.",
     platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-court",
@@ -327,7 +327,7 @@ export const projects: Project[] = [
       },
       {
         title: "Core focus",
-        body: "The game emphasizes competitive arcade play, positioning, reaction speed, and control.",
+        body: "The game emphasizes competitive arcade play, court positioning, return angles, reaction speed, and control.",
       },
     ],
   },
@@ -537,6 +537,8 @@ export const featuredProjects = featuredProjectSlugs
   .map((slug) => getProject(slug))
   .filter((project): project is Project => Boolean(project));
 
+const featuredProjectSlugSet = new Set<string>(featuredProjectSlugs);
+
 export const includedGames = projects.filter(
   (project) => project.roadmapGroup === "included-game",
 );
@@ -551,6 +553,14 @@ export const activeDevelopmentProjects = projects.filter(
 
 export const plannedProjects = projects.filter(
   (project) => project.roadmapGroup === "planned",
+);
+
+export const comingSoonRoadmapProjects = comingSoonProjects.filter(
+  (project) => !featuredProjectSlugSet.has(project.slug),
+);
+
+export const activeDevelopmentRoadmapProjects = activeDevelopmentProjects.filter(
+  (project) => !featuredProjectSlugSet.has(project.slug),
 );
 
 export function getProject(slug: string) {

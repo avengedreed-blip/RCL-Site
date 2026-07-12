@@ -8,6 +8,7 @@ type ButtonLinkProps = {
   children: ReactNode;
   variant?: "primary" | "secondary" | "ghost" | "contact";
   className?: string;
+  prefetch?: boolean;
 };
 
 export function ButtonLink({
@@ -15,10 +16,12 @@ export function ButtonLink({
   children,
   variant = "primary",
   className,
+  prefetch,
 }: ButtonLinkProps) {
   return (
     <Link
       href={href}
+      prefetch={prefetch}
       className={cn(
         "exhibit-button group inline-flex h-12 items-center justify-center gap-3 whitespace-nowrap rounded-[3px] px-7 text-sm font-black uppercase transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper",
         "relative overflow-hidden",

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
-import { CompactProjectCard } from "@/components/ProjectCard";
+import { ForgeProductPage } from "@/components/product-pages/ForgeProductPage";
+import { PhaseArcadeProductPage } from "@/components/product-pages/PhaseArcadeProductPage";
 import {
   getProjectScreenshots,
+  getProjectSocialImage,
   getProjectVisualImage,
   ProjectMediaImage,
 } from "@/components/ProjectMedia";
@@ -15,7 +17,6 @@ import {
   getProject,
   getProjectDateLabel,
   getStatusLabel,
-  includedGames,
   projects,
 } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
@@ -50,8 +51,10 @@ export async function generateMetadata({
     description: project.shortDescription,
     path: project.route,
     image: {
-      url: getProjectVisualImage(project.visual)?.src ?? "/og-image.jpg",
+      url: getProjectSocialImage(project.slug),
       alt: `${project.name} preview image`,
+      width: 1200,
+      height: 630,
     },
   });
 }
@@ -64,8 +67,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const relatedIncludedGames =
-    project.slug === "phase-arcade-volume-1" ? includedGames : [];
+  if (project.slug === "forge") {
+    return <ForgeProductPage project={project} />;
+  }
+
+  if (project.slug === "phase-arcade-volume-1") {
+    return <PhaseArcadeProductPage project={project} />;
+  }
+
   const parentProject = project.parentProject ? getProject(project.parentProject) : undefined;
   const visualImage = getProjectVisualImage(project.visual);
   const screenshots = getProjectScreenshots(project.visual);
@@ -129,21 +138,33 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {screenshots.length > 1 ? (
         <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
           <Reveal>
-            <SectionHeader title="Product Screenshots" />
+            <SectionHeader
+              title={project.slug === "rcl-science-lab" ? "Inside RCL Science Lab" : "Product Screenshots"}
+            />
           </Reveal>
-          <div className="grid gap-4 md:grid-cols-2">
-            {screenshots.map((screenshot) => (
-              <Reveal key={screenshot.src}>
-                <div className="screenshot-frame relative aspect-video overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-black shadow-[0_0_54px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-rcl-copper/58 hover:shadow-[0_0_64px_rgba(0,0,0,0.44),0_0_18px_rgba(210,115,59,0.08),inset_0_1px_0_rgba(255,255,255,0.06)]">
-                  <Image
-                    src={screenshot.src}
-                    alt={screenshot.alt}
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-contain"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-white/[0.03]" />
-                </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {screenshots.map((screenshot, index) => (
+              <Reveal
+                key={screenshot.src}
+                className={screenshots.length === 3 && index === 2 ? "md:col-span-2 xl:col-span-1" : undefined}
+              >
+                <figure>
+                  <div className="screenshot-frame relative aspect-video overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-black shadow-[0_0_54px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-rcl-copper/58 hover:shadow-[0_0_64px_rgba(0,0,0,0.44),0_0_18px_rgba(210,115,59,0.08),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                    <Image
+                      src={screenshot.src}
+                      alt={screenshot.alt}
+                      fill
+                      sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-contain"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-white/[0.03]" />
+                  </div>
+                  {screenshot.caption ? (
+                    <figcaption className="mt-3 text-xs leading-5 text-rcl-dim">
+                      {screenshot.caption}
+                    </figcaption>
+                  ) : null}
+                </figure>
               </Reveal>
             ))}
           </div>
@@ -236,20 +257,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </section>
 
-      {relatedIncludedGames.length > 0 ? (
-        <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-8 md:px-8 xl:px-0">
-          <Reveal>
-            <SectionHeader title="Included Games" />
-          </Reveal>
-          <div className="grid gap-4 md:grid-cols-3">
-            {relatedIncludedGames.map((includedProject, index) => (
-              <Reveal key={includedProject.slug} delay={index * 0.06}>
-                <CompactProjectCard project={includedProject} />
-              </Reveal>
-            ))}
-          </div>
-        </section>
-      ) : null}
     </main>
   );
 }

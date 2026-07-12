@@ -106,7 +106,7 @@ export default function AboutPage() {
                 Reed Creative Labs around real life, full-time work, and a
                 belief that small teams can still build meaningful things.
               </p>
-              <ButtonLink href="/about/founder" variant="secondary" className="mt-7">
+              <ButtonLink href="/about/founder" variant="secondary" className="mt-7" prefetch={false}>
                 Read the Story
               </ButtonLink>
             </div>

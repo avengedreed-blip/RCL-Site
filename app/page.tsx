@@ -85,7 +85,7 @@ export default function Home() {
             privacy, and lasting value.
           </p>
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <ButtonLink href="/projects">Explore Projects</ButtonLink>
+            <ButtonLink href="/projects">Explore Products</ButtonLink>
             <ButtonLink href="/services" variant="secondary">
               Services
             </ButtonLink>
@@ -102,7 +102,7 @@ export default function Home() {
           <SectionHeader
             title="Featured Products"
             href="/projects"
-            action="View all projects"
+            action="View all products"
           />
         </Reveal>
         <div className="grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -110,7 +110,6 @@ export default function Home() {
             <Reveal key={project.slug} delay={index * 0.06}>
               <FeaturedProjectCard
                 project={project}
-                priority={index < 3}
                 variant="gallery"
               />
             </Reveal>

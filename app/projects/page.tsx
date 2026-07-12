@@ -4,8 +4,8 @@ import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import {
-  activeDevelopmentProjects,
-  comingSoonProjects,
+  activeDevelopmentRoadmapProjects,
+  comingSoonRoadmapProjects,
   featuredProjects,
   includedGames,
   plannedProjects,
@@ -19,8 +19,10 @@ export const metadata: Metadata = buildMetadata({
     "Explore Reed Creative Labs software, games, tools, active development projects, and future roadmap.",
   path: "/projects",
   image: {
-    url: "/images/home/phase-arcade-card.jpg",
-    alt: "Phase Arcade cabinet artwork representing Reed Creative Labs featured releases.",
+    url: "/images/social/phase-arcade-volume-1.jpg",
+    alt: "Reed Creative Labs products, including Forge, Phase Arcade Volume I, and RCL Science Lab.",
+    width: 1200,
+    height: 630,
   },
 });
 
@@ -40,7 +42,7 @@ export default function ProjectsPage() {
         <div className="grid gap-3 lg:grid-cols-3">
           {featuredProjects.map((project, index) => (
             <Reveal key={project.slug} delay={index * 0.06}>
-              <FeaturedProjectCard project={project} priority={index < 3} />
+              <FeaturedProjectCard project={project} />
             </Reveal>
           ))}
         </div>
@@ -51,7 +53,7 @@ export default function ProjectsPage() {
           <SectionHeader title="Coming Soon" />
         </Reveal>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {comingSoonProjects.map((project, index) => (
+          {comingSoonRoadmapProjects.map((project, index) => (
             <Reveal key={project.slug} delay={index * 0.04}>
               <CompactProjectCard project={project} />
             </Reveal>
@@ -78,7 +80,7 @@ export default function ProjectsPage() {
             <SectionHeader title="Active Development" />
           </Reveal>
           <div className="grid gap-4">
-            {activeDevelopmentProjects.map((project, index) => (
+            {activeDevelopmentRoadmapProjects.map((project, index) => (
               <Reveal key={project.slug} delay={index * 0.06}>
                 <CompactProjectCard project={project} />
               </Reveal>

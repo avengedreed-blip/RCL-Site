@@ -115,9 +115,20 @@ for (const file of [
 
 for (const file of [
   "public/images/social/forge.jpg",
+  "public/images/social/phase-arcade-volume-1.jpg",
+  "public/images/social/rcl-science-lab.jpg",
+  "public/images/social/phase-shift.jpg",
+  "public/images/social/phase-breaker.jpg",
+  "public/images/social/phase-court.jpg",
   "public/images/social/phase-arcade-volume-2.jpg",
   "public/images/social/phase-breaker-coming-soon.jpg",
   "public/images/social/pigs-can-fly.jpg",
+  "public/images/projects/phase-shift-gameplay-01.webp",
+  "public/images/projects/phase-breaker-gameplay-01.webp",
+  "public/images/projects/phase-court-gameplay-01.webp",
+  "public/images/projects/rcl-science-lab-observatory.jpg",
+  "public/images/projects/rcl-science-lab-protostar-formation.jpg",
+  "public/images/projects/rcl-science-lab-catalog-browser.jpg",
 ]) {
   if (!existsSync(join(root, file))) fail(`Required portfolio asset is missing: ${file}`);
 }
@@ -137,6 +148,8 @@ if (!existsSync(out)) {
 const sitemapFile = join(out, "sitemap.xml");
 if (!existsSync(sitemapFile)) fail("Missing sitemap.xml");
 const sitemap = readFileSync(sitemapFile, "utf8");
+
+if (!existsSync(join(out, "404.html"))) fail("Missing branded 404 output");
 
 if (sitemap.includes("/privacy-policy")) {
   fail("The non-canonical privacy alias remains in the sitemap");
@@ -163,9 +176,13 @@ for (const project of projects) {
     if (!html.includes(required)) fail(`Missing ${required} in ${project.route}`);
   }
 
-  for (const script of html.matchAll(
+  const structuredDataScripts = [...html.matchAll(
     /<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,
-  )) {
+  )];
+  if (structuredDataScripts.length === 0) {
+    fail(`Missing JSON-LD in ${project.route}`);
+  }
+  for (const script of structuredDataScripts) {
     try {
       JSON.parse(script[1]);
     } catch (error) {
@@ -202,6 +219,52 @@ const positions = expectedFeatured.map((slug) => homepage.indexOf(`data-product-
 if (positions.some((position) => position < 0)) fail("Homepage is missing a required featured product");
 if (!(positions[0] < positions[1] && positions[1] < positions[2])) {
   fail("Homepage featured products are not in the required order");
+}
+
+const productsPage = readFileSync(routeFile("/projects"), "utf8");
+for (const slug of expectedFeatured) {
+  const occurrences = productsPage.match(new RegExp(`data-product-slug="${slug}"`, "g"))?.length ?? 0;
+  if (occurrences !== 1) {
+    fail(`Featured product ${slug} appears ${occurrences} times on the Products page`);
+  }
+}
+
+const forgePage = readFileSync(routeFile("/projects/forge"), "utf8");
+for (const required of [
+  "Interface preview coming soon",
+  "Dale",
+  "Iris",
+  "Victor",
+  "Active Development",
+]) {
+  if (!forgePage.includes(required)) fail(`Forge page is missing ${required}`);
+}
+if (forgePage.includes("/images/projects/forge-")) {
+  fail("Forge page must not expose unfinished product screenshots");
+}
+
+const phaseArcadePage = readFileSync(routeFile("/projects/phase-arcade-volume-1"), "utf8");
+for (const required of [
+  "Phase Shift",
+  "Phase Breaker",
+  "Phase Court",
+  "Desktop + VR",
+  "/images/projects/phase-shift-gameplay-01.webp",
+  "/images/projects/phase-breaker-gameplay-01.webp",
+  "/images/projects/phase-court-gameplay-01.webp",
+]) {
+  if (!phaseArcadePage.includes(required)) fail(`Phase Arcade page is missing ${required}`);
+}
+
+const scienceLabPage = readFileSync(routeFile("/projects/rcl-science-lab"), "utf8");
+for (const screenshot of [
+  "rcl-science-lab-observatory.jpg",
+  "rcl-science-lab-protostar-formation.jpg",
+  "rcl-science-lab-catalog-browser.jpg",
+]) {
+  if (!scienceLabPage.includes(screenshot)) {
+    fail(`RCL Science Lab is missing approved screenshot ${screenshot}`);
+  }
 }
 
 console.log(`Portfolio checks passed: ${projects.length} products, ${featuredProjects.length} featured.`);

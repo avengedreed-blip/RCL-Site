@@ -68,7 +68,6 @@ function ProductCardIcon({ visual }: { visual: Project["visual"] }) {
 type FeaturedProjectCardProps = {
   project: Project;
   className?: string;
-  priority?: boolean;
   variant?: "showcase" | "gallery";
 };
 
