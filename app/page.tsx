@@ -105,12 +105,12 @@ export default function Home() {
             action="View all projects"
           />
         </Reveal>
-        <div className="grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project, index) => (
             <Reveal key={project.slug} delay={index * 0.06}>
               <FeaturedProjectCard
                 project={project}
-                priority={index < 4}
+                priority={index < 3}
                 variant="gallery"
               />
             </Reveal>

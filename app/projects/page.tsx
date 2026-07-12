@@ -61,7 +61,7 @@ export default function ProjectsPage() {
 
       <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <Reveal>
-          <SectionHeader title="Phase Arcade Volume 1 Included Games" />
+          <SectionHeader title="Phase Arcade Volume I Included Games" />
         </Reveal>
         <div className="grid gap-4 md:grid-cols-3">
           {includedGames.map((project, index) => (

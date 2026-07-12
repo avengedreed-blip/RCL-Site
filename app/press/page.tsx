@@ -69,8 +69,8 @@ export default function PressPage() {
               Reed Creative Labs is an independent software studio building
               software products, games, educational tools, websites, and custom
               software with a focus on privacy, ownership, and lasting value.
-              Current featured products include Echo, Phase Arcade Volume 1,
-              RCL Workspace, and RCL Science Lab.
+              Current featured products include Forge, Phase Arcade Volume I,
+              and RCL Science Lab.
             </p>
           </div>
         </Reveal>

@@ -1035,18 +1035,20 @@ a {
   opacity: 0.28;
 }
 
-.product-card-motif[data-visual="echo"]::before {
+.product-card-motif[data-visual="forge"]::before {
   background:
     radial-gradient(ellipse at 76% 62%, transparent 0 22%, rgba(210, 115, 59, 0.09) 23% 24%, transparent 25% 100%),
     radial-gradient(ellipse at 72% 58%, rgba(238, 154, 82, 0.07), transparent 28%);
 }
 
-.product-card-motif[data-visual="workspace"] .product-card-motif__rail--a,
+.product-card-motif[data-visual="forge"] .product-card-motif__rail--a,
 .product-card-motif[data-visual="science-lab"] .product-card-motif__rail--a {
   transform: rotate(-8deg);
 }
 
 .product-card-motif[data-visual="phase-arcade"] .product-card-motif__rail--b,
+.product-card-motif[data-visual="phase-arcade-2"] .product-card-motif__rail--b,
+.product-card-motif[data-visual="pigs-can-fly"] .product-card-motif__rail--b,
 .product-card-motif[data-visual="neon-drift"] .product-card-motif__rail--b {
   transform: rotate(7deg);
 }

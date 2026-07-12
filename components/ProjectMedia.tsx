@@ -19,38 +19,20 @@ type VisualImage = {
 };
 
 const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
-  echo: {
-    src: "/images/projects/echo-start-screen.jpg",
-    alt: "Echo cinematic slideshow application start screen",
-    position: "object-center",
-    detailSrc: "/images/projects/echo-editor-screen.jpg",
-    detailAlt: "Echo story card editor interface",
-    detailFit: "contain",
-    detailPosition: "object-center",
-    screenshots: [
-      {
-        src: "/images/projects/echo-start-screen.jpg",
-        alt: "Echo cinematic slideshow application start screen",
-      },
-      {
-        src: "/images/projects/echo-editor-screen.jpg",
-        alt: "Echo story card editor interface",
-      },
-    ],
+  forge: {
+    src: "/images/social/forge.jpg",
+    alt: "Forge software engineering environment social preview.",
+    cardMode: "abstract",
   },
   "phase-arcade": {
     src: "/images/home/phase-arcade-card.jpg",
-    alt: "Abstract arcade collection identity artwork representing Phase Arcade Volume 1.",
+    alt: "Abstract arcade collection identity artwork representing Phase Arcade Volume I.",
     position: "object-center",
     cardMode: "abstract",
     screenshots: [
       {
         src: "/images/projects/phase-shift-gameplay-card.jpg",
         alt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
-      },
-      {
-        src: "/images/projects/phase-defense-gameplay-card.jpg",
-        alt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
       },
       {
         src: "/images/projects/phase-court-gameplay-card.jpg",
@@ -66,13 +48,10 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     detailAlt: "Phase Shift gameplay screenshot with a cyan and magenta neon tunnel.",
     detailFit: "contain",
   },
-  "phase-defense": {
-    src: "/images/projects/phase-defense-gameplay-card.jpg",
-    alt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
-    position: "object-center",
-    detailSrc: "/images/projects/phase-defense-gameplay-card.jpg",
-    detailAlt: "Phase Defense gameplay screenshot with a defensive neon lane and central reticle.",
-    detailFit: "contain",
+  "phase-breaker": {
+    src: "/images/social/phase-breaker-coming-soon.jpg",
+    alt: "Phase Breaker social preview artwork.",
+    cardMode: "abstract",
   },
   "phase-court": {
     src: "/images/projects/phase-court-gameplay-card.jpg",
@@ -82,23 +61,15 @@ const visualImages: Partial<Record<ProjectVisual, VisualImage>> = {
     detailAlt: "Phase Court gameplay screenshot with opposing cyan and magenta sides.",
     detailFit: "contain",
   },
-  workspace: {
-    src: "/images/projects/rcl-workspace-dashboard.jpg",
-    alt: "RCL Workspace project dashboard interface",
-    position: "object-center",
-    detailSrc: "/images/projects/rcl-workspace-start-screen.jpg",
-    detailAlt: "RCL Workspace start screen",
-    detailFit: "contain",
-    screenshots: [
-      {
-        src: "/images/projects/rcl-workspace-start-screen.jpg",
-        alt: "RCL Workspace start screen",
-      },
-      {
-        src: "/images/projects/rcl-workspace-dashboard-v2.jpg",
-        alt: "RCL Workspace project dashboard interface",
-      },
-    ],
+  "phase-arcade-2": {
+    src: "/images/social/phase-arcade-volume-2.jpg",
+    alt: "Phase Arcade Volume II social preview artwork.",
+    cardMode: "abstract",
+  },
+  "pigs-can-fly": {
+    src: "/images/social/pigs-can-fly.jpg",
+    alt: "Pigs Can Fly? social preview artwork.",
+    cardMode: "abstract",
   },
   "science-lab": {
     src: "/images/projects/rcl-science-lab-stable-orbits.jpg",

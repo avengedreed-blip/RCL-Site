@@ -68,10 +68,11 @@ export default function AboutPage() {
                 with a consistent point of view.
               </p>
               <p>
-                The work ranges from private software like Echo to arcade
-                collections like Phase Arcade, but the same principles guide the
-                whole catalog: local control, clean interaction, durable value,
-                and restrained presentation.
+                The work ranges from software engineering tools like Forge to
+                arcade collections like Phase Arcade and educational software
+                like RCL Science Lab. The same principles guide the whole
+                catalog: local control, clean interaction, durable value, and
+                restrained presentation.
               </p>
             </div>
           </div>

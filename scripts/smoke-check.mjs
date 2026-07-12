@@ -7,7 +7,6 @@ const expectedFiles = [
   "out/contact.html",
   "out/press.html",
   "out/privacy.html",
-  "out/privacy-policy.html",
   "out/terms.html",
   "out/sitemap.xml",
   "out/robots.txt",
@@ -77,7 +76,6 @@ const builtText = [
   "out/contact.html",
   "out/press.html",
   "out/privacy.html",
-  "out/privacy-policy.html",
   "out/terms.html",
 ].map((file) => readFileSync(join(root, file), "utf8")).join("\n");
 

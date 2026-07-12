@@ -21,6 +21,26 @@
       ],
       "destination": "https://reedcreativelabs.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/projects/rcl-workspace",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/projects/echo",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/projects/phase-defense",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy",
+      "permanent": true
     }
   ],
   "headers": [

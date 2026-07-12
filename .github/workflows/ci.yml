@@ -34,6 +34,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Validate portfolio
+        run: npm run check:portfolio
+
       - name: Build
         run: npm run build
 
