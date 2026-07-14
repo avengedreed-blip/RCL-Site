@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Compass, Hammer, HeartHandshake, Sparkles } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
 import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
@@ -18,8 +17,6 @@ export const metadata: Metadata = buildMetadata({
   },
 });
 
-const founderIcons = [Hammer, Sparkles] as const;
-
 export default function FounderPage() {
   return (
     <main id="main-content" tabIndex={-1}>
@@ -33,16 +30,12 @@ export default function FounderPage() {
         <h2 className="sr-only">Founder profiles</h2>
         <div className="grid gap-5 lg:grid-cols-2">
           {founderStory.founders.map((founder, index) => {
-            const Icon = founderIcons[index] ?? Compass;
             return (
               <Reveal key={founder.name} delay={index * 0.06}>
-                <article className="surface-panel relative min-h-full overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/55 hover:bg-rcl-elevated hover:shadow-[0_14px_42px_rgba(0,0,0,0.24)] sm:p-8">
+                <article className="surface-panel relative min-h-full overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 sm:p-8">
                   <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(132deg,rgba(255,255,255,0.03),transparent_38%),linear-gradient(28deg,transparent_0_72%,rgba(238,154,82,0.05)_73%,transparent_74.2%)]" />
                   <div className="relative">
-                    <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-[4px] border border-rcl-copper/40 bg-rcl-copper/8 text-rcl-amber shadow-[0_0_20px_rgba(210,115,59,0.1)]">
-                      <Icon className="h-6 w-6" strokeWidth={1.5} aria-hidden="true" />
-                    </div>
-                      <p className="text-sm font-black uppercase text-rcl-amber">
+                    <p className="text-sm font-black uppercase text-rcl-amber">
                       {founder.title}
                     </p>
                     <h3 className="brand-heading mt-4 text-4xl leading-none text-white sm:text-5xl">
@@ -73,7 +66,7 @@ export default function FounderPage() {
 
       <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-14 xl:px-0">
         <Reveal>
-          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-rcl-copper/50 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)] sm:p-8 lg:grid lg:grid-cols-[0.78fr_1.22fr] lg:gap-12 lg:p-10">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] sm:p-8 lg:grid lg:grid-cols-[0.78fr_1.22fr] lg:gap-12 lg:p-10">
             <RclTechnicalMotif
               className="right-[-18%] top-[-24%] h-[460px] w-[460px] opacity-35"
               variant="panel"
@@ -109,13 +102,6 @@ export default function FounderPage() {
         <Reveal>
           <div className="grid gap-8 border-t border-rcl-copper/18 pt-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
             <div>
-              <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-[4px] border border-rcl-copper/45 bg-rcl-copper/10 text-rcl-amber">
-                <HeartHandshake
-                  className="h-6 w-6"
-                  strokeWidth={1.5}
-                  aria-hidden="true"
-                />
-              </div>
               <h2 className="brand-heading text-4xl leading-none text-white sm:text-5xl">
                 {founderStory.support.heading}
               </h2>

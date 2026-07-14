@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Download } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
@@ -31,12 +31,7 @@ export default function PressPage() {
 
       <section className="mx-auto grid max-w-[1240px] min-w-0 gap-8 px-5 py-8 md:grid-cols-[0.9fr_1.1fr] md:px-8 xl:px-0">
         <Reveal className="min-w-0">
-          <div className="surface-panel min-w-0 rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-7 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-rcl-copper/55 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)]">
-            <Download
-              className="mb-8 h-8 w-8 text-rcl-amber"
-              strokeWidth={1.5}
-              aria-hidden="true"
-            />
+          <div className="surface-panel min-w-0 rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-7 shadow-[0_12px_38px_rgba(0,0,0,0.18)]">
             <h2 className="text-2xl font-black uppercase text-white">
               Press Contact
             </h2>
@@ -61,7 +56,7 @@ export default function PressPage() {
           </div>
         </Reveal>
         <Reveal className="min-w-0" delay={0.08}>
-          <div className="surface-panel min-w-0 rounded-[6px] border border-rcl-copper/22 bg-rcl-elevated p-7 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-rcl-copper/55 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)]">
+          <div className="surface-panel min-w-0 rounded-[6px] border border-rcl-copper/22 bg-rcl-elevated p-7 shadow-[0_12px_38px_rgba(0,0,0,0.18)]">
             <h2 className="text-2xl font-black uppercase text-white">
               Studio Boilerplate
             </h2>

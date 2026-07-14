@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  Atom,
-  Code2,
-  Gamepad2,
-  LayoutGrid,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/content/projects";
 import { getProjectDateLabel } from "@/content/projects";
 import { cn } from "@/lib/utils";
@@ -43,28 +37,6 @@ function ProductCardMotif({
   );
 }
 
-function ProductCardIcon({ visual }: { visual: Project["visual"] }) {
-  const Icon =
-    visual === "forge"
-      ? Code2
-      : visual === "science-lab"
-        ? Atom
-        : visual === "phase-arcade" ||
-            visual === "phase-arcade-2" ||
-            visual === "phase-shift" ||
-            visual === "phase-breaker" ||
-            visual === "phase-court" ||
-            visual === "pigs-can-fly"
-          ? Gamepad2
-          : LayoutGrid;
-
-  return (
-    <span className="product-card-icon" aria-hidden="true">
-      <Icon className="h-5 w-5" strokeWidth={1.7} />
-    </span>
-  );
-}
-
 type FeaturedProjectCardProps = {
   project: Project;
   className?: string;
@@ -84,14 +56,13 @@ export function FeaturedProjectCard({
       data-product-slug={project.slug}
       data-card-kind="hardware"
       className={cn(
-        "featured-exhibit-card group relative flex h-full flex-col overflow-hidden rounded-[4px] border border-rcl-copper/25 bg-rcl-elevated p-5 transition duration-300 ease-out hover:-translate-y-1 hover:border-rcl-copper/70 hover:shadow-[0_20px_72px_rgba(0,0,0,0.42),0_0_42px_rgba(210,115,59,0.11)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-amber",
+        "featured-exhibit-card group relative flex h-full flex-col overflow-hidden rounded-[4px] border border-rcl-copper/25 bg-rcl-elevated p-5 transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-amber",
         isGallery ? "min-h-[310px]" : "min-h-[420px] p-6 md:p-8",
         className,
       )}
     >
       <ProductCardMotif visual={project.visual} />
-      <ProductCardIcon visual={project.visual} />
-      <div className="relative z-10 flex flex-1 flex-col pr-8">
+      <div className="relative z-10 flex flex-1 flex-col">
         <p
           className={cn(
             "mb-3 max-w-[520px] font-black uppercase leading-5 text-rcl-amber",
@@ -148,14 +119,13 @@ export function CompactProjectCard({
       data-product-slug={project.slug}
       data-card-kind="hardware"
       className={cn(
-        "compact-exhibit-card group flex h-full flex-col overflow-hidden rounded-[6px] border border-rcl-copper/20 bg-rcl-surface p-4 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/65 hover:bg-rcl-elevated hover:shadow-[0_16px_46px_rgba(0,0,0,0.32),0_0_30px_rgba(210,115,59,0.085)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-amber",
+        "compact-exhibit-card group flex h-full flex-col overflow-hidden rounded-[6px] border border-rcl-copper/20 bg-rcl-surface p-4 transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-rcl-elevated focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-amber",
         isIncludedGame ? "min-h-[350px]" : "min-h-[250px]",
         emphasis === "quiet" && "opacity-85 hover:opacity-100",
       )}
     >
       <ProductCardMotif visual={project.visual} />
-      <ProductCardIcon visual={project.visual} />
-      <div className="relative z-10 flex flex-1 flex-col pr-8">
+      <div className="relative z-10 flex flex-1 flex-col">
         <p className="text-xs font-black uppercase text-rcl-amber">
           {getProjectDateLabel(project)}
         </p>
