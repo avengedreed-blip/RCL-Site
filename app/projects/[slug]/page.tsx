@@ -207,7 +207,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="grid gap-8 md:grid-cols-2">
           {project.idealFor?.length ? (
             <Reveal>
-              <div className="surface-panel rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-rcl-copper/55 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]">
+              <div className="surface-panel rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
                 <h2 className="text-2xl font-black uppercase text-white">
                   Who it is for
                 </h2>
@@ -223,7 +223,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ) : null}
           {project.usersCan?.length ? (
             <Reveal delay={0.06}>
-              <div className="surface-panel rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-rcl-copper/55 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]">
+              <div className="surface-panel rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
                 <h2 className="text-2xl font-black uppercase text-white">
                   What users can do
                 </h2>

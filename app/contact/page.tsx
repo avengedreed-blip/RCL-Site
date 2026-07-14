@@ -39,7 +39,7 @@ export default function ContactPage() {
         <div className="grid gap-4 md:grid-cols-[minmax(0,0.78fr)]">
           {contacts.map((contact, index) => (
             <Reveal key={contact.label} delay={index * 0.06}>
-              <div className="surface-panel block min-h-[260px] min-w-0 rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/70 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-7">
+              <div className="surface-panel block min-h-[260px] min-w-0 rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-6 sm:p-7">
                 <Mail
                   className="mb-8 h-8 w-8 text-rcl-amber"
                   strokeWidth={1.5}

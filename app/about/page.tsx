@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Archive, LockKeyhole, ScanLine, UsersRound, WifiOff } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
 import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
@@ -22,22 +21,18 @@ const principles = [
   {
     title: "Offline First",
     body: "The best tools should keep working when the network does not.",
-    icon: WifiOff,
   },
   {
     title: "Privacy By Default",
     body: "Products should not require surrendering personal data to become useful.",
-    icon: LockKeyhole,
   },
   {
     title: "Ownership Matters",
     body: "People should own the things they buy and keep access to their work.",
-    icon: Archive,
   },
   {
     title: "Focused Design",
     body: "The interface should support the work, not compete with it.",
-    icon: ScanLine,
   },
 ];
 
@@ -81,18 +76,13 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
         <Reveal>
-          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] transition duration-300 ease-out hover:border-rcl-copper/50 hover:shadow-[0_16px_48px_rgba(0,0,0,0.24)] sm:p-8 md:grid md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] sm:p-8 md:grid md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
             <RclTechnicalMotif
               className="right-[-20%] top-[-38%] h-[380px] w-[380px] opacity-30"
               variant="compact"
             />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(132deg,transparent_0_76%,rgba(238,154,82,0.055)_77%,transparent_78.2%),linear-gradient(90deg,rgba(255,255,255,0.024),transparent_45%)]" />
             <div className="relative">
-              <UsersRound
-                className="mb-7 h-8 w-8 text-rcl-amber"
-                strokeWidth={1.5}
-                aria-hidden="true"
-              />
               <p className="text-sm font-black uppercase text-rcl-amber">
                 Founder story
               </p>
@@ -120,15 +110,9 @@ export default function AboutPage() {
         </Reveal>
         <div className="grid gap-4 md:grid-cols-4">
           {principles.map((principle, index) => {
-            const Icon = principle.icon;
             return (
               <Reveal key={principle.title} delay={index * 0.06}>
-                <div className="surface-panel min-h-[240px] rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/45 hover:bg-rcl-elevated hover:shadow-[0_12px_36px_rgba(0,0,0,0.22)]">
-                  <Icon
-                    className="mb-8 h-8 w-8 text-rcl-amber"
-                    strokeWidth={1.5}
-                    aria-hidden="true"
-                  />
+                <div className="surface-panel h-full min-h-[180px] rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
                   <h3 className="font-black uppercase text-white">
                     {principle.title}
                   </h3>

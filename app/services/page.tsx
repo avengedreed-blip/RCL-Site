@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import {
   BadgeCheck,
   CircleSlash,
-  Code2,
-  Laptop,
   Mail,
-  MonitorSmartphone,
-  ShieldCheck,
 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
@@ -132,7 +128,7 @@ export default function ServicesPage() {
 
       <section className="mx-auto max-w-[1240px] px-5 pb-8 md:px-8 md:pb-12 xl:px-0">
         <Reveal>
-          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-6 shadow-[0_0_66px_rgba(0,0,0,0.46)] transition duration-300 ease-out hover:shadow-[0_0_78px_rgba(0,0,0,0.5),0_0_26px_rgba(210,115,59,0.075)] sm:p-8 md:p-10">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-6 shadow-[0_0_66px_rgba(0,0,0,0.46)] sm:p-8 md:p-10">
             <RclTechnicalMotif
               className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-30 md:block"
               variant="panel"
@@ -162,12 +158,7 @@ export default function ServicesPage() {
       <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
         <div className="grid gap-4 lg:grid-cols-2">
           <Reveal>
-            <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/45 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-8">
-              <MonitorSmartphone
-                className="mb-8 h-8 w-8 text-rcl-amber"
-                strokeWidth={1.5}
-                aria-hidden="true"
-              />
+            <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 sm:p-8">
               <h2 className="text-3xl font-black uppercase text-white">
                 Websites for Small Businesses
               </h2>
@@ -180,11 +171,6 @@ export default function ServicesPage() {
                 <FeatureList items={websiteServices} />
               </div>
               <div className="mt-8 rounded-[4px] border border-rcl-copper/35 bg-rcl-copper/[0.08] p-5">
-                <ShieldCheck
-                  className="mb-4 h-6 w-6 text-rcl-amber"
-                  strokeWidth={1.5}
-                  aria-hidden="true"
-                />
                 <p className="text-sm font-black uppercase text-white">
                   You own your website, domain, and hosting.
                 </p>
@@ -196,12 +182,7 @@ export default function ServicesPage() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/45 hover:bg-rcl-elevated hover:shadow-[0_14px_44px_rgba(0,0,0,0.24)] sm:p-8">
-              <Code2
-                className="mb-8 h-8 w-8 text-rcl-amber"
-                strokeWidth={1.5}
-                aria-hidden="true"
-              />
+            <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 sm:p-8">
               <h2 className="text-3xl font-black uppercase text-white">
                 Custom Software
               </h2>
@@ -215,11 +196,6 @@ export default function ServicesPage() {
                 <FeatureList items={softwareServices} />
               </div>
               <div className="mt-8 rounded-[4px] border border-rcl-copper/18 bg-black/25 p-5">
-                <Laptop
-                  className="mb-4 h-6 w-6 text-rcl-amber"
-                  strokeWidth={1.5}
-                  aria-hidden="true"
-                />
                 <p className="text-sm font-black uppercase text-white">
                   Local-first when practical
                 </p>
@@ -299,7 +275,7 @@ export default function ServicesPage() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {processSteps.map((step, index) => (
             <Reveal key={step.title} delay={index * 0.05}>
-              <div className="surface-panel min-h-[230px] rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/55 hover:shadow-[0_12px_34px_rgba(0,0,0,0.22)]">
+              <div className="surface-panel min-h-[230px] rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
                 <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-[4px] border border-rcl-copper/18 bg-black/30 text-sm font-black text-rcl-amber">
                   {index + 1}
                 </div>
@@ -322,7 +298,7 @@ export default function ServicesPage() {
         <div className="grid gap-4 lg:grid-cols-2">
           {faqs.map((faq, index) => (
             <Reveal key={faq.question} delay={index * 0.04}>
-              <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 transition duration-300 ease-out hover:border-rcl-copper/55 hover:shadow-[0_12px_34px_rgba(0,0,0,0.2)]">
+              <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
                 <h3 className="text-base font-black uppercase text-white">
                   {faq.question}
                 </h3>
@@ -337,7 +313,7 @@ export default function ServicesPage() {
 
       <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-10 md:px-8 md:pb-24 xl:px-0">
         <Reveal>
-          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-rcl-elevated p-6 shadow-[0_0_66px_rgba(0,0,0,0.48)] transition duration-300 ease-out hover:shadow-[0_0_82px_rgba(0,0,0,0.52),0_0_28px_rgba(210,115,59,0.085)] sm:p-8 md:p-10">
+          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-rcl-elevated p-6 shadow-[0_0_66px_rgba(0,0,0,0.48)] sm:p-8 md:p-10">
             <RclTechnicalMotif
               className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-30 md:block"
               variant="panel"

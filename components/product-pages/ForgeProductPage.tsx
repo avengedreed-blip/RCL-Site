@@ -1,4 +1,4 @@
-import { CheckCircle2, CircleDashed, Code2, Eye, ShieldCheck } from "lucide-react";
+import { CheckCircle2, CircleDashed } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { Reveal } from "@/components/Reveal";
 import { StructuredData } from "@/components/StructuredData";
@@ -40,10 +40,7 @@ export function ForgeProductPage({ project }: { project: Project }) {
           <div className="surface-panel relative min-h-[360px] overflow-hidden rounded-[6px] border border-rcl-copper/28 bg-rcl-elevated p-7 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:min-h-[430px] sm:p-10">
             <div className="abstract-product-visual absolute inset-0 opacity-70" data-abstract-visual="forge" aria-hidden="true" />
             <div className="relative z-10 flex min-h-[300px] flex-col justify-between sm:min-h-[350px]">
-              <div className="flex items-center justify-between gap-4">
-                <span className="flex h-12 w-12 items-center justify-center rounded-[4px] border border-rcl-copper/40 bg-black/35 text-rcl-amber">
-                  <Code2 className="h-6 w-6" aria-hidden="true" />
-                </span>
+              <div className="flex justify-end">
                 <span className="rounded-[3px] border border-rcl-copper/28 bg-black/30 px-3 py-2 text-xs font-black uppercase text-rcl-amber">
                   Active Development
                 </span>
@@ -113,8 +110,7 @@ export function ForgeProductPage({ project }: { project: Project }) {
       <section className="mx-auto grid max-w-[1240px] gap-8 px-5 py-12 md:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 xl:px-0">
         <Reveal>
           <div className="border-t border-rcl-copper/26 pt-6">
-            <Eye className="h-6 w-6 text-rcl-amber" aria-hidden="true" />
-            <h2 className="mt-5 text-3xl font-black uppercase text-white">Repository and project work</h2>
+            <h2 className="text-3xl font-black uppercase text-white">Repository and project work</h2>
             <p className="mt-5 text-base leading-8 text-rcl-muted">
               Forge can discover a local project, inspect files, preserve per-project
               context, and present proposed changes through review and approval surfaces.
@@ -124,8 +120,7 @@ export function ForgeProductPage({ project }: { project: Project }) {
         </Reveal>
         <Reveal delay={0.06}>
           <div className="border-t border-rcl-copper/26 pt-6">
-            <ShieldCheck className="h-6 w-6 text-rcl-amber" aria-hidden="true" />
-            <h2 className="mt-5 text-3xl font-black uppercase text-white">Models, tools, and user control</h2>
+            <h2 className="text-3xl font-black uppercase text-white">Models, tools, and user control</h2>
             <p className="mt-5 text-base leading-8 text-rcl-muted">
               Forge coordinates supported reasoning engines and tools inside a consistent
               project workspace. Third-party models remain third-party services, and data

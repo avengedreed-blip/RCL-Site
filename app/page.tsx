@@ -1,12 +1,4 @@
 import type { Metadata } from "next";
-import {
-  Archive,
-  Code2,
-  Globe2,
-  Heart,
-  LockKeyhole,
-  WifiOff,
-} from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { FeaturedProjectCard } from "@/components/ProjectCard";
 import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
@@ -32,22 +24,18 @@ const philosophy = [
   {
     title: "Privacy By Default",
     body: "Your data stays on your device whenever possible.",
-    icon: LockKeyhole,
   },
   {
     title: "Offline First",
     body: "Core functionality should work without internet dependence.",
-    icon: WifiOff,
   },
   {
     title: "Ownership Matters",
     body: "Software should feel owned, not rented.",
-    icon: Archive,
   },
   {
     title: "Built With Care",
     body: "Thoughtful design. Human-focused experiences.",
-    icon: Heart,
   },
 ];
 
@@ -141,9 +129,6 @@ export default function Home() {
               <div className="hidden w-px bg-gradient-to-b from-transparent via-rcl-copper/55 to-transparent lg:block" />
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="surface-panel rounded-[4px] border border-rcl-copper/16 bg-black/24 p-5">
-                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-[3px] border border-rcl-copper/50 text-rcl-amber shadow-[0_0_18px_rgba(210,115,59,0.08)]">
-                    <Globe2 className="h-5 w-5" aria-hidden="true" />
-                  </div>
                   <h3 className="text-sm font-black uppercase text-white">
                     Websites
                   </h3>
@@ -152,9 +137,6 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="surface-panel rounded-[4px] border border-rcl-copper/16 bg-black/24 p-5">
-                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-[3px] border border-rcl-copper/50 text-rcl-amber shadow-[0_0_18px_rgba(210,115,59,0.08)]">
-                    <Code2 className="h-5 w-5" aria-hidden="true" />
-                  </div>
                   <h3 className="text-sm font-black uppercase text-white">
                     Custom Software
                   </h3>
@@ -170,7 +152,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-[1240px] px-5 py-11 md:px-8 md:py-14 xl:px-0">
         <Reveal>
-          <div className="surface-panel philosophy-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/25 bg-rcl-surface/95 p-7 shadow-[0_0_78px_rgba(0,0,0,0.5)] transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/70 hover:shadow-[0_22px_72px_rgba(0,0,0,0.46),0_0_44px_rgba(210,115,59,0.105)] md:p-9">
+          <div className="surface-panel philosophy-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/25 bg-rcl-surface/95 p-7 shadow-[0_0_78px_rgba(0,0,0,0.5)] md:p-9">
             <RclTechnicalMotif
               variant="panel"
               className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-35 lg:block"
@@ -192,19 +174,11 @@ export default function Home() {
               </div>
               <div className="grid min-w-0 gap-3 sm:grid-cols-2">
                 {philosophy.map((item) => {
-                  const Icon = item.icon;
                   return (
                     <div
                       key={item.title}
-                      className="surface-panel group rounded-[6px] border border-rcl-copper/18 bg-rcl-elevated/80 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition duration-300 hover:border-rcl-copper/65 hover:bg-rcl-elevated hover:shadow-[0_0_32px_rgba(210,115,59,0.1)]"
+                      className="surface-panel rounded-[6px] border border-rcl-copper/18 bg-rcl-elevated/80 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                     >
-                      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[4px] border border-rcl-copper/22 bg-black/35 text-white transition duration-300 group-hover:border-rcl-copper/70 group-hover:text-rcl-amber group-hover:shadow-[0_0_22px_rgba(210,115,59,0.14)]">
-                        <Icon
-                          className="h-5 w-5"
-                          strokeWidth={1.5}
-                          aria-hidden="true"
-                        />
-                      </div>
                       <h3 className="text-sm font-black uppercase text-white">
                         {item.title}
                       </h3>
@@ -222,14 +196,13 @@ export default function Home() {
 
       <section className="mx-auto max-w-[900px] px-5 pb-16 pt-6 md:px-0 md:pb-24">
         <Reveal>
-          <div className="surface-panel final-cta-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/25 bg-rcl-elevated px-6 py-10 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-rcl-copper/70 hover:shadow-[0_22px_72px_rgba(0,0,0,0.46),0_0_44px_rgba(210,115,59,0.105)] md:px-9 md:py-11">
+          <div className="surface-panel final-cta-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/25 bg-rcl-elevated px-6 py-10 md:px-9 md:py-11">
             <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-[linear-gradient(128deg,transparent_0_62%,rgba(238,154,82,0.085)_63%,transparent_64%),linear-gradient(90deg,transparent,rgba(255,255,255,0.026),transparent)] md:block" />
             <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <div className="mb-5 flex items-center gap-3 text-rcl-amber">
-                  <Heart className="h-5 w-5" aria-hidden="true" />
-                  <p className="text-sm font-black uppercase">Reed Creative Labs</p>
-                </div>
+                <p className="mb-5 text-sm font-black uppercase text-rcl-amber">
+                  Reed Creative Labs
+                </p>
                 <h2 className="brand-heading max-w-[620px] text-4xl leading-none md:text-5xl">
                   Contact the Studio
                 </h2>
