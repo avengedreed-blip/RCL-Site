@@ -27,3 +27,11 @@ platform allows it.
 Update `/privacy`, `/terms`, and `SECURITY.md` before adding forms, analytics,
 accounts, purchases, downloads, newsletters, cookies, tracking scripts, pixels,
 or third-party telemetry.
+
+The public trust routes are `/privacy`, `/terms`, `/accessibility`, and
+`/security`. Keep them in the sitemap and footer. Review
+`LAUNCH_READINESS.md` before adding product downloads, storefront links,
+checkout, accounts, telemetry, child-directed data flows, or paid client work.
+
+Renew `public/.well-known/security.txt` before its `Expires` date and verify the
+listed email remains monitored.

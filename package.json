@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "check:portfolio": "node --no-warnings --experimental-strip-types scripts/portfolio-check.mjs",
+    "check:trust": "node scripts/trust-check.mjs",
     "start": "next start",
     "lint": "eslint .",
-    "smoke": "node scripts/smoke-check.mjs && npm run check:portfolio",
+    "smoke": "node scripts/smoke-check.mjs && npm run check:portfolio && npm run check:trust",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -1,9 +1,5 @@
 import { Reveal } from "@/components/Reveal";
-
-type LegalSection = {
-  title: string;
-  body: string[];
-};
+import type { LegalSection } from "@/content/legal";
 
 type LegalPageProps = {
   sections: LegalSection[];

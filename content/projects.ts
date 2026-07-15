@@ -181,6 +181,10 @@ export const projects: Project[] = [
         title: "What users can do",
         body: "Users can adjust variables, compare outcomes, and observe scientific systems through real-time visual feedback.",
       },
+      {
+        title: "Educational scope",
+        body: "RCL Science Lab uses educational models that may simplify complex systems. Educators should assess each simulation for their learners and setting.",
+      },
     ],
   },
   {
@@ -453,7 +457,7 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "What it is",
-        body: "Talk To Me AAC is an augmentative and alternative communication application for accessibility and everyday communication support.",
+        body: "Talk To Me AAC is an augmentative and alternative communication application in active development for accessibility and everyday communication support. It is not medical treatment or an emergency service.",
       },
       {
         title: "Who it is for",
@@ -485,7 +489,7 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "What it is",
-        body: "Bloom is a planned recovery and sobriety support application being developed by Aaron and Katy.",
+        body: "Bloom is a planned personal recovery and sobriety support application being developed by Aaron and Katy. It is not treatment, crisis support, or a replacement for professional care.",
       },
       {
         title: "Who it is for",

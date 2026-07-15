@@ -1,66 +1,181 @@
 import { studioEmail } from "@/content/contact";
 
-export const legalLastUpdated = "July 5, 2026";
+export const policyDates = {
+  effective: "July 15, 2026",
+  lastUpdated: "July 15, 2026",
+} as const;
 
-export const privacySections = [
+export type LegalSection = {
+  title: string;
+  body: string[];
+};
+
+export const privacySections: LegalSection[] = [
   {
-    title: "Current website privacy posture",
+    title: "Scope",
     body: [
-      "Reed Creative Labs does not currently use third-party analytics, tracking scripts, tracking pixels, advertising cookies, or similar telemetry on this website.",
-      "The website does not currently require accounts and does not intentionally collect personal information through forms.",
-      "If analytics, forms, purchases, newsletters, downloads, accounts, or similar data-collecting features are added later, this page must be reviewed and updated first.",
+      "This policy describes the current data practices of the Reed Creative Labs website at reedcreativelabs.com. It does not automatically cover separately distributed products, client work, or third-party storefronts.",
     ],
   },
   {
-    title: "Email contact",
+    title: "Information processed when you visit",
     body: [
-      `Contact currently happens by email at ${studioEmail}. If you email Reed Creative Labs, your email address and message content are visible to Reed Creative Labs because email requires that.`,
-      "Email providers and mail apps may process messages according to their own terms and privacy practices.",
+      "The website does not require accounts and does not intentionally collect personal information through forms, newsletters, purchases, or user profiles.",
+      "The site is hosted by Vercel. Vercel may process ordinary technical information needed to deliver and protect the site, such as an IP address, browser and device information, requested URLs, timestamps, and security or error logs. Reed Creative Labs may review limited hosting logs when operating or troubleshooting the site.",
     ],
   },
   {
-    title: "Personal information",
+    title: "Cookies, storage, and analytics",
     body: [
-      "Reed Creative Labs does not sell personal information.",
-      "Product-specific privacy terms may be added later as apps, games, services, downloads, purchases, or account features launch.",
+      "Reed Creative Labs does not currently use third-party analytics, tracking pixels, behavioral advertising, or nonessential cookies on this website. The site does not intentionally write information to local storage or session storage.",
+      "The copy-email control uses the browser Clipboard API only after you select it and does not send clipboard contents to Reed Creative Labs.",
     ],
   },
   {
-    title: "Legal note",
+    title: "Email and service inquiries",
     body: [
-      "This page is written in plain English for transparency. It is not presented as lawyer-reviewed legal advice.",
+      `If you email ${studioEmail}, Reed Creative Labs receives the address you use, your message, and anything you choose to attach. Email providers also process messages under their own terms and privacy practices.`,
+      "Messages are used to respond to inquiries and maintain appropriate business or security records. They are kept only as long as reasonably needed for those purposes or legal obligations. Do not send passwords, payment-card details, health records, or other highly sensitive information by ordinary email.",
+    ],
+  },
+  {
+    title: "Sharing and selling",
+    body: [
+      "Reed Creative Labs does not sell personal information or use visitor information for behavioral advertising.",
+      "Information may be processed by providers needed to operate the website and email, or disclosed when reasonably necessary to comply with law or address fraud, security, rights, or safety concerns.",
+    ],
+  },
+  {
+    title: "Third-party destinations",
+    body: [
+      "Links to storefronts, model providers, app stores, social platforms, or other services are governed by the destination's own terms and privacy practices after you leave this site. The current website does not intentionally embed third-party video, advertising, or social-media widgets.",
+    ],
+  },
+  {
+    title: "Children and families",
+    body: [
+      "This marketing website is not designed to collect personal information from children. A parent, guardian, or caregiver should assist if a child needs to contact Reed Creative Labs. Contact the studio if you believe a child has sent personal information by email.",
+    ],
+  },
+  {
+    title: "Security",
+    body: [
+      "Reed Creative Labs uses a static-site architecture and reasonable measures intended to reduce the website's data and security exposure. No internet transmission, hosting provider, or email system can be guaranteed completely secure.",
+    ],
+  },
+  {
+    title: "Questions and updates",
+    body: [
+      `Questions or reasonable privacy requests can be sent to ${studioEmail}. Enough information may be needed to understand and verify a request before acting on it.`,
+      "This policy may change as the website and studio offerings evolve. The effective and last-updated dates identify the current version.",
     ],
   },
 ];
 
-export const termsSections = [
+export const termsSections: LegalSection[] = [
   {
-    title: "Informational site",
+    title: "Acceptance and scope",
     body: [
-      "The content on this website is provided for general informational purposes and may change over time.",
-      "Product availability, pricing, features, launch timing, and platform support may change.",
+      "By using this website, you agree to these Website Terms. If you do not agree, do not use the site.",
+      "These terms govern the public Reed Creative Labs website. Distributed products, purchases, client work, and third-party storefronts may have additional licenses, store terms, or written agreements.",
     ],
   },
   {
-    title: "Availability",
+    title: "Information and development status",
     body: [
-      "Reed Creative Labs does not guarantee that this website will be uninterrupted, error-free, or available at all times.",
-      "External links and third-party platforms may have their own terms, policies, and availability rules.",
+      "Website content is provided for general information. Product descriptions, screenshots, roadmaps, platforms, and development statuses describe current intentions and may change.",
+      "Coming Soon, Active Development, and Planned do not promise a release date, final feature set, price, platform, or continued development. A product is available only when Reed Creative Labs or an authorized storefront clearly says it is available.",
     ],
   },
   {
-    title: "Ownership",
+    title: "Intellectual property and use",
     body: [
-      "Site content, branding, copy, and original assets are owned by Reed Creative Labs unless otherwise stated.",
-      "You may not copy Reed Creative Labs branding or original assets, or misrepresent affiliation with Reed Creative Labs.",
+      "Copyright and other rights in original Reed Creative Labs site content are reserved. Third-party names, software, icons, and marks remain the property of their respective owners, and their appearance does not imply endorsement.",
+      "You may view and link to public pages for personal, editorial, or legitimate business purposes. You may not misrepresent affiliation, republish substantial site content as your own, interfere with the site, attempt unauthorized access, or distribute malicious material through it.",
+      "Access to this website does not grant a license to copy or commercially exploit separately distributed Reed Creative Labs products. Product-specific terms will apply when products are distributed.",
     ],
   },
   {
-    title: "Preliminary terms",
+    title: "Services and communications",
     body: [
-      "These terms are preliminary and may be updated as products, services, downloads, purchases, or account features launch.",
+      "Sending an inquiry does not create a client relationship, reserve availability, or require either party to proceed. Work begins only after both parties accept a written scope or equivalent agreement.",
+      "You are responsible for having permission to share materials submitted for a possible project. Do not send credentials, regulated data, or highly sensitive information until an appropriate method and written scope have been agreed upon.",
+    ],
+  },
+  {
+    title: "Educational and wellness information",
+    body: [
+      "RCL Science Lab is educational software and may simplify complex systems. It is not professional engineering, safety, medical, financial, or research advice.",
+      "Descriptions of planned AAC, recovery, accessibility, or wellness projects do not claim medical treatment, diagnosis, clinical validation, emergency service, or guaranteed outcomes.",
+    ],
+  },
+  {
+    title: "Third-party links, stores, and purchases",
+    body: [
+      "Third-party links are provided for convenience. Reed Creative Labs is not responsible for the destination's content, availability, security, or practices.",
+      "If a product is distributed through a third-party storefront, that store generally handles payment, delivery, taxes, accounts, and refunds under its own terms unless Reed Creative Labs states otherwise. This website does not currently offer direct checkout.",
+    ],
+  },
+  {
+    title: "Availability and liability",
+    body: [
+      "The website is provided as available without a guarantee that it will always be uninterrupted, complete, current, secure, or error-free.",
+      "To the extent permitted by law, Reed Creative Labs is not liable for indirect, incidental, special, consequential, or punitive losses arising from use of, inability to use, or reliance on this informational website. This does not exclude rights or liabilities that cannot legally be excluded.",
+    ],
+  },
+  {
+    title: "Changes and contact",
+    body: [
+      "These terms may change as the website and studio offerings evolve. The effective and last-updated dates identify the current version.",
       `Questions can be sent to ${studioEmail}.`,
-      "This page is written in plain English for transparency. It is not presented as lawyer-reviewed legal advice.",
+    ],
+  },
+];
+
+export const accessibilitySections: LegalSection[] = [
+  {
+    title: "Current approach",
+    body: [
+      "Reed Creative Labs aims to make this website usable with keyboard, touch, screen readers, zoom, and reduced-motion preferences. Accessibility is ongoing work, not a one-time certification.",
+      "The current site uses semantic landmarks and headings, a skip link, visible keyboard focus, text alternatives for meaningful images, responsive layouts, and reduced-motion behavior.",
+    ],
+  },
+  {
+    title: "Conformance and limitations",
+    body: [
+      "Reed Creative Labs does not claim formal accessibility certification or complete conformance with a particular standard at this time.",
+      "Some product screenshots contain small interface text that may not be readable at every size. Captions and surrounding descriptions provide the main context while the studio continues to review contrast, reflow, focus behavior, and assistive-technology support.",
+    ],
+  },
+  {
+    title: "Accessibility feedback",
+    body: [
+      `If a page, control, image, or document is difficult to use, email ${studioEmail}. Include the page address, what you were trying to do, and any browser or assistive-technology details you are comfortable sharing.`,
+      "Reed Creative Labs will review practical accessibility reports and work toward a reasonable improvement or alternative where possible. No fixed response or remediation time is promised.",
+    ],
+  },
+];
+
+export const securitySections: LegalSection[] = [
+  {
+    title: "Website security posture",
+    body: [
+      "This marketing site is a static Next.js export. It does not currently provide public accounts, form submission, payment processing, a database, or intentional analytics and advertising scripts.",
+      "The deployment uses HTTPS and browser security headers. These choices reduce the site's attack surface but do not make the website or its providers risk-free.",
+    ],
+  },
+  {
+    title: "Report a vulnerability",
+    body: [
+      `Send a good-faith security report to ${studioEmail} with the affected URL or product, reproduction steps, potential impact, and evidence that can be shared safely. Use the subject line Security Report when practical.`,
+      "Do not access, alter, retain, or disclose other people's data; disrupt availability; use social engineering; or perform destructive testing. Allow a reasonable opportunity to investigate before public disclosure.",
+    ],
+  },
+  {
+    title: "Scope and expectations",
+    body: [
+      "The public security contact covers this website and public Reed Creative Labs products. Reports about third-party platforms should normally use that provider's disclosure channel.",
+      "Submitting a report does not create a contract, guarantee a response time, or promise payment or a bug bounty.",
     ],
   },
 ];

@@ -1479,3 +1479,40 @@ a {
     transform: none !important;
   }
 }
+
+@media (prefers-contrast: more) {
+  :root {
+    --color-rcl-muted: #f0f1f2;
+    --color-rcl-dim: #c4c8cc;
+  }
+}
+
+@media (forced-colors: active) {
+  .surface-panel,
+  .detail-hero-panel,
+  .screenshot-frame,
+  .featured-exhibit-card,
+  .compact-exhibit-card,
+  .exhibit-button,
+  .site-contact-link {
+    border: 1px solid CanvasText;
+    box-shadow: none;
+  }
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .exhibit-button,
+  .site-contact-link {
+    text-decoration: none;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 4px !important;
+  }
+}

@@ -3,8 +3,10 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
 import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
 import { Reveal } from "@/components/Reveal";
+import { StructuredData } from "@/components/StructuredData";
 import { founderStory } from "@/content/founders";
 import { buildMetadata } from "@/lib/seo";
+import { founderPersonJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = buildMetadata({
   title: "The People Behind Reed Creative Labs",
@@ -20,6 +22,7 @@ export const metadata: Metadata = buildMetadata({
 export default function FounderPage() {
   return (
     <main id="main-content" tabIndex={-1}>
+      <StructuredData data={founderPersonJsonLd()} />
       <PageHeader
         eyebrow="Studio Story"
         title={founderStory.hero.title}

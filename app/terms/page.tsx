@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
-import { legalLastUpdated, termsSections } from "@/content/legal";
+import { policyDates, termsSections } from "@/content/legal";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -21,8 +21,8 @@ export default function TermsPage() {
           Website Terms
         </h1>
         <p className="mt-7 max-w-[820px] text-lg leading-8 text-rcl-muted">
-          Last updated: {legalLastUpdated}. These plain-English terms describe
-          the current informational website.
+          Effective: {policyDates.effective}. Last updated: {policyDates.lastUpdated}.
+          These plain-English terms govern the current informational website.
         </p>
       </section>
       <LegalPage sections={termsSections} />

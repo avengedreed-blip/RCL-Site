@@ -54,6 +54,21 @@ export function websiteJsonLd() {
   };
 }
 
+export function founderPersonJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Aaron Reed",
+    jobTitle: "Founder, Lead Developer & Creative Technologist",
+    worksFor: {
+      "@type": "Organization",
+      name: siteName,
+      url: siteUrl,
+    },
+    url: absoluteUrl("/about/founder"),
+  };
+}
+
 export function projectJsonLd(project: Project) {
   const base = {
     "@context": "https://schema.org",

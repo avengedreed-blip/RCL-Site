@@ -11,6 +11,8 @@ const footerLinks = [
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
+  { href: "/accessibility", label: "Accessibility" },
+  { href: "/security", label: "Security" },
 ];
 
 const socialLinks = [

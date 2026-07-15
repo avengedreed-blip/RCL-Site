@@ -66,7 +66,7 @@ const processSteps = [
   },
   {
     title: "Planning & Quote",
-    body: "The scope is reviewed and a custom quote is provided.",
+    body: "The scope is reviewed and a written estimate or quote is provided for approval.",
   },
   {
     title: "Development",
@@ -74,7 +74,7 @@ const processSteps = [
   },
   {
     title: "Delivery",
-    body: "Launch your website or receive your completed software solution.",
+    body: "Approved deliverables are prepared for launch or handoff according to the written scope.",
   },
 ];
 
@@ -92,7 +92,7 @@ const faqs = [
   {
     question: "Do I own the final product?",
     answer:
-      "Yes. Clients retain ownership of their website, domain, hosting, and delivered software unless otherwise agreed upon.",
+      "Ownership and license terms are stated in the written project agreement. The goal is clear client ownership of agreed deliverables, while pre-existing tools and third-party components remain subject to their applicable terms.",
   },
   {
     question: "Do you work remotely?",
@@ -102,6 +102,16 @@ const faqs = [
     question: "Do you build cloud platforms or enterprise systems?",
     answer:
       "Not currently. Reed Creative Labs focuses on websites, standalone applications, and practical software solutions.",
+  },
+  {
+    question: "Does an inquiry start a project?",
+    answer:
+      "No. An inquiry is exploratory. Work begins only after both parties accept a written scope covering deliverables, price, timing, and other project terms.",
+  },
+  {
+    question: "What costs are included?",
+    answer:
+      "The written quote identifies included work. Domains, hosting, software licenses, paid services, content, and other third-party costs are addressed separately when they apply.",
   },
 ];
 
