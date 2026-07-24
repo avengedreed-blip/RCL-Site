@@ -1,4 +1,12 @@
-export type ProjectStatus = "coming-soon" | "active-development" | "planned";
+export type ProjectStatus =
+  | "concept"
+  | "research"
+  | "prototype"
+  | "active-development"
+  | "private-beta"
+  | "public-release"
+  | "production"
+  | "archived";
 
 export type RoadmapGroup =
   | "coming-soon"
@@ -17,6 +25,8 @@ export type ProjectCategory =
 
 export type ProjectVisual =
   | "forge"
+  | "forgefield"
+  | "storm-lab"
   | "phase-arcade"
   | "phase-arcade-2"
   | "phase-shift"
@@ -30,6 +40,58 @@ export type ProjectVisual =
   | "talk-to-me"
   | "bloom"
   | "misread";
+
+export type ProjectMedia =
+  | {
+      kind: "approved-image";
+      src: string;
+      alt: string;
+      caption?: string;
+      fit?: "cover" | "contain";
+      position?: string;
+    }
+  | {
+      kind: "placeholder";
+      alt: string;
+      message: string;
+    };
+
+export type ProjectMilestone = {
+  title: string;
+  state: "complete" | "current" | "planned";
+};
+
+export type TechnicalProfileKey =
+  | "languages"
+  | "nativeCore"
+  | "engine"
+  | "frameworks"
+  | "renderer"
+  | "gpu"
+  | "database"
+  | "storage"
+  | "platforms"
+  | "interfaces"
+  | "packaging"
+  | "tooling";
+
+export type TechnicalProfile = {
+  summary: string;
+  verifiedOn: string;
+  compactFields: TechnicalProfileKey[];
+  languages?: string[];
+  nativeCore?: string[];
+  engine?: string[];
+  frameworks?: string[];
+  renderer?: string[];
+  gpu?: string[];
+  database?: string[];
+  storage?: string[];
+  platforms?: string[];
+  interfaces?: string[];
+  packaging?: string[];
+  tooling?: string[];
+};
 
 export type Project = {
   name: string;
@@ -48,8 +110,15 @@ export type Project = {
   route: string;
   visual: ProjectVisual;
   featured?: boolean;
+  featuredOrder?: number;
+  presentationTier?: "flagship" | "featured" | "catalog";
+  showcaseMedia?: ProjectMedia;
   includedGames?: string[];
   parentProject?: string;
+  currentFocus?: string[];
+  milestones?: ProjectMilestone[];
+  features?: string[];
+  technicalProfile?: TechnicalProfile;
   pageSections: {
     title: string;
     body: string;
@@ -71,9 +140,9 @@ export const projects: Project[] = [
     tagline:
       "A local-first engineering environment for sustained work on real repositories and codebases.",
     shortDescription:
-      "Forge helps developers inspect, plan, build, audit, repair, and improve real codebases while coordinating models, tools, tasks, and engineering context.",
+      "Forge is a local-first engineering workspace for developers working on real repositories and long-running codebases. It coordinates supported AI models, tools, tasks, plans, and review evidence inside one sustained project workflow. Consequential work remains organized, inspectable, and subject to user approval instead of being reduced to disconnected prompts.",
     longDescription:
-      "Forge is a local-first software engineering environment for sustained project work. It combines repository inspection, planning, implementation, review, and repair in one continuous workflow while keeping consequential changes visible for user approval.",
+      "Forge is a local-first software engineering environment for developers and maintainers doing sustained work on real repositories. It connects repository inspection, planning, implementation, review, and repair so that project context survives across tasks. The engineering goal is to coordinate supported models and tools without obscuring evidence, affected files, or approval boundaries. Its long-term direction is a dependable desktop workspace where complex codebase work remains continuous and reviewable.",
     platforms: ["Windows"],
     idealFor: [
       "Developers working across real repositories",
@@ -90,6 +159,45 @@ export const projects: Project[] = [
     route: "/projects/forge",
     visual: "forge",
     featured: true,
+    featuredOrder: 1,
+    presentationTier: "flagship",
+    showcaseMedia: {
+      kind: "placeholder",
+      alt: "Forge product media is being prepared for public release.",
+      message: "Images coming soon.",
+    },
+    currentFocus: [
+      "Repository inspection and sustained project context",
+      "Planning, implementation, review, and repair workflows",
+      "Clear approval boundaries for consequential changes",
+    ],
+    features: [
+      "Repository-aware project work",
+      "Model, tool, and task coordination",
+      "Selectable engineering-colleague communication profiles",
+      "Reviewable plans and proposed changes",
+    ],
+    technicalProfile: {
+      summary:
+        "A Rust backend and Tauri 2 desktop shell host a Svelte 5 and SvelteKit interface. SQLite provides local persistence, while the installed Codex app-server is the currently verified engineering engine.",
+      verifiedOn: "2026-07-23",
+      compactFields: ["languages", "frameworks", "database"],
+      languages: ["Rust", "TypeScript"],
+      frameworks: ["Tauri 2", "Svelte 5", "SvelteKit"],
+      database: ["SQLite"],
+      platforms: ["Windows"],
+      interfaces: [
+        "Codex app-server",
+        "Git",
+        "Local process execution",
+      ],
+      packaging: ["Tauri desktop bundle"],
+    },
+    milestones: [
+      { title: "Core engineering workflow", state: "current" },
+      { title: "Integration and reliability validation", state: "current" },
+      { title: "Public release", state: "planned" },
+    ],
     pageSections: [
       {
         title: "How Forge works",
@@ -107,21 +215,104 @@ export const projects: Project[] = [
         title: "Development state",
         body: "Forge is in active development. Product behavior, supported integrations, and release plans may change as the engineering workflow is tested and refined.",
       },
+      {
+        title: "Long-term direction",
+        body: "Forge is intended to support continued engineering work across the life of a repository, preserving the decisions, evidence, and project context needed to understand what changed and why.",
+      },
+    ],
+  },
+  {
+    name: "Forgefield",
+    slug: "forgefield",
+    status: "active-development",
+    roadmapGroup: "active-development",
+    category: "software",
+    categoryLabel: "Procedural Live Wallpapers & Screensavers",
+    headline: "Living worlds for the Windows desktop.",
+    tagline:
+      "A native Windows procedural-rendering project for premium live wallpapers and screensavers.",
+    shortDescription:
+      "Forgefield is a native Windows procedural-rendering project in active development. Its current implementation contains nine living worlds rendered as active systems for live wallpaper and screensaver playback rather than replayed as fixed video loops. Installer, licensing, packaging, and public distribution remain separate release gates.",
+    longDescription:
+      "Forgefield is a renderer-led native Windows application for people who want procedural motion on the desktop rather than looping video. The current implementation generates nine living worlds through the product's rendering systems for live wallpaper and screensaver playback. Engineering work focuses on visual continuity, reliable long-running playback, and responsible use of desktop resources. Forgefield remains in active development: installer readiness, licensing, packaging, distribution, and final release validation have not yet passed.",
+    platforms: ["Windows"],
+    idealFor: [
+      "Windows users who want procedural desktop environments",
+      "People who prefer renderer-driven visuals over looping video",
+    ],
+    route: "/projects/forgefield",
+    visual: "forgefield",
+    featured: true,
+    featuredOrder: 2,
+    presentationTier: "featured",
+    showcaseMedia: {
+      kind: "placeholder",
+      alt: "Forgefield imagery is intentionally withheld until an approved current-build capture is available.",
+      message: "Images coming soon.",
+    },
+    currentFocus: [
+      "Representative hardware validation",
+      "Installer, packaging, and signing readiness",
+      "Live wallpaper and screensaver reliability",
+    ],
+    features: [
+      "Nine procedural living worlds",
+      "Live wallpaper playback",
+      "Screensaver playback",
+    ],
+    technicalProfile: {
+      summary:
+        "Modern Fortran owns the product model and procedural scene lifecycle, with narrow C and Win32 boundaries feeding an OpenGL 4.6 renderer. A self-contained WPF launcher manages live-wallpaper and screensaver operation.",
+      verifiedOn: "2026-07-23",
+      compactFields: ["languages", "renderer", "gpu"],
+      languages: ["Fortran 2018", "C11", "C#"],
+      nativeCore: [
+        "Fortran simulation and product model",
+        "Win32 / WGL C boundaries",
+      ],
+      frameworks: [".NET 10 / WPF"],
+      renderer: ["OpenGL 4.6 Core", "GLSL"],
+      gpu: ["OpenGL compute shaders"],
+      platforms: ["Windows 10/11 x64"],
+      interfaces: [
+        "Win32 live-wallpaper host",
+        "Windows screensaver (.scr)",
+      ],
+      packaging: ["Self-contained WPF launcher"],
+    },
+    milestones: [
+      { title: "Procedural world architecture", state: "complete" },
+      { title: "Reliability and hardware validation", state: "current" },
+      { title: "Installer, licensing, and distribution gates", state: "planned" },
+    ],
+    pageSections: [
+      {
+        title: "What it is",
+        body: "Forgefield is a Windows desktop application for procedural live wallpapers and screensavers. Its visual worlds are rendered rather than presented as pre-recorded video loops.",
+      },
+      {
+        title: "Development state",
+        body: "Forgefield is in active development and is not presented as released or commercially available. Current work is focused on representative hardware evidence, installer readiness, packaging, signing, licensing, and long-running reliability.",
+      },
+      {
+        title: "Engineering goal",
+        body: "The product is being built to sustain renderer-driven environments during normal desktop use, with reliability and resource behavior treated as part of the experience rather than afterthoughts.",
+      },
     ],
   },
   {
     name: "Phase Arcade Volume I",
     slug: "phase-arcade-volume-1",
-    status: "coming-soon",
+    status: "active-development",
     roadmapGroup: "coming-soon",
     category: "game-collection",
     categoryLabel: "Desktop & VR Arcade Game Collection",
     headline: "Three focused arcade games for desktop and VR.",
     tagline: "Phase Shift, Phase Breaker, and Phase Court in one arcade collection.",
     shortDescription:
-      "Phase Arcade Volume I is a collection of three focused arcade games built around short sessions, clean mechanics, and replayable score-chasing loops for desktop and VR.",
+      "Phase Arcade Volume I is a collection of three compact arcade games for traditional desktop play and VR. Phase Shift, Phase Breaker, and Phase Court each explore a different relationship between motion, timing, positioning, and physical interaction. The collection is for players who value readable mechanics, short sessions, and repeatable score-driven practice.",
     longDescription:
-      "Phase Arcade Volume I includes Phase Shift, Phase Breaker, and Phase Court. Each game is a distinct arcade experience under the broader Phase Arcade identity, with both traditional desktop play and VR support.",
+      "Phase Arcade Volume I brings Phase Shift, Phase Breaker, and Phase Court into one desktop and VR collection. It is built for players who want focused mechanics and short sessions that reward timing, positioning, and repeated practice. The engineering goal is to keep input response, visual readability, and the core rules consistent across traditional desktop play and VR without erasing each game's identity. The collection's long-term direction is a stable arcade foundation that can support distinct games under one shared release.",
     platforms: ["PC", "VR"],
     usersCan: [
       "Play three distinct arcade games in one collection.",
@@ -131,7 +322,52 @@ export const projects: Project[] = [
     route: "/projects/phase-arcade-volume-1",
     visual: "phase-arcade",
     featured: true,
+    featuredOrder: 5,
+    presentationTier: "featured",
+    showcaseMedia: {
+      kind: "approved-image",
+      src: "/images/projects/phase-shift-gameplay-01.webp",
+      alt: "Phase Shift gameplay from Phase Arcade Volume I, showing a cyan and magenta tunnel.",
+      caption: "Phase Shift gameplay captured from the current desktop build.",
+      fit: "cover",
+      position: "center",
+    },
     includedGames: ["phase-shift", "phase-breaker", "phase-court"],
+    currentFocus: [
+      "Desktop and VR play across all three included games",
+      "Readability, input response, and short-session pacing",
+      "Collection-level release validation",
+    ],
+    features: [
+      "Exactly three included games: Phase Shift, Phase Breaker, and Phase Court",
+      "Traditional desktop play",
+      "VR support",
+      "Short-session arcade structure and replayable score chasing",
+    ],
+    technicalProfile: {
+      summary:
+        "Godot 4.7 runs the three-game collection in GDScript, using Forward+ for rendering and OpenXR for the PCVR path. Desktop and VR share the collection shell and local save and settings system.",
+      verifiedOn: "2026-07-23",
+      compactFields: [
+        "languages",
+        "engine",
+        "renderer",
+        "interfaces",
+        "platforms",
+      ],
+      languages: ["GDScript"],
+      engine: ["Godot 4.7"],
+      renderer: ["Godot Forward+"],
+      storage: ["Godot user:// local saves"],
+      platforms: ["Windows PC", "PCVR"],
+      interfaces: ["OpenXR"],
+      packaging: ["Godot Windows desktop export"],
+    },
+    milestones: [
+      { title: "Three-game collection structure", state: "complete" },
+      { title: "Desktop and VR validation", state: "current" },
+      { title: "Public release", state: "planned" },
+    ],
     pageSections: [
       {
         title: "Included games",
@@ -141,22 +377,26 @@ export const projects: Project[] = [
         title: "Desktop and VR",
         body: "The collection supports traditional desktop play and VR. Specific headset support and release details have not been announced.",
       },
+      {
+        title: "Collection direction",
+        body: "The three games are being refined as one release, with shared attention to input response, readable feedback, short-session pacing, and consistent behavior across desktop and VR.",
+      },
     ],
   },
   {
     name: "RCL Science Lab",
     slug: "rcl-science-lab",
-    status: "coming-soon",
+    status: "active-development",
     roadmapGroup: "coming-soon",
     category: "simulation",
     categoryLabel: "Educational Software & Scientific Simulation Platform",
     headline: "Science you can manipulate.",
     tagline: "Explore scientific ideas through real-time simulation and visualization.",
     shortDescription:
-      "RCL Science Lab is an educational simulation platform for exploring scientific concepts through real-time visualization, experimentation, and variable control.",
+      "RCL Science Lab is an educational application built around interactive simulations, visualizations, and guided scientific exploration. Students, educators, homeschool families, and independent learners can change variables and observe how a modeled system responds. It exists to make complex scientific behavior easier to investigate through direct experimentation instead of passive explanation alone.",
     longDescription:
-      "RCL Science Lab helps users explore science through interactive simulations covering physics, astronomy, cosmology, mathematics, chemistry, and other scientific concepts. Users can manipulate variables, observe outcomes, and build intuition for how complex systems behave.",
-    platforms: ["Windows", "macOS", "Linux"],
+      "RCL Science Lab helps students, educators, homeschool families, and self-learners explore science through interactive simulation. Its catalog spans physics, astronomy, cosmology, mathematics, chemistry, and related concepts, with variable controls and guided learning organized around direct observation. The engineering goal is to make each modeled system legible without hiding where an educational simplification is being used. Over time, the lab is intended to become a coherent local environment for experimentation, learning paths, and retained study progress.",
+    platforms: ["Desktop"],
     idealFor: [
       "Students",
       "Educators",
@@ -172,6 +412,44 @@ export const projects: Project[] = [
     route: "/projects/rcl-science-lab",
     visual: "science-lab",
     featured: true,
+    featuredOrder: 3,
+    presentationTier: "featured",
+    showcaseMedia: {
+      kind: "approved-image",
+      src: "/images/projects/rcl-science-lab-observatory.jpg",
+      alt: "RCL Science Lab observatory launch screen with simulation and learning-path navigation.",
+      caption: "The current RCL Science Lab observatory organizes simulations and local study progress.",
+      fit: "contain",
+      position: "center",
+    },
+    currentFocus: [
+      "Scientific simulation breadth and accuracy review",
+      "Guided learning and observation workflows",
+      "Local progress and experiment organization",
+    ],
+    features: [
+      "Interactive scientific simulations",
+      "Real-time variable control",
+      "Guided learning paths",
+      "Local study progress",
+    ],
+    technicalProfile: {
+      summary:
+        "A Svelte 5 and SvelteKit interface runs inside a Tauri 2 desktop shell. Current experiments render through Canvas 2D and retain study state in browser local storage; the staged WebGL2 adapter is not presented as the active renderer.",
+      verifiedOn: "2026-07-23",
+      compactFields: ["languages", "frameworks", "renderer"],
+      languages: ["TypeScript", "Rust"],
+      frameworks: ["Svelte 5", "SvelteKit", "Tauri 2"],
+      renderer: ["Canvas 2D"],
+      storage: ["Browser local storage"],
+      platforms: ["Desktop"],
+      packaging: ["Tauri desktop bundle"],
+    },
+    milestones: [
+      { title: "Core observatory and catalog", state: "complete" },
+      { title: "Simulation and lesson validation", state: "current" },
+      { title: "Public release", state: "planned" },
+    ],
     pageSections: [
       {
         title: "What it is",
@@ -185,12 +463,87 @@ export const projects: Project[] = [
         title: "Educational scope",
         body: "RCL Science Lab uses educational models that may simplify complex systems. Educators should assess each simulation for their learners and setting.",
       },
+      {
+        title: "Long-term direction",
+        body: "The project is being organized as a connected local science environment where simulations, guided investigations, learning paths, and progress records support continued study rather than isolated demonstrations.",
+      },
+    ],
+  },
+  {
+    name: "Storm Lab",
+    slug: "storm-lab",
+    status: "prototype",
+    roadmapGroup: "active-development",
+    category: "simulation",
+    categoryLabel: "Meteorological Simulation Research Prototype",
+    headline: "Atmospheric modeling from field behavior to future decisions.",
+    tagline:
+      "A working meteorological simulation prototype with a native atmospheric model and map-based visualization.",
+    shortDescription:
+      "Storm Lab is an in-development meteorological simulation prototype. Its current Windows foundation connects a native atmospheric model to a Godot presentation layer for map-based inspection of modeled weather fields. Radar visualization, severe-weather behavior, forecasting, warnings, and operational decision systems remain planned direction rather than completed public features.",
+    longDescription:
+      "Storm Lab has a functioning Windows prototype that connects a modern Fortran atmospheric model to a Godot presentation layer. The implemented foundation models moisture, warm-rain microphysics, precipitation, cloud behavior, ordinary convection, and deterministic state, with map-based field, cloud, precipitation, and satellite-style visualization. Radar visualization, forecasting systems, organized severe-weather behavior, warnings, interventions, and operational decision-making remain planned technical direction. The project is research software in active prototype development, not a playable, downloadable, or release-ready product.",
+    platforms: ["Windows"],
+    idealFor: [
+      "People interested in weather systems and operational decision-making",
+      "Learners interested in meteorology and simulation",
+    ],
+    route: "/projects/storm-lab",
+    visual: "storm-lab",
+    featured: true,
+    featuredOrder: 4,
+    presentationTier: "featured",
+    showcaseMedia: {
+      kind: "placeholder",
+      alt: "Storm Lab does not yet have approved product imagery.",
+      message: "Images coming soon.",
+    },
+    currentFocus: [
+      "Validation of the warm-rain and ordinary-convection model",
+      "Map-based weather-field readability",
+      "Research toward severe-weather, radar, forecast, and decision systems",
+    ],
+    milestones: [
+      { title: "Fortran and Godot prototype foundation", state: "complete" },
+      { title: "Atmospheric-model validation", state: "current" },
+      { title: "Radar, warning, and decision systems", state: "planned" },
+    ],
+    features: [
+      "Native atmospheric simulation prototype",
+      "Map-based weather-field visualization",
+      "Field-derived cloud, precipitation, and satellite-style products",
+    ],
+    technicalProfile: {
+      summary:
+        "The current Windows prototype uses a Fortran atmosphere model exposed through a versioned C ABI and C++ GDExtension to Godot 4.7.1. Godot owns presentation and input. Radar, severe-weather, warning, intervention, and broader operational systems are not presented as implemented.",
+      verifiedOn: "2026-07-23",
+      compactFields: ["languages", "engine", "interfaces"],
+      languages: ["Fortran", "C++", "GDScript"],
+      nativeCore: ["Fortran atmospheric simulation"],
+      engine: ["Godot 4.7.1"],
+      renderer: ["Godot OpenGL Compatibility"],
+      platforms: ["Windows"],
+      interfaces: ["Versioned C ABI", "C++ GDExtension"],
+    },
+    pageSections: [
+      {
+        title: "Current state",
+        body: "Storm Lab has a functioning simulation prototype: a native atmospheric model, a Godot presentation layer, map-based field inspection, and deterministic state. It is not presented as playable, downloadable, feature-complete, or release-ready.",
+      },
+      {
+        title: "Planned direction",
+        body: "Radar visualization, forecasting systems, organized severe-weather behavior, warnings, interventions, and operational decision-making remain planned technical direction. They are not claims about the current prototype.",
+      },
+      {
+        title: "Engineering goal",
+        body: "Prototype work is testing whether researched atmospheric behavior and readable visual evidence can support an understandable meteorological simulation before the broader operational scope advances.",
+      },
     ],
   },
   {
     name: "Neon Drift",
     slug: "neon-drift",
-    status: "coming-soon",
+    status: "active-development",
     roadmapGroup: "coming-soon",
     category: "game",
     categoryLabel: "Mobile Arcade Game",
@@ -222,7 +575,7 @@ export const projects: Project[] = [
   {
     name: "Falling From The Sky",
     slug: "falling-from-the-sky",
-    status: "coming-soon",
+    status: "active-development",
     roadmapGroup: "coming-soon",
     category: "game",
     categoryLabel: "Mobile Action Platformer",
@@ -254,7 +607,7 @@ export const projects: Project[] = [
   {
     name: "Phase Shift",
     slug: "phase-shift",
-    status: "coming-soon",
+    status: "active-development",
     roadmapGroup: "included-game",
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
@@ -268,6 +621,14 @@ export const projects: Project[] = [
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-shift",
     visual: "phase-shift",
+    showcaseMedia: {
+      kind: "approved-image",
+      src: "/images/projects/phase-shift-gameplay-01.webp",
+      alt: "Phase Shift gameplay with a photon moving through a cyan and magenta tunnel.",
+      caption: "Real desktop gameplay captured from the current Phase Shift build.",
+      fit: "contain",
+      position: "center",
+    },
     pageSections: [
       {
         title: "Collection context",
@@ -282,7 +643,7 @@ export const projects: Project[] = [
   {
     name: "Phase Breaker",
     slug: "phase-breaker",
-    status: "coming-soon",
+    status: "active-development",
     roadmapGroup: "included-game",
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
@@ -296,6 +657,14 @@ export const projects: Project[] = [
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-breaker",
     visual: "phase-breaker",
+    showcaseMedia: {
+      kind: "approved-image",
+      src: "/images/projects/phase-breaker-gameplay-01.webp",
+      alt: "Phase Breaker gameplay inside a cyan and magenta containment chamber.",
+      caption: "Real desktop gameplay captured from the current Phase Breaker build.",
+      fit: "contain",
+      position: "center",
+    },
     pageSections: [
       {
         title: "Collection context",
@@ -310,7 +679,7 @@ export const projects: Project[] = [
   {
     name: "Phase Court",
     slug: "phase-court",
-    status: "coming-soon",
+    status: "active-development",
     roadmapGroup: "included-game",
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
@@ -324,6 +693,15 @@ export const projects: Project[] = [
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-court",
     visual: "phase-court",
+    showcaseMedia: {
+      kind: "approved-image",
+      src: "/images/projects/phase-court-gameplay-02.webp",
+      alt: "Phase Court desktop gameplay showing a cyan player paddle returning the glowing ball across the magenta court.",
+      caption:
+        "Native desktop gameplay captured from the current Phase Court build.",
+      fit: "contain",
+      position: "center",
+    },
     pageSections: [
       {
         title: "Collection context",
@@ -468,7 +846,7 @@ export const projects: Project[] = [
   {
     name: "Bloom",
     slug: "bloom",
-    status: "planned",
+    status: "concept",
     roadmapGroup: "planned",
     category: "app",
     categoryLabel: "Recovery & Sobriety Support App",
@@ -500,7 +878,7 @@ export const projects: Project[] = [
   {
     name: "Misread",
     slug: "misread",
-    status: "planned",
+    status: "concept",
     roadmapGroup: "planned",
     category: "game",
     categoryLabel: "Narrative Psychological Experience",
@@ -533,8 +911,10 @@ export const projects: Project[] = [
 
 export const featuredProjectSlugs = [
   "forge",
-  "phase-arcade-volume-1",
+  "forgefield",
   "rcl-science-lab",
+  "storm-lab",
+  "phase-arcade-volume-1",
 ] as const;
 
 export const featuredProjects = featuredProjectSlugs
@@ -572,15 +952,18 @@ export function getProject(slug: string) {
 }
 
 export function getStatusLabel(status: ProjectStatus) {
-  if (status === "coming-soon") {
-    return "Coming Soon";
-  }
+  const labels: Record<ProjectStatus, string> = {
+    concept: "Concept",
+    research: "Research",
+    prototype: "Prototype",
+    "active-development": "Active Development",
+    "private-beta": "Private Beta",
+    "public-release": "Public Release",
+    production: "Production",
+    archived: "Archived",
+  };
 
-  if (status === "active-development") {
-    return "Active Development";
-  }
-
-  return "Planned";
+  return labels[status];
 }
 
 export function getProjectDateLabel(project: Project) {

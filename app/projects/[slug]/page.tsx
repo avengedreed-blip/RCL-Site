@@ -1,24 +1,19 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
 import { ForgeProductPage } from "@/components/product-pages/ForgeProductPage";
+import { FlagshipProductPage } from "@/components/product-pages/FlagshipProductPage";
 import { PhaseArcadeProductPage } from "@/components/product-pages/PhaseArcadeProductPage";
-import {
-  getProjectScreenshots,
-  getProjectSocialImage,
-  getProjectVisualImage,
-  ProjectMediaImage,
-} from "@/components/ProjectMedia";
+import { ProductMediaSurface } from "@/components/ProductMediaSurface";
 import { StructuredData } from "@/components/StructuredData";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeader } from "@/components/SectionHeader";
 import {
   getProject,
   getProjectDateLabel,
   getStatusLabel,
   projects,
 } from "@/content/projects";
+import { getProjectSocialImage } from "@/lib/project-media";
 import { buildMetadata } from "@/lib/seo";
 import { projectJsonLd } from "@/lib/structured-data";
 
@@ -75,14 +70,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     return <PhaseArcadeProductPage project={project} />;
   }
 
-  const parentProject = project.parentProject ? getProject(project.parentProject) : undefined;
-  const visualImage = getProjectVisualImage(project.visual);
-  const screenshots = getProjectScreenshots(project.visual);
+  if (
+    project.slug === "forgefield" ||
+    project.slug === "rcl-science-lab" ||
+    project.slug === "storm-lab"
+  ) {
+    return <FlagshipProductPage project={project} />;
+  }
 
+  const parentProject = project.parentProject ? getProject(project.parentProject) : undefined;
   return (
     <main id="main-content" tabIndex={-1}>
       <StructuredData data={projectJsonLd(project)} />
-      <section className="mx-auto grid max-w-[1240px] gap-10 px-5 pb-14 pt-12 md:grid-cols-[minmax(0,1fr)_minmax(460px,1fr)] md:px-8 md:pb-18 md:pt-16 xl:gap-14 xl:px-0">
+      <section className="mx-auto grid max-w-[1240px] gap-10 px-5 pb-14 pt-12 md:px-8 md:pb-18 md:pt-16 lg:grid-cols-[minmax(0,1fr)_minmax(460px,1fr)] xl:gap-14 xl:px-0">
         <Reveal className="min-w-0 self-center">
           <p className="mb-5 text-sm font-black uppercase text-rcl-amber">
             {getProjectDateLabel(project)}
@@ -111,65 +111,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </Reveal>
         <Reveal delay={0.08}>
-          <div className="detail-hero-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/24 bg-rcl-elevated shadow-[0_0_68px_rgba(0,0,0,0.44),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-rcl-copper/58 hover:shadow-[0_0_82px_rgba(0,0,0,0.5),0_0_24px_rgba(210,115,59,0.08),inset_0_1px_0_rgba(255,255,255,0.06)]">
-            {visualImage ? (
-              <div className="project-media-frame relative min-h-[260px] bg-black sm:min-h-[340px] md:min-h-[390px] xl:min-h-[430px]">
-                {visualImage.detailFit === "contain" || visualImage.fit === "contain" ? (
-                  <ProjectMediaImage
-                    visual={project.visual}
-                    priority={false}
-                    variant="detail"
-                    fitOverride="cover"
-                    decorative
-                    className="scale-110 opacity-28 blur-xl saturate-125"
-                  />
-                ) : null}
-                <ProjectMediaImage visual={project.visual} priority variant="detail" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-white/[0.03]" />
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/5 bg-gradient-to-r from-black/14 to-transparent" />
-              </div>
-            ) : (
-              <div className="min-h-[260px] bg-rcl-elevated sm:min-h-[340px] md:min-h-[390px] xl:min-h-[430px]" />
-            )}
-          </div>
+          <ProductMediaSurface
+            project={project}
+            variant="detail"
+            priority
+            className="min-h-[260px] sm:min-h-[340px] md:min-h-[390px] xl:min-h-[430px]"
+          />
         </Reveal>
       </section>
-
-      {screenshots.length > 1 ? (
-        <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
-          <Reveal>
-            <SectionHeader
-              title={project.slug === "rcl-science-lab" ? "Inside RCL Science Lab" : "Product Screenshots"}
-            />
-          </Reveal>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {screenshots.map((screenshot, index) => (
-              <Reveal
-                key={screenshot.src}
-                className={screenshots.length === 3 && index === 2 ? "md:col-span-2 xl:col-span-1" : undefined}
-              >
-                <figure>
-                  <div className="screenshot-frame relative aspect-video overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-black shadow-[0_0_54px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 ease-out hover:border-rcl-copper/58 hover:shadow-[0_0_64px_rgba(0,0,0,0.44),0_0_18px_rgba(210,115,59,0.08),inset_0_1px_0_rgba(255,255,255,0.06)]">
-                    <Image
-                      src={screenshot.src}
-                      alt={screenshot.alt}
-                      fill
-                      sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                      className="object-contain"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-white/[0.03]" />
-                  </div>
-                  {screenshot.caption ? (
-                    <figcaption className="mt-3 text-xs leading-5 text-rcl-dim">
-                      {screenshot.caption}
-                    </figcaption>
-                  ) : null}
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-      ) : null}
 
       <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
         <Reveal>

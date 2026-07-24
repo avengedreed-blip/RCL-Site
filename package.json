@@ -4,17 +4,22 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run check:hero && npm run check:color && next build",
+    "build:fortran": "node scripts/build-fortran-hero.mjs",
+    "check:fortran": "node scripts/check-fortran-hero.mjs",
+    "check:hero": "npm run check:fortran && node scripts/check-fortran-hero-integration.mjs",
+    "check:color": "node scripts/check-v2-color-system.mjs",
     "check:portfolio": "node --no-warnings --experimental-strip-types scripts/portfolio-check.mjs",
+    "check:commercial": "node scripts/commercial-check.mjs",
     "check:trust": "node scripts/trust-check.mjs",
     "start": "next start",
     "lint": "eslint .",
-    "smoke": "node scripts/smoke-check.mjs && npm run check:portfolio && npm run check:trust",
+    "smoke": "node scripts/smoke-check.mjs && npm run check:portfolio && npm run check:commercial && npm run check:trust && npm run check:hero && npm run check:color",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "lucide-react": "1.17.0",
-    "next": "16.2.6",
+    "next": "16.2.11",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
@@ -24,11 +29,12 @@
     "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.2.11",
     "tailwindcss": "4.3.0",
     "typescript": "6.0.3"
   },
   "overrides": {
-    "postcss": "8.5.15"
+    "postcss": "8.5.15",
+    "sharp": "0.35.0"
   }
 }

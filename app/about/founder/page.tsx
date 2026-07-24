@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
-import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
 import { Reveal } from "@/components/Reveal";
 import { StructuredData } from "@/components/StructuredData";
 import { founderStory } from "@/content/founders";
@@ -14,14 +13,16 @@ export const metadata: Metadata = buildMetadata({
     "Meet Aaron and Katy Reed, the husband-and-wife team building Reed Creative Labs: an independent studio focused on privacy-conscious software, creative tools, and small, memorable games.",
   path: "/about/founder",
   image: {
-    url: "/images/home/rcl-technical-orb.jpg",
-    alt: "Red technical circular graphic representing the Reed Creative Labs studio story.",
+    url: "/social-preview.jpg",
+    alt: "Reed Creative Labs dark, silver, and gold studio preview.",
+    width: 1200,
+    height: 630,
   },
 });
 
 export default function FounderPage() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <main id="main-content" tabIndex={-1} className="v2-info-page v2-founder-page">
       <StructuredData data={founderPersonJsonLd()} />
       <PageHeader
         eyebrow="Studio Story"
@@ -29,102 +30,70 @@ export default function FounderPage() {
         body={founderStory.hero.subtitle}
       />
 
-      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
+      <section className="v2-container v2-founder-profiles">
         <h2 className="sr-only">Founder profiles</h2>
-        <div className="grid gap-5 lg:grid-cols-2">
-          {founderStory.founders.map((founder, index) => {
-            return (
-              <Reveal key={founder.name} delay={index * 0.06}>
-                <article className="surface-panel relative min-h-full overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 sm:p-8">
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(132deg,rgba(255,255,255,0.03),transparent_38%),linear-gradient(28deg,transparent_0_72%,rgba(238,154,82,0.05)_73%,transparent_74.2%)]" />
-                  <div className="relative">
-                    <p className="text-sm font-black uppercase text-rcl-amber">
-                      {founder.title}
-                    </p>
-                    <h3 className="brand-heading mt-4 text-4xl leading-none text-white sm:text-5xl">
-                      {founder.name}
-                    </h3>
-                    {"intro" in founder ? (
-                      <p className="mt-7 text-xl font-black text-white">
-                        {founder.intro}
-                      </p>
-                    ) : null}
-                    <div className="mt-5 space-y-5 text-base leading-8 text-rcl-muted">
-                      {founder.bio.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-                    {"quote" in founder ? (
-                      <blockquote className="mt-7 border-l-2 border-rcl-copper pl-5 text-xl font-black leading-8 text-white">
-                        &quot;{founder.quote}&quot;
-                      </blockquote>
-                    ) : null}
-                  </div>
-                </article>
-              </Reveal>
-            );
-          })}
-        </div>
+        {founderStory.founders.map((founder, index) => {
+          return (
+            <Reveal key={founder.name} delay={index * 0.06}>
+              <article>
+                <div className="v2-founder-profile__identity">
+                  <p className="v2-eyebrow">{founder.title}</p>
+                  <h3>{founder.name}</h3>
+                </div>
+                <div className="v2-founder-profile__body">
+                  {"intro" in founder ? (
+                    <p className="v2-founder-profile__intro">{founder.intro}</p>
+                  ) : null}
+                  {founder.bio.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                  {"quote" in founder ? (
+                    <blockquote>&quot;{founder.quote}&quot;</blockquote>
+                  ) : null}
+                </div>
+              </article>
+            </Reveal>
+          );
+        })}
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 md:py-14 xl:px-0">
-        <Reveal>
-          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] sm:p-8 lg:grid lg:grid-cols-[0.78fr_1.22fr] lg:gap-12 lg:p-10">
-            <RclTechnicalMotif
-              className="right-[-18%] top-[-24%] h-[460px] w-[460px] opacity-35"
-              variant="panel"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,5,0.94),rgba(5,5,5,0.78)_52%,rgba(8,10,12,0.62)),linear-gradient(132deg,transparent_0_76%,rgba(238,154,82,0.052)_77%,transparent_78.5%)]" />
-            <div className="relative">
-              <p className="text-sm font-black uppercase text-rcl-amber">
-                Family-Built Studio
+      <section className="v2-section-band">
+        <Reveal className="v2-container v2-family-studio">
+          <div>
+            <p className="v2-eyebrow">Family-built studio</p>
+            <h2>{founderStory.familyBuilt.heading}</h2>
+          </div>
+          <div className="v2-family-studio__body">
+            {founderStory.familyBuilt.body.map((paragraph) => (
+              <p
+                key={paragraph}
+                className={
+                  paragraph === "That reality shapes the way we build."
+                    ? "v2-family-studio__emphasis"
+                    : undefined
+                }
+              >
+                {paragraph}
               </p>
-              <h2 className="brand-heading mt-5 text-4xl leading-none text-white sm:text-5xl md:text-6xl">
-                {founderStory.familyBuilt.heading}
-              </h2>
-            </div>
-            <div className="relative mt-8 space-y-5 text-base leading-8 text-rcl-muted lg:mt-0">
-              {founderStory.familyBuilt.body.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className={
-                    paragraph === "That reality shapes the way we build."
-                      ? "font-black uppercase text-white"
-                      : undefined
-                  }
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            ))}
           </div>
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-8 md:px-8 xl:px-0">
+      <section className="v2-container v2-founder-support">
         <Reveal>
-          <div className="grid gap-8 border-t border-rcl-copper/18 pt-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-            <div>
-              <h2 className="brand-heading text-4xl leading-none text-white sm:text-5xl">
-                {founderStory.support.heading}
-              </h2>
-            </div>
-            <div>
-              <p className="max-w-[760px] text-base leading-8 text-rcl-muted">
-                {founderStory.support.copy}
-              </p>
-              <div className="mt-7 flex flex-wrap gap-4">
-                {founderStory.support.ctas.map((cta) => (
-                  <ButtonLink
-                    key={cta.href}
-                    href={cta.href}
-                    variant={cta.href === "/contact" ? "contact" : cta.variant}
-                  >
-                    {cta.label}
-                  </ButtonLink>
-                ))}
-              </div>
-            </div>
+          <h2>{founderStory.support.heading}</h2>
+          <p>{founderStory.support.copy}</p>
+          <div className="v2-action-row">
+            {founderStory.support.ctas.map((cta) => (
+              <ButtonLink
+                key={cta.href}
+                href={cta.href}
+                variant={cta.href === "/contact" ? "contact" : cta.variant}
+              >
+                {cta.label}
+              </ButtonLink>
+            ))}
           </div>
         </Reveal>
       </section>

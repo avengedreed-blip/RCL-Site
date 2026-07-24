@@ -17,7 +17,7 @@ export function SectionHeader({ title, href, action }: SectionHeaderProps) {
       {href && action ? (
         <Link
           href={href}
-          className="group hidden items-center gap-3 text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper sm:inline-flex"
+          className="group hidden items-center gap-3 text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-gold sm:inline-flex"
         >
           <span>{action}</span>
           <ArrowRight

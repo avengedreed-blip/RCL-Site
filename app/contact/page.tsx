@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Mail, MessageSquareText } from "lucide-react";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
@@ -12,77 +11,105 @@ export const metadata: Metadata = buildMetadata({
     "Contact Reed Creative Labs for product, press, and studio inquiries.",
   path: "/contact",
   image: {
-    url: "/images/home/red-floor-glow.jpg",
-    alt: "Dark Reed Creative Labs red floor glow visual used for studio contact pages.",
+    url: "/social-preview.jpg",
+    alt: "Reed Creative Labs dark, silver, and gold studio preview.",
+    width: 1200,
+    height: 630,
   },
 });
 
-const contacts = [
+const inquiryGuidance = [
+  "What you are trying to build or solve",
+  "Who the work is for",
+  "What already exists",
+  "Important platform, timing, or delivery constraints",
+  "Brand, content, media, domain, or technical materials already available",
+];
+
+const contactPaths = [
   {
-    label: "Studio Email",
-    href: studioEmailHref,
-    value: studioEmail,
-    body: "Use this address for press, support, business, product, and general studio inquiries.",
+    label: "Business and services",
+    body: "Describe the project, current problem, intended users, and the outcome you need.",
+  },
+  {
+    label: "Products and support",
+    body: "Name the product, platform, version or build when known, and what happened.",
+  },
+  {
+    label: "Press",
+    body: "Include the outlet, intended coverage, requested material, and relevant timing.",
+  },
+  {
+    label: "Accessibility and security",
+    body: "Include the affected route or product and enough detail to reproduce or understand the issue.",
   },
 ];
 
 export default function ContactPage() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <main id="main-content" tabIndex={-1} className="v2-info-page v2-contact-page">
       <PageHeader
         eyebrow="Contact"
         title="Reach the studio directly"
-        body="For press, support, business, and general inquiries, contact Reed Creative Labs directly by email."
+        body="Reed Creative Labs uses one verified studio address for business, product, press, accessibility, security, and general inquiries."
       />
 
-      <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-8 md:px-8 xl:px-0">
-        <div className="grid gap-4 md:grid-cols-[minmax(0,0.78fr)]">
-          {contacts.map((contact, index) => (
-            <Reveal key={contact.label} delay={index * 0.06}>
-              <div className="surface-panel block min-h-[260px] min-w-0 rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-6 sm:p-7">
-                <Mail
-                  className="mb-8 h-8 w-8 text-rcl-amber"
-                  strokeWidth={1.5}
-                  aria-hidden="true"
-                />
-                <p className="text-sm font-black uppercase text-rcl-amber">
-                  {contact.label}
-                </p>
-                <a
-                  href={contact.href}
-                  className="mt-4 inline-flex max-w-full text-lg font-black text-white [overflow-wrap:anywhere] transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper sm:text-2xl"
-                >
-                  {contact.value}
-                </a>
-                <div className="mt-5 rounded-[4px] border border-rcl-copper/18 bg-black/28 p-4">
-                  <p className="text-xs font-black uppercase text-rcl-dim">
-                    Plain-text email
-                  </p>
-                  <code className="mt-2 block text-sm font-bold text-white [overflow-wrap:anywhere]">
-                    {contact.value}
-                  </code>
-                  <CopyEmailButton email={contact.value} />
-                </div>
-                <p className="mt-5 text-base leading-8 text-rcl-muted">
-                  {contact.body}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal delay={0.12}>
-          <div className="mt-8 flex items-start gap-5 border-t border-rcl-copper/18 pt-8 text-rcl-muted">
-            <MessageSquareText
-              className="mt-1 h-6 w-6 shrink-0 text-rcl-amber"
-              strokeWidth={1.5}
-              aria-hidden="true"
-            />
-            <p className="max-w-[760px] text-sm leading-7">
-              Reed Creative Labs does not run a public account system or
-              on-site contact form. Direct email keeps communication simple and
-              avoids unnecessary data collection.
-            </p>
+      <section className="v2-container v2-contact-direct">
+        <Reveal className="v2-contact-direct__address">
+          <p className="v2-eyebrow">Verified studio email</p>
+          <a href={studioEmailHref}>{studioEmail}</a>
+          <p>
+            Selecting the address opens your email application. The same address
+            is provided below in plain text for copying.
+          </p>
+          <div className="v2-contact-direct__copy">
+            <code>{studioEmail}</code>
+            <CopyEmailButton email={studioEmail} />
           </div>
+        </Reveal>
+        <Reveal className="v2-contact-direct__guidance" delay={0.06}>
+          <p className="v2-eyebrow">For a useful first message</p>
+          <ul>
+            {inquiryGuidance.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </Reveal>
+      </section>
+
+      <section className="v2-section-band" aria-labelledby="contact-paths-title">
+        <div className="v2-container v2-contact-paths">
+          <Reveal className="v2-section-intro v2-section-intro--compact">
+            <p className="v2-eyebrow">Inquiry guidance</p>
+            <h2 id="contact-paths-title">One address, clear context.</h2>
+            <p>
+              The details below help the studio understand the request without
+              adding an account system or collecting information through a form.
+            </p>
+          </Reveal>
+          <div className="v2-contact-paths__list">
+            {contactPaths.map((path, index) => (
+              <Reveal key={path.label} delay={index * 0.04}>
+                <article>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{path.label}</h3>
+                  <p>{path.body}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="v2-container v2-contact-privacy">
+        <Reveal>
+          <p className="v2-eyebrow">Privacy</p>
+          <h2>Direct contact without an on-site form.</h2>
+          <p>
+            This website does not run a public account system or contact-form
+            backend. Direct email keeps the collection path visible and avoids
+            adding a separate database or form provider.
+          </p>
         </Reveal>
       </section>
     </main>

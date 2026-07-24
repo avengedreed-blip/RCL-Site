@@ -31,6 +31,22 @@ const retiredProducts = [
   { name: ["Ec", "ho"].join(""), slug: ["ec", "ho"].join("") },
 ];
 const retiredIncludedGame = ["Phase", "Defense"].join(" ");
+const allowedStatuses = new Set([
+  "concept",
+  "research",
+  "prototype",
+  "active-development",
+  "private-beta",
+  "public-release",
+  "production",
+  "archived",
+]);
+
+for (const project of projects) {
+  if (!allowedStatuses.has(project.status)) {
+    fail(`${project.name} uses unsupported public status ${project.status}`);
+  }
+}
 
 for (const retired of retiredProducts) {
   if (
@@ -45,14 +61,137 @@ for (const retired of retiredProducts) {
   }
 }
 
-const expectedFeatured = ["forge", "phase-arcade-volume-1", "rcl-science-lab"];
+const expectedFeatured = [
+  "forge",
+  "forgefield",
+  "rcl-science-lab",
+  "storm-lab",
+  "phase-arcade-volume-1",
+];
 if (featuredProjects.map((project) => project.slug).join(",") !== expectedFeatured.join(",")) {
-  fail("Featured hierarchy must be Forge, Phase Arcade Volume I, then RCL Science Lab");
+  fail(
+    "Featured hierarchy must be Forge, Forgefield, RCL Science Lab, Storm Lab, then Phase Arcade Volume I",
+  );
+}
+
+function technicalValues(project) {
+  if (!project?.technicalProfile) return [];
+
+  return Object.entries(project.technicalProfile)
+    .filter(([, value]) => Array.isArray(value))
+    .flatMap(([, value]) => value);
+}
+
+for (const slug of expectedFeatured) {
+  const project = getProject(slug);
+  const profile = project?.technicalProfile;
+
+  if (!project || !profile) {
+    fail(`${slug} is missing its centralized technical profile`);
+  }
+  if (!profile.summary.trim() || !profile.verifiedOn.trim()) {
+    fail(`${slug} is missing its technical summary or verification date`);
+  }
+  if (profile.compactFields.length === 0) {
+    fail(`${slug} has no compact technical fields for Home and Products`);
+  }
+
+  for (const [key, value] of Object.entries(profile)) {
+    if (Array.isArray(value) && value.some((item) => !item.trim())) {
+      fail(`${slug} has an empty value in technicalProfile.${key}`);
+    }
+  }
+}
+
+const technicalExpectations = new Map([
+  [
+    "forge",
+    ["Rust", "TypeScript", "Tauri 2", "Svelte 5", "SvelteKit", "SQLite", "Codex app-server"],
+  ],
+  [
+    "forgefield",
+    ["Fortran 2018", "C11", "C#", ".NET 10 / WPF", "OpenGL 4.6 Core", "GLSL", "OpenGL compute shaders"],
+  ],
+  [
+    "rcl-science-lab",
+    ["TypeScript", "Rust", "Svelte 5", "SvelteKit", "Tauri 2", "Canvas 2D", "Browser local storage"],
+  ],
+  [
+    "storm-lab",
+    ["Fortran", "C++", "GDScript", "Godot 4.7.1", "Versioned C ABI", "C++ GDExtension"],
+  ],
+  [
+    "phase-arcade-volume-1",
+    ["GDScript", "Godot 4.7", "Godot Forward+", "OpenXR", "Windows PC", "PCVR"],
+  ],
+]);
+
+for (const [slug, expectedValues] of technicalExpectations) {
+  const project = getProject(slug);
+  const values = technicalValues(project);
+
+  for (const expected of expectedValues) {
+    if (!values.includes(expected)) {
+      fail(`${slug} is missing verified technical value ${expected}`);
+    }
+  }
+}
+
+for (const prohibited of [
+  ["rcl-science-lab", "WebGL2"],
+  ["rcl-science-lab", "Fortran"],
+  ["rcl-science-lab", "SQLite"],
+  ["phase-arcade-volume-1", "Fortran"],
+  ["phase-arcade-volume-1", "Linux"],
+  ["storm-lab", "Linux"],
+]) {
+  const [slug, value] = prohibited;
+  if (technicalValues(getProject(slug)).includes(value)) {
+    fail(`${slug} presents unverified or inactive technology as current: ${value}`);
+  }
 }
 
 const forge = getProject("forge");
 if (!forge || forge.status !== "active-development" || forge.roadmapGroup !== "active-development") {
   fail("Forge must exist as Active Development");
+}
+if (forge.showcaseMedia?.kind !== "placeholder") {
+  fail("Forge must use the approved no-screenshot placeholder");
+}
+
+const forgefield = getProject("forgefield");
+if (
+  !forgefield ||
+  forgefield.status !== "active-development" ||
+  forgefield.showcaseMedia?.kind !== "placeholder"
+) {
+  fail("Forgefield must exist as Active Development without unapproved imagery");
+}
+if (forgefield.ownerReview) {
+  fail("Forgefield owner-review markers must be resolved before release candidacy");
+}
+
+const stormLab = getProject("storm-lab");
+if (
+  !stormLab ||
+  stormLab.status !== "prototype" ||
+  stormLab.showcaseMedia?.kind !== "placeholder"
+) {
+  fail("Storm Lab must remain a verified Prototype without fabricated product imagery");
+}
+if (stormLab.ownerReview) {
+  fail("Storm Lab owner-review markers must be resolved before release candidacy");
+}
+
+const scienceLab = getProject("rcl-science-lab");
+if (scienceLab?.platforms.join(",") !== "Desktop") {
+  fail("RCL Science Lab must use the verified conservative Desktop platform claim");
+}
+
+for (const slug of ["rcl-science-lab", "phase-arcade-volume-1"]) {
+  if (getProject(slug)?.showcaseMedia?.kind !== "approved-image") {
+    fail(`${slug} must use approved authentic product media`);
+  }
 }
 
 const phaseArcade = getProject("phase-arcade-volume-1");
@@ -114,6 +253,22 @@ for (const file of [
 }
 
 for (const file of [
+  "public/images/home/phase-arcade-card.jpg",
+  "public/images/home/rcl-hero-cinematic.jpg",
+  "public/images/home/rcl-technical-orb.jpg",
+  "public/images/home/red-atmosphere.jpg",
+  "public/images/home/red-floor-glow.jpg",
+  "public/images/home/red-grid-tech.jpg",
+  "public/images/projects/misread-card.jpg",
+  "public/images/projects/talk-to-me-card.jpg",
+  "public/images/social/phase-breaker-coming-soon.jpg",
+]) {
+  if (existsSync(join(root, file))) {
+    fail(`Prohibited legacy visual asset remains public: ${file}`);
+  }
+}
+
+for (const file of [
   "public/images/social/forge.jpg",
   "public/images/social/phase-arcade-volume-1.jpg",
   "public/images/social/rcl-science-lab.jpg",
@@ -121,16 +276,19 @@ for (const file of [
   "public/images/social/phase-breaker.jpg",
   "public/images/social/phase-court.jpg",
   "public/images/social/phase-arcade-volume-2.jpg",
-  "public/images/social/phase-breaker-coming-soon.jpg",
   "public/images/social/pigs-can-fly.jpg",
   "public/images/projects/phase-shift-gameplay-01.webp",
   "public/images/projects/phase-breaker-gameplay-01.webp",
-  "public/images/projects/phase-court-gameplay-01.webp",
+  "public/images/projects/phase-court-gameplay-02.webp",
   "public/images/projects/rcl-science-lab-observatory.jpg",
   "public/images/projects/rcl-science-lab-protostar-formation.jpg",
   "public/images/projects/rcl-science-lab-catalog-browser.jpg",
 ]) {
   if (!existsSync(join(root, file))) fail(`Required portfolio asset is missing: ${file}`);
+}
+
+if (!existsSync(join(root, "docs", "RCL_V2_MEDIA_INVENTORY.md"))) {
+  fail("Missing V2 media provenance inventory");
 }
 
 for (const file of [
@@ -174,6 +332,20 @@ for (const project of projects) {
     'name="twitter:image"',
   ]) {
     if (!html.includes(required)) fail(`Missing ${required} in ${project.route}`);
+  }
+
+  if (
+    expectedFeatured.includes(project.slug) &&
+    !html.includes("Project status") &&
+    !html.includes("PROJECT STATUS")
+  ) {
+    fail(`Featured product page is missing its project status section: ${project.route}`);
+  }
+  if (
+    expectedFeatured.includes(project.slug) &&
+    !html.includes(`data-technical-profile="${project.slug}"`)
+  ) {
+    fail(`Featured product page is missing its technical profile: ${project.route}`);
   }
 
   const structuredDataScripts = [...html.matchAll(
@@ -231,7 +403,7 @@ for (const slug of expectedFeatured) {
 
 const forgePage = readFileSync(routeFile("/projects/forge"), "utf8");
 for (const required of [
-  "Interface preview coming soon",
+  "Images coming soon.",
   "Dale",
   "Iris",
   "Victor",
@@ -248,15 +420,23 @@ for (const required of [
   "Phase Shift",
   "Phase Breaker",
   "Phase Court",
-  "Desktop + VR",
+  "Desktop and VR",
   "/images/projects/phase-shift-gameplay-01.webp",
   "/images/projects/phase-breaker-gameplay-01.webp",
-  "/images/projects/phase-court-gameplay-01.webp",
+  "/images/projects/phase-court-gameplay-02.webp",
 ]) {
   if (!phaseArcadePage.includes(required)) fail(`Phase Arcade page is missing ${required}`);
 }
 
 const scienceLabPage = readFileSync(routeFile("/projects/rcl-science-lab"), "utf8");
+if (!scienceLabPage.includes(">Desktop<")) {
+  fail("RCL Science Lab must render the verified Desktop platform claim");
+}
+for (const unsupportedPlatform of ["Windows / macOS / Linux", ">macOS<", ">Linux<"]) {
+  if (scienceLabPage.includes(unsupportedPlatform)) {
+    fail(`RCL Science Lab renders an unverified platform claim: ${unsupportedPlatform}`);
+  }
+}
 for (const screenshot of [
   "rcl-science-lab-observatory.jpg",
   "rcl-science-lab-protostar-formation.jpg",

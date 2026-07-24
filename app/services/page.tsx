@@ -1,355 +1,234 @@
 import type { Metadata } from "next";
-import {
-  BadgeCheck,
-  CircleSlash,
-  Mail,
-} from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
-import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeader } from "@/components/SectionHeader";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Services",
   description:
-    "Professional websites and custom software for small businesses, organizations, professionals, and independent creators.",
+    "Boutique software engineering, scientific simulation, AI integration, interactive media, and website services from Reed Creative Labs.",
   path: "/services",
   image: {
-    url: "/images/home/red-grid-tech.jpg",
-    alt: "Dark red technical grid artwork representing Reed Creative Labs services.",
+    url: "/social-preview.jpg",
+    alt: "Reed Creative Labs dark, silver, and gold studio preview.",
+    width: 1200,
+    height: 630,
   },
 });
 
-const websiteServices = [
-  "Responsive design",
-  "Mobile-friendly layouts",
-  "Contact links and inquiry paths",
-  "Content pages and galleries",
-  "Performance-focused development",
-  "Accessibility-conscious design",
-  "Domain and hosting guidance",
-];
-
-const softwareServices = [
-  "Internal business tools",
-  "Workflow systems",
-  "Data management applications",
-  "Educational software",
-  "Tracking and reporting tools",
-  "Specialized tools tailored to unique requirements",
-];
-
-const focusAreas = [
-  "Informational business websites",
-  "Portfolio and professional sites",
-  "Landing pages",
-  "Standalone desktop applications",
-  "Local-first tools",
-  "Small custom software utilities",
-];
-
-const outOfScope = [
-  "Large-scale cloud platforms",
-  "Enterprise infrastructure",
-  "Custom e-commerce systems",
-  "Medical record systems",
-  "Financial services software",
-  "Social networks or multi-user platforms",
+const serviceDisciplines = [
+  {
+    title: "Software Development",
+    summary:
+      "Focused applications and internal tools designed around a defined operational problem.",
+    services: [
+      "Native desktop applications",
+      "Cross-platform software",
+      "Internal business tools",
+      "AI-assisted workflows",
+    ],
+    boundary:
+      "Best suited to scoped products with clear owners, workflows, and delivery requirements.",
+  },
+  {
+    title: "Scientific and Engineering Simulation",
+    summary:
+      "Numerical and visual systems that make technical behavior easier to inspect, teach, and test.",
+    services: [
+      "Physics simulations",
+      "Scientific visualization",
+      "Numerical modeling",
+      "Educational software",
+    ],
+    boundary:
+      "Models, assumptions, validation needs, and intended use are defined before implementation.",
+  },
+  {
+    title: "AI Solutions",
+    summary:
+      "Practical integrations that support real work without presenting a model as a substitute for engineering judgment.",
+    services: [
+      "AI integrations",
+      "Custom AI tools",
+      "Automation",
+      "Internal knowledge systems",
+    ],
+    boundary:
+      "Work is limited to scoped, maintainable systems using supported services and explicit human review.",
+  },
+  {
+    title: "Interactive Media",
+    summary:
+      "Interactive systems built to explain, explore, teach, or create a focused play experience.",
+    services: [
+      "Games",
+      "Simulations",
+      "Visualization",
+      "Educational experiences",
+    ],
+    boundary:
+      "The studio prioritizes clear mechanics and technical purpose over speculative content volume.",
+  },
+  {
+    title: "Websites",
+    summary:
+      "Fast, accessible web experiences for businesses and creators who need a polished, maintainable presence.",
+    services: [
+      "Premium business websites",
+      "Custom web applications",
+      "Performance-first design",
+      "Optional ongoing maintenance",
+    ],
+    boundary:
+      "Maintenance, hosting, domains, paid services, and third-party costs are quoted separately when they apply.",
+  },
 ];
 
 const processSteps = [
   {
-    title: "Discovery",
-    body: "Tell us about your project, goals, and requirements.",
+    title: "Define",
+    body: "Clarify the problem, users, constraints, existing systems, and what a successful delivery must do.",
   },
   {
-    title: "Planning & Quote",
-    body: "The scope is reviewed and a written estimate or quote is provided for approval.",
+    title: "Scope",
+    body: "Document deliverables, responsibilities, assumptions, timing, and project-based pricing before work begins.",
   },
   {
-    title: "Development",
-    body: "Your project is designed and built with regular communication throughout the process.",
+    title: "Build",
+    body: "Develop against the approved scope with direct communication and review points appropriate to the work.",
   },
   {
-    title: "Delivery",
-    body: "Approved deliverables are prepared for launch or handoff according to the written scope.",
+    title: "Deliver",
+    body: "Prepare the approved product for launch or handoff, including the agreed documentation and ownership terms.",
   },
 ];
 
-const faqs = [
-  {
-    question: "How much does a project cost?",
-    answer:
-      "Every project is different. Pricing is based on scope, complexity, and requirements.",
-  },
-  {
-    question: "Do you offer maintenance and updates?",
-    answer:
-      "Yes. Ongoing support and future enhancements can be quoted separately after launch if needed.",
-  },
-  {
-    question: "Do I own the final product?",
-    answer:
-      "Ownership and license terms are stated in the written project agreement. The goal is clear client ownership of agreed deliverables, while pre-existing tools and third-party components remain subject to their applicable terms.",
-  },
-  {
-    question: "Do you work remotely?",
-    answer: "Yes. Projects can be completed for clients anywhere.",
-  },
-  {
-    question: "Do you build cloud platforms or enterprise systems?",
-    answer:
-      "Not currently. Reed Creative Labs focuses on websites, standalone applications, and practical software solutions.",
-  },
-  {
-    question: "Does an inquiry start a project?",
-    answer:
-      "No. An inquiry is exploratory. Work begins only after both parties accept a written scope covering deliverables, price, timing, and other project terms.",
-  },
-  {
-    question: "What costs are included?",
-    answer:
-      "The written quote identifies included work. Domains, hosting, software licenses, paid services, content, and other third-party costs are addressed separately when they apply.",
-  },
+const engagementBoundaries = [
+  "No work begins from an inquiry alone. Both parties first accept a written scope.",
+  "Large enterprise platforms, safety-critical infrastructure, medical records, banking systems, and 24/7 operational support are outside the current studio scope.",
+  "Ownership, licenses, third-party services, hosting, maintenance, and handoff responsibilities are stated in the project agreement.",
 ];
-
-function FeatureList({ items }: { items: string[] }) {
-  return (
-    <ul className="grid gap-3">
-      {items.map((item) => (
-        <li key={item} className="text-sm leading-6 text-rcl-muted">
-          {item}
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 export default function ServicesPage() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <main id="main-content" tabIndex={-1} className="v2-info-page v2-services-page">
       <PageHeader
         eyebrow="Studio Services"
-        title="Services"
-        body="Professional websites and custom software for small businesses, organizations, professionals, and independent creators."
+        title="Engineering services for focused, technically serious work."
+        body="Reed Creative Labs is a boutique software and engineering studio. Engagements are scoped directly, documented clearly, and built around a real operational or creative need."
       />
 
-      <section className="mx-auto max-w-[1240px] px-5 pb-8 md:px-8 md:pb-12 xl:px-0">
-        <Reveal>
-          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-rcl-surface p-6 shadow-[0_0_66px_rgba(0,0,0,0.46)] sm:p-8 md:p-10">
-            <RclTechnicalMotif
-              className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-30 md:block"
-              variant="panel"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.026),transparent_52%),linear-gradient(135deg,transparent_0_76%,rgba(210,115,59,0.055)_78%,transparent_82%)]" />
-            <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-              <div>
-                <p className="max-w-[800px] text-base leading-8 text-rcl-muted md:text-lg md:leading-9">
-                  Reed Creative Labs builds practical digital tools with a
-                  focus on quality, usability, ownership, and long-term
-                  maintainability.
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <ButtonLink href="/contact" variant="contact">
-                  Request a Quote
-                </ButtonLink>
-                <ButtonLink href="/projects" variant="secondary">
-                  View Products
-                </ButtonLink>
-              </div>
-            </div>
+      <section className="v2-container v2-services-intro">
+        <Reveal className="v2-services-intro__layout">
+          <p className="v2-eyebrow">Working relationship</p>
+          <p className="v2-services-intro__statement">
+            Small-studio attention, direct technical communication, and a
+            written scope before implementation.
+          </p>
+          <div className="v2-action-row">
+            <ButtonLink href="/contact" variant="contact">
+              Start a Business Inquiry
+            </ButtonLink>
+            <ButtonLink href="/projects" variant="secondary">
+              View Product Work
+            </ButtonLink>
           </div>
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
-        <div className="grid gap-4 lg:grid-cols-2">
-          <Reveal>
-            <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 sm:p-8">
-              <h2 className="text-3xl font-black uppercase text-white">
-                Websites for Small Businesses
-              </h2>
-              <p className="mt-5 text-base leading-8 text-rcl-muted">
-                Whether you are launching something new, refreshing an outdated
-                website, or establishing an online presence for the first time,
-                Reed Creative Labs can help bring your vision to life.
-              </p>
-              <div className="mt-7">
-                <FeatureList items={websiteServices} />
-              </div>
-              <div className="mt-8 rounded-[4px] border border-rcl-copper/35 bg-rcl-copper/[0.08] p-5">
-                <p className="text-sm font-black uppercase text-white">
-                  You own your website, domain, and hosting.
-                </p>
-                <p className="mt-2 text-sm leading-6 text-rcl-muted">
-                  No subscriptions. No vendor lock-in.
-                </p>
-              </div>
-            </div>
+      <section className="v2-section-band" aria-labelledby="service-disciplines-title">
+        <div className="v2-container v2-services-disciplines">
+          <Reveal className="v2-section-intro v2-section-intro--compact">
+            <p className="v2-eyebrow">Capabilities</p>
+            <h2 id="service-disciplines-title">Five working disciplines.</h2>
+            <p>
+              Each engagement is narrowed to what the studio can deliver and
+              support responsibly.
+            </p>
           </Reveal>
-
-          <Reveal delay={0.06}>
-            <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 sm:p-8">
-              <h2 className="text-3xl font-black uppercase text-white">
-                Custom Software
-              </h2>
-              <p className="mt-5 text-base leading-8 text-rcl-muted">
-                Purpose-built software designed around your unique needs. From
-                internal business tools to standalone desktop applications, Reed
-                Creative Labs develops software that prioritizes usability,
-                maintainability, and long-term value.
-              </p>
-              <div className="mt-7">
-                <FeatureList items={softwareServices} />
-              </div>
-              <div className="mt-8 rounded-[4px] border border-rcl-copper/18 bg-black/25 p-5">
-                <p className="text-sm font-black uppercase text-white">
-                  Local-first when practical
+          <div className="v2-services-ledger">
+            {serviceDisciplines.map((discipline, index) => (
+              <Reveal
+                key={discipline.title}
+                className="v2-service-discipline"
+                delay={Math.min(index * 0.035, 0.12)}
+              >
+                <p className="v2-service-discipline__index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-rcl-muted">
-                  Whenever practical, software is built with a local-first
-                  approach that reduces unnecessary complexity and keeps you in
-                  control of your data.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
-        <div className="grid gap-10 lg:grid-cols-2">
-          <div>
-            <Reveal>
-              <SectionHeader title="What We Focus On" />
-              <p className="mb-7 max-w-[720px] text-base leading-8 text-rcl-muted">
-                Reed Creative Labs focuses on practical, maintainable projects
-                that can be delivered responsibly.
-              </p>
-            </Reveal>
-            <div className="grid gap-3">
-              {focusAreas.map((item, index) => (
-                <Reveal key={item} delay={index * 0.035}>
-                  <div className="surface-panel flex items-center gap-4 rounded-[6px] border border-rcl-copper/16 bg-rcl-surface px-5 py-4">
-                    <BadgeCheck
-                      className="h-5 w-5 shrink-0 text-rcl-amber"
-                      strokeWidth={1.5}
-                      aria-hidden="true"
-                    />
-                    <p className="text-sm font-bold text-white">{item}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <Reveal>
-              <SectionHeader title="What We Do Not Currently Offer" />
-              <p className="mb-7 max-w-[720px] text-base leading-8 text-rcl-muted">
-                Some projects require infrastructure, compliance, or security
-                support beyond the current scope of Reed Creative Labs.
-              </p>
-            </Reveal>
-            <div className="grid gap-3">
-              {outOfScope.map((item, index) => (
-                <Reveal key={item} delay={index * 0.035}>
-                  <div className="surface-panel flex items-center gap-4 rounded-[6px] border border-rcl-copper/16 bg-rcl-surface px-5 py-4">
-                    <CircleSlash
-                      className="h-5 w-5 shrink-0 text-rcl-dim"
-                      strokeWidth={1.5}
-                      aria-hidden="true"
-                    />
-                    <p className="text-sm font-bold text-rcl-muted">{item}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal delay={0.18}>
-              <p className="mt-6 border-l border-rcl-copper/70 pl-5 text-sm leading-7 text-rcl-muted">
-                If a project falls outside the current scope, Reed Creative Labs
-                will be honest about it.
-              </p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
-        <Reveal>
-          <SectionHeader title="Project Process" />
-        </Reveal>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {processSteps.map((step, index) => (
-            <Reveal key={step.title} delay={index * 0.05}>
-              <div className="surface-panel min-h-[230px] rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
-                <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-[4px] border border-rcl-copper/18 bg-black/30 text-sm font-black text-rcl-amber">
-                  {index + 1}
+                <div className="v2-service-discipline__identity">
+                  <h3>{discipline.title}</h3>
+                  <p>{discipline.summary}</p>
                 </div>
-                <h3 className="text-lg font-black uppercase text-white">
-                  {step.title}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-rcl-muted">
-                  {step.body}
+                <ul>
+                  {discipline.services.map((service) => (
+                    <li key={service}>{service}</li>
+                  ))}
+                </ul>
+                <p className="v2-service-discipline__boundary">
+                  {discipline.boundary}
                 </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
-        <Reveal>
-          <SectionHeader title="Frequently Asked Questions" />
-        </Reveal>
-        <div className="grid gap-4 lg:grid-cols-2">
-          {faqs.map((faq, index) => (
-            <Reveal key={faq.question} delay={index * 0.04}>
-              <div className="surface-panel min-h-full rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
-                <h3 className="text-base font-black uppercase text-white">
-                  {faq.question}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-rcl-muted">
-                  {faq.answer}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-5 pb-20 pt-10 md:px-8 md:pb-24 xl:px-0">
-        <Reveal>
-          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/22 bg-rcl-elevated p-6 shadow-[0_0_66px_rgba(0,0,0,0.48)] sm:p-8 md:p-10">
-            <RclTechnicalMotif
-              className="absolute -right-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-30 md:block"
-              variant="panel"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,transparent_0_76%,rgba(210,115,59,0.06)_78%,transparent_82%)]" />
-            <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-              <div>
-                <Mail
-                  className="mb-7 h-8 w-8 text-rcl-amber"
-                  strokeWidth={1.5}
-                  aria-hidden="true"
-                />
-                <h2 className="brand-heading max-w-[760px] text-4xl leading-none text-white md:text-6xl">
-                  Have a project in mind?
-                </h2>
-                <p className="mt-5 max-w-[720px] text-base leading-8 text-rcl-muted">
-                  Whether you need a professional website, a custom application,
-                  or a unique software solution, Reed Creative Labs would be
-                  happy to hear about it.
-                </p>
-              </div>
-              <ButtonLink href="/contact" variant="contact">
-                Request a Quote
-              </ButtonLink>
-            </div>
+              </Reveal>
+            ))}
           </div>
+        </div>
+      </section>
+
+      <section className="v2-container v2-services-process" aria-labelledby="process-title">
+        <Reveal className="v2-section-intro v2-section-intro--compact">
+          <p className="v2-eyebrow">Project process</p>
+          <h2 id="process-title">A clear path from inquiry to delivery.</h2>
+        </Reveal>
+        <ol className="v2-process-ledger">
+          {processSteps.map((step, index) => (
+            <li
+              key={step.title}
+              className="reveal-enter"
+              style={{ animationDelay: `${index * 0.04}s` }}
+            >
+              <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="v2-section-band" aria-labelledby="boundaries-title">
+        <div className="v2-container v2-services-boundaries">
+          <Reveal>
+            <p className="v2-eyebrow">Engagement boundaries</p>
+            <h2 id="boundaries-title">
+              Scope is part of the engineering.
+            </h2>
+          </Reveal>
+          <div className="v2-services-boundaries__list">
+            {engagementBoundaries.map((boundary, index) => (
+              <Reveal key={boundary} delay={index * 0.04}>
+                <p>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  {boundary}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="v2-container v2-contact-cta" aria-labelledby="service-contact-title">
+        <Reveal className="v2-contact-cta__layout">
+          <div>
+            <p className="v2-eyebrow">Business inquiries</p>
+            <h2 id="service-contact-title">Bring the problem, constraints, and desired outcome.</h2>
+            <p className="v2-services-cta__body">
+              Include what the project is for, what already exists, and any
+              timing, platform, or delivery constraints that matter.
+            </p>
+          </div>
+          <ButtonLink href="/contact" variant="contact">
+            Contact the Studio
+          </ButtonLink>
         </Reveal>
       </section>
     </main>

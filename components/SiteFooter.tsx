@@ -1,73 +1,85 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { studioEmail, studioEmailHref } from "@/content/contact";
 
-const footerLinks = [
+const studioLinks = [
   { href: "/projects", label: "Products" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },
+];
+
+const legalLinks = [
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
   { href: "/accessibility", label: "Accessibility" },
   { href: "/security", label: "Security" },
 ];
 
-const socialLinks = [
-  { href: studioEmailHref, label: "Email", icon: Mail },
+const disciplines = [
+  "Software development",
+  "Scientific simulation",
+  "AI solutions",
+  "Interactive media",
+  "Websites",
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="footer-shell border-t border-rcl-copper/20 bg-rcl-black">
-      <div className="mx-auto grid max-w-[1240px] gap-8 px-5 py-10 md:grid-cols-[1.15fr_1fr_1fr] md:px-8 xl:px-0">
-        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
-          <Logo className="w-[150px]" />
-          <div className="hidden h-12 w-px bg-gradient-to-b from-transparent via-rcl-copper/55 to-transparent sm:block" />
-          <p className="max-w-[260px] text-sm leading-6 text-rcl-dim">
-            Independent software studio building products, websites, and custom
-            tools.
+    <footer className="footer-shell material-brushed-metal">
+      <div className="v2-container footer-shell__grid">
+        <div className="footer-shell__brand">
+          <Logo />
+          <p>
+            Reed Creative Labs is an independent software and engineering
+            studio.
+          </p>
+          <p className="footer-shell__location">
+            South Carolina · Remote inquiries
           </p>
         </div>
-        <nav className="flex flex-wrap items-center gap-5 md:justify-center" aria-label="Footer">
-          {footerLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="inline-flex min-h-10 items-center text-xs font-black uppercase text-rcl-muted transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
-            >
+        <div className="footer-shell__column">
+          <p className="footer-shell__label">Core disciplines</p>
+          <ul className="footer-shell__disciplines">
+            {disciplines.map((discipline) => (
+              <li key={discipline}>{discipline}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="footer-shell__column">
+          <p className="footer-shell__label">Studio</p>
+          <nav className="footer-shell__nav" aria-label="Studio links">
+            {studioLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="footer-shell__link"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="footer-shell__contact">
+          <p className="footer-shell__label">Contact</p>
+          <a
+            href={studioEmailHref}
+            className="footer-shell__email"
+          >
+            {studioEmail}
+          </a>
+        </div>
+      </div>
+      <div className="v2-container footer-shell__base">
+        <p>&copy; 2026 Reed Creative Labs. All rights reserved.</p>
+        <nav className="footer-shell__legal" aria-label="Legal">
+          {legalLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="footer-shell__link">
               {link.label}
             </Link>
           ))}
         </nav>
-        <div className="flex flex-col gap-5 md:items-end">
-          <div className="flex gap-4">
-            {socialLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  aria-label={link.label}
-                  className="inline-flex min-h-11 min-w-11 items-center justify-center text-white transition duration-300 hover:-translate-y-0.5 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
-                >
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </a>
-              );
-            })}
-          </div>
-          <a
-            href={studioEmailHref}
-            className="inline-flex min-h-10 max-w-full items-center text-xs font-black uppercase text-rcl-muted [overflow-wrap:anywhere] transition duration-300 hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
-          >
-            {studioEmail}
-          </a>
-          <p className="text-sm leading-6 text-rcl-dim">
-            &copy; 2026 Reed Creative Labs. All rights reserved.
-          </p>
-        </div>
       </div>
     </footer>
   );

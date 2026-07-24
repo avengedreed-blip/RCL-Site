@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-import { CompactProjectCard, FeaturedProjectCard } from "@/components/ProjectCard";
-import { PageHeader } from "@/components/PageHeader";
+import { FeaturedProductChapter } from "@/components/FeaturedProductChapter";
+import { ProductLedger } from "@/components/ProductLedger";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeader } from "@/components/SectionHeader";
 import {
-  activeDevelopmentRoadmapProjects,
-  comingSoonRoadmapProjects,
   featuredProjects,
   includedGames,
-  plannedProjects,
+  projects,
   roadmapDisclaimer,
 } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
@@ -27,79 +24,85 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function ProjectsPage() {
+  const featuredSlugs = new Set(featuredProjects.map((project) => project.slug));
+  const includedSlugs = new Set(includedGames.map((project) => project.slug));
+  const currentProjects = projects.filter(
+    (project) =>
+      project.status === "active-development" &&
+      !featuredSlugs.has(project.slug) &&
+      !includedSlugs.has(project.slug),
+  );
+  const conceptProjects = projects.filter(
+    (project) =>
+      project.status === "concept" &&
+      !featuredSlugs.has(project.slug) &&
+      !includedSlugs.has(project.slug),
+  );
+
   return (
-    <main id="main-content" tabIndex={-1}>
-      <PageHeader
-        eyebrow="Products"
-        title="Products and Roadmap"
-        body="Explore Reed Creative Labs software, games, tools, active development projects, and future roadmap."
-      />
-
-      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
+    <main id="main-content" tabIndex={-1} className="v2-catalog">
+      <header className="v2-container v2-catalog-hero">
         <Reveal>
-          <SectionHeader title="Featured Products" />
+          <p className="v2-eyebrow">Products</p>
+          <h1>Software, simulation, and games built around real systems.</h1>
+          <p>
+            A complete view of current Reed Creative Labs products, active
+            development, and verified concepts.
+          </p>
         </Reveal>
-        <div className="grid gap-3 lg:grid-cols-3">
+      </header>
+
+      <section
+        className="v2-container v2-catalog-featured"
+        aria-labelledby="catalog-featured-title"
+      >
+        <Reveal className="v2-section-intro">
+          <p className="v2-eyebrow">Featured products</p>
+          <h2 id="catalog-featured-title">The studio&apos;s primary body of work.</h2>
+          <p>
+            Each product is shown with its current public status and only
+            approved product media.
+          </p>
+        </Reveal>
+        <div className="v2-product-chapters">
           {featuredProjects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.06}>
-              <FeaturedProjectCard project={project} />
+            <Reveal key={project.slug} delay={Math.min(index * 0.04, 0.12)}>
+              <FeaturedProductChapter project={project} index={index} />
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
-        <Reveal>
-          <SectionHeader title="Coming Soon" />
-        </Reveal>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {comingSoonRoadmapProjects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.04}>
-              <CompactProjectCard project={project} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-5 py-10 md:px-8 xl:px-0">
-        <Reveal>
-          <SectionHeader title="Phase Arcade Volume I Included Games" />
-        </Reveal>
-        <div className="grid gap-4 md:grid-cols-3">
-          {includedGames.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.06}>
-              <CompactProjectCard project={project} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto grid max-w-[1240px] gap-10 px-5 py-10 md:grid-cols-2 md:px-8 md:pb-20 xl:px-0">
-        <div>
-          <Reveal>
-            <SectionHeader title="Active Development" />
+      <section className="v2-section-band">
+        <div className="v2-container v2-catalog-ledger-section">
+          <Reveal className="v2-section-intro v2-section-intro--compact">
+            <p className="v2-eyebrow">Phase Arcade Volume I</p>
+            <h2 id="included-games-title">Three included games.</h2>
+            <p>
+              Phase Shift, Phase Breaker, and Phase Court are parts of one
+              desktop and VR collection.
+            </p>
           </Reveal>
-          <div className="grid gap-4">
-            {activeDevelopmentRoadmapProjects.map((project, index) => (
-              <Reveal key={project.slug} delay={index * 0.06}>
-                <CompactProjectCard project={project} />
-              </Reveal>
-            ))}
-          </div>
+          <ProductLedger projects={includedGames} labelledBy="included-games-title" />
         </div>
-        <div>
-          <Reveal>
-            <SectionHeader title="Planned" />
+      </section>
+
+      <section className="v2-container v2-catalog-ledgers">
+        <div className="v2-catalog-ledger-section">
+          <Reveal className="v2-section-intro v2-section-intro--compact">
+            <p className="v2-eyebrow">Current work</p>
+            <h2 id="active-products-title">Active development.</h2>
           </Reveal>
-          <div className="grid gap-4">
-            {plannedProjects.map((project, index) => (
-              <Reveal key={project.slug} delay={index * 0.06}>
-                <CompactProjectCard project={project} emphasis="quiet" />
-              </Reveal>
-            ))}
-          </div>
+          <ProductLedger projects={currentProjects} labelledBy="active-products-title" />
         </div>
-        <p className="text-xs leading-6 text-rcl-dim md:col-span-2">
+        <div className="v2-catalog-ledger-section">
+          <Reveal className="v2-section-intro v2-section-intro--compact">
+            <p className="v2-eyebrow">Early work</p>
+            <h2 id="concept-products-title">Verified concepts.</h2>
+          </Reveal>
+          <ProductLedger projects={conceptProjects} labelledBy="concept-products-title" />
+        </div>
+        <p className="v2-catalog-disclaimer">
           {roadmapDisclaimer}
         </p>
       </section>

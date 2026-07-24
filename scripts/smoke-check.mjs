@@ -15,7 +15,7 @@ const expectedFiles = [
 const forbiddenEverywhere = [
   { pattern: ["@vercel", "analytics"].join("/"), label: "Vercel Analytics package" },
   { pattern: "<" + "Analytics", label: "Analytics component" },
-  { pattern: "unsafe" + "-eval", label: "eval-enabled CSP token" },
+  { pattern: "'unsafe" + "-eval'", label: "general eval-enabled CSP token" },
 ];
 
 const corsHeaderName = [
@@ -63,12 +63,39 @@ for (const sourceFile of guardedSourceFiles) {
   }
 }
 
+const vercelConfig = JSON.parse(
+  readFileSync(join(root, "vercel.json"), "utf8"),
+);
+const globalHeaderRule = vercelConfig.headers?.find(
+  (rule) => rule.source === "/(.*)",
+);
+const productionHeaders = new Map(
+  globalHeaderRule?.headers?.map(({ key, value }) => [key, value]) ?? [],
+);
+const requiredProductionHeaders = [
+  "Content-Security-Policy",
+  "X-Frame-Options",
+  "X-Content-Type-Options",
+  "Strict-Transport-Security",
+  "Referrer-Policy",
+  "Permissions-Policy",
+];
+
+for (const header of requiredProductionHeaders) {
+  if (!productionHeaders.has(header)) {
+    throw new Error(`Missing production security header: ${header}`);
+  }
+}
+
 const homepage = readFileSync(join(root, "out/index.html"), "utf8");
 const h1 = homepage.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? "";
 const h1Text = h1.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
-if (h1Text !== "Reed Creative Labs" && !homepage.includes('aria-label="Reed Creative Labs"')) {
-  throw new Error(`Homepage H1 accessible text is not Reed Creative Labs: ${h1Text}`);
+if (h1Text !== "Building software that explores complex systems.") {
+  throw new Error(`Homepage H1 does not match the approved V2 thesis: ${h1Text}`);
+}
+if (!homepage.includes("Reed Creative Labs")) {
+  throw new Error("Homepage is missing the Reed Creative Labs identity");
 }
 
 const builtText = [

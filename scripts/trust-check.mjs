@@ -57,6 +57,19 @@ for (const internalDocument of ["LAUNCH_READINESS", "THIRD_PARTY_NOTICES"]) {
 }
 
 const htmlFiles = walk(out).filter((file) => file.endsWith(".html"));
+const notFoundFile = join(out, "404.html");
+if (!existsSync(notFoundFile)) fail("Missing branded 404 output");
+const notFoundHtml = readFileSync(notFoundFile, "utf8");
+for (const required of [
+  "<title>Page Not Found | Reed Creative Labs</title>",
+  'name="robots" content="noindex, nofollow, noarchive, nocache"',
+]) {
+  if (!notFoundHtml.includes(required)) fail(`404 output is missing ${required}`);
+}
+if (notFoundHtml.includes('rel="canonical"')) {
+  fail("404 output must not publish a canonical URL");
+}
+
 for (const file of htmlFiles) {
   const html = readFileSync(file, "utf8");
   for (const link of requiredFooterLinks) {
@@ -113,7 +126,7 @@ for (const phrase of [
 const terms = readFileSync(join(out, "terms.html"), "utf8");
 for (const phrase of [
   "Sending an inquiry does not create a client relationship",
-  "Coming Soon",
+  "Active Development",
   "RCL Science Lab is educational software",
   "does not currently offer direct checkout",
 ]) {

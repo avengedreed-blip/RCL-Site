@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
+import { Logo } from "@/components/Logo";
 import { PageHeader } from "@/components/PageHeader";
-import { RclTechnicalMotif } from "@/components/RclTechnicalMotif";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeader } from "@/components/SectionHeader";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -12,118 +13,172 @@ export const metadata: Metadata = buildMetadata({
     "Reed Creative Labs is an independent creative technology studio building privacy-conscious software, games, educational tools, websites, and custom software.",
   path: "/about",
   image: {
-    url: "/images/home/rcl-technical-orb.jpg",
-    alt: "Red technical circular graphic representing the Reed Creative Labs operating philosophy.",
+    url: "/social-preview.jpg",
+    alt: "Reed Creative Labs dark, silver, and gold studio preview.",
+    width: 1200,
+    height: 630,
   },
 });
 
+const disciplines = [
+  {
+    title: "AI and engineering tools",
+    body: "Systems that help inspect, plan, build, audit, and maintain complex technical work.",
+  },
+  {
+    title: "Scientific software",
+    body: "Numerical models and visual systems that make complex behavior observable and teachable.",
+  },
+  {
+    title: "Desktop applications",
+    body: "Purpose-built software where local control, performance, and continuity matter.",
+  },
+  {
+    title: "Interactive media",
+    body: "Games and simulations built around clear mechanics, feedback, and real-time systems.",
+  },
+];
+
+const technologyNotes = [
+  {
+    label: "Web",
+    body: "TypeScript, React, Next.js, and static deployment when a smaller runtime surface is the right fit.",
+  },
+  {
+    label: "Numerical",
+    body: "Modern Fortran, WebAssembly, and dedicated simulation kernels where the mathematics benefits from a clear boundary.",
+  },
+  {
+    label: "Desktop",
+    body: "Native and cross-platform application stacks selected around distribution, performance, and maintainability.",
+  },
+  {
+    label: "Interactive",
+    body: "Real-time engines and custom rendering chosen for the requirements of each game, simulation, or visualization.",
+  },
+];
+
 const principles = [
-  {
-    title: "Offline First",
-    body: "The best tools should keep working when the network does not.",
-  },
-  {
-    title: "Privacy By Default",
-    body: "Products should not require surrendering personal data to become useful.",
-  },
-  {
-    title: "Ownership Matters",
-    body: "People should own the things they buy and keep access to their work.",
-  },
-  {
-    title: "Focused Design",
-    body: "The interface should support the work, not compete with it.",
-  },
+  "Build around a real problem.",
+  "Keep ownership and privacy visible in the architecture.",
+  "Use the smallest system that can support the work responsibly.",
+  "Treat unfinished products as unfinished products.",
 ];
 
 export default function AboutPage() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <main id="main-content" tabIndex={-1} className="v2-info-page v2-about-page">
       <PageHeader
         eyebrow="About"
-        title="A creative technology studio with one standard"
-        body="Reed Creative Labs builds software, games, and tools that respect time, privacy, and ownership. The products are different on purpose. The principles are shared."
+        title="One studio for software, simulation, and interactive systems."
+        body="Reed Creative Labs is an independent software and engineering studio. The work spans different disciplines because the same underlying questions appear across them: how systems behave, how people understand them, and how software can remain useful over time."
       />
 
-      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
-        <Reveal>
-          <div className="grid gap-8 border-y border-rcl-copper/18 py-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <p className="text-sm font-black uppercase text-rcl-amber">
-                Studio identity
-              </p>
-              <h2 className="mt-5 text-3xl font-black uppercase text-white md:text-4xl">
-                Software company. Game studio. Creative technology lab.
-              </h2>
-            </div>
-            <div className="space-y-5 text-base leading-8 text-rcl-muted">
-              <p>
-                Reed Creative Labs is built as a long-term brand, not a hobby
-                page or portfolio wrapper. The studio makes serious products
-                with a consistent point of view.
-              </p>
-              <p>
-                The work ranges from software engineering tools like Forge to
-                arcade collections like Phase Arcade and educational software
-                like RCL Science Lab. The same principles guide the whole
-                catalog: local control, clean interaction, durable value, and
-                restrained presentation.
-              </p>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-5 py-8 md:px-8 xl:px-0">
-        <Reveal>
-          <div className="surface-panel relative overflow-hidden rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6 shadow-[0_12px_38px_rgba(0,0,0,0.18)] sm:p-8 md:grid md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
-            <RclTechnicalMotif
-              className="right-[-20%] top-[-38%] h-[380px] w-[380px] opacity-30"
-              variant="compact"
+      <section className="v2-container v2-about-mission">
+        <Reveal className="v2-about-mission__layout">
+          <div>
+            <Logo
+              className="v2-about-mission__logo"
+              imageClassName="v2-about-mission__logo-image"
             />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(132deg,transparent_0_76%,rgba(238,154,82,0.055)_77%,transparent_78.2%),linear-gradient(90deg,rgba(255,255,255,0.024),transparent_45%)]" />
-            <div className="relative">
-              <p className="text-sm font-black uppercase text-rcl-amber">
-                Founder story
-              </p>
-              <h2 className="brand-heading mt-4 text-3xl leading-none text-white sm:text-4xl">
-                The People Behind Reed Creative Labs
-              </h2>
-            </div>
-            <div className="relative mt-6 md:mt-0">
-              <p className="max-w-[760px] text-base leading-8 text-rcl-muted">
-                Meet Aaron and Katy Reed, the husband-and-wife team building
-                Reed Creative Labs around real life, full-time work, and a
-                belief that small teams can still build meaningful things.
-              </p>
-              <ButtonLink href="/about/founder" variant="secondary" className="mt-7" prefetch={false}>
-                Read the Story
-              </ButtonLink>
-            </div>
+            <p className="v2-eyebrow">Mission</p>
+            <h2>Build tools that make complex systems usable and understandable.</h2>
+          </div>
+          <div className="v2-about-mission__copy">
+            <p>
+              The studio develops its own products and accepts carefully scoped
+              client work. In both cases, the standard is the same: direct
+              purpose, maintainable engineering, clear interaction, and honest
+              presentation.
+            </p>
+            <p>
+              AI tools, scientific simulation, desktop software, visualization,
+              and games belong together here because each asks people to reason
+              about a system. The interface may change. The engineering problem
+              is still one of state, feedback, constraints, and consequences.
+            </p>
           </div>
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-5 py-12 md:px-8 md:pb-20 xl:px-0">
-        <Reveal>
-          <SectionHeader title="Principles" />
-        </Reveal>
-        <div className="grid gap-4 md:grid-cols-4">
-          {principles.map((principle, index) => {
-            return (
-              <Reveal key={principle.title} delay={index * 0.06}>
-                <div className="surface-panel h-full min-h-[180px] rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
-                  <h3 className="font-black uppercase text-white">
-                    {principle.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-rcl-muted">
-                    {principle.body}
-                  </p>
-                </div>
+      <section className="v2-section-band" aria-labelledby="disciplines-title">
+        <div className="v2-container v2-about-disciplines">
+          <Reveal className="v2-section-intro v2-section-intro--compact">
+            <p className="v2-eyebrow">Disciplines</p>
+            <h2 id="disciplines-title">Different outputs. Shared engineering concerns.</h2>
+          </Reveal>
+          <div className="v2-about-disciplines__list">
+            {disciplines.map((discipline, index) => (
+              <Reveal key={discipline.title} delay={index * 0.04}>
+                <article>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{discipline.title}</h3>
+                  <p>{discipline.body}</p>
+                </article>
               </Reveal>
-            );
-          })}
+            ))}
+          </div>
         </div>
+      </section>
+
+      <section className="v2-container v2-about-technology" aria-labelledby="technology-title">
+        <Reveal className="v2-section-intro v2-section-intro--compact">
+          <p className="v2-eyebrow">Technology</p>
+          <h2 id="technology-title">Tools follow the product.</h2>
+          <p>
+            Reed Creative Labs does not force every project into one stack.
+            Technology is selected around the behavior, distribution, and
+            maintenance needs of the work.
+          </p>
+        </Reveal>
+        <dl className="v2-about-technology__ledger">
+          {technologyNotes.map((note) => (
+            <div key={note.label} className="reveal-enter">
+              <dt>{note.label}</dt>
+              <dd>{note.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className="v2-section-band" aria-labelledby="principles-title">
+        <div className="v2-container v2-about-principles">
+          <Reveal>
+            <p className="v2-eyebrow">Operating principles</p>
+            <h2 id="principles-title">A practical standard for the work.</h2>
+          </Reveal>
+          <ol>
+            {principles.map((principle, index) => (
+              <li
+                key={principle}
+                className="reveal-enter"
+                style={{ animationDelay: `${index * 0.04}s` }}
+              >
+                <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <p>{principle}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="v2-container v2-about-people" aria-labelledby="people-title">
+        <Reveal>
+          <p className="v2-eyebrow">People</p>
+          <h2 id="people-title">A small, family-built studio.</h2>
+          <p>
+            Reed Creative Labs is built by Aaron and Katy Reed. The longer
+            studio story explains how the work fits around family life,
+            technical practice, and the decisions behind the products.
+          </p>
+          <Link className="text-link" href="/about/founder" prefetch={false}>
+            Read the founder story
+            <ArrowRight aria-hidden="true" />
+          </Link>
+        </Reveal>
+        <ButtonLink href="/contact" variant="contact">
+          Contact the Studio
+        </ButtonLink>
       </section>
     </main>
   );

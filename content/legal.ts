@@ -84,7 +84,7 @@ export const termsSections: LegalSection[] = [
     title: "Information and development status",
     body: [
       "Website content is provided for general information. Product descriptions, screenshots, roadmaps, platforms, and development statuses describe current intentions and may change.",
-      "Coming Soon, Active Development, and Planned do not promise a release date, final feature set, price, platform, or continued development. A product is available only when Reed Creative Labs or an authorized storefront clearly says it is available.",
+      "Concept, Research, Prototype, Active Development, and Private Beta do not promise a release date, final feature set, price, platform, or continued development. A product is available only when Reed Creative Labs or an authorized storefront clearly says it is available.",
     ],
   },
   {

@@ -1,5 +1,5 @@
 import type { Project } from "@/content/projects";
-import { getProjectSocialImage } from "@/components/ProjectMedia";
+import { getProjectSocialImage } from "@/lib/project-media";
 import { absoluteUrl, siteName, siteUrl } from "@/lib/seo";
 
 const organization = {
@@ -39,7 +39,7 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     ...organization,
     description:
-      "Reed Creative Labs is an independent software studio building products, websites, and custom tools with privacy, ownership, and lasting value in mind.",
+      "Reed Creative Labs is an independent software and engineering studio building tools, simulations, desktop software, games, websites, and custom software with privacy, ownership, and lasting value in mind.",
   };
 }
 

@@ -26,7 +26,7 @@ export function CopyEmailButton({ email }: CopyEmailButtonProps) {
     <button
       type="button"
       onClick={copyEmail}
-      className="mt-4 inline-flex h-10 items-center justify-center gap-2 rounded-[3px] border border-rcl-copper/45 bg-black/20 px-4 text-xs font-black uppercase text-white transition duration-300 hover:-translate-y-0.5 hover:border-rcl-copper hover:text-rcl-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-copper"
+      className="mt-4 inline-flex h-10 items-center justify-center gap-2 rounded-[3px] border border-rcl-copper/45 bg-black/20 px-4 text-xs font-black uppercase text-white transition duration-300 hover:-translate-y-0.5 hover:border-rcl-gold hover:text-rcl-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-gold"
       aria-live="polite"
     >
       <Icon className="h-4 w-4" aria-hidden="true" />

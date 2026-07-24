@@ -2,7 +2,7 @@ export const phaseArcadeGames = [
   {
     slug: "phase-shift",
     name: "Phase Shift",
-    status: "Coming Soon",
+    status: "Active Development",
     image: "/images/projects/phase-shift-gameplay-01.webp",
     alt: "Phase Shift gameplay with a photon moving through a cyan and magenta tunnel.",
     description:
@@ -13,7 +13,7 @@ export const phaseArcadeGames = [
   {
     slug: "phase-breaker",
     name: "Phase Breaker",
-    status: "Coming Soon",
+    status: "Active Development",
     image: "/images/projects/phase-breaker-gameplay-01.webp",
     alt: "Phase Breaker gameplay inside a cyan and magenta containment chamber.",
     description:
@@ -24,9 +24,9 @@ export const phaseArcadeGames = [
   {
     slug: "phase-court",
     name: "Phase Court",
-    status: "Coming Soon",
-    image: "/images/projects/phase-court-gameplay-01.webp",
-    alt: "Phase Court gameplay showing the court, paddles, and ball in motion.",
+    status: "Active Development",
+    image: "/images/projects/phase-court-gameplay-02.webp",
+    alt: "Phase Court desktop gameplay showing a cyan player paddle returning the glowing ball across the magenta court.",
     description:
       "An arcade paddle duel centered on court positioning, reaction speed, and controlling the angle and pace of each return.",
     identity:
