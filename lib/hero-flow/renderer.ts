@@ -120,7 +120,7 @@ const HERO_COMPOSITIONS: Record<
 > = {
   a: { centerX: 0.55, centerY: 0.5, sceneScale: 1.22 },
   b: { centerX: 0.7, centerY: 0.49, sceneScale: 1.58 },
-  c: { centerX: 0.61, centerY: 0.51, sceneScale: 1.5 },
+  c: { centerX: 0.67, centerY: 0.51, sceneScale: 1.5 },
   d: { centerX: 0.64, centerY: 0.45, sceneScale: 1.5 },
 };
 
