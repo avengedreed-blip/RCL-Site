@@ -1555,6 +1555,7 @@ a {
 .fortran-flow-hero {
   position: absolute;
   inset: -4% -12% -6% 25%;
+  right: min(-12%, calc(50% - 50vw));
   z-index: 1;
   min-height: 0;
   pointer-events: none;

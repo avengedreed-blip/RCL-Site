@@ -227,10 +227,13 @@ function sharedStateUniforms(
 function heroCenter(
   state: HeroSystemState,
   composition: HeroCompositionName,
+  horizontalFocalScale = 1,
 ) {
   const profile = HERO_COMPOSITIONS[composition];
   return {
-    x: profile.centerX + state.cameraX * 0.12,
+    x:
+      (profile.centerX + state.cameraX * 0.12) *
+      horizontalFocalScale,
     y: profile.centerY + state.cameraY * 0.12,
   };
 }
@@ -242,8 +245,13 @@ function applySharedState(
   width: number,
   height: number,
   composition: HeroCompositionName,
+  horizontalFocalScale: number,
 ) {
-  const center = heroCenter(state, composition);
+  const center = heroCenter(
+    state,
+    composition,
+    horizontalFocalScale,
+  );
   const profile = HERO_COMPOSITIONS[composition];
   gl.uniform2f(uniforms.resolution, width, height);
   gl.uniform2f(uniforms.center, center.x, center.y);
@@ -264,6 +272,7 @@ export class HeroFlowRenderer {
   private readonly gl: WebGL2RenderingContext;
   private gpuQuery: WebGLQuery | null = null;
   private height = 0;
+  private horizontalFocalScale = 1;
   private quality: HeroRenderQuality | null = null;
   private composition: HeroCompositionName;
   private renderedFrames = 0;
@@ -505,9 +514,14 @@ export class HeroFlowRenderer {
     cssHeight: number,
     devicePixelRatio: number,
     quality: HeroRenderQuality,
+    focalCssWidth = cssWidth,
   ) {
     this.cssWidth = cssWidth;
     this.cssHeight = cssHeight;
+    this.horizontalFocalScale = Math.min(
+      1,
+      Math.max(0.01, focalCssWidth / Math.max(cssWidth, 1)),
+    );
     this.quality = quality;
     const scale =
       Math.min(devicePixelRatio, quality.dprCap) * quality.renderScale;
@@ -574,6 +588,7 @@ export class HeroFlowRenderer {
       this.width,
       this.height,
       this.composition,
+      this.horizontalFocalScale,
     );
     gl.uniform1i(this.environment.uniforms.volumeSteps, quality.volumeSteps);
     gl.uniform1f(this.environment.uniforms.quality, qualityFactor);
@@ -590,6 +605,7 @@ export class HeroFlowRenderer {
       this.width,
       this.height,
       this.composition,
+      this.horizontalFocalScale,
     );
     gl.uniform1ui(this.particles.uniforms.seed, HERO_SEED);
     gl.uniform1f(
@@ -615,7 +631,11 @@ export class HeroFlowRenderer {
     this.bindTarget(this.resolved);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.useProgram(this.lensing.program);
-    const center = heroCenter(state, this.composition);
+    const center = heroCenter(
+      state,
+      this.composition,
+      this.horizontalFocalScale,
+    );
     const compositionProfile = HERO_COMPOSITIONS[this.composition];
     gl.uniform2f(this.lensing.uniforms.resolution, this.width, this.height);
     gl.uniform2f(this.lensing.uniforms.center, center.x, center.y);
@@ -698,6 +718,7 @@ export class HeroFlowRenderer {
       this.cssHeight,
       devicePixelRatio,
       quality,
+      this.cssWidth * this.horizontalFocalScale,
     );
   }
 

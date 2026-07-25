@@ -46,6 +46,7 @@ const QUALITY_LEVELS: readonly HeroRenderQuality[] = [
 const MIN_QUALITY_SAMPLES = 120;
 const DIAGNOSTIC_UPDATE_INTERVAL = 45;
 const MAX_PREFLIGHT_LONG_TASK_MS = 180;
+const DESKTOP_REFERENCE_RIGHT_OVERHANG = 0.12;
 const COMPOSITION_NAMES: readonly HeroCompositionName[] = [
   "a",
   "b",
@@ -217,11 +218,22 @@ export function FortranFlowHero() {
       renderer.setComposition(composition);
       container.dataset.heroComposition = composition;
       const bounds = container.getBoundingClientRect();
+      const layoutBounds = container.parentElement?.getBoundingClientRect();
+      const focalWidth =
+        window.innerWidth >= 1024 && layoutBounds
+          ? Math.min(
+              bounds.width,
+              layoutBounds.right +
+                layoutBounds.width * DESKTOP_REFERENCE_RIGHT_OVERHANG -
+                bounds.left,
+            )
+          : bounds.width;
       renderer.resize(
         bounds.width,
         bounds.height,
         window.devicePixelRatio || 1,
         QUALITY_LEVELS[qualityIndex],
+        focalWidth,
       );
     };
 
