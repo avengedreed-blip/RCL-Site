@@ -9,6 +9,61 @@ export type ProjectScreenshot = {
 const projectScreenshots: Partial<
   Record<ProjectVisual, readonly ProjectScreenshot[]>
 > = {
+  forge: [
+    {
+      src: "/images/projects/forge-clean-session.png",
+      alt: "Forge empty workspace showing the clean start prompt and Choose folder action, with no conversation or repository content.",
+      caption:
+        "Forge captured from an isolated current build in a clean empty workspace. No chat history or repository data is present.",
+    },
+  ],
+  forgefield: [
+    {
+      src: "/images/projects/forgefield-eventide.webp",
+      alt: "Forgefield Eventide procedural world rendered by the current Windows build.",
+      caption: "Eventide — a procedural Forgefield world rendered by the current Windows build.",
+    },
+    {
+      src: "/images/projects/forgefield-genesis.webp",
+      alt: "Forgefield Genesis procedural world rendered by the current Windows build.",
+      caption: "Genesis — a procedural Forgefield world rendered by the current Windows build.",
+    },
+    {
+      src: "/images/projects/forgefield-gravitas.webp",
+      alt: "Forgefield Gravitas procedural world rendered by the current Windows build.",
+      caption: "Gravitas — a procedural Forgefield world rendered by the current Windows build.",
+    },
+    {
+      src: "/images/projects/forgefield-abyssal.webp",
+      alt: "Forgefield Abyssal procedural world rendered by the current Windows build.",
+      caption: "Abyssal — a procedural Forgefield world rendered by the current Windows build.",
+    },
+    {
+      src: "/images/projects/forgefield-synapse.webp",
+      alt: "Forgefield Synapse procedural world rendered by the current Windows build.",
+      caption: "Synapse — a procedural Forgefield world rendered by the current Windows build.",
+    },
+    {
+      src: "/images/projects/forgefield-quantum-garden.webp",
+      alt: "Forgefield Quantum Garden procedural world rendered by the current Windows build.",
+      caption: "Quantum Garden — a procedural Forgefield world rendered by the current Windows build.",
+    },
+    {
+      src: "/images/projects/forgefield-strange-attractors.webp",
+      alt: "Forgefield Strange Attractors procedural world rendered by the current Windows build.",
+      caption: "Strange Attractors — a procedural Forgefield world rendered by the current Windows build.",
+    },
+    {
+      src: "/images/projects/forgefield-ember.webp",
+      alt: "Forgefield Ember procedural world rendered by the current Windows build.",
+      caption: "Ember — a procedural Forgefield world rendered by the current Windows build.",
+    },
+    {
+      src: "/images/projects/forgefield-polar-night.webp",
+      alt: "Forgefield Polar Night procedural world rendered by the current Windows build.",
+      caption: "Polar Night — a procedural Forgefield world rendered by the current Windows build.",
+    },
+  ],
   "phase-arcade": [
     {
       src: "/images/projects/phase-shift-gameplay-01.webp",
@@ -50,6 +105,7 @@ const projectScreenshots: Partial<
 
 const projectSocialImages: Record<string, string> = {
   forge: "/images/social/forge.jpg",
+  forgefield: "/images/social/forgefield.jpg",
   "phase-arcade-volume-1": "/images/social/phase-arcade-volume-1.jpg",
   "rcl-science-lab": "/images/social/rcl-science-lab.jpg",
   "phase-shift": "/images/social/phase-shift.jpg",

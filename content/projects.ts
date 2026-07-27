@@ -162,9 +162,12 @@ export const projects: Project[] = [
     featuredOrder: 1,
     presentationTier: "flagship",
     showcaseMedia: {
-      kind: "placeholder",
-      alt: "Forge product media is being prepared for public release.",
-      message: "Images coming soon.",
+      kind: "approved-image",
+      src: "/images/projects/forge-clean-session.png",
+      alt: "Forge empty workspace showing the clean start prompt and Choose folder action, with no conversation or repository content.",
+      caption:
+        "Forge captured from an isolated current build in a clean empty workspace. No chat history or repository data is present.",
+      fit: "contain",
     },
     currentFocus: [
       "Repository inspection and sustained project context",
@@ -246,9 +249,12 @@ export const projects: Project[] = [
     featuredOrder: 2,
     presentationTier: "featured",
     showcaseMedia: {
-      kind: "placeholder",
-      alt: "Forgefield imagery is intentionally withheld until an approved current-build capture is available.",
-      message: "Images coming soon.",
+      kind: "approved-image",
+      src: "/images/projects/forgefield-eventide.webp",
+      alt: "Forgefield Eventide procedural world rendered by the current Windows build.",
+      caption:
+        "Eventide — a procedural Forgefield world rendered by the current Windows build.",
+      fit: "cover",
     },
     currentFocus: [
       "Representative hardware validation",

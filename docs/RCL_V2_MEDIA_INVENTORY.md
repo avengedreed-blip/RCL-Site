@@ -1,6 +1,6 @@
 # RCL V2 Media Inventory
 
-Last verified: 2026-07-24
+Last verified: 2026-07-27
 
 This inventory separates product evidence from brand-only and retired concept
 media. A file being present in `public/` does not make it approved product
@@ -17,7 +17,16 @@ evidence.
 | `/images/projects/rcl-science-lab-protostar-formation.jpg` | RCL Science Lab | Owner-provided capture from the current application | Yes | Product gallery | RCL Science Lab protostar formation simulation interface. | Reed Creative Labs |
 | `/images/projects/rcl-science-lab-catalog-browser.jpg` | RCL Science Lab | Owner-provided capture from the current application | Yes | Product gallery | RCL Science Lab simulation catalog browser interface. | Reed Creative Labs |
 | `/images/projects/rcl-science-lab-stable-orbits.jpg` | RCL Science Lab | Owner-provided capture from an earlier current-build review | Yes, but superseded as primary | Supporting use only; the three newer captures are preferred | RCL Science Lab stable orbits simulation interface. | Reed Creative Labs |
-
+| `/images/projects/forge-clean-session.png` | Forge | Isolated current-build Tauri capture from `C:\Dev\RCL Forge` | Yes | Homepage chapter, product hero, product gallery | Forge empty workspace showing the clean start prompt and Choose folder action, with no conversation or repository content. | Reed Creative Labs |
+| `/images/projects/forgefield-eventide.webp` | Forgefield / Eventide | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Homepage chapter, product hero, product gallery, social composition | Forgefield Eventide procedural world rendered by the current Windows build. | Reed Creative Labs |
+| `/images/projects/forgefield-genesis.webp` | Forgefield / Genesis | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Product gallery | Forgefield Genesis procedural world rendered by the current Windows build. | Reed Creative Labs |
+| `/images/projects/forgefield-gravitas.webp` | Forgefield / Gravitas | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Product gallery | Forgefield Gravitas procedural world rendered by the current Windows build. | Reed Creative Labs |
+| `/images/projects/forgefield-abyssal.webp` | Forgefield / Abyssal | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Product gallery | Forgefield Abyssal procedural world rendered by the current Windows build. | Reed Creative Labs |
+| `/images/projects/forgefield-synapse.webp` | Forgefield / Synapse | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Product gallery | Forgefield Synapse procedural world rendered by the current Windows build. | Reed Creative Labs |
+| `/images/projects/forgefield-quantum-garden.webp` | Forgefield / Quantum Garden | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Product gallery | Forgefield Quantum Garden procedural world rendered by the current Windows build. | Reed Creative Labs |
+| `/images/projects/forgefield-strange-attractors.webp` | Forgefield / Strange Attractors | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Product gallery | Forgefield Strange Attractors procedural world rendered by the current Windows build. | Reed Creative Labs |
+| `/images/projects/forgefield-ember.webp` | Forgefield / Ember | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Product gallery | Forgefield Ember procedural world rendered by the current Windows build. | Reed Creative Labs |
+| `/images/projects/forgefield-polar-night.webp` | Forgefield / Polar Night | Native diagnostics-renderer capture from `C:\Dev\Forgefield` | Yes | Product gallery | Forgefield Polar Night procedural world rendered by the current Windows build. | Reed Creative Labs |
 ## Official brand and social media
 
 | Asset | Product | Source | Authentic | Public use | Notes | Ownership |
@@ -25,7 +34,8 @@ evidence.
 | `/images/rcl-logo-full.png` | Studio | Official RCL brand asset | Yes | Brand identity | Preserve without alteration. | Reed Creative Labs |
 | `/images/rcl-logo-full.webp` | Studio | Delivery-sized lossless WebP derivative of the official RCL logo | Yes | Site header, footer, and studio identity | Generated from the approved PNG at the component's declared 720-pixel source width without altering the logo design. | Reed Creative Labs |
 | `/images/rcl-logo-mark.png` | Studio | Official RCL brand asset | Yes | Favicons, social avatars, and other compact brand contexts | Preserve without alteration. | Reed Creative Labs |
-| `/images/social/forge.jpg` | Forge | RCL typographic social treatment | Brand-authentic, not product evidence | Open Graph and Twitter preview | Contains no simulated interface and must not be described as a screenshot. | Reed Creative Labs |
+| `/images/social/forge.jpg` | Forge | 1200 x 630 crop of the isolated clean-session current-build capture | Yes | Open Graph and Twitter preview | Contains no chat history, conversation, or repository data. | Reed Creative Labs |
+| `/images/social/forgefield.jpg` | Forgefield | 1200 x 630 crop of the Eventide current-build renderer capture | Yes | Open Graph and Twitter preview | Authentic procedural output from the current Windows build. | Reed Creative Labs |
 | `/images/social/phase-arcade-volume-1.jpg` | Phase Arcade Volume I | RCL composition derived from real product captures | Yes | Open Graph, Twitter, collection preview | Must remain consistent with the current public status language. | Reed Creative Labs |
 | `/images/social/rcl-science-lab.jpg` | RCL Science Lab | RCL composition using a real application capture | Yes | Open Graph and Twitter preview | Product UI is authentic. | Reed Creative Labs |
 | `/images/social/phase-shift.jpg` | Phase Shift | RCL composition using a real gameplay capture | Yes | Open Graph and Twitter preview | Product gameplay is authentic. | Reed Creative Labs |
@@ -55,8 +65,6 @@ evidence.
 
 ## Products using the approved no-media state
 
-- Forge
-- Forgefield
 - Storm Lab
 - Neon Drift
 - Falling From The Sky
@@ -70,11 +78,33 @@ evidence.
 These routes must display `Images coming soon.` instead of generated art,
 mockups, interface simulations, or stock media.
 
-Forgefield and Storm Lab imagery remains intentionally withheld by owner
-decision. Forgefield needs a current-build capture that accurately represents
-the intended shipping product. Storm Lab needs an authentic prototype capture
-approved for public use. Neither placeholder is evidence of a released product.
+Storm Lab imagery remains intentionally withheld by owner decision. It needs an
+authentic prototype capture approved for public use. Its placeholder is not
+evidence of a released product.
 
+## Forge capture provenance and privacy review
+
+The public Forge image was captured on 2026-07-27 from a locally built Tauri
+application using a capture-only application identifier,
+`com.reedcreativelabs.forge.webcapture`. The isolated capture database was
+verified before publication with these exact counts: `codex_sessions=0`,
+`conversations=0`, `messages=0`, and `history_rows=0`. The rendered state shows
+only Forge's built-in clean-start prompt and `Choose folder` action. No chat
+history, repository name, file content, task record, user account, or private
+project data appears in the image. The public PNG is a metadata-stripped,
+1920-pixel-wide derivative of the 2560 x 1369 first-party capture. The social
+image is a 1200 x 630 crop of the same verified source.
+
+## Forgefield capture provenance
+
+All nine Forgefield images were captured on 2026-07-27 from the current native
+Windows diagnostics renderer at 2560 x 1421 with production UI and diagnostics
+overlays disabled. The selected masters are `eventide-a`, `genesis-a`,
+`gravitas-b`, `abyssal-a`, `synapse-b`, `quantum-garden-a`,
+`strange-attractors-a`, `ember-a`, and `polar_night-b`. Public WebP files are
+metadata-stripped 1920-pixel-wide derivatives with no compositing, generated
+content, or visual substitution. Eventide is the featured homepage and social
+capture; the complete nine-world set appears on the Forgefield detail page.
 ## Procedural hero provenance
 
 The homepage hero is generated at runtime from the Fortran source in

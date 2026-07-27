@@ -46,8 +46,8 @@ export default function ProjectsPage() {
           <p className="v2-eyebrow">Products</p>
           <h1>Software, simulation, and games built around real systems.</h1>
           <p>
-            A complete view of current Reed Creative Labs products, active
-            development, and verified concepts.
+            An evidence-led view of what the studio is building now, shown with
+            current public status and approved product media.
           </p>
         </Reveal>
       </header>
@@ -56,13 +56,11 @@ export default function ProjectsPage() {
         className="v2-container v2-catalog-featured"
         aria-labelledby="catalog-featured-title"
       >
-        <Reveal className="v2-section-intro">
-          <p className="v2-eyebrow">Featured products</p>
-          <h2 id="catalog-featured-title">The studio&apos;s primary body of work.</h2>
-          <p>
-            Each product is shown with its current public status and only
-            approved product media.
-          </p>
+        <Reveal className="v2-catalog-featured__intro">
+          <h2 id="catalog-featured-title" className="v2-eyebrow">
+            Featured products
+          </h2>
+          <p>Selected work, presented with verified status and approved media.</p>
         </Reveal>
         <div className="v2-product-chapters">
           {featuredProjects.map((project, index) => (

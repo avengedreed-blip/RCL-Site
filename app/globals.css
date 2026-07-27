@@ -1466,8 +1466,9 @@ a {
   content: "";
   border-top: 1px solid rgb(var(--color-accent-gold-rgb) / 0.12);
   background:
-    linear-gradient(90deg, transparent 0 8%, rgb(var(--color-accent-gold-bright-rgb) / 0.24) 8.1%, rgb(var(--color-accent-copper-rgb) / 0.12) 23%, transparent 54%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.018), rgba(3, 4, 5, 0.66));
+    radial-gradient(ellipse 72% 150% at 84% 112%, rgb(var(--color-accent-gold-bright-rgb) / 0.18), rgb(var(--color-accent-copper-rgb) / 0.09) 32%, transparent 74%),
+    radial-gradient(ellipse 42% 108% at 98% 96%, rgb(var(--color-accent-gold-rgb) / 0.09), transparent 72%),
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.008) 46%, rgba(3, 4, 5, 0.5));
   mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
 
@@ -2443,7 +2444,7 @@ a {
 }
 
 .v2-catalog-hero {
-  padding-block: clamp(5rem, 8vw, 7rem) clamp(3.5rem, 5vw, 5rem);
+  padding-block: clamp(4.25rem, 5.5vw, 5.5rem) clamp(2.5rem, 3.5vw, 3.5rem);
 }
 
 .v2-catalog-hero > div {
@@ -2479,13 +2480,40 @@ a {
 .v2-catalog-featured {
   padding-bottom: var(--v2-section-space);
 }
+.v2-catalog-featured__intro {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+  padding-block: clamp(2.5rem, 3.6vw, 3.25rem) clamp(2rem, 2.8vw, 2.5rem);
+}
+
+.v2-catalog-featured__intro h2,
+.v2-catalog-featured__intro p {
+  margin: 0;
+}
+
+.v2-catalog-featured__intro p {
+  max-width: 620px;
+  color: var(--v2-copy);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
 
 .v2-catalog-ledger-section {
   display: grid;
-  grid-template-columns: minmax(250px, 0.42fr) minmax(0, 1fr);
-  gap: clamp(2.5rem, 7vw, 7rem);
+  grid-template-columns: minmax(320px, 0.5fr) minmax(0, 1fr);
+  gap: clamp(3rem, 5vw, 6rem);
   align-items: start;
   padding-block: clamp(4.5rem, 7vw, 7rem);
+}
+
+.v2-catalog-ledger-section > .v2-section-intro h2 {
+  max-width: 100%;
+  font-size: clamp(3rem, 3.8vw, 4.25rem);
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .v2-catalog-ledgers {
@@ -4506,7 +4534,13 @@ a {
   }
 
   .v2-catalog-hero {
-    padding-block: 5.25rem 4.5rem;
+    padding-block: 4.25rem 2.75rem;
+  }
+
+  .v2-catalog-featured__intro {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding-block: 1.75rem 1.4rem;
   }
 
   .v2-catalog-hero h1,
