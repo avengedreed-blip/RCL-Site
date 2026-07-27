@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import {
   HERO_MEMORY_PAGES,
   inspectHeroArtifact,
+  normalizeLineEndings,
   patchMemoryPages,
   sha256,
 } from "./hero-wasm-utils.mjs";
@@ -24,7 +25,9 @@ if (!compilerRoot) {
 
 const compilerPath = path.join(compilerRoot, "lfortran.js");
 const compilerSource = await readFile(compilerPath, "utf8");
-const fortranSource = await readFile(sourcePath, "utf8");
+const fortranSource = normalizeLineEndings(
+  await readFile(sourcePath, "utf8"),
+);
 const workDirectory = await mkdtemp(path.join(tmpdir(), "rcl-fortran-hero-"));
 const rawArtifactPath = path.join(workDirectory, "hero-flow.raw.wasm");
 const wrapperPath = path.join(workDirectory, "compile-hero-flow.cjs");

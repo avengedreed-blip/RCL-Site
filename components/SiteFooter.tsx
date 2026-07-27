@@ -30,7 +30,7 @@ export function SiteFooter() {
     <footer className="footer-shell material-brushed-metal">
       <div className="v2-container footer-shell__grid">
         <div className="footer-shell__brand">
-          <Logo />
+          <Logo priority />
           <p>
             Reed Creative Labs is an independent software and engineering
             studio.

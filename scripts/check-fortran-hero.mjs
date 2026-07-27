@@ -1,7 +1,11 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { inspectHeroArtifact, sha256 } from "./hero-wasm-utils.mjs";
+import {
+  inspectHeroArtifact,
+  normalizeLineEndings,
+  sha256,
+} from "./hero-wasm-utils.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const sourcePath = path.join(root, "simulation", "hero", "hero_flow.f90");
@@ -9,13 +13,13 @@ const artifactPath = path.join(root, "public", "wasm", "hero-flow.wasm");
 const manifestPath = path.join(root, "public", "wasm", "hero-flow.manifest.json");
 
 const [source, artifact, manifestText] = await Promise.all([
-  readFile(sourcePath),
+  readFile(sourcePath, "utf8"),
   readFile(artifactPath),
   readFile(manifestPath, "utf8"),
 ]);
 const manifest = JSON.parse(manifestText);
 
-if (sha256(source) !== manifest.source.sha256) {
+if (sha256(normalizeLineEndings(source)) !== manifest.source.sha256) {
   throw new Error(
     "Fortran source changed without regenerating the checked-in Wasm artifact.",
   );

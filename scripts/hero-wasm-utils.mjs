@@ -21,6 +21,10 @@ export function sha256(bytes) {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
+export function normalizeLineEndings(text) {
+  return text.replace(/\r\n?/g, "\n");
+}
+
 function readUnsignedLeb(bytes, offset) {
   let value = 0;
   let shift = 0;
