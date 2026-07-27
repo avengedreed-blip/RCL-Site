@@ -82,7 +82,12 @@ export default function AboutPage() {
               imageClassName="v2-about-mission__logo-image"
             />
             <p className="v2-eyebrow">Mission</p>
-            <h2>Build tools that make complex systems usable and understandable.</h2>
+            <h2>
+              <span className="v2-about-mission__line">Build tools </span>
+              <span className="v2-about-mission__line">that make complex </span>
+              <span className="v2-about-mission__line">systems usable </span>
+              <span className="v2-about-mission__line">and understandable.</span>
+            </h2>
           </div>
           <div className="v2-about-mission__copy">
             <p>
