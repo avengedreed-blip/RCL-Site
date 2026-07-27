@@ -3136,6 +3136,18 @@ a {
   line-height: 1.8;
 }
 
+.v2-about-page .v2-page-hero__inner {
+  gap: 1rem;
+}
+
+.v2-about-page .v2-page-hero h1 {
+  max-width: 1160px;
+}
+
+.v2-about-page .v2-page-hero__inner > p:last-child {
+  max-width: 850px;
+}
+
 .v2-services-intro {
   padding-block: clamp(4.5rem, 7vw, 7rem);
 }
@@ -3353,8 +3365,8 @@ a {
 
 .v2-about-mission__layout {
   display: grid;
-  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
-  gap: clamp(3rem, 8vw, 8rem);
+  grid-template-columns: minmax(460px, 1fr) minmax(420px, 0.92fr);
+  gap: clamp(4rem, 6vw, 6rem);
   padding-top: 1.5rem;
   border-top: 1px solid var(--v2-hairline-strong);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
@@ -3362,16 +3374,20 @@ a {
 
 .v2-about-mission__logo {
   display: inline-block;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.v2-about-mission__line {
+  display: block;
 }
 
 .v2-about-mission__logo-image {
-  width: clamp(178px, 18vw, 248px);
+  width: clamp(148px, 13vw, 196px);
 }
 
 .v2-about-mission h2 {
   max-width: 720px;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   font-size: clamp(2.8rem, 5vw, 5.7rem);
   line-height: 0.96;
 }
@@ -3379,9 +3395,11 @@ a {
 .v2-about-mission__copy {
   display: grid;
   gap: 1.4rem;
-  color: rgb(var(--color-text-secondary-rgb) / 0.94);
-  font-size: 1rem;
-  line-height: 1.85;
+  max-width: 68ch;
+  padding-top: clamp(6rem, 7vw, 7rem);
+  color: rgb(var(--color-text-secondary-rgb) / 0.97);
+  font-size: 1.04rem;
+  line-height: 1.82;
 }
 
 .v2-about-disciplines {
@@ -4240,6 +4258,20 @@ a {
 }
 
 @media (max-width: 1023px) {
+  .v2-about-mission__layout {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .v2-about-mission__copy {
+    max-width: 72ch;
+    padding-top: 0;
+  }
+
+  .v2-about-mission__line {
+    display: inline;
+  }
+
   .v2-hero__layout {
     min-height: 640px;
     grid-template-columns: 1fr;
