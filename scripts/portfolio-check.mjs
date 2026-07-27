@@ -155,17 +155,21 @@ const forge = getProject("forge");
 if (!forge || forge.status !== "active-development" || forge.roadmapGroup !== "active-development") {
   fail("Forge must exist as Active Development");
 }
-if (forge.showcaseMedia?.kind !== "placeholder") {
-  fail("Forge must use the approved no-screenshot placeholder");
+if (
+  forge.showcaseMedia?.kind !== "approved-image" ||
+  forge.showcaseMedia.src !== "/images/projects/forge-clean-session.png"
+) {
+  fail("Forge must use the approved clean-session capture");
 }
 
 const forgefield = getProject("forgefield");
 if (
   !forgefield ||
   forgefield.status !== "active-development" ||
-  forgefield.showcaseMedia?.kind !== "placeholder"
+  forgefield.showcaseMedia?.kind !== "approved-image" ||
+  forgefield.showcaseMedia.src !== "/images/projects/forgefield-eventide.webp"
 ) {
-  fail("Forgefield must exist as Active Development without unapproved imagery");
+  fail("Forgefield must use the approved Eventide current-build capture");
 }
 if (forgefield.ownerReview) {
   fail("Forgefield owner-review markers must be resolved before release candidacy");
@@ -270,7 +274,17 @@ for (const file of [
 
 for (const file of [
   "public/images/social/forge.jpg",
-  "public/images/social/phase-arcade-volume-1.jpg",
+  "public/images/social/forgefield.jpg",
+  "public/images/projects/forge-clean-session.png",
+  "public/images/projects/forgefield-eventide.webp",
+  "public/images/projects/forgefield-genesis.webp",
+  "public/images/projects/forgefield-gravitas.webp",
+  "public/images/projects/forgefield-abyssal.webp",
+  "public/images/projects/forgefield-synapse.webp",
+  "public/images/projects/forgefield-quantum-garden.webp",
+  "public/images/projects/forgefield-strange-attractors.webp",
+  "public/images/projects/forgefield-ember.webp",
+  "public/images/projects/forgefield-polar-night.webp",  "public/images/social/phase-arcade-volume-1.jpg",
   "public/images/social/rcl-science-lab.jpg",
   "public/images/social/phase-shift.jpg",
   "public/images/social/phase-breaker.jpg",
@@ -403,16 +417,34 @@ for (const slug of expectedFeatured) {
 
 const forgePage = readFileSync(routeFile("/projects/forge"), "utf8");
 for (const required of [
-  "Images coming soon.",
   "Dale",
   "Iris",
   "Victor",
   "Active Development",
+  "/images/projects/forge-clean-session.png",
+  "No chat history or repository data is present.",
 ]) {
   if (!forgePage.includes(required)) fail(`Forge page is missing ${required}`);
 }
-if (forgePage.includes("/images/projects/forge-")) {
-  fail("Forge page must not expose unfinished product screenshots");
+if (forgePage.includes("Images coming soon.")) {
+  fail("Forge page still renders the retired no-media placeholder");
+}
+
+const forgefieldPage = readFileSync(routeFile("/projects/forgefield"), "utf8");
+for (const screenshot of [
+  "forgefield-eventide.webp",
+  "forgefield-genesis.webp",
+  "forgefield-gravitas.webp",
+  "forgefield-abyssal.webp",
+  "forgefield-synapse.webp",
+  "forgefield-quantum-garden.webp",
+  "forgefield-strange-attractors.webp",
+  "forgefield-ember.webp",
+  "forgefield-polar-night.webp",
+]) {
+  if (!forgefieldPage.includes(screenshot)) {
+    fail(`Forgefield is missing approved current-build capture ${screenshot}`);
+  }
 }
 
 const phaseArcadePage = readFileSync(routeFile("/projects/phase-arcade-volume-1"), "utf8");

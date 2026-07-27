@@ -35,8 +35,8 @@ and must not be copied into the public site.
 
 | Product | Public state | Media state | Evidence |
 | --- | --- | --- | --- |
-| Forge | Active Development | Placeholder | No approved current-build public screenshot |
-| Forgefield | Active Development | Placeholder | Public name and status approved; captures remain withheld pending current-build approval |
+| Forge | Active Development | Approved clean-state screenshot | Isolated current-build capture verified with zero sessions, conversations, messages, or history rows |
+| Forgefield | Active Development | Approved renderer captures | Nine authentic current-build procedural-world captures; Eventide is the featured image |
 | RCL Science Lab | Coming Soon | Approved screenshots | Current observatory, simulation, and catalog captures |
 | Storm Lab | Prototype | Placeholder | Functioning Fortran/Godot Windows prototype; no approved public capture |
 | Phase Arcade Volume I | Coming Soon | Approved gameplay | Current Phase Shift, Phase Breaker, and Phase Court captures |
@@ -140,10 +140,14 @@ Featured products are horizontal editorial chapters, not a repeated card grid.
 Resolved on 2026-07-24:
 
 - **Forgefield** is the approved public name. It remains **Active Development**
-  and may appear as a featured product. Authentic public screenshots remain
-  withheld until a current-build capture accurately represents the intended
-  shipping product. Installer readiness, licensing, packaging, distribution,
-  and final release validation are separate future gates.
+  and may appear as a featured product. Nine authentic current-build renderer
+  captures are approved for public use, with Eventide as the featured image.
+  Installer readiness, licensing, packaging, distribution, and final release
+  validation are separate future gates.
+- **Forge** uses one isolated clean-workspace screenshot captured from the
+  current Tauri build. Its capture database contains zero Codex sessions,
+  conversations, messages, or history rows. No chat history or repository data
+  may appear in public Forge media.
 - **Storm Lab** remains public as a featured project. Repository evidence
   supports **Prototype**: the current Windows implementation connects a modern
   Fortran atmospheric model to Godot through a versioned C ABI and C++
@@ -157,7 +161,6 @@ Resolved on 2026-07-24:
 These items remain deliberately conservative in the release candidate and do
 not block review or preview deployment:
 
-- Approve current-build Forge media before replacing its placeholder.
 - Confirm whether `Coming Soon` remains accurate for Science Lab and Phase Arcade.
 - Confirm whether macOS and Linux remain public launch targets for Science Lab.
 
