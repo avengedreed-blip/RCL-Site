@@ -10,7 +10,7 @@ import { founderPersonJsonLd } from "@/lib/structured-data";
 export const metadata: Metadata = buildMetadata({
   title: "The People Behind Reed Creative Labs",
   description:
-    "Meet Aaron and Katy Reed, the husband-and-wife team building Reed Creative Labs: an independent studio focused on privacy-conscious software, creative tools, and small, memorable games.",
+    "Meet Aaron and Katy Reed, the husband-and-wife team behind Reed Creative Labs, and learn how Aaron's background as a former U.S. Navy submariner shaped the studio's systems-first engineering approach.",
   path: "/about/founder",
   image: {
     url: "/social-preview.jpg",

@@ -32,7 +32,7 @@ export function SiteFooter() {
         <div className="footer-shell__brand">
           <Logo priority />
           <p>
-            Reed Creative Labs is an independent software and engineering
+            Reed Creative Labs is a veteran-founded independent software and
             studio.
           </p>
           <p className="footer-shell__location">

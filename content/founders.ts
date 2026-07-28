@@ -10,8 +10,8 @@ export const founderStory = {
       title: "Founder, Lead Developer & Creative Technologist",
       intro: "Hi, I'm Aaron.",
       bio: [
-        "I founded Reed Creative Labs to build the kind of software and games I wish existed: focused, privacy-conscious, creatively ambitious, and free from unnecessary complexity.",
-        "My background is in technical troubleshooting, industrial maintenance, and solving difficult problems under pressure. Over the years, that evolved into a passion for software development, systems design, and creating tools that people genuinely enjoy using.",
+        "Before founding Reed Creative Labs, I served as a U.S. Navy submariner and trained through the Navy Nuclear Power Program. That background, along with years of technical troubleshooting and industrial maintenance, shaped a systems-first approach built around precision, disciplined problem solving, and understanding how complex parts affect the whole.",
+        "That experience still influences how the studio works today: understand the system deeply, build carefully, verify behavior, and choose reliability over unnecessary complexity. Over time, that approach grew into a passion for software development, systems design, simulations, and games.",
         "Today, I design, develop, and maintain every Reed Creative Labs product, from productivity tools and creative software to experimental projects and games. My goal is simple: build things that are useful, memorable, and worth owning.",
       ],
     },

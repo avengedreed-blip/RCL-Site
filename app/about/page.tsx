@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "About",
   description:
-    "Reed Creative Labs is an independent creative technology studio building privacy-conscious software, games, educational tools, websites, and custom software.",
+    "Reed Creative Labs is a veteran-founded, family-built software and engineering studio creating privacy-conscious software, simulations, games, websites, and custom tools.",
   path: "/about",
   image: {
     url: "/social-preview.jpg",
@@ -71,7 +71,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="One studio for software, simulation, and interactive systems."
-        body="Reed Creative Labs is an independent software and engineering studio. The work spans different disciplines because the same underlying questions appear across them: how systems behave, how people understand them, and how software can remain useful over time."
+        body="Reed Creative Labs is a veteran-founded, family-built independent software and engineering studio. The work spans different disciplines because the same underlying questions appear across them: how systems behave, how people understand them, and how software can remain useful over time."
       />
 
       <section className="v2-container v2-about-mission">
