@@ -332,9 +332,9 @@ export const projects: Project[] = [
     presentationTier: "featured",
     showcaseMedia: {
       kind: "approved-image",
-      src: "/images/projects/phase-shift-gameplay-01.webp",
-      alt: "Phase Shift gameplay from Phase Arcade Volume I, showing a cyan and magenta tunnel.",
-      caption: "Phase Shift gameplay captured from the current desktop build.",
+      src: "/images/projects/phase-breaker-gameplay-01.webp",
+      alt: "Phase Breaker gameplay from Phase Arcade Volume I inside a cyan and magenta containment chamber.",
+      caption: "Phase Breaker gameplay captured from the current desktop build.",
       fit: "cover",
       position: "center",
     },
