@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
   title: "Products",
   description:
     "Explore Reed Creative Labs software, games, tools, active development projects, and future roadmap.",
-  path: "/projects",
+  path: "/products",
   image: {
     url: "/images/social/phase-arcade-volume-1.jpg",
     alt: "Reed Creative Labs products, including Forge, Phase Arcade Volume I, and RCL Science Lab.",
@@ -23,7 +23,7 @@ export const metadata: Metadata = buildMetadata({
   },
 });
 
-export default function ProjectsPage() {
+export default function ProductsPage() {
   const featuredSlugs = new Set(featuredProjects.map((project) => project.slug));
   const includedSlugs = new Set(includedGames.map((project) => project.slug));
   const currentProjects = projects.filter(

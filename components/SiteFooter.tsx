@@ -3,7 +3,7 @@ import { Logo } from "@/components/Logo";
 import { studioEmail, studioEmailHref } from "@/content/contact";
 
 const studioLinks = [
-  { href: "/projects", label: "Products" },
+  { href: "/products", label: "Products" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/press", label: "Press" },

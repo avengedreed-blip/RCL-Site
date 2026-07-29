@@ -130,7 +130,7 @@ export default function ServicesPage() {
             <ButtonLink href="/contact" variant="contact">
               Start a Business Inquiry
             </ButtonLink>
-            <ButtonLink href="/projects" variant="secondary">
+            <ButtonLink href="/products" variant="secondary">
               View Product Work
             </ButtonLink>
           </div>

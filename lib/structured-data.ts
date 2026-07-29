@@ -48,6 +48,8 @@ export function websiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: siteName,
+    description:
+      "Software, simulation, and interactive systems by Reed Creative Labs.",
     url: siteUrl,
     publisher: organization,
     inLanguage: "en-US",

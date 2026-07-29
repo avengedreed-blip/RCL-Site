@@ -40,7 +40,7 @@ export default function NotFound() {
             The page may have moved, or the address may be incomplete. The product catalog and studio pages remain available below.
           </p>
           <div className="v2-action-row">
-            <ButtonLink href="/projects">View Products</ButtonLink>
+            <ButtonLink href="/products">View Products</ButtonLink>
             <ButtonLink href="/" variant="secondary">Return Home</ButtonLink>
           </div>
         </div>

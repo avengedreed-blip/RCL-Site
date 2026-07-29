@@ -102,7 +102,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 View Collection
               </ButtonLink>
             ) : null}
-            <ButtonLink href="/projects" variant="secondary">
+            <ButtonLink href="/products" variant="secondary">
               All Products
             </ButtonLink>
             <ButtonLink href="/contact" variant="contact">

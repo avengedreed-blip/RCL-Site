@@ -4,6 +4,7 @@ import { join } from "node:path";
 const root = process.cwd();
 const expectedFiles = [
   "out/index.html",
+  "out/products.html",
   "out/contact.html",
   "out/press.html",
   "out/privacy.html",

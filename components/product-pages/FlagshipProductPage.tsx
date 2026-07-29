@@ -115,7 +115,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
           <h1>{project.name}</h1>
           <p className="v2-product-hero__tagline">{project.tagline}</p>
           <div className="v2-action-row">
-            <ButtonLink href="/projects" variant="secondary">
+            <ButtonLink href="/products" variant="secondary">
               All Products
             </ButtonLink>
             <ButtonLink href="/contact" variant="contact">

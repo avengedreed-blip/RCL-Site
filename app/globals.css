@@ -1489,6 +1489,10 @@ a {
   max-width: 760px;
 }
 
+.v2-hero__copy--enter {
+  animation: hero-copy-enter 520ms ease both;
+}
+
 .v2-hero__logo {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -4783,6 +4787,18 @@ a {
   from {
     opacity: 0;
     transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-copy-enter {
+  from {
+    opacity: 0.88;
+    transform: translateY(6px);
   }
 
   to {

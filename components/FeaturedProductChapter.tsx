@@ -61,7 +61,11 @@ export function FeaturedProductChapter({
             </ul>
           </div>
         ) : null}
-        <Link className="text-link" href={project.route}>
+        <Link
+          className="text-link"
+          href={project.route}
+          aria-label={`View ${project.name} product details`}
+        >
           View product
           <ArrowRight aria-hidden="true" />
         </Link>

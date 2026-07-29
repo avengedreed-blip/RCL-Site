@@ -42,7 +42,7 @@ export const founderStory = {
     copy:
       "The best way to support Reed Creative Labs is to try the products, share the studio, and help independent software reach the people who need it.",
     ctas: [
-      { label: "View Products", href: "/projects", variant: "primary" },
+      { label: "View Products", href: "/products", variant: "primary" },
       { label: "Contact the Studio", href: "/contact", variant: "secondary" },
     ],
   },

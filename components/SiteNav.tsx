@@ -6,13 +6,17 @@ import { cn } from "@/lib/utils";
 
 export const primaryNavItems = [
   { href: "/", label: "Home" },
-  { href: "/projects", label: "Products" },
+  { href: "/products", label: "Products" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
 function isCurrentPath(pathname: string, href: string) {
+  if (href === "/products" && pathname.startsWith("/projects/")) {
+    return true;
+  }
+
   return href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 }
 

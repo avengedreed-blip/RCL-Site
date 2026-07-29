@@ -23,18 +23,28 @@
       "permanent": true
     },
     {
+      "source": "/projects",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/projects/",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
       "source": "/projects/rcl-workspace",
-      "destination": "/projects",
+      "destination": "/products",
       "permanent": true
     },
     {
       "source": "/projects/echo",
-      "destination": "/projects",
+      "destination": "/products",
       "permanent": true
     },
     {
       "source": "/projects/phase-defense",
-      "destination": "/projects",
+      "destination": "/products",
       "permanent": true
     },
     {

@@ -10,7 +10,7 @@ import { featuredProjects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Reed Creative Labs",
+  title: "Reed Creative Labs | Software, Simulation & Interactive Systems",
   description:
     "An independent software and engineering studio building tools, simulations, desktop software, and games with a focus on ownership and lasting value.",
   path: "/",
@@ -65,7 +65,7 @@ export default function Home() {
     <main id="main-content" tabIndex={-1} className="v2-home">
       <section className="v2-hero">
         <div className="v2-container v2-hero__layout">
-          <Reveal className="v2-hero__copy">
+          <div className="v2-hero__copy v2-hero__copy--enter">
             <Logo
               className="v2-hero__logo"
               imageClassName="v2-hero__logo-image"
@@ -89,7 +89,7 @@ export default function Home() {
             <p className="v2-hero__principle">
               Runtime simulation, not pre-rendered media.
             </p>
-          </Reveal>
+          </div>
           <FortranFlowHero />
         </div>
       </section>
@@ -115,7 +115,7 @@ export default function Home() {
           ))}
         </div>
         <div className="v2-inline-action">
-          <Link className="text-link" href="/projects">
+          <Link className="text-link" href="/products">
             View the complete product catalog
             <ArrowRight aria-hidden="true" />
           </Link>

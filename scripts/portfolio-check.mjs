@@ -42,6 +42,7 @@ const allowedStatuses = new Set([
   "archived",
 ]);
 
+
 for (const project of projects) {
   if (!allowedStatuses.has(project.status)) {
     fail(`${project.name} uses unsupported public status ${project.status}`);
@@ -229,9 +230,11 @@ if (projects.some((project) => project.name === retiredIncludedGame)) {
 
 const vercelConfig = JSON.parse(readFileSync(join(root, "vercel.json"), "utf8"));
 const requiredRedirects = new Map([
-  ["/projects/rcl-workspace", "/projects"],
-  ["/projects/echo", "/projects"],
-  ["/projects/phase-defense", "/projects"],
+  ["/projects", "/products"],
+  ["/projects/", "/products"],
+  ["/projects/rcl-workspace", "/products"],
+  ["/projects/echo", "/products"],
+  ["/projects/phase-defense", "/products"],
   ["/privacy-policy", "/privacy"],
 ]);
 
@@ -330,6 +333,19 @@ if (!sitemap.includes("https://reedcreativelabs.com/privacy")) {
   fail("The canonical privacy route is missing from the sitemap");
 }
 
+if (!sitemap.includes("https://reedcreativelabs.com/products")) {
+  fail("The canonical Products catalog is missing from the sitemap");
+}
+if (sitemap.includes("<loc>https://reedcreativelabs.com/projects</loc>")) {
+  fail("The retired /projects catalog URL remains in the sitemap");
+}
+if (!existsSync(routeFile("/products"))) {
+  fail("The canonical /products catalog output is missing");
+}
+if (existsSync(routeFile("/projects"))) {
+  fail("A duplicate static /projects catalog output was generated");
+}
+
 for (const project of projects) {
   const pageFile = routeFile(project.route);
   if (!existsSync(pageFile)) fail(`Missing product route output: ${project.route}`);
@@ -401,13 +417,43 @@ for (const retired of [...retiredProducts.map((item) => item.name), retiredInclu
 if (publicHtml.includes('href="#"')) fail("Placeholder public link found");
 
 const homepage = readFileSync(routeFile("/"), "utf8");
+const homeSource = readFileSync(join(root, "app", "page.tsx"), "utf8");
+const globalCss = readFileSync(join(root, "app", "globals.css"), "utf8");
+const heroMediaSource = readFileSync(join(root, "components", "HeroSystemField.tsx"), "utf8");
+const expectedHomeTitle =
+  "<title>Reed Creative Labs | Software, Simulation &amp; Interactive Systems</title>";
+
+if (!homepage.includes(expectedHomeTitle)) {
+  fail("Homepage title does not match the approved post-launch title");
+}
+if (!homepage.includes('class="v2-hero__copy v2-hero__copy--enter"')) {
+  fail("Homepage hero copy is missing its first-paint-safe entrance class");
+}
+if (homeSource.includes('<Reveal className="v2-hero__copy">')) {
+  fail("Homepage hero copy regressed to the opacity-zero Reveal wrapper");
+}
+if (!globalCss.includes("@keyframes hero-copy-enter") || !globalCss.includes("opacity: 0.88")) {
+  fail("Homepage hero entrance no longer guarantees readable initial opacity");
+}
+if (!heroMediaSource.includes('className="hero-system-field" aria-hidden="true"') || !heroMediaSource.includes('alt=""')) {
+  fail("Decorative hero fallback image must remain hidden from assistive technology");
+}
 const positions = expectedFeatured.map((slug) => homepage.indexOf(`data-product-slug="${slug}"`));
 if (positions.some((position) => position < 0)) fail("Homepage is missing a required featured product");
 if (!(positions[0] < positions[1] && positions[1] < positions[2])) {
   fail("Homepage featured products are not in the required order");
 }
 
-const productsPage = readFileSync(routeFile("/projects"), "utf8");
+const productsPage = readFileSync(routeFile("/products"), "utf8");
+for (const project of featuredProjects) {
+  const label = `aria-label="View ${project.name} product details"`;
+  if (!homepage.includes(label) || !productsPage.includes(label)) {
+    fail(`Missing unique featured-product accessible name for ${project.name}`);
+  }
+}
+if (publicHtml.includes('href="/projects"')) {
+  fail("A public link still targets the retired /projects catalog URL");
+}
 for (const slug of expectedFeatured) {
   const occurrences = productsPage.match(new RegExp(`data-product-slug="${slug}"`, "g"))?.length ?? 0;
   if (occurrences !== 1) {
