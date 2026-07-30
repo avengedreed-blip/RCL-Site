@@ -47,6 +47,12 @@ const MIN_QUALITY_SAMPLES = 120;
 const DIAGNOSTIC_UPDATE_INTERVAL = 45;
 const MAX_PREFLIGHT_LONG_TASK_MS = 180;
 const DESKTOP_REFERENCE_RIGHT_OVERHANG = 0.12;
+const LAPTOP_FOCAL_SHIFT_START = 1024;
+const LAPTOP_FOCAL_SHIFT_HOLD_END = 1366;
+const LAPTOP_FOCAL_SHIFT_END = 1440;
+const LAPTOP_RENDERER_CENTER_TARGET_X = 0.675;
+const LAPTOP_COMPOSITION_CENTER_X = 0.7;
+const LAPTOP_CAPTION_FOLLOW_RATIO = 0.55;
 const COMPOSITION_NAMES: readonly HeroCompositionName[] = [
   "a",
   "b",
@@ -62,6 +68,20 @@ function responsiveComposition(): HeroCompositionName {
     return "b";
   }
   return "c";
+}
+
+function laptopFocalCorrectionWeight(viewportWidth: number) {
+  if (
+    viewportWidth < LAPTOP_FOCAL_SHIFT_START ||
+    viewportWidth >= LAPTOP_FOCAL_SHIFT_END
+  ) {
+    return 0;
+  }
+
+  return viewportWidth <= LAPTOP_FOCAL_SHIFT_HOLD_END
+    ? 1
+    : (LAPTOP_FOCAL_SHIFT_END - viewportWidth) /
+        (LAPTOP_FOCAL_SHIFT_END - LAPTOP_FOCAL_SHIFT_HOLD_END);
 }
 
 function initialQualityIndex() {
@@ -228,12 +248,33 @@ export function FortranFlowHero() {
                 bounds.left,
             )
           : bounds.width;
+      const focalCorrectionWeight = laptopFocalCorrectionWeight(
+        window.innerWidth,
+      );
+      const currentFocalCenterCss =
+        bounds.left + LAPTOP_COMPOSITION_CENTER_X * focalWidth;
+      const targetFocalCenterCss =
+        window.innerWidth * LAPTOP_RENDERER_CENTER_TARGET_X;
+      const focalShiftCss =
+        Math.max(0, currentFocalCenterCss - targetFocalCenterCss) *
+        focalCorrectionWeight;
+      const adjustedFocalWidth = Math.max(
+        bounds.width * 0.01,
+        focalWidth - focalShiftCss / LAPTOP_COMPOSITION_CENTER_X,
+      );
+      container.style.setProperty(
+        "--hero-caption-shift",
+        `${focalShiftCss * LAPTOP_CAPTION_FOLLOW_RATIO}px`,
+      );
+      if (diagnosticsEnabled) {
+        container.dataset.heroFocalShiftCss = focalShiftCss.toFixed(2);
+      }
       renderer.resize(
         bounds.width,
         bounds.height,
         window.devicePixelRatio || 1,
         QUALITY_LEVELS[qualityIndex],
-        focalWidth,
+        adjustedFocalWidth,
       );
     };
 
