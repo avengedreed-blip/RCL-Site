@@ -12,7 +12,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Reed Creative Labs | Software, Simulation & Interactive Systems",
   description:
-    "An independent software and engineering studio building tools, simulations, desktop software, and games with a focus on ownership and lasting value.",
+    "An independent studio building original software, simulations, desktop tools, games, premium websites, and focused custom software.",
   path: "/",
   image: {
     url: "/og-image.jpg",
@@ -75,10 +75,9 @@ export default function Home() {
               Reed Creative Labs · Software Engineering Studio · South Carolina
             </p>
             <h1>Building software that explores complex systems.</h1>
-            <p className="v2-hero__body v2-hero__subheading">
-              AI <span aria-hidden="true">•</span> Scientific Simulation{" "}
-              <span aria-hidden="true">•</span> Desktop Software{" "}
-              <span aria-hidden="true">•</span> Games
+            <p className="v2-hero__body v2-hero__services-copy">
+              Original software, simulations, and games, alongside premium
+              websites and focused custom software.
             </p>
             <div className="v2-action-row">
               <ButtonLink href="#featured-products">Explore Products</ButtonLink>
