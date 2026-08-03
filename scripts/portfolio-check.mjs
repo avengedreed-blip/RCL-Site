@@ -5,6 +5,7 @@ import {
   getProject,
   projects,
 } from "../content/projects.ts";
+import { flagshipSectionDensity } from "../components/product-pages/flagship-section-density.ts";
 
 const root = process.cwd();
 const out = join(root, "out");
@@ -69,6 +70,23 @@ const expectedFeatured = [
   "storm-lab",
   "phase-arcade-volume-1",
 ];
+
+const expectedFlagshipDensity = {
+  hero: "expansive",
+  mission: "standard",
+  status: "compact",
+  "current-focus": "compact",
+  roadmap: "standard",
+  features: "compact",
+  engineering: "compact",
+  gallery: "expansive",
+  "final-cta": "expansive",
+};
+
+if (JSON.stringify(flagshipSectionDensity) !== JSON.stringify(expectedFlagshipDensity)) {
+  fail("Flagship section density hierarchy has drifted from the approved editorial rhythm");
+}
+
 if (featuredProjects.map((project) => project.slug).join(",") !== expectedFeatured.join(",")) {
   fail(
     "Featured hierarchy must be Forge, Forgefield, RCL Science Lab, Storm Lab, then Phase Arcade Volume I",
