@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ComponentPropsWithoutRef } from "react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { ProductMediaSurface } from "@/components/ProductMediaSurface";
 import { Reveal } from "@/components/Reveal";
@@ -15,12 +16,33 @@ import {
 } from "@/content/projects";
 import { getProjectScreenshots } from "@/lib/project-media";
 import { projectJsonLd } from "@/lib/structured-data";
+import {
+  flagshipSectionDensity,
+  type FlagshipSectionName,
+} from "@/components/product-pages/flagship-section-density";
 
 type GalleryImage = {
   src: string;
   alt: string;
   caption?: string;
 };
+
+type FlagshipSectionProps = ComponentPropsWithoutRef<"section"> & {
+  sectionName: FlagshipSectionName;
+};
+
+function FlagshipSection({
+  sectionName,
+  ...props
+}: FlagshipSectionProps) {
+  return (
+    <section
+      data-density={flagshipSectionDensity[sectionName]}
+      data-flagship-section={sectionName}
+      {...props}
+    />
+  );
+}
 
 function getGallery(project: Project): readonly GalleryImage[] {
   if (project.slug === "phase-arcade-volume-1") {
@@ -107,7 +129,10 @@ export function FlagshipProductPage({ project }: { project: Project }) {
     >
       <StructuredData data={projectJsonLd(project)} />
 
-      <section className="v2-container v2-product-hero">
+      <FlagshipSection
+        sectionName="hero"
+        className="v2-container v2-product-hero"
+      >
         <Reveal className="v2-product-hero__copy">
           <p className="v2-eyebrow">
             {getStatusLabel(project.status)} · {project.categoryLabel}
@@ -135,9 +160,13 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             <ProjectRecord project={project} />
           )}
         </Reveal>
-      </section>
+      </FlagshipSection>
 
-      <section className="v2-container v2-product-mission" aria-labelledby="mission-title">
+      <FlagshipSection
+        sectionName="mission"
+        className="v2-container v2-product-mission"
+        aria-labelledby="mission-title"
+      >
         <Reveal>
           <p className="v2-eyebrow">Mission</p>
           <h2 id="mission-title">{project.headline}</h2>
@@ -153,9 +182,10 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             </Reveal>
           ))}
         </div>
-      </section>
+      </FlagshipSection>
 
-      <section
+      <FlagshipSection
+        sectionName="status"
         className="v2-section-band v2-product-status"
         aria-labelledby="project-status-title"
       >
@@ -168,10 +198,14 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             </div>
           </Reveal>
         </div>
-      </section>
+      </FlagshipSection>
 
       {project.currentFocus?.length ? (
-        <section className="v2-container v2-product-section" aria-labelledby="current-focus-title">
+        <FlagshipSection
+          sectionName="current-focus"
+          className="v2-container v2-product-section"
+          aria-labelledby="current-focus-title"
+        >
           <Reveal className="v2-product-section__intro">
             <p className="v2-eyebrow">Current focus</p>
             <h2 id="current-focus-title">What the studio is working through now.</h2>
@@ -188,11 +222,15 @@ export function FlagshipProductPage({ project }: { project: Project }) {
               </li>
             ))}
           </ol>
-        </section>
+        </FlagshipSection>
       ) : null}
 
       {project.milestones?.length ? (
-        <section className="v2-container v2-product-section" aria-labelledby="roadmap-title">
+        <FlagshipSection
+          sectionName="roadmap"
+          className="v2-container v2-product-section"
+          aria-labelledby="roadmap-title"
+        >
           <Reveal className="v2-product-section__intro">
             <p className="v2-eyebrow">Roadmap</p>
             <h2 id="roadmap-title">Progress without invented dates.</h2>
@@ -211,11 +249,15 @@ export function FlagshipProductPage({ project }: { project: Project }) {
               </li>
             ))}
           </ol>
-        </section>
+        </FlagshipSection>
       ) : null}
 
       {features.length || project.slug === "forge" ? (
-        <section className="v2-section-band" aria-labelledby="features-title">
+        <FlagshipSection
+          sectionName="features"
+          className="v2-section-band"
+          aria-labelledby="features-title"
+        >
           <div className="v2-container v2-product-section">
             <Reveal className="v2-product-section__intro">
               <p className="v2-eyebrow">{isConcept ? "Planned systems" : "Features"}</p>
@@ -241,11 +283,15 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             ) : null}
             {project.slug === "forge" ? <ForgeFeatureDetail /> : null}
           </div>
-        </section>
+        </FlagshipSection>
       ) : null}
 
       {project.technicalProfile ? (
-        <section className="v2-container v2-product-section" aria-labelledby="technical-profile-title">
+        <FlagshipSection
+          sectionName="engineering"
+          className="v2-container v2-product-section"
+          aria-labelledby="technical-profile-title"
+        >
           <Reveal className="v2-product-section__intro">
             <p className="v2-eyebrow">
               {isConcept ? "Current technical foundation" : "Engineering"}
@@ -260,10 +306,14 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             profile={project.technicalProfile}
             productSlug={project.slug}
           />
-        </section>
+        </FlagshipSection>
       ) : null}
 
-      <section className="v2-container v2-product-section" aria-labelledby="gallery-title">
+      <FlagshipSection
+        sectionName="gallery"
+        className="v2-container v2-product-section"
+        aria-labelledby="gallery-title"
+      >
         <Reveal className="v2-product-section__intro">
           <p className="v2-eyebrow">Gallery</p>
           <h2 id="gallery-title">Verified product media.</h2>
@@ -296,9 +346,13 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             />
           </Reveal>
         )}
-      </section>
+      </FlagshipSection>
 
-      <section className="v2-container v2-product-final" aria-labelledby="product-final-title">
+      <FlagshipSection
+        sectionName="final-cta"
+        className="v2-container v2-product-final"
+        aria-labelledby="product-final-title"
+      >
         <Reveal>
           <p className="v2-eyebrow">Product inquiry</p>
           <h2 id="product-final-title">Follow the work without pretending it is finished.</h2>
@@ -309,7 +363,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             Contact the Studio
           </ButtonLink>
         </Reveal>
-      </section>
+      </FlagshipSection>
     </main>
   );
 }

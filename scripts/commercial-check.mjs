@@ -38,11 +38,10 @@ for (const page of requiredPages) {
 
 const services = readFileSync(join(out, "services.html"), "utf8");
 for (const discipline of [
-  "Software Development",
-  "Scientific and Engineering Simulation",
-  "AI Solutions",
-  "Interactive Media",
-  "Websites",
+  "Premium Websites",
+  "Custom Software",
+  "Desktop Applications",
+  "Data Visualization",
 ]) {
   if (!services.includes(discipline)) {
     fail(`Services page is missing discipline: ${discipline}`);
@@ -50,9 +49,9 @@ for (const discipline of [
 }
 for (const boundary of [
   "written scope",
-  "safety-critical infrastructure",
-  "24/7 operational support",
-  "quoted separately",
+  "Regulated medical, legal, or financial systems",
+  "always-on cloud infrastructure",
+  "scoped separately",
 ]) {
   if (!services.includes(boundary)) {
     fail(`Services page is missing boundary language: ${boundary}`);
