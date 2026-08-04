@@ -3453,7 +3453,8 @@ a {
   line-height: 1.75;
 }
 
-.v2-services-page .v2-page-hero__inner > p:last-child {
+.v2-services-page .v2-page-hero__inner > p:last-child,
+.v2-contact-page .v2-page-hero__inner > p:last-child {
   margin-top: 0.75rem;
 }
 
