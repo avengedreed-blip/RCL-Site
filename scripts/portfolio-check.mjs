@@ -464,7 +464,7 @@ if (!(positions[0] < positions[1] && positions[1] < positions[2])) {
 
 const productsPage = readFileSync(routeFile("/products"), "utf8");
 for (const project of featuredProjects) {
-  const label = `aria-label="View ${project.name} product details"`;
+  const label = `aria-label="View product: ${project.name}"`;
   if (!homepage.includes(label) || !productsPage.includes(label)) {
     fail(`Missing unique featured-product accessible name for ${project.name}`);
   }

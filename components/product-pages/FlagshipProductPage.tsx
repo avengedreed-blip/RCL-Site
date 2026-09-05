@@ -233,7 +233,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         >
           <Reveal className="v2-product-section__intro">
             <p className="v2-eyebrow">Roadmap</p>
-            <h2 id="roadmap-title">Progress without invented dates.</h2>
+            <h2 id="roadmap-title">Development milestones.</h2>
           </Reveal>
           <ol className="v2-roadmap">
             {project.milestones.map((milestone, index) => (
@@ -255,7 +255,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
       {features.length || project.slug === "forge" ? (
         <FlagshipSection
           sectionName="features"
-          className="v2-section-band"
+          className="v2-section-band v2-product-feature-band"
           aria-labelledby="features-title"
         >
           <div className="v2-container v2-product-section">
@@ -355,7 +355,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
       >
         <Reveal>
           <p className="v2-eyebrow">Product inquiry</p>
-          <h2 id="product-final-title">Follow the work without pretending it is finished.</h2>
+          <h2 id="product-final-title">Discuss the product and its development.</h2>
           <p>
             Contact Reed Creative Labs for product, development, or press inquiries.
           </p>

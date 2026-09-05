@@ -64,7 +64,7 @@ export function FeaturedProductChapter({
         <Link
           className="text-link"
           href={project.route}
-          aria-label={`View ${project.name} product details`}
+          aria-label={`View product: ${project.name}`}
         >
           View product
           <ArrowRight aria-hidden="true" />
@@ -77,7 +77,6 @@ export function FeaturedProductChapter({
         </div>
         <ProductMediaSurface
           project={project}
-          priority={index === 0}
           className="featured-product-chapter__surface"
         />
       </div>

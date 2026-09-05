@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { ProductionSpeedInsights } from "@/components/ProductionSpeedInsights";
 import { StructuredData } from "@/components/StructuredData";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { defaultSeo, siteUrl } from "@/lib/seo";
@@ -64,6 +65,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <ProductionSpeedInsights />
       </body>
     </html>
   );

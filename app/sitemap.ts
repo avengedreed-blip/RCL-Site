@@ -1,29 +1,16 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/content/projects";
 import { siteUrl } from "@/lib/seo";
+import { staticPagePaths } from "@/lib/site-routes";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = [
-    "",
-    "/products",
-    "/services",
-    "/about",
-    "/about/founder",
-    "/press",
-    "/contact",
-    "/privacy",
-    "/terms",
-    "/accessibility",
-    "/security",
-  ];
-
   return [
-      ...staticRoutes.map((route) => ({
-        url: `${siteUrl}${route}`,
+      ...staticPagePaths.map((route) => ({
+        url: new URL(route, siteUrl).toString(),
         changeFrequency: "monthly" as const,
-        priority: route === "" ? 1 : 0.8,
+        priority: route === "/" ? 1 : 0.8,
       })),
       ...projects.map((project) => ({
         url: `${siteUrl}${project.route}`,

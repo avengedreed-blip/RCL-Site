@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
   description:
-    "Contact Reed Creative Labs for product, press, and studio inquiries.",
+    "Discuss a website or custom software project with Reed Creative Labs, or contact the studio for product, press, accessibility, and security inquiries.",
   path: "/contact",
   image: {
     url: "/social-preview.jpg",

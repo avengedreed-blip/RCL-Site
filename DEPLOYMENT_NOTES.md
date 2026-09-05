@@ -22,9 +22,26 @@ repository redirect rules run. Configure the domain or redirect rule in Vercel
 so plain HTTP `www` goes directly to `https://reedcreativelabs.com/` when the
 platform allows it.
 
+## Privacy-Preserving Performance Measurement
+
+The production build renders the official `@vercel/speed-insights` component
+only when `VERCEL_ENV=production`. Enable Speed Insights for the Vercel project
+before deployment so Vercel provisions its randomized same-origin script and
+intake routes.
+
+Do not enable Vercel Web Analytics for this project. Its daily visitor hash and
+session grouping do not meet the studio's no-fingerprinting requirement. Do not
+add custom events, advertising trackers, session recording, heatmaps, or other
+visitor profiling without a new explicit privacy and legal decision.
+
+The public disclosure is maintained in `/privacy`; the technical decision and
+data inventory are in
+`docs/PRIVACY_ANALYTICS_AND_LLM_DISCOVERABILITY.md`.
+
 ## Privacy And Product Changes
 
-Update `/privacy`, `/terms`, and `SECURITY.md` before adding forms, analytics,
+Update `/privacy`, `/terms`, `SECURITY.md`, and the privacy architecture note
+before adding forms, traffic analytics,
 accounts, purchases, downloads, newsletters, cookies, tracking scripts, pixels,
 or third-party telemetry.
 

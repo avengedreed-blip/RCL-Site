@@ -11,11 +11,18 @@ const expectedFiles = [
   "out/terms.html",
   "out/sitemap.xml",
   "out/robots.txt",
+  "out/llms.txt",
 ];
 
 const forbiddenEverywhere = [
   { pattern: ["@vercel", "analytics"].join("/"), label: "Vercel Analytics package" },
   { pattern: "<" + "Analytics", label: "Analytics component" },
+  { pattern: "googletagmanager.com", label: "Google Tag Manager" },
+  { pattern: "google-analytics.com", label: "Google Analytics" },
+  { pattern: "connect.facebook.net", label: "Meta tracking script" },
+  { pattern: "static.hotjar.com", label: "Hotjar" },
+  { pattern: "clarity.ms", label: "Microsoft Clarity" },
+  { pattern: "fullstory.com", label: "FullStory" },
   { pattern: "'unsafe" + "-eval'", label: "general eval-enabled CSP token" },
 ];
 
@@ -30,6 +37,8 @@ const guardedSourceFiles = [
   "app/layout.tsx",
   "app/page.tsx",
   "components/SiteFooter.tsx",
+  "components/ProductionSpeedInsights.tsx",
+  "components/PrivacySpeedInsights.tsx",
   "package.json",
   "vercel.json",
 ];
@@ -44,6 +53,61 @@ if (missingFiles.length > 0) {
   throw new Error(`Missing expected build output: ${missingFiles.join(", ")}`);
 }
 
+const packageJson = JSON.parse(
+  readFileSync(join(root, "package.json"), "utf8"),
+);
+if (!packageJson.dependencies?.["@vercel/speed-insights"]) {
+  throw new Error("Official Vercel Speed Insights dependency is missing");
+}
+if (packageJson.dependencies?.["@vercel/analytics"]) {
+  throw new Error("Vercel Web Analytics must remain uninstalled");
+}
+
+const insightsSource = readFileSync(
+  join(root, "components/ProductionSpeedInsights.tsx"),
+  "utf8",
+);
+for (const required of [
+  "@/components/PrivacySpeedInsights",
+  'process.env.VERCEL_ENV !== "production"',
+  "<PrivacySpeedInsights",
+]) {
+  if (!insightsSource.includes(required)) {
+    throw new Error("Production Speed Insights guard is missing " + required);
+  }
+}
+const privacyInsightsSource = readFileSync(
+  join(root, "components/PrivacySpeedInsights.tsx"),
+  "utf8",
+);
+for (const required of [
+  "@vercel/speed-insights/next",
+  "beforeSend",
+  "sanitizePerformanceEvent",
+  "globalPrivacyControl",
+  "return null",
+]) {
+  if (!privacyInsightsSource.includes(required)) {
+    throw new Error("Speed Insights privacy redaction is missing " + required);
+  }
+}
+const layoutSource = readFileSync(join(root, "app/layout.tsx"), "utf8");
+if (!layoutSource.includes("<ProductionSpeedInsights />")) {
+  throw new Error("Root layout is missing the production Speed Insights boundary");
+}
+
+const llmsText = readFileSync(join(root, "out/llms.txt"), "utf8");
+for (const required of [
+  "# Reed Creative Labs",
+  "https://reedcreativelabs.com/projects/forge",
+  "https://reedcreativelabs.com/services",
+  "https://reedcreativelabs.com/contact",
+  "https://reedcreativelabs.com/privacy",
+]) {
+  if (!llmsText.includes(required)) {
+    throw new Error("llms.txt is missing " + required);
+  }
+}
 for (const sourceFile of [...guardedSourceFiles, ...documentationFiles]) {
   const filePath = join(root, sourceFile);
   if (!existsSync(filePath)) {

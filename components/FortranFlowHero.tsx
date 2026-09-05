@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Pause, Play } from "lucide-react";
 import { HeroSystemField } from "@/components/HeroSystemField";
 import type {
   HeroCompositionName,
@@ -135,6 +136,16 @@ export function FortranFlowHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const statusRef = useRef<HTMLSpanElement>(null);
+  const pausedRef = useRef(false);
+  const syncPlaybackRef = useRef<(() => void) | null>(null);
+  const [paused, setPaused] = useState(false);
+  const [live, setLive] = useState(false);
+
+  function togglePlayback() {
+    pausedRef.current = !pausedRef.current;
+    setPaused(pausedRef.current);
+    syncPlaybackRef.current?.();
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -276,6 +287,9 @@ export function FortranFlowHero() {
         QUALITY_LEVELS[qualityIndex],
         adjustedFocalWidth,
       );
+      if (pausedRef.current && runtime) {
+        renderer.render(runtime.state);
+      }
     };
 
     const setQuality = (nextIndex: number) => {
@@ -354,7 +368,11 @@ export function FortranFlowHero() {
 
     const frame = (timestamp: number) => {
       animationFrame = 0;
-      if (cancelled || !animationEnabled) {
+      if (cancelled || !animationEnabled || pausedRef.current) {
+        return;
+      }
+      if (motionQuery.matches) {
+        handleMotionChange();
         return;
       }
 
@@ -384,7 +402,7 @@ export function FortranFlowHero() {
 
     const updateAnimationState = () => {
       const shouldRun =
-        !cancelled && animationEnabled && documentVisible && heroVisible;
+        !cancelled && animationEnabled && !pausedRef.current && documentVisible && heroVisible;
       if (diagnosticsEnabled) {
         container.dataset.heroActivity = shouldRun ? "running" : "paused";
       }
@@ -398,6 +416,8 @@ export function FortranFlowHero() {
       }
     };
 
+    syncPlaybackRef.current = updateAnimationState;
+
     const handleVisibilityChange = () => {
       documentVisible = !document.hidden;
       updateAnimationState();
@@ -406,6 +426,7 @@ export function FortranFlowHero() {
       event.preventDefault();
       heroVisible = false;
       animationEnabled = false;
+      setLive(false);
       window.cancelAnimationFrame(animationFrame);
       container.dataset.heroMode = "fallback";
       container.dataset.heroQuality = "static";
@@ -418,16 +439,18 @@ export function FortranFlowHero() {
       }
       updateAnimationState();
     };
-    const handleMotionChange = (event: MediaQueryListEvent) => {
-      if (!event.matches) {
+    const handleMotionChange = () => {
+      if (!motionQuery.matches) {
         return;
       }
       heroVisible = false;
       animationEnabled = false;
+      setLive(false);
       window.cancelAnimationFrame(animationFrame);
       renderer?.dispose();
       renderer = null;
       runtime = null;
+      performanceObserver?.disconnect();
       container.dataset.heroMode = "reduced";
       container.dataset.heroQuality = "static";
       setDevelopmentStage("reduced-motion");
@@ -452,8 +475,15 @@ export function FortranFlowHero() {
     canvas.addEventListener("webglcontextlost", handleContextLost);
     motionQuery.addEventListener("change", handleMotionChange);
 
+    const canInitialize = () => {
+      if (cancelled) return false;
+      if (motionQuery.matches) handleMotionChange();
+      return animationEnabled;
+    };
+
     const initialize = async () => {
       try {
+        if (!canInitialize()) return;
         recordLongTasks(performanceObserver?.takeRecords() ?? []);
         performanceObserver?.disconnect();
         if (
@@ -483,7 +513,7 @@ export function FortranFlowHero() {
           import("@/lib/hero-flow/runtime"),
           import("@/lib/hero-flow/renderer"),
         ]);
-        if (cancelled) {
+        if (!canInitialize()) {
           return;
         }
 
@@ -504,11 +534,13 @@ export function FortranFlowHero() {
           container.dataset.heroShaderStatus = "compiled-and-linked";
         }
         setDevelopmentStage("loading-fortran-wasm");
-        runtime = await FortranHeroRuntime.load();
-        if (cancelled) {
-          renderer.dispose();
+        const loadedRuntime = await FortranHeroRuntime.load();
+        if (!canInitialize()) {
+          renderer?.dispose();
+          renderer = null;
           return;
         }
+        runtime = loadedRuntime;
 
         if (overrides.forcedTime !== undefined) {
           runtime.seek(overrides.forcedTime);
@@ -520,6 +552,7 @@ export function FortranFlowHero() {
         resize();
         renderer.render(runtime.state);
         container.dataset.heroMode = "live";
+        setLive(true);
         setDevelopmentStage("live");
         updateAnimationState();
         if (diagnosticsEnabled) {
@@ -541,7 +574,11 @@ export function FortranFlowHero() {
           statusRef.current.textContent = "Forgefield web renderer";
         }
       } catch (error) {
+        renderer?.dispose();
+        renderer = null;
+        runtime = null;
         if (!cancelled) {
+          setLive(false);
           animationEnabled = false;
           window.cancelAnimationFrame(animationFrame);
           container.dataset.heroMode = "fallback";
@@ -572,6 +609,7 @@ export function FortranFlowHero() {
 
     return () => {
       cancelled = true;
+      syncPlaybackRef.current = null;
       window.cancelAnimationFrame(animationFrame);
       if (cancelIdle && requestIdle) {
         cancelIdle(idleHandle);
@@ -610,8 +648,19 @@ export function FortranFlowHero() {
       </div>
       <p className="fortran-flow-hero__caption">
         <span>Simulation field</span>
-        <span ref={statusRef}>Initializing numerical field</span>
+        <span ref={statusRef}>Deterministic renderer still</span>
       </p>
+      {live ? (
+        <button
+          type="button"
+          className="fortran-flow-hero__playback"
+          onClick={togglePlayback}
+          aria-label={paused ? "Resume simulation" : "Pause simulation"}
+          title={paused ? "Resume simulation" : "Pause simulation"}
+        >
+          {paused ? <Play aria-hidden="true" size={16} /> : <Pause aria-hidden="true" size={16} />}
+        </button>
+      ) : null}
     </div>
   );
 }

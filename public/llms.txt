@@ -1,0 +1,37 @@
+# Reed Creative Labs
+
+> Reed Creative Labs is a veteran-founded, family-built independent software and engineering studio in South Carolina. Its mission is to build software that explores complex systems through desktop tools, scientific simulation, procedural media, games, and focused client work.
+
+Products described as Active Development, Prototype, Research, Private Beta, or Concept are not represented as released products. Product pages state the current public development status and known platform scope.
+
+The public website is a static Next.js App Router application built with React and TypeScript. Its homepage includes a procedurally generated visualization whose canonical state system is authored in modern Fortran and compiled to WebAssembly; browser code handles lifecycle and rendering. Product pages distinguish working screenshots from abstract or unavailable media.
+
+## Primary Products
+
+- [Forge](https://reedcreativelabs.com/projects/forge): A local-first software engineering environment for sustained work on real repositories and codebases. Active Development for Windows.
+- [Forgefield](https://reedcreativelabs.com/projects/forgefield): A native Windows procedural-rendering project for live wallpapers and screensavers. Active Development.
+- [RCL Science Lab](https://reedcreativelabs.com/projects/rcl-science-lab): Educational software for interactive scientific simulations, visualization, and guided exploration. Active Development for desktop.
+- [Storm Lab](https://reedcreativelabs.com/projects/storm-lab): A working meteorological simulation research prototype connecting a native atmospheric model to map-based visualization. Prototype for Windows.
+- [Phase Arcade Volume I](https://reedcreativelabs.com/projects/phase-arcade-volume-1): Three focused arcade games for traditional desktop play and VR: Phase Shift, Phase Breaker, and Phase Court. Active Development.
+
+## Products and Roadmap
+
+- [All Products](https://reedcreativelabs.com/products): Current products, included games, active development, and planned work.
+
+## Services
+
+- [Studio Services](https://reedcreativelabs.com/services): Premium websites and focused custom software for small businesses, organizations, professionals, and independent creators.
+
+## Studio
+
+- [About Reed Creative Labs](https://reedcreativelabs.com/about): Studio purpose, engineering philosophy, and family-built context.
+- [Founder Story](https://reedcreativelabs.com/about/founder): Aaron and Katy Reed and the background behind the studio.
+- [Press Information](https://reedcreativelabs.com/press): Approved studio and product information for editorial use.
+- [Contact](https://reedcreativelabs.com/contact): The verified route for business, product, press, accessibility, security, and general inquiries.
+
+## Policies
+
+- [Privacy Policy](https://reedcreativelabs.com/privacy): Current website data practices, including production-only anonymous aggregate Web Vitals through Vercel Speed Insights and the explicit exclusion of visitor analytics and fingerprinting.
+- [Website Terms](https://reedcreativelabs.com/terms): Terms for the public informational website.
+- [Accessibility](https://reedcreativelabs.com/accessibility): Accessibility approach, limitations, and feedback path.
+- [Security](https://reedcreativelabs.com/security): Security posture and vulnerability-reporting guidance.

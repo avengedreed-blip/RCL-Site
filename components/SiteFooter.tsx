@@ -33,7 +33,7 @@ export function SiteFooter() {
           <Logo priority />
           <p>
             Reed Creative Labs is a veteran-founded independent software and
-            studio.
+            engineering studio.
           </p>
           <p className="footer-shell__location">
             South Carolina · Remote inquiries

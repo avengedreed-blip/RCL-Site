@@ -32,6 +32,7 @@ export function Logo({
         width={720}
         height={isFullLogo ? 350 : 254}
         loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : undefined}
         className={cn(
           "h-auto object-contain",
           isFullLogo ? "w-[138px] md:w-[156px]" : "w-[126px] md:w-[148px]",

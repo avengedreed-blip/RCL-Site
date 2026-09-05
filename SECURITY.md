@@ -6,14 +6,25 @@ Security headers are configured in `vercel.json` so they apply to the exported
 static deployment. The Content Security Policy intentionally allows
 `'unsafe-inline'` for scripts and styles because the current static Next export
 emits inline bootstrap scripts and inline style behavior. The policy does not
-allow eval-based script execution, third-party script domains, analytics
-endpoints, tracking scripts, tracking pixels, advertising cookies, or external
-service origins.
+allow eval-based script execution, third-party script domains, tracking pixels,
+advertising cookies, or external analytics origins.
 
-No third-party analytics or tracking scripts are currently allowed. Any future
-analytics, forms, accounts, purchases, downloads, newsletters, cookies, tracking
-pixels, or telemetry require an explicit privacy/legal review and updates to the
-privacy policy, terms, and this file before implementation.
+The production build is configured with only the official
+`@vercel/speed-insights` package. Vercel injects its script and intake routes
+through randomized same-origin paths, so the existing same-origin script and
+connection policy remains sufficient. The component is omitted unless
+`VERCEL_ENV` is `production`.
+
+The telemetry filter allows only canonical, published page paths, strips queries
+and fragments, and drops unknown or credential-bearing URLs. Do Not Track and
+Global Privacy Control suppress performance records.
+
+Vercel Web Analytics is intentionally not installed. It creates a daily visitor
+hash and groups page views into sessions, which does not meet the studio's
+stricter no-fingerprinting standard. Custom analytics events, advertising
+analytics, session recording, heatmaps, and cross-site tracking remain
+prohibited. Any expansion beyond anonymous aggregate performance metrics
+requires a new privacy, legal, security, and data-minimization review.
 
 Public vulnerability-reporting guidance is available at `/security`, with a
 machine-readable contact at `/.well-known/security.txt`. The security.txt

@@ -1,8 +1,8 @@
 import { studioEmail } from "@/content/contact";
 
 export const policyDates = {
-  effective: "July 15, 2026",
-  lastUpdated: "July 15, 2026",
+  effective: "August 6, 2026",
+  lastUpdated: "September 5, 2026",
 } as const;
 
 export type LegalSection = {
@@ -27,7 +27,10 @@ export const privacySections: LegalSection[] = [
   {
     title: "Cookies, storage, and analytics",
     body: [
-      "Reed Creative Labs does not currently use third-party analytics, tracking pixels, behavioral advertising, or nonessential cookies on this website. The site does not intentionally write information to local storage or session storage.",
+      "The Reed Creative Labs production website is configured to use Vercel Speed Insights to measure aggregate page performance. According to Vercel, each anonymous performance record may include the route and URL after Reed Creative Labs removes query strings and fragments, network speed, browser, device type, operating system, country, Web Vital and its page-element attribution, SDK version, and server-received time. Vercel states that these records are not tied to an individual visitor or IP address and cannot be used to reconstruct a browsing session.",
+      "Speed Insights uses native browser performance APIs and first-party Vercel intake routes. Reed Creative Labs does not use cookies, local storage, session storage, advertising identifiers, custom analytics events, or visitor profiles for this measurement.",
+      "Performance records are limited to published page paths. Unknown URLs, including mistyped addresses, are excluded. Records are also suppressed when the browser signals Do Not Track or Global Privacy Control.",
+      "Reed Creative Labs does not use Vercel Web Analytics because it creates a daily visitor hash and groups page views into sessions, which does not meet the studio's stricter no-fingerprinting standard. The site does not use advertising analytics, tracking pixels, behavioral advertising, session recording, heatmaps, or cross-site tracking.",
       "The copy-email control uses the browser Clipboard API only after you select it and does not send clipboard contents to Reed Creative Labs.",
     ],
   },
@@ -160,7 +163,7 @@ export const securitySections: LegalSection[] = [
   {
     title: "Website security posture",
     body: [
-      "This marketing site is a static Next.js export. It does not currently provide public accounts, form submission, payment processing, a database, or intentional analytics and advertising scripts.",
+      "This marketing site is a static Next.js export. It does not currently provide public accounts, form submission, payment processing, or a database. Its only intentional telemetry configuration is production-only Vercel Speed Insights for anonymous aggregate Web Vitals; it does not use visitor analytics, advertising scripts, or behavioral profiles.",
       "The deployment uses HTTPS and browser security headers. These choices reduce the site's attack surface but do not make the website or its providers risk-free.",
     ],
   },

@@ -296,6 +296,14 @@ fallback image are hidden from assistive technology and cannot capture pointer
 or keyboard input. The headline, capability line, actions, and restrained
 simulation caption remain ordinary HTML.
 
+Live mode also exposes an ordinary HTML pause/resume button outside the
+decorative canvas wrapper. It has a 44px target, an accessible name and a
+visible keyboard focus outline. Pausing stops simulation advancement and frame
+scheduling; resizing while paused redraws the same state once. The control is
+absent in static and reduced-motion modes. A reduced-motion change during
+asynchronous initialization cancels the live path before it can become visible.
+Leaving reduced motion does not automatically restart the scene in that visit.
+
 ## Validation commands
 
 ```powershell

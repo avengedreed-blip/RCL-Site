@@ -117,6 +117,9 @@ for (const phrase of [
   "Effective:",
   "Vercel",
   "Cookies, storage, and analytics",
+  "Vercel Speed Insights",
+  "does not use Vercel Web Analytics",
+  "no-fingerprinting standard",
   "Children and families",
   "separately distributed products",
 ]) {

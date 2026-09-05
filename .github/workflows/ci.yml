@@ -42,3 +42,9 @@ jobs:
 
       - name: Smoke check static output
         run: npm run smoke
+
+      - name: Install browser for regression checks
+        run: npx playwright install --with-deps chromium --only-shell
+
+      - name: Browser and accessibility regression checks
+        run: npm run check:browser

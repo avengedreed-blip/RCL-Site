@@ -12,12 +12,15 @@
     "check:portfolio": "node --no-warnings --experimental-strip-types scripts/portfolio-check.mjs",
     "check:commercial": "node scripts/commercial-check.mjs",
     "check:trust": "node scripts/trust-check.mjs",
+    "check:privacy": "node --no-warnings --experimental-strip-types scripts/privacy-check.mjs",
+    "check:browser": "node --no-warnings --experimental-strip-types scripts/browser-check.mjs",
     "start": "next start",
     "lint": "eslint .",
-    "smoke": "node scripts/smoke-check.mjs && npm run check:portfolio && npm run check:commercial && npm run check:trust && npm run check:hero && npm run check:color",
+    "smoke": "node scripts/smoke-check.mjs && npm run check:portfolio && npm run check:commercial && npm run check:trust && npm run check:hero && npm run check:color && npm run check:privacy",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "lucide-react": "1.17.0",
     "next": "16.2.12",
     "react": "19.2.6",
@@ -28,9 +31,11 @@
     "@types/node": "25.9.1",
     "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
+    "axe-core": "4.13.0",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.12",
     "minimatch": "file:vendor/minimatch-compat",
+    "playwright": "1.62.1",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   },
