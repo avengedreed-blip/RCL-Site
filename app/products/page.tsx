@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getProjectSocialImage } from "@/lib/project-media";
 import { FeaturedProductChapter } from "@/components/FeaturedProductChapter";
 import { ProductLedger } from "@/components/ProductLedger";
 import { Reveal } from "@/components/Reveal";
@@ -16,15 +17,18 @@ export const metadata: Metadata = buildMetadata({
     "Explore Reed Creative Labs software, games, tools, active development projects, and future roadmap.",
   path: "/products",
   image: {
-    url: "/images/social/phase-arcade-volume-1.jpg",
-    alt: "Reed Creative Labs products, including Forge, Phase Arcade Volume I, and RCL Science Lab.",
+    url: getProjectSocialImage(featuredProjects[0].slug),
+    alt:
+      featuredProjects[0].showcaseMedia?.alt ?? "Reed Creative Labs products",
     width: 1200,
     height: 630,
   },
 });
 
 export default function ProductsPage() {
-  const featuredSlugs = new Set(featuredProjects.map((project) => project.slug));
+  const featuredSlugs = new Set(
+    featuredProjects.map((project) => project.slug),
+  );
   const includedSlugs = new Set(includedGames.map((project) => project.slug));
   const currentProjects = projects.filter(
     (project) =>
@@ -60,7 +64,9 @@ export default function ProductsPage() {
           <h2 id="catalog-featured-title" className="v2-eyebrow">
             Featured products
           </h2>
-          <p>Selected work, presented with verified status and approved media.</p>
+          <p>
+            Selected work, presented with verified status and approved media.
+          </p>
         </Reveal>
         <div className="v2-product-chapters">
           {featuredProjects.map((project, index) => (
@@ -81,7 +87,10 @@ export default function ProductsPage() {
               desktop and VR collection.
             </p>
           </Reveal>
-          <ProductLedger projects={includedGames} labelledBy="included-games-title" />
+          <ProductLedger
+            projects={includedGames}
+            labelledBy="included-games-title"
+          />
         </div>
       </section>
 
@@ -91,18 +100,22 @@ export default function ProductsPage() {
             <p className="v2-eyebrow">Current work</p>
             <h2 id="active-products-title">Active development.</h2>
           </Reveal>
-          <ProductLedger projects={currentProjects} labelledBy="active-products-title" />
+          <ProductLedger
+            projects={currentProjects}
+            labelledBy="active-products-title"
+          />
         </div>
         <div className="v2-catalog-ledger-section">
           <Reveal className="v2-section-intro v2-section-intro--compact">
             <p className="v2-eyebrow">Early work</p>
             <h2 id="concept-products-title">Verified concepts.</h2>
           </Reveal>
-          <ProductLedger projects={conceptProjects} labelledBy="concept-products-title" />
+          <ProductLedger
+            projects={conceptProjects}
+            labelledBy="concept-products-title"
+          />
         </div>
-        <p className="v2-catalog-disclaimer">
-          {roadmapDisclaimer}
-        </p>
+        <p className="v2-catalog-disclaimer">{roadmapDisclaimer}</p>
       </section>
     </main>
   );

@@ -40,7 +40,11 @@ for (const field of ["Contact:", "Expires:", "Canonical:", "Policy:"]) {
   if (!securityText.includes(field)) fail(`security.txt is missing ${field}`);
 }
 const expires = securityText.match(/^Expires:\s*(.+)$/m)?.[1];
-if (!expires || Number.isNaN(Date.parse(expires)) || Date.parse(expires) <= Date.now()) {
+if (
+  !expires ||
+  Number.isNaN(Date.parse(expires)) ||
+  Date.parse(expires) <= Date.now()
+) {
   fail("security.txt has an invalid or expired Expires value");
 }
 
@@ -64,7 +68,8 @@ for (const required of [
   "<title>Page Not Found | Reed Creative Labs</title>",
   'name="robots" content="noindex, nofollow, noarchive, nocache"',
 ]) {
-  if (!notFoundHtml.includes(required)) fail(`404 output is missing ${required}`);
+  if (!notFoundHtml.includes(required))
+    fail(`404 output is missing ${required}`);
 }
 if (notFoundHtml.includes('rel="canonical"')) {
   fail("404 output must not publish a canonical URL");
@@ -107,9 +112,16 @@ for (const file of htmlFiles) {
   }
 }
 
-const publicHtml = htmlFiles.map((file) => readFileSync(file, "utf8")).join("\n");
-for (const prohibited of ["®", "registered trademark", "Registered Trademark"]) {
-  if (publicHtml.includes(prohibited)) fail(`Unsupported trademark claim found: ${prohibited}`);
+const publicHtml = htmlFiles
+  .map((file) => readFileSync(file, "utf8"))
+  .join("\n");
+for (const prohibited of [
+  "®",
+  "registered trademark",
+  "Registered Trademark",
+]) {
+  if (publicHtml.includes(prohibited))
+    fail(`Unsupported trademark claim found: ${prohibited}`);
 }
 
 const privacy = readFileSync(join(out, "privacy.html"), "utf8");
@@ -130,7 +142,7 @@ const terms = readFileSync(join(out, "terms.html"), "utf8");
 for (const phrase of [
   "Sending an inquiry does not create a client relationship",
   "Active Development",
-  "RCL Science Lab is educational software",
+  "RCL simulations may simplify complex systems",
   "does not currently offer direct checkout",
 ]) {
   if (!terms.includes(phrase)) fail(`Website Terms are missing ${phrase}`);

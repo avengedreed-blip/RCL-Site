@@ -47,8 +47,8 @@ const capabilities = [
 
 const technicalFocus = [
   {
-    title: "Repository continuity",
-    body: "Keeping engineering context, decisions, evidence, and proposed changes connected across sustained project work.",
+    title: "Structural decisions",
+    body: "Connecting construction, load tests, and inspection so a design can be understood and improved through its response.",
   },
   {
     title: "Procedural environments",
@@ -80,7 +80,9 @@ export default function Home() {
               websites and focused custom software.
             </p>
             <div className="v2-action-row">
-              <ButtonLink href="#featured-products">Explore Products</ButtonLink>
+              <ButtonLink href="#featured-products">
+                Explore Products
+              </ButtonLink>
               <ButtonLink href="/services" variant="secondary">
                 View Services
               </ButtonLink>
@@ -100,10 +102,12 @@ export default function Home() {
       >
         <Reveal className="v2-section-intro">
           <p className="v2-eyebrow">Selected work</p>
-          <h2 id="featured-products-title">Products built around real systems.</h2>
+          <h2 id="featured-products-title">
+            Products built around real systems.
+          </h2>
           <p>
-            Current products span software engineering, procedural rendering,
-            science education, meteorological simulation, and arcade play.
+            Forgefield is launching soon. Phase Arcade is awaiting final
+            testing. Project Load Bearing and Static Drift are in development.
           </p>
         </Reveal>
         <div className="v2-product-chapters">
@@ -125,10 +129,12 @@ export default function Home() {
         <div className="v2-container v2-capabilities">
           <Reveal className="v2-section-intro v2-section-intro--compact">
             <p className="v2-eyebrow">Studio capabilities</p>
-            <h2 id="capabilities-title">Engineering across software and systems.</h2>
+            <h2 id="capabilities-title">
+              Engineering across software and systems.
+            </h2>
             <p>
-              Product work and client services share the same standard:
-              focused scope, maintainable engineering, and direct communication.
+              Product work and client services share the same standard: focused
+              scope, maintainable engineering, and direct communication.
             </p>
             <Link className="text-link" href="/services">
               Explore studio services
@@ -142,7 +148,9 @@ export default function Home() {
                 className="v2-capability-row"
                 delay={Math.min(index * 0.035, 0.12)}
               >
-                <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <h3>{capability.title}</h3>
                 <p>{capability.body}</p>
               </Reveal>
@@ -151,7 +159,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="v2-container v2-research" aria-labelledby="research-title">
+      <section
+        className="v2-container v2-research"
+        aria-labelledby="research-title"
+      >
         <Reveal className="v2-section-intro v2-section-intro--compact">
           <p className="v2-eyebrow">Current technical focus</p>
           <h2 id="research-title">The questions shaping the work.</h2>
@@ -172,9 +183,7 @@ export default function Home() {
       <section className="v2-studio-statement">
         <Reveal className="v2-container v2-studio-statement__layout">
           <p className="v2-eyebrow">Reed Creative Labs</p>
-          <h2>
-            Independent software, engineered with a clear point of view.
-          </h2>
+          <h2>Independent software, engineered with a clear point of view.</h2>
           <p>
             The studio works across tools, simulation, visualization, and games
             without treating privacy, ownership, or maintainability as optional
@@ -183,11 +192,16 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className="v2-container v2-contact-cta" aria-labelledby="contact-title">
+      <section
+        className="v2-container v2-contact-cta"
+        aria-labelledby="contact-title"
+      >
         <Reveal className="v2-contact-cta__layout">
           <div>
             <p className="v2-eyebrow">Start a conversation</p>
-            <h2 id="contact-title">Products, engineering, and project inquiries.</h2>
+            <h2 id="contact-title">
+              Products, engineering, and project inquiries.
+            </h2>
           </div>
           <ButtonLink href="/contact" variant="contact">
             Contact the Studio

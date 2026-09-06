@@ -4,7 +4,7 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { chromium, firefox, webkit } from "playwright";
 import { createRequire } from "node:module";
-import { projects } from "../content/projects.ts";
+import { featuredProjects, projects } from "../content/projects.ts";
 import { staticPagePaths } from "../lib/site-routes.ts";
 
 const require = createRequire(import.meta.url);
@@ -77,7 +77,7 @@ try {
   }
   for (const width of [320, 360, 430, 720, 768, 820, 1024, 1100, 1180, 1280, 1366, 1920, 2560]) {
     await page.setViewportSize({ width, height: 900 });
-    for (const route of ["/", "/products", "/services", "/projects/forgefield"]) {
+    for (const route of ["/", "/products", "/services", ...featuredProjects.map((project) => project.route)]) {
       await page.goto(base + route, { waitUntil: "networkidle" });
       const overflow = await page.evaluate(() => [...document.querySelectorAll("main h1, main h2, main h3, main p, main a, main li")].filter((e) => !e.closest('[aria-hidden="true"]') && !e.classList.contains("sr-only") && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden").filter((e) => { const b = e.getBoundingClientRect(); return b.left < -1 || b.right > innerWidth + 1 || e.scrollWidth > e.clientWidth + 2; }).map((e) => e.textContent.trim().slice(0, 80)));
       assert.deepEqual(overflow, [], `${route} at ${width}: overflow`);

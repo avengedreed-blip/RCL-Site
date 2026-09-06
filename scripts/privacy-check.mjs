@@ -24,7 +24,7 @@ for (const url of [
 ]) {
   assert.equal(sanitizePerformanceEvent({ url }, paths, origin), null);
 }
-const llms = readFileSync(new URL("../public/llms.txt", import.meta.url), "utf8");
+const llms = readFileSync(new URL("../public/llms.txt", import.meta.url), "utf8").replace(/\r\n/g, "\n");
 assert.ok(llms.startsWith("# Reed Creative Labs\n"));
 for (const section of llms.split(/^## .+$/m).slice(1)) {
   for (const line of section.trim().split("\n").filter(Boolean)) {

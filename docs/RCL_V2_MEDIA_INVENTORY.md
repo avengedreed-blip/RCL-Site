@@ -2,6 +2,11 @@
 
 Last verified: 2026-07-27
 
+**Historical snapshot, superseded for current portfolio use.** See
+[September 2026 Portfolio Baseline](SEPTEMBER_2026_PORTFOLIO.md) for the current
+Forgefield captures and withdrawn Forge/Science Lab media. The approval and
+usage labels below describe July only and must not authorize new public use.
+
 This inventory separates product evidence from brand-only and retired concept
 media. A file being present in `public/` does not make it approved product
 evidence.
