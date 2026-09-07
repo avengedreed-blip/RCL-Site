@@ -4,7 +4,7 @@ export const siteUrl = "https://reedcreativelabs.com";
 export const siteName = "Reed Creative Labs";
 
 const defaultDescription =
-  "Independent software and engineering studio building AI tools, scientific simulations, desktop software, games, and focused digital products.";
+  "Independent software and engineering studio building procedural environments, scientific simulations, desktop software, games, and focused digital products.";
 
 type SeoOptions = {
   title: string;
@@ -21,13 +21,20 @@ type SeoOptions = {
 const imageDimensions: Record<string, { width: number; height: number }> = {
   "/og-image.jpg": { width: 1200, height: 630 },
   "/social-preview.jpg": { width: 1200, height: 630 },
-  "/images/projects/rcl-science-lab-stable-orbits.jpg": { width: 1276, height: 717 },
-  "/images/projects/phase-shift-gameplay-01.webp": { width: 1920, height: 1080 },
-  "/images/projects/phase-breaker-gameplay-01.webp": { width: 1920, height: 1080 },
-  "/images/projects/phase-court-gameplay-02.webp": { width: 1920, height: 1080 },
-  "/images/social/forge.jpg": { width: 1200, height: 630 },
+  "/images/projects/phase-shift-gameplay-01.webp": {
+    width: 1920,
+    height: 1080,
+  },
+  "/images/projects/phase-breaker-gameplay-01.webp": {
+    width: 1920,
+    height: 1080,
+  },
+  "/images/projects/phase-court-gameplay-02.webp": {
+    width: 1920,
+    height: 1080,
+  },
+  "/images/social/forgefield-2026-09.jpg": { width: 1200, height: 630 },
   "/images/social/phase-arcade-volume-1.jpg": { width: 1200, height: 630 },
-  "/images/social/rcl-science-lab.jpg": { width: 1200, height: 630 },
   "/images/social/phase-shift.jpg": { width: 1200, height: 630 },
   "/images/social/phase-breaker.jpg": { width: 1200, height: 630 },
   "/images/social/phase-court.jpg": { width: 1200, height: 630 },

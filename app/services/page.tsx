@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
@@ -206,7 +208,11 @@ const faqs = [
 
 export default function ServicesPage() {
   return (
-    <main id="main-content" tabIndex={-1} className="v2-info-page v2-services-page">
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className="v2-info-page v2-services-page"
+    >
       <PageHeader
         eyebrow="Studio Services"
         title="Custom software and premium websites, built with product-level care."
@@ -215,16 +221,69 @@ export default function ServicesPage() {
 
       <section className="v2-container v2-services-intro">
         <Reveal className="v2-services-intro__layout">
-          <p className="v2-eyebrow">Client work at RCL</p>
+          <p className="v2-eyebrow">Internal RCL project</p>
           <div>
-            <p className="v2-services-intro__statement">
-              The same standards used for RCL products guide client work:
-              performance, usability, maintainability, and visual quality.
-            </p>
+            <h2 className="v2-services-intro__statement">
+              You are using one example of our work.
+            </h2>
             <p className="v2-services-intro__support">
-              Engagements begin with a real problem and a written scope, not a
-              generic package or an open-ended promise.
+              This website is designed and built by RCL. Its live simulation,
+              responsive composition, and fallbacks make the engineering
+              decisions visible, not just the finished surface.
             </p>
+          </div>
+          <div className="v2-studio-case">
+            <div className="v2-studio-case__media">
+              <figure>
+                <Image
+                  src="/images/projects/rcl-site-desktop-2026-09.webp"
+                  width={1440}
+                  height={1000}
+                  sizes="(min-width: 1024px) 48vw, 90vw"
+                  alt="RCL homepage in desktop Chrome with the live black-hole renderer and readable studio introduction."
+                />
+                <figcaption>
+                  Desktop. Live Fortran/Wasm state rendered through WebGL2.
+                </figcaption>
+              </figure>
+              <figure>
+                <Image
+                  src="/images/projects/rcl-site-mobile-2026-09.webp"
+                  width={390}
+                  height={844}
+                  sizes="(min-width: 768px) 22vw, 210px"
+                  alt="RCL homepage at 390 pixels wide with stacked actions and its reduced-motion static renderer image."
+                />
+                <figcaption>Mobile. Reduced-motion presentation.</figcaption>
+              </figure>
+            </div>
+            <dl className="v2-studio-case__decisions">
+              <div>
+                <dt>Live rendering</dt>
+                <dd>
+                  A Fortran numerical kernel runs in WebAssembly. The browser
+                  renders its state without a native server process.
+                </dd>
+              </div>
+              <div>
+                <dt>Responsive art direction</dt>
+                <dd>
+                  The renderer, text protection, and controls respond to the
+                  viewport. Constrained and reduced-motion experiences use a
+                  deterministic still.
+                </dd>
+              </div>
+              <div>
+                <dt>Useful without the effect</dt>
+                <dd>
+                  Product information and navigation remain HTML. Playback can
+                  be paused, and the renderer pauses when hidden or offscreen.
+                </dd>
+              </div>
+            </dl>
+            <Link className="text-link" href="/">
+              Explore the live homepage
+            </Link>
           </div>
           <div className="v2-action-row">
             <ButtonLink href="/contact" variant="contact">
@@ -237,11 +296,14 @@ export default function ServicesPage() {
         </Reveal>
       </section>
 
-      <section className="v2-section-band" aria-labelledby="service-disciplines-title">
+      <section
+        className="v2-section-band"
+        aria-labelledby="service-disciplines-title"
+      >
         <div className="v2-container v2-services-disciplines">
           <Reveal className="v2-section-intro v2-section-intro--compact">
             <p className="v2-eyebrow">What we build</p>
-            <h2 id="service-disciplines-title">Four focused service areas.</h2>
+            <h2 id="service-disciplines-title">Four service disciplines.</h2>
             <p>
               Each project is narrowed to work the studio can design, build,
               test, and hand off responsibly.
@@ -275,10 +337,15 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="v2-container v2-services-fit" aria-labelledby="project-fit-title">
+      <section
+        className="v2-container v2-services-fit"
+        aria-labelledby="project-fit-title"
+      >
         <Reveal className="v2-section-intro">
           <p className="v2-eyebrow">Who we work with</p>
-          <h2 id="project-fit-title">Small teams with a problem worth defining well.</h2>
+          <h2 id="project-fit-title">
+            Small teams with a problem worth defining well.
+          </h2>
           <p>
             RCL is a small independent studio. Clients work directly with the
             people designing and building the project.
@@ -341,7 +408,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="v2-container v2-services-pricing" aria-labelledby="pricing-title">
+      <section
+        className="v2-container v2-services-pricing"
+        aria-labelledby="pricing-title"
+      >
         <Reveal>
           <p className="v2-eyebrow">Project-based pricing</p>
           <h2 id="pricing-title">A quote built from the work required.</h2>
@@ -358,8 +428,9 @@ export default function ServicesPage() {
             development begins.
           </p>
           <p className="v2-services-pricing__qualifier">
-            RCL is best suited for clients seeking custom, high-quality work
-            rather than template-only or ultra-low-budget solutions.
+            A smaller brief can still be carefully built. Start with the
+            essential pages or workflow; additional work can be scoped
+            separately.
           </p>
         </Reveal>
       </section>
@@ -368,11 +439,14 @@ export default function ServicesPage() {
         <div className="v2-container v2-services-boundaries">
           <Reveal>
             <p className="v2-eyebrow">Scope and limitations</p>
-            <h2 id="boundaries-title">Responsible boundaries are part of the work.</h2>
+            <h2 id="boundaries-title">
+              Responsible boundaries are part of the work.
+            </h2>
             <p className="v2-services-boundaries__intro">
               RCL focuses on restrained, well-defined projects where a small
               studio can provide careful implementation and a clear handoff.
-              Established third-party services may be integrated when appropriate.
+              Established third-party services may be integrated when
+              appropriate.
             </p>
           </Reveal>
           <ul className="v2-services-boundaries__list">
@@ -398,7 +472,9 @@ export default function ServicesPage() {
       >
         <Reveal className="v2-section-intro v2-section-intro--compact">
           <p className="v2-eyebrow">Hosting, ownership, and services</p>
-          <h2 id="responsibilities-title">Accounts and responsibilities stay clear.</h2>
+          <h2 id="responsibilities-title">
+            Accounts and responsibilities stay clear.
+          </h2>
           <p>
             Project-specific details belong in the written proposal. These are
             the studio&apos;s general working expectations.
@@ -436,11 +512,16 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="v2-container v2-contact-cta" aria-labelledby="service-contact-title">
+      <section
+        className="v2-container v2-contact-cta"
+        aria-labelledby="service-contact-title"
+      >
         <Reveal className="v2-contact-cta__layout">
           <div>
             <p className="v2-eyebrow">Have a focused project in mind?</p>
-            <h2 id="service-contact-title">Tell us what you are trying to build.</h2>
+            <h2 id="service-contact-title">
+              Tell us what you are trying to build.
+            </h2>
             <p className="v2-services-cta__body">
               Include the problem it should solve, who it is for, what already
               exists, and any constraints you already know about.

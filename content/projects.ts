@@ -3,16 +3,15 @@ export type ProjectStatus =
   | "research"
   | "prototype"
   | "active-development"
+  | "launching-soon"
+  | "final-testing"
   | "private-beta"
   | "public-release"
   | "production"
   | "archived";
 
 export type RoadmapGroup =
-  | "coming-soon"
-  | "active-development"
-  | "planned"
-  | "included-game";
+  "coming-soon" | "active-development" | "planned" | "included-game";
 
 export type ProjectCategory =
   | "software"
@@ -24,16 +23,15 @@ export type ProjectCategory =
   | "app";
 
 export type ProjectVisual =
-  | "forge"
   | "forgefield"
-  | "storm-lab"
+  | "load-bearing"
+  | "static-drift"
   | "phase-arcade"
   | "phase-arcade-2"
   | "phase-shift"
   | "phase-breaker"
   | "phase-court"
   | "pigs-can-fly"
-  | "science-lab"
   | "neon-drift"
   | "falling-from-the-sky"
   | "darren"
@@ -112,6 +110,7 @@ export type Project = {
   featured?: boolean;
   featuredOrder?: number;
   presentationTier?: "flagship" | "featured" | "catalog";
+  chapterTreatment?: "lead" | "feature" | "development" | "brief";
   showcaseMedia?: ProjectMedia;
   includedGames?: string[];
   parentProject?: string;
@@ -130,114 +129,19 @@ export const roadmapDisclaimer =
 
 export const projects: Project[] = [
   {
-    name: "Forge",
-    slug: "forge",
-    status: "active-development",
-    roadmapGroup: "active-development",
-    category: "tool",
-    categoryLabel: "Software Engineering Environment",
-    headline: "Serious engineering work, kept in context.",
-    tagline:
-      "A local-first engineering environment for sustained work on real repositories and codebases.",
-    shortDescription:
-      "Forge is a local-first engineering workspace for developers working on real repositories and long-running codebases. It coordinates supported AI models, tools, tasks, plans, and review evidence inside one sustained project workflow. Consequential work remains organized, inspectable, and subject to user approval instead of being reduced to disconnected prompts.",
-    longDescription:
-      "Forge is a local-first software engineering environment for developers and maintainers doing sustained work on real repositories. It connects repository inspection, planning, implementation, review, and repair so that project context survives across tasks. The engineering goal is to coordinate supported models and tools without obscuring evidence, affected files, or approval boundaries. Its long-term direction is a dependable desktop workspace where complex codebase work remains continuous and reviewable.",
-    platforms: ["Windows"],
-    idealFor: [
-      "Developers working across real repositories",
-      "Software maintainers",
-      "Privacy-conscious engineers",
-      "People managing long-running technical projects",
-    ],
-    usersCan: [
-      "Inspect a repository and keep project context connected to the work.",
-      "Plan, build, audit, repair, and improve codebases through one sustained workflow.",
-      "Coordinate supported models, tools, and tasks while reviewing consequential changes before approval.",
-      "Choose Dale, Iris, or Victor as the engineering colleague communication style.",
-    ],
-    route: "/projects/forge",
-    visual: "forge",
-    featured: true,
-    featuredOrder: 1,
-    presentationTier: "flagship",
-    showcaseMedia: {
-      kind: "approved-image",
-      src: "/images/projects/forge-clean-session.png",
-      alt: "Forge empty workspace showing the clean start prompt and Choose folder action, with no conversation or repository content.",
-      caption:
-        "Forge captured from an isolated current build in a clean empty workspace. No chat history or repository data is present.",
-      fit: "contain",
-    },
-    currentFocus: [
-      "Repository inspection and sustained project context",
-      "Planning, implementation, review, and repair workflows",
-      "Clear approval boundaries for consequential changes",
-    ],
-    features: [
-      "Repository-aware project work",
-      "Model, tool, and task coordination",
-      "Selectable engineering-colleague communication profiles",
-      "Reviewable plans and proposed changes",
-    ],
-    technicalProfile: {
-      summary:
-        "A Rust backend and Tauri 2 desktop shell host a Svelte 5 and SvelteKit interface. SQLite provides local persistence, while the installed Codex app-server is the currently verified engineering engine.",
-      verifiedOn: "2026-07-23",
-      compactFields: ["languages", "frameworks", "database"],
-      languages: ["Rust", "TypeScript"],
-      frameworks: ["Tauri 2", "Svelte 5", "SvelteKit"],
-      database: ["SQLite"],
-      platforms: ["Windows"],
-      interfaces: [
-        "Codex app-server",
-        "Git",
-        "Local process execution",
-      ],
-      packaging: ["Tauri desktop bundle"],
-    },
-    milestones: [
-      { title: "Core engineering workflow", state: "current" },
-      { title: "Integration and reliability validation", state: "current" },
-      { title: "Public release", state: "planned" },
-    ],
-    pageSections: [
-      {
-        title: "How Forge works",
-        body: "Forge keeps repository context, engineering decisions, plans, evidence, and proposed changes connected to one project thread. It is designed for continued work rather than disposable prompts.",
-      },
-      {
-        title: "Engineering colleagues",
-        body: "Dale, Iris, and Victor are selectable communication profiles applied across supported reasoning models. Dale is the default. They are not separate AI models, and changing colleagues does not change Forge's routing or engineering rules.",
-      },
-      {
-        title: "Review before change",
-        body: "Forge is designed to show plans, evidence, affected files, and proposed changes before consequential work is applied. User approval remains the trust boundary.",
-      },
-      {
-        title: "Development state",
-        body: "Forge is in active development. Product behavior, supported integrations, and release plans may change as the engineering workflow is tested and refined.",
-      },
-      {
-        title: "Long-term direction",
-        body: "Forge is intended to support continued engineering work across the life of a repository, preserving the decisions, evidence, and project context needed to understand what changed and why.",
-      },
-    ],
-  },
-  {
     name: "Forgefield",
     slug: "forgefield",
-    status: "active-development",
-    roadmapGroup: "active-development",
+    status: "launching-soon",
+    roadmapGroup: "coming-soon",
     category: "software",
     categoryLabel: "Procedural Live Wallpapers & Screensavers",
     headline: "Living worlds for the Windows desktop.",
     tagline:
-      "A native Windows procedural-rendering project for premium live wallpapers and screensavers.",
+      "Nine procedural worlds. Live wallpaper and screensaver playback. Launching soon.",
     shortDescription:
-      "Forgefield is a native Windows procedural-rendering project in active development. Its current implementation contains nine living worlds rendered as active systems for live wallpaper and screensaver playback rather than replayed as fixed video loops. Installer, licensing, packaging, and public distribution remain separate release gates.",
+      "Nine living worlds for the Windows desktop, from black-hole accretion to aurora and glowing embers. Forgefield generates live wallpapers and screensavers through native simulation and GPU rendering, not looping video.",
     longDescription:
-      "Forgefield is a renderer-led native Windows application for people who want procedural motion on the desktop rather than looping video. The current implementation generates nine living worlds through the product's rendering systems for live wallpaper and screensaver playback. Engineering work focuses on visual continuity, reliable long-running playback, and responsible use of desktop resources. Forgefield remains in active development: installer readiness, licensing, packaging, distribution, and final release validation have not yet passed.",
+      "Forgefield turns the Windows desktop into a continuously evolving procedural environment, not a repeating video. Its nine worlds span Eventide, Genesis, Gravitas, Abyssal, Synapse, Quantum Garden, Corona, Ember, and Polar Night. Modern Fortran coordinates the simulation and scene lifecycle, while OpenGL compute and rendering shaders produce the imagery in real time. A native Windows launcher manages world selection, preview, live wallpaper, and screensaver operation. Forgefield is RCL's flagship product and is launching soon. Public availability and a release date have not yet been announced.",
     platforms: ["Windows"],
     idealFor: [
       "Windows users who want procedural desktop environments",
@@ -246,30 +150,31 @@ export const projects: Project[] = [
     route: "/projects/forgefield",
     visual: "forgefield",
     featured: true,
-    featuredOrder: 2,
-    presentationTier: "featured",
+    featuredOrder: 1,
+    presentationTier: "flagship",
+    chapterTreatment: "lead",
     showcaseMedia: {
       kind: "approved-image",
-      src: "/images/projects/forgefield-eventide.webp",
-      alt: "Forgefield Eventide procedural world rendered by the current Windows build.",
-      caption:
-        "Eventide — a procedural Forgefield world rendered by the current Windows build.",
+      src: "/images/projects/forgefield-eventide-2026-09.webp",
+      alt: "Eventide in Forgefield: a bright black-hole accretion ring with flowing copper material and polar jets.",
+      caption: "Eventide, captured from the September 2026 Windows build.",
       fit: "cover",
     },
     currentFocus: [
-      "Representative hardware validation",
-      "Installer, packaging, and signing readiness",
+      "Final release preparation",
+      "Representative Windows hardware and long-running playback validation",
       "Live wallpaper and screensaver reliability",
     ],
     features: [
-      "Nine procedural living worlds",
-      "Live wallpaper playback",
-      "Screensaver playback",
+      "Nine distinct procedural worlds, rendered live rather than looped video",
+      "Native Windows live wallpaper and screensaver modes",
+      "World selection and live preview in the Windows launcher",
+      "Quality presets for different hardware budgets",
     ],
     technicalProfile: {
       summary:
-        "Modern Fortran owns the product model and procedural scene lifecycle, with narrow C and Win32 boundaries feeding an OpenGL 4.6 renderer. A self-contained WPF launcher manages live-wallpaper and screensaver operation.",
-      verifiedOn: "2026-07-23",
+        "Modern Fortran owns the product model and procedural scene lifecycle. Narrow C and Win32/WGL boundaries support an OpenGL 4.6 renderer, including compute shaders. A self-contained WPF launcher manages world selection, preview, live wallpaper, and screensaver operation.",
+      verifiedOn: "2026-09-06",
       compactFields: ["languages", "renderer", "gpu"],
       languages: ["Fortran 2018", "C11", "C#"],
       nativeCore: [
@@ -280,45 +185,43 @@ export const projects: Project[] = [
       renderer: ["OpenGL 4.6 Core", "GLSL"],
       gpu: ["OpenGL compute shaders"],
       platforms: ["Windows 10/11 x64"],
-      interfaces: [
-        "Win32 live-wallpaper host",
-        "Windows screensaver (.scr)",
-      ],
+      interfaces: ["Win32 live-wallpaper host", "Windows screensaver (.scr)"],
       packaging: ["Self-contained WPF launcher"],
     },
     milestones: [
-      { title: "Procedural world architecture", state: "complete" },
-      { title: "Reliability and hardware validation", state: "current" },
-      { title: "Installer, licensing, and distribution gates", state: "planned" },
+      { title: "Nine-world procedural collection", state: "complete" },
+      { title: "Final release preparation and validation", state: "current" },
+      { title: "Public release", state: "planned" },
     ],
     pageSections: [
       {
-        title: "What it is",
-        body: "Forgefield is a Windows desktop application for procedural live wallpapers and screensavers. Its visual worlds are rendered rather than presented as pre-recorded video loops.",
+        title: "Rendered, not replayed",
+        body: "The worlds are active rendering systems. Particle, field, surface, and lighting behavior evolves during playback rather than repeating a pre-recorded movie.",
       },
       {
-        title: "Development state",
-        body: "Forgefield is in active development and is not presented as released or commercially available. Current work is focused on representative hardware evidence, installer readiness, packaging, signing, licensing, and long-running reliability.",
+        title: "A desktop application",
+        body: "The Windows launcher brings world selection, live preview, wallpaper operation, screensaver settings, and quality presets together. Windows 10/11 x64 and an OpenGL 4.6-capable GPU are the current technical baseline.",
       },
       {
-        title: "Engineering goal",
-        body: "The product is being built to sustain renderer-driven environments during normal desktop use, with reliability and resource behavior treated as part of the experience rather than afterthoughts.",
+        title: "Launching soon",
+        body: "Final preparation focuses on Windows hardware, long-running playback, and wallpaper and screensaver reliability. Release details will be published when confirmed.",
       },
     ],
   },
   {
     name: "Phase Arcade Volume I",
     slug: "phase-arcade-volume-1",
-    status: "active-development",
+    status: "final-testing",
     roadmapGroup: "coming-soon",
     category: "game-collection",
     categoryLabel: "Desktop & VR Arcade Game Collection",
     headline: "Three focused arcade games for desktop and VR.",
-    tagline: "Phase Shift, Phase Breaker, and Phase Court in one arcade collection.",
+    tagline:
+      "Phase Shift, Phase Breaker, and Phase Court in one arcade collection.",
     shortDescription:
-      "Phase Arcade Volume I is a collection of three compact arcade games for traditional desktop play and VR. Phase Shift, Phase Breaker, and Phase Court each explore a different relationship between motion, timing, positioning, and physical interaction. The collection is for players who value readable mechanics, short sessions, and repeatable score-driven practice.",
+      "Phase Shift, Phase Breaker, and Phase Court in one desktop and VR collection. Three distinct takes on motion, timing, and positioning, built for short sessions and repeated practice.",
     longDescription:
-      "Phase Arcade Volume I brings Phase Shift, Phase Breaker, and Phase Court into one desktop and VR collection. It is built for players who want focused mechanics and short sessions that reward timing, positioning, and repeated practice. The engineering goal is to keep input response, visual readability, and the core rules consistent across traditional desktop play and VR without erasing each game's identity. The collection's long-term direction is a stable arcade foundation that can support distinct games under one shared release.",
+      "Phase Arcade Volume I brings Phase Shift, Phase Breaker, and Phase Court into one desktop and VR collection. It is built for players who want focused mechanics and short sessions that reward timing, positioning, and repeated practice. Input response, visual readability, and consistent core rules connect traditional desktop play and VR without erasing each game's identity. The collection is awaiting final testing before release. It has not launched, and a release date has not been announced.",
     platforms: ["PC", "VR"],
     usersCan: [
       "Play three distinct arcade games in one collection.",
@@ -328,13 +231,15 @@ export const projects: Project[] = [
     route: "/projects/phase-arcade-volume-1",
     visual: "phase-arcade",
     featured: true,
-    featuredOrder: 5,
+    featuredOrder: 2,
     presentationTier: "featured",
+    chapterTreatment: "feature",
     showcaseMedia: {
       kind: "approved-image",
       src: "/images/projects/phase-breaker-gameplay-01.webp",
       alt: "Phase Breaker gameplay from Phase Arcade Volume I inside a cyan and magenta containment chamber.",
-      caption: "Phase Breaker gameplay captured from the current desktop build.",
+      caption:
+        "Phase Breaker gameplay captured from the current desktop build.",
       fit: "cover",
       position: "center",
     },
@@ -342,7 +247,7 @@ export const projects: Project[] = [
     currentFocus: [
       "Desktop and VR play across all three included games",
       "Readability, input response, and short-session pacing",
-      "Collection-level release validation",
+      "Final testing before public release",
     ],
     features: [
       "Exactly three included games: Phase Shift, Phase Breaker, and Phase Court",
@@ -384,165 +289,139 @@ export const projects: Project[] = [
         body: "The collection supports traditional desktop play and VR. Specific headset support and release details have not been announced.",
       },
       {
-        title: "Collection direction",
-        body: "The three games are being refined as one release, with shared attention to input response, readable feedback, short-session pacing, and consistent behavior across desktop and VR.",
+        title: "Final testing",
+        body: "The three-game collection is awaiting final testing before release, with attention to input response, readable feedback, and consistent behavior across desktop and VR. It is not yet available to purchase or download.",
       },
     ],
   },
   {
-    name: "RCL Science Lab",
-    slug: "rcl-science-lab",
+    name: "Project Load Bearing",
+    slug: "project-load-bearing",
     status: "active-development",
-    roadmapGroup: "coming-soon",
+    roadmapGroup: "active-development",
     category: "simulation",
-    categoryLabel: "Educational Software & Scientific Simulation Platform",
-    headline: "Science you can manipulate.",
-    tagline: "Explore scientific ideas through real-time simulation and visualization.",
+    categoryLabel: "Structural Engineering Simulation",
+    headline: "Build a structure. Test the decisions holding it together.",
+    tagline:
+      "A structural simulation in development, connecting hands-on construction to a native Fortran solver.",
     shortDescription:
-      "RCL Science Lab is an educational application built around interactive simulations, visualizations, and guided scientific exploration. Students, educators, homeschool families, and independent learners can change variables and observe how a modeled system responds. It exists to make complex scientific behavior easier to investigate through direct experimentation instead of passive explanation alone.",
+      "Build a steel frame, test it under load, inspect its response, and redesign it. The current Brace the Bay prototype connects hands-on construction in Unreal Engine to a native Fortran structural solver.",
     longDescription:
-      "RCL Science Lab helps students, educators, homeschool families, and self-learners explore science through interactive simulation. Its catalog spans physics, astronomy, cosmology, mathematics, chemistry, and related concepts, with variable controls and guided learning organized around direct observation. The engineering goal is to make each modeled system legible without hiding where an educational simplification is being used. Over time, the lab is intended to become a coherent local environment for experimentation, learning paths, and retained study progress.",
-    platforms: ["Desktop"],
-    idealFor: [
-      "Students",
-      "Educators",
-      "Homeschool families",
-      "Self-learners",
-      "Science enthusiasts",
-    ],
-    usersCan: [
-      "Manipulate simulation variables and observe outcomes.",
-      "Explore scientific concepts through visual experimentation.",
-      "Build intuition for systems that are easier to understand when seen in motion.",
-    ],
-    route: "/projects/rcl-science-lab",
-    visual: "science-lab",
+      "Project Load Bearing explores structural engineering through a build, test, inspect, and redesign loop. In the current Brace the Bay prototype, a steel-frame construction challenge is evaluated against authored gravity and lateral loads. A native Fortran solver calculates the initial elastic response and identifies the first member failure; Unreal Engine presents the structure, editing tools, and inspection views. The project is a primary RCL development focus, not an imminent release. Its current scope is a working vertical slice rather than a finished engineering simulator.",
+    platforms: ["Windows"],
+    route: "/projects/project-load-bearing",
+    visual: "load-bearing",
     featured: true,
     featuredOrder: 3,
     presentationTier: "featured",
+    chapterTreatment: "development",
     showcaseMedia: {
       kind: "approved-image",
-      src: "/images/projects/rcl-science-lab-observatory.jpg",
-      alt: "RCL Science Lab observatory launch screen with simulation and learning-path navigation.",
-      caption: "The current RCL Science Lab observatory organizes simulations and local study progress.",
-      fit: "contain",
-      position: "center",
+      src: "/images/projects/load-bearing-braced-frame-2026-09.webp",
+      alt: "Project Load Bearing's Brace the Bay prototype: a steel frame with roof equipment and a diagonal brace.",
+      caption: "Brace the Bay. A braced frame in the current prototype.",
+      fit: "cover",
     },
     currentFocus: [
-      "Scientific simulation breadth and accuracy review",
-      "Guided learning and observation workflows",
-      "Local progress and experiment organization",
+      "The Brace the Bay construction, testing, and redesign journey",
+      "Clear explanations of structural response and model limits",
+      "Hands-on usability and product validation",
     ],
     features: [
-      "Interactive scientific simulations",
-      "Real-time variable control",
-      "Guided learning paths",
-      "Local study progress",
+      "Steel-frame construction and editing in a working prototype",
+      "Authored gravity and lateral load tests",
+      "Inspection of initial elastic response and first-member failure",
+      "Design revision, undo/redo, and local save/load",
     ],
     technicalProfile: {
       summary:
-        "A Svelte 5 and SvelteKit interface runs inside a Tauri 2 desktop shell. Current experiments render through Canvas 2D and retain study state in browser local storage; the staged WebGL2 adapter is not presented as the active renderer.",
-      verifiedOn: "2026-07-23",
-      compactFields: ["languages", "frameworks", "renderer"],
-      languages: ["TypeScript", "Rust"],
-      frameworks: ["Svelte 5", "SvelteKit", "Tauri 2"],
-      renderer: ["Canvas 2D"],
-      storage: ["Browser local storage"],
-      platforms: ["Desktop"],
-      packaging: ["Tauri desktop bundle"],
+        "Unreal Engine 5.8 and C++ provide construction tools and presentation. A native Fortran solver evaluates linear-elastic static frame response through a C ABI. The current challenge stops after the first member removal and one static re-equilibrium; it does not model general dynamic collapse.",
+      verifiedOn: "2026-09-06",
+      compactFields: ["languages", "engine", "nativeCore"],
+      languages: ["Fortran", "C++"],
+      nativeCore: ["Linear-elastic static frame solver"],
+      engine: ["Unreal Engine 5.8"],
+      interfaces: ["C ABI"],
+      storage: ["Local design and session saves"],
+      platforms: ["Windows"],
     },
-    milestones: [
-      { title: "Core observatory and catalog", state: "complete" },
-      { title: "Simulation and lesson validation", state: "current" },
-      { title: "Public release", state: "planned" },
-    ],
     pageSections: [
       {
-        title: "What it is",
-        body: "RCL Science Lab is educational software and a scientific simulation platform focused on interactive exploration rather than passive reading.",
+        title: "A working construction challenge",
+        body: "Brace the Bay asks players to improve a steel frame within a defined budget and load case. The prototype connects direct construction, testing, failure inspection, modification, and a repeatable redesign loop.",
       },
       {
-        title: "What users can do",
-        body: "Users can adjust variables, compare outcomes, and observe scientific systems through real-time visual feedback.",
+        title: "The model has boundaries",
+        body: "The current solver uses a linear-elastic static frame model. It does not claim dynamic collapse, plasticity, fracture, earthquake simulation, or certified building design. The project is an interactive simulation, not a tool for real-world structural safety decisions.",
       },
       {
-        title: "Educational scope",
-        body: "RCL Science Lab uses educational models that may simplify complex systems. Educators should assess each simulation for their learners and setting.",
-      },
-      {
-        title: "Long-term direction",
-        body: "The project is being organized as a connected local science environment where simulations, guided investigations, learning paths, and progress records support continued study rather than isolated demonstrations.",
+        title: "In development",
+        body: "The current vertical slice is being developed and reviewed. Hands-on usability, presentation, and broader product scope still require validation. No release window has been announced.",
       },
     ],
   },
   {
-    name: "Storm Lab",
-    slug: "storm-lab",
-    status: "prototype",
+    name: "Static Drift",
+    slug: "static-drift",
+    status: "active-development",
     roadmapGroup: "active-development",
-    category: "simulation",
-    categoryLabel: "Meteorological Simulation Research Prototype",
-    headline: "Atmospheric modeling from field behavior to future decisions.",
+    category: "app",
+    categoryLabel: "Procedural Ambient TV Application",
+    headline: "A quieter kind of screen time.",
     tagline:
-      "A working meteorological simulation prototype with a native atmospheric model and map-based visualization.",
+      "An offline ambient TV application built around evolving procedural worlds.",
     shortDescription:
-      "Storm Lab is an in-development meteorological simulation prototype. Its current Windows foundation connects a native atmospheric model to a Godot presentation layer for map-based inspection of modeled weather fields. Radar visualization, severe-weather behavior, forecasting, warnings, and operational decision systems remain planned direction rather than completed public features.",
+      "Procedural ambient worlds for Android TV, with optional built-in sound, simple remote controls, and locally saved playback settings. A quieter screen experience, still in development.",
     longDescription:
-      "Storm Lab has a functioning Windows prototype that connects a modern Fortran atmospheric model to a Godot presentation layer. The implemented foundation models moisture, warm-rain microphysics, precipitation, cloud behavior, ordinary convection, and deterministic state, with map-based field, cloud, precipitation, and satellite-style visualization. Radar visualization, forecasting systems, organized severe-weather behavior, warnings, interventions, and operational decision-making remain planned technical direction. The project is research software in active prototype development, not a playable, downloadable, or release-ready product.",
-    platforms: ["Windows"],
-    idealFor: [
-      "People interested in weather systems and operational decision-making",
-      "Learners interested in meteorology and simulation",
-    ],
-    route: "/projects/storm-lab",
-    visual: "storm-lab",
+      "Static Drift brings procedural ambient visuals to the television without relying on looping video. The current application combines a native C++ renderer with Android TV controls, optional built-in sound, and local playback settings. Development is focused on sustained visual quality and a quiet, remote-friendly experience. Static Drift remains in development: visual and audio review, physical-TV testing, and release preparation are still ahead of public availability.",
+    platforms: ["Android TV"],
+    route: "/projects/static-drift",
+    visual: "static-drift",
     featured: true,
     featuredOrder: 4,
     presentationTier: "featured",
+    chapterTreatment: "brief",
     showcaseMedia: {
-      kind: "placeholder",
-      alt: "Storm Lab does not yet have approved product imagery.",
-      message: "Images coming soon.",
+      kind: "approved-image",
+      src: "/images/projects/static-drift-prismatic-bloom-2026-09.webp",
+      alt: "Static Drift Prismatic Bloom: a folded glass-like form with silver and warm reflections against black.",
+      caption: "Prismatic Bloom. Captured from the development renderer.",
+      fit: "cover",
     },
     currentFocus: [
-      "Validation of the warm-rain and ordinary-convection model",
-      "Map-based weather-field readability",
-      "Research toward severe-weather, radar, forecast, and decision systems",
-    ],
-    milestones: [
-      { title: "Fortran and Godot prototype foundation", state: "complete" },
-      { title: "Atmospheric-model validation", state: "current" },
-      { title: "Radar, warning, and decision systems", state: "planned" },
+      "Procedural world quality and long-duration playback",
+      "Remote-control usability and optional ambient sound",
+      "Physical-TV validation and owner review",
     ],
     features: [
-      "Native atmospheric simulation prototype",
-      "Map-based weather-field visualization",
-      "Field-derived cloud, precipitation, and satellite-style products",
+      "Procedural ambient worlds generated during playback",
+      "Optional built-in sound, including silence",
+      "Remote-friendly playback controls",
+      "Locally saved scene, brightness, sound, and volume settings",
     ],
     technicalProfile: {
       summary:
-        "The current Windows prototype uses a Fortran atmosphere model exposed through a versioned C ABI and C++ GDExtension to Godot 4.7.1. Godot owns presentation and input. Radar, severe-weather, warning, intervention, and broader operational systems are not presented as implemented.",
-      verifiedOn: "2026-07-23",
-      compactFields: ["languages", "engine", "interfaces"],
-      languages: ["Fortran", "C++", "GDScript"],
-      nativeCore: ["Fortran atmospheric simulation"],
-      engine: ["Godot 4.7.1"],
-      renderer: ["Godot OpenGL Compatibility"],
-      platforms: ["Windows"],
-      interfaces: ["Versioned C ABI", "C++ GDExtension"],
+        "A C++20 rendering core produces procedural visuals through OpenGL and GLSL. The Android TV application connects Kotlin controls to the native engine through JNI. A Windows host supports development and review; it is not an announced consumer platform.",
+      verifiedOn: "2026-09-06",
+      compactFields: ["languages", "renderer", "platforms"],
+      languages: ["C++20", "Kotlin"],
+      renderer: ["OpenGL", "GLSL"],
+      interfaces: ["JNI"],
+      storage: ["Local playback preferences"],
+      platforms: ["Android TV"],
     },
     pageSections: [
       {
-        title: "Current state",
-        body: "Storm Lab has a functioning simulation prototype: a native atmospheric model, a Godot presentation layer, map-based field inspection, and deterministic state. It is not presented as playable, downloadable, feature-complete, or release-ready.",
+        title: "Ambient, not passive video",
+        body: "The native engine generates visual motion during playback rather than repeating a movie. Visual quality and sustained playback are the current development focus.",
       },
       {
-        title: "Planned direction",
-        body: "Radar visualization, forecasting systems, organized severe-weather behavior, warnings, interventions, and operational decision-making remain planned technical direction. They are not claims about the current prototype.",
+        title: "Built for a remote",
+        body: "Playback controls support D-pad navigation, scene selection, brightness, sound, and volume. Settings persist locally, and the visuals can run without audio.",
       },
       {
-        title: "Engineering goal",
-        body: "Prototype work is testing whether researched atmospheric behavior and readable visual evidence can support an understandable meteorological simulation before the broader operational scope advances.",
+        title: "In development",
+        body: "Static Drift is not a store release. Physical-TV behavior and the final visual and audio experience still need review. No release date, universal performance target, or HDR support is being promised.",
       },
     ],
   },
@@ -554,7 +433,8 @@ export const projects: Project[] = [
     category: "game",
     categoryLabel: "Mobile Arcade Game",
     headline: "Forward motion under pressure.",
-    tagline: "A mobile arcade game about thrust, timing, and precision navigation.",
+    tagline:
+      "A mobile arcade game about thrust, timing, and precision navigation.",
     shortDescription:
       "Neon Drift is a mobile-first arcade game built around constant forward movement, vertical thrust controls, obstacle avoidance, and precision navigation.",
     longDescription:
@@ -586,7 +466,8 @@ export const projects: Project[] = [
     category: "game",
     categoryLabel: "Mobile Action Platformer",
     headline: "Freeform aerial movement.",
-    tagline: "A mobile action game focused on movement, aerial control, and reaction timing.",
+    tagline:
+      "A mobile action game focused on movement, aerial control, and reaction timing.",
     shortDescription:
       "Falling From The Sky is a fast-paced mobile action game focused on fluid movement, aerial control, freeform navigation, and reaction-based gameplay.",
     longDescription:
@@ -618,7 +499,8 @@ export const projects: Project[] = [
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
     headline: "Movement and timing.",
-    tagline: "A neon tunnel runner built around movement, timing, and state switching.",
+    tagline:
+      "A neon tunnel runner built around movement, timing, and state switching.",
     shortDescription:
       "Phase Shift is a tunnel runner where forward motion, lane control, and switching between measured and unmeasured states determine each run.",
     longDescription:
@@ -631,7 +513,8 @@ export const projects: Project[] = [
       kind: "approved-image",
       src: "/images/projects/phase-shift-gameplay-01.webp",
       alt: "Phase Shift gameplay with a photon moving through a cyan and magenta tunnel.",
-      caption: "Real desktop gameplay captured from the current Phase Shift build.",
+      caption:
+        "Real desktop gameplay captured from the current Phase Shift build.",
       fit: "contain",
       position: "center",
     },
@@ -667,7 +550,8 @@ export const projects: Project[] = [
       kind: "approved-image",
       src: "/images/projects/phase-breaker-gameplay-01.webp",
       alt: "Phase Breaker gameplay inside a cyan and magenta containment chamber.",
-      caption: "Real desktop gameplay captured from the current Phase Breaker build.",
+      caption:
+        "Real desktop gameplay captured from the current Phase Breaker build.",
       fit: "contain",
       position: "center",
     },
@@ -690,7 +574,8 @@ export const projects: Project[] = [
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
     headline: "Competition and reaction.",
-    tagline: "An arcade paddle duel focused on positioning, angles, and reaction speed.",
+    tagline:
+      "An arcade paddle duel focused on positioning, angles, and reaction speed.",
     shortDescription:
       "Phase Court is an arcade paddle duel where court positioning, reaction speed, and the angle of each return shape the rally.",
     longDescription:
@@ -727,13 +612,17 @@ export const projects: Project[] = [
     category: "game",
     categoryLabel: "Mobile Vertical Arcade Game",
     headline: "Climb higher, one run at a time.",
-    tagline: "A mobile arcade game built around upward movement, altitude, and limited lives.",
+    tagline:
+      "A mobile arcade game built around upward movement, altitude, and limited lives.",
     shortDescription:
       "Pigs Can Fly? is a mobile arcade game about propelling a pig upward, managing a limited run, and pushing for a higher altitude.",
     longDescription:
       "Pigs Can Fly? is a mobile arcade game with touch-focused play, character selection, lives, and current and best altitude tracking. It remains in active development while release systems and representative device testing are completed.",
     platforms: ["Mobile"],
-    idealFor: ["Mobile arcade players", "Players who enjoy short score-driven runs"],
+    idealFor: [
+      "Mobile arcade players",
+      "Players who enjoy short score-driven runs",
+    ],
     usersCan: [
       "Control upward movement during a mobile arcade run.",
       "Track current and best altitude across attempts.",
@@ -766,7 +655,10 @@ export const projects: Project[] = [
     longDescription:
       "Phase Arcade Volume II continues the Phase Arcade identity in a VR-focused collection. Its final lineup, release timing, and detailed platform support have not been announced.",
     platforms: ["VR"],
-    idealFor: ["VR arcade players", "Players interested in focused short-session games"],
+    idealFor: [
+      "VR arcade players",
+      "Players interested in focused short-session games",
+    ],
     usersCan: [
       "Follow development of the next Phase Arcade collection.",
       "Expect distinct games to share a consistent Phase Arcade interaction and presentation framework.",
@@ -792,7 +684,8 @@ export const projects: Project[] = [
     category: "game",
     categoryLabel: "Atmospheric Horror Game",
     headline: "Atmospheric Appalachian horror.",
-    tagline: "A stylized horror experience built around atmosphere, discovery, and tension.",
+    tagline:
+      "A stylized horror experience built around atmosphere, discovery, and tension.",
     shortDescription:
       "Darren In The Woods 2 is a stylized horror experience inspired by Appalachian folklore, wilderness exploration, environmental storytelling, and psychological tension.",
     longDescription:
@@ -824,13 +717,19 @@ export const projects: Project[] = [
     category: "app",
     categoryLabel: "Accessibility & Communication Software",
     headline: "Communication support built for real use.",
-    tagline: "AAC software focused on accessibility, usability, affordability, and family needs.",
+    tagline:
+      "AAC software focused on accessibility, usability, affordability, and family needs.",
     shortDescription:
       "Talk To Me AAC is an augmentative and alternative communication application for nonverbal and minimally verbal users.",
     longDescription:
       "Talk To Me AAC is accessibility and communication software designed to help nonverbal and minimally verbal users communicate through customizable visual and speech-based tools. The project focuses on accessibility, usability, affordability, and real-world family needs.",
     platforms: ["Android", "iOS", "Tablets"],
-    idealFor: ["Nonverbal users", "Minimally verbal users", "Families", "Caregivers"],
+    idealFor: [
+      "Nonverbal users",
+      "Minimally verbal users",
+      "Families",
+      "Caregivers",
+    ],
     usersCan: [
       "Use customizable visual communication tools.",
       "Communicate through speech-based support features.",
@@ -857,7 +756,8 @@ export const projects: Project[] = [
     category: "app",
     categoryLabel: "Recovery & Sobriety Support App",
     headline: "Support for recovery milestones.",
-    tagline: "A sobriety and recovery support app being developed by Aaron and Katy.",
+    tagline:
+      "A sobriety and recovery support app being developed by Aaron and Katy.",
     shortDescription:
       "Bloom is a sobriety and recovery support application being developed by Aaron and Katy.",
     longDescription:
@@ -889,7 +789,8 @@ export const projects: Project[] = [
     category: "game",
     categoryLabel: "Narrative Psychological Experience",
     headline: "What people mean. What others hear.",
-    tagline: "A narrative psychological experience about communication and interpretation.",
+    tagline:
+      "A narrative psychological experience about communication and interpretation.",
     shortDescription:
       "Misread is a narrative-focused project exploring perception, communication, misunderstanding, memory, and human psychology.",
     longDescription:
@@ -916,11 +817,10 @@ export const projects: Project[] = [
 ];
 
 export const featuredProjectSlugs = [
-  "forge",
   "forgefield",
-  "rcl-science-lab",
-  "storm-lab",
   "phase-arcade-volume-1",
+  "project-load-bearing",
+  "static-drift",
 ] as const;
 
 export const featuredProjects = featuredProjectSlugs
@@ -949,9 +849,10 @@ export const comingSoonRoadmapProjects = comingSoonProjects.filter(
   (project) => !featuredProjectSlugSet.has(project.slug),
 );
 
-export const activeDevelopmentRoadmapProjects = activeDevelopmentProjects.filter(
-  (project) => !featuredProjectSlugSet.has(project.slug),
-);
+export const activeDevelopmentRoadmapProjects =
+  activeDevelopmentProjects.filter(
+    (project) => !featuredProjectSlugSet.has(project.slug),
+  );
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
@@ -963,6 +864,8 @@ export function getStatusLabel(status: ProjectStatus) {
     research: "Research",
     prototype: "Prototype",
     "active-development": "Active Development",
+    "launching-soon": "Launching Soon",
+    "final-testing": "Final Testing",
     "private-beta": "Private Beta",
     "public-release": "Public Release",
     production: "Production",

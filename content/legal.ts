@@ -87,7 +87,7 @@ export const termsSections: LegalSection[] = [
     title: "Information and development status",
     body: [
       "Website content is provided for general information. Product descriptions, screenshots, roadmaps, platforms, and development statuses describe current intentions and may change.",
-      "Concept, Research, Prototype, Active Development, and Private Beta do not promise a release date, final feature set, price, platform, or continued development. A product is available only when Reed Creative Labs or an authorized storefront clearly says it is available.",
+      "Concept, Research, Prototype, Active Development, Private Beta, Final Testing, and Launching Soon do not promise a release date, final feature set, price, platform, or continued development. A product is available only when Reed Creative Labs or an authorized storefront clearly says it is available.",
     ],
   },
   {
@@ -108,7 +108,7 @@ export const termsSections: LegalSection[] = [
   {
     title: "Educational and wellness information",
     body: [
-      "RCL Science Lab is educational software and may simplify complex systems. It is not professional engineering, safety, medical, financial, or research advice.",
+      "RCL simulations may simplify complex systems. They are not professional engineering, safety, medical, financial, or research advice.",
       "Descriptions of planned AAC, recovery, accessibility, or wellness projects do not claim medical treatment, diagnosis, clinical validation, emergency service, or guaranteed outcomes.",
     ],
   },

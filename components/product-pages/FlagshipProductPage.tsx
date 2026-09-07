@@ -1,20 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { ProductMediaSurface } from "@/components/ProductMediaSurface";
 import { Reveal } from "@/components/Reveal";
 import { StructuredData } from "@/components/StructuredData";
 import { TechnicalProfile } from "@/components/TechnicalProfile";
-import {
-  forgeColleagues,
-  forgeWorkflow,
-} from "@/content/forge";
 import { phaseArcadeGames } from "@/content/phase-arcade";
+import { getProject, getStatusLabel, type Project } from "@/content/projects";
 import {
-  getStatusLabel,
-  type Project,
-} from "@/content/projects";
-import { getProjectScreenshots } from "@/lib/project-media";
+  getProjectGalleryCopy,
+  getProjectScreenshots,
+} from "@/lib/project-media";
 import { projectJsonLd } from "@/lib/structured-data";
 import {
   flagshipSectionDensity,
@@ -25,16 +22,15 @@ type GalleryImage = {
   src: string;
   alt: string;
   caption?: string;
+  title?: string;
+  href?: string;
 };
 
 type FlagshipSectionProps = ComponentPropsWithoutRef<"section"> & {
   sectionName: FlagshipSectionName;
 };
 
-function FlagshipSection({
-  sectionName,
-  ...props
-}: FlagshipSectionProps) {
+function FlagshipSection({ sectionName, ...props }: FlagshipSectionProps) {
   return (
     <section
       data-density={flagshipSectionDensity[sectionName]}
@@ -49,7 +45,9 @@ function getGallery(project: Project): readonly GalleryImage[] {
     return phaseArcadeGames.map((game) => ({
       src: game.image,
       alt: game.alt,
-      caption: `${game.name} — real desktop gameplay captured from the current build.`,
+      title: game.name,
+      href: getProject(game.slug)?.route,
+      caption: `${game.description} ${game.identity}`,
     }));
   }
 
@@ -58,7 +56,10 @@ function getGallery(project: Project): readonly GalleryImage[] {
 
 function ProjectRecord({ project }: { project: Project }) {
   return (
-    <aside className="v2-product-record" aria-label={`${project.name} project record`}>
+    <aside
+      className="v2-product-record"
+      aria-label={`${project.name} project record`}
+    >
       <p className="v2-eyebrow">Project record</p>
       <dl>
         <div>
@@ -76,49 +77,29 @@ function ProjectRecord({ project }: { project: Project }) {
       </dl>
       <p className="v2-product-record__media">
         {project.showcaseMedia?.kind === "placeholder"
-          ? `${project.showcaseMedia.message} No concept imagery substituted.`
-          : "Approved product media"}
+          ? project.showcaseMedia.message
+          : "Product overview"}
       </p>
     </aside>
   );
 }
 
-function ForgeFeatureDetail() {
-  return (
-    <>
-      <ol className="v2-workflow" aria-label="Forge engineering workflow">
-        {forgeWorkflow.map((stage, index) => (
-          <li key={stage.title}>
-            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-            <h3>{stage.title}</h3>
-            <p>{stage.body}</p>
-          </li>
-        ))}
-      </ol>
-      <div className="v2-colleague-list">
-        {forgeColleagues.map((colleague) => (
-          <article key={colleague.name}>
-            <p>{colleague.role}</p>
-            <h3>{colleague.name}</h3>
-            <p>{colleague.body}</p>
-          </article>
-        ))}
-      </div>
-    </>
-  );
-}
-
 export function FlagshipProductPage({ project }: { project: Project }) {
   const gallery = getGallery(project);
+  const galleryCopy = getProjectGalleryCopy(project.visual);
   const hasApprovedHero = project.showcaseMedia?.kind === "approved-image";
   const features = project.features ?? project.usersCan ?? [];
   const isConcept = project.status === "concept";
   const statusDescription =
-    project.status === "prototype"
-      ? "This is a functioning development prototype, not a playable, downloadable, or release-ready public build."
-      : isConcept
-        ? "This project is in preproduction. Its public page describes a verified direction, not an implemented product."
-        : "The product is under active development. Public release timing has not been announced.";
+    project.status === "launching-soon"
+      ? "Launching soon. The product has not yet been publicly released; availability and a release date have not been announced."
+      : project.status === "final-testing"
+        ? "Awaiting final testing before release. The collection has not launched and is not yet available to purchase or download."
+        : project.status === "prototype"
+          ? "This is a functioning development prototype, not a playable, downloadable, or release-ready public build."
+          : isConcept
+            ? "This project is in preproduction. Its public page describes a verified direction, not an implemented product."
+            : "The product is under active development. Public release timing has not been announced.";
 
   return (
     <main
@@ -143,6 +124,11 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             <ButtonLink href="/products" variant="secondary">
               All Products
             </ButtonLink>
+            {gallery.length > 0 ? (
+              <ButtonLink href="#gallery-title" variant="secondary">
+                {galleryCopy?.action ?? "View Gallery"}
+              </ButtonLink>
+            ) : null}
             <ButtonLink href="/contact" variant="contact">
               Contact the Studio
             </ButtonLink>
@@ -193,7 +179,9 @@ export function FlagshipProductPage({ project }: { project: Project }) {
           <Reveal>
             <p className="v2-eyebrow">Project status</p>
             <div className="v2-product-status__layout">
-              <h2 id="project-status-title">{getStatusLabel(project.status)}</h2>
+              <h2 id="project-status-title">
+                {getStatusLabel(project.status)}
+              </h2>
               <p>{statusDescription}</p>
             </div>
           </Reveal>
@@ -208,7 +196,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         >
           <Reveal className="v2-product-section__intro">
             <p className="v2-eyebrow">Current focus</p>
-            <h2 id="current-focus-title">What the studio is working through now.</h2>
+            <h2 id="current-focus-title">In progress.</h2>
           </Reveal>
           <ol className="v2-fact-list">
             {project.currentFocus.map((item, index) => (
@@ -217,7 +205,9 @@ export function FlagshipProductPage({ project }: { project: Project }) {
                 className="reveal-enter"
                 style={{ animationDelay: `${Math.min(index * 0.04, 0.12)}s` }}
               >
-                <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <p>{item}</p>
               </li>
             ))}
@@ -243,7 +233,9 @@ export function FlagshipProductPage({ project }: { project: Project }) {
                 data-state={milestone.state}
                 style={{ animationDelay: `${Math.min(index * 0.04, 0.12)}s` }}
               >
-                <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <h3>{milestone.title}</h3>
                 <p>{milestone.state}</p>
               </li>
@@ -252,7 +244,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         </FlagshipSection>
       ) : null}
 
-      {features.length || project.slug === "forge" ? (
+      {features.length ? (
         <FlagshipSection
           sectionName="features"
           className="v2-section-band v2-product-feature-band"
@@ -260,11 +252,13 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         >
           <div className="v2-container v2-product-section">
             <Reveal className="v2-product-section__intro">
-              <p className="v2-eyebrow">{isConcept ? "Planned systems" : "Features"}</p>
+              <p className="v2-eyebrow">
+                {isConcept ? "Planned systems" : "Features"}
+              </p>
               <h2 id="features-title">
                 {isConcept
-                  ? "The verified direction for the product."
-                  : "The work the product is organized to support."}
+                  ? "Planned capabilities."
+                  : "Inside the current build."}
               </h2>
             </Reveal>
             {features.length ? (
@@ -273,15 +267,18 @@ export function FlagshipProductPage({ project }: { project: Project }) {
                   <li
                     key={feature}
                     className="reveal-enter"
-                    style={{ animationDelay: `${Math.min(index * 0.035, 0.12)}s` }}
+                    style={{
+                      animationDelay: `${Math.min(index * 0.035, 0.12)}s`,
+                    }}
                   >
-                    <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                    <span aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     <p>{feature}</p>
                   </li>
                 ))}
               </ul>
             ) : null}
-            {project.slug === "forge" ? <ForgeFeatureDetail /> : null}
           </div>
         </FlagshipSection>
       ) : null}
@@ -309,17 +306,31 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         </FlagshipSection>
       ) : null}
 
-      <FlagshipSection
-        sectionName="gallery"
-        className="v2-container v2-product-section"
-        aria-labelledby="gallery-title"
-      >
-        <Reveal className="v2-product-section__intro">
-          <p className="v2-eyebrow">Gallery</p>
-          <h2 id="gallery-title">Verified product media.</h2>
-        </Reveal>
-        {gallery.length ? (
-          <div className="v2-product-gallery">
+      {gallery.length > 0 ? (
+        <FlagshipSection
+          sectionName="gallery"
+          className="v2-container v2-product-section"
+          aria-labelledby="gallery-title"
+        >
+          <Reveal className="v2-product-section__intro">
+            <p className="v2-eyebrow">Gallery</p>
+            <h2 id="gallery-title">
+              {galleryCopy?.title ?? "Inside the product."}
+            </h2>
+            {galleryCopy?.context ? (
+              <p className="v2-gallery-context">{galleryCopy.context}</p>
+            ) : null}
+          </Reveal>
+          <div
+            className="v2-product-gallery"
+            data-gallery-layout={
+              project.visual === "forgefield"
+                ? "worlds"
+                : project.visual === "phase-arcade"
+                  ? "gameplay"
+                  : "development"
+            }
+          >
             {gallery.map((image, index) => (
               <Reveal key={image.src} delay={Math.min(index * 0.04, 0.12)}>
                 <figure>
@@ -328,25 +339,38 @@ export function FlagshipProductPage({ project }: { project: Project }) {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      sizes="(min-width: 1024px) 58vw, 100vw"
+                      sizes={
+                        project.visual === "forgefield" && index > 1
+                          ? "(min-width: 768px) 46vw, 100vw"
+                          : "(min-width: 1440px) 1360px, 94vw"
+                      }
+                      loading="lazy"
                       className="object-contain"
                     />
                   </div>
-                  {image.caption ? <figcaption>{image.caption}</figcaption> : null}
+                  {image.caption ? (
+                    <figcaption>
+                      {image.title && image.href ? (
+                        <h3>
+                          <Link href={image.href}>{image.title}</Link>
+                        </h3>
+                      ) : null}
+                      <p>{image.caption}</p>
+                      <a
+                        className="text-link"
+                        href={image.src}
+                        aria-label={`View full size: ${image.alt}`}
+                      >
+                        View full size
+                      </a>
+                    </figcaption>
+                  ) : null}
                 </figure>
               </Reveal>
             ))}
           </div>
-        ) : (
-          <Reveal>
-            <ProductMediaSurface
-              project={project}
-              variant="detail"
-              className="v2-product-gallery__placeholder"
-            />
-          </Reveal>
-        )}
-      </FlagshipSection>
+        </FlagshipSection>
+      ) : null}
 
       <FlagshipSection
         sectionName="final-cta"
@@ -355,9 +379,12 @@ export function FlagshipProductPage({ project }: { project: Project }) {
       >
         <Reveal>
           <p className="v2-eyebrow">Product inquiry</p>
-          <h2 id="product-final-title">Discuss the product and its development.</h2>
+          <h2 id="product-final-title">
+            Discuss the product and its development.
+          </h2>
           <p>
-            Contact Reed Creative Labs for product, development, or press inquiries.
+            Contact Reed Creative Labs for product, development, or press
+            inquiries.
           </p>
           <ButtonLink href="/contact" variant="contact">
             Contact the Studio

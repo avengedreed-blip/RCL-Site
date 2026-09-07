@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
-import { ForgeProductPage } from "@/components/product-pages/ForgeProductPage";
 import { FlagshipProductPage } from "@/components/product-pages/FlagshipProductPage";
 import { PhaseArcadeProductPage } from "@/components/product-pages/PhaseArcadeProductPage";
 import { ProductMediaSurface } from "@/components/ProductMediaSurface";
@@ -43,7 +42,9 @@ export async function generateMetadata({
 
   return buildMetadata({
     title: project.name,
-    description: project.shortDescription,
+    description: project.featured
+      ? `${getStatusLabel(project.status)}. ${project.shortDescription}`
+      : project.shortDescription,
     path: project.route,
     image: {
       url: getProjectSocialImage(project.slug),
@@ -62,23 +63,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  if (project.slug === "forge") {
-    return <ForgeProductPage project={project} />;
-  }
-
   if (project.slug === "phase-arcade-volume-1") {
     return <PhaseArcadeProductPage project={project} />;
   }
 
   if (
-    project.slug === "forgefield" ||
-    project.slug === "rcl-science-lab" ||
-    project.slug === "storm-lab"
+    project.presentationTier === "flagship" ||
+    project.presentationTier === "featured"
   ) {
     return <FlagshipProductPage project={project} />;
   }
 
-  const parentProject = project.parentProject ? getProject(project.parentProject) : undefined;
+  const parentProject = project.parentProject
+    ? getProject(project.parentProject)
+    : undefined;
   return (
     <main id="main-content" tabIndex={-1}>
       <StructuredData data={projectJsonLd(project)} />
@@ -124,19 +122,25 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <Reveal>
           <div className="grid gap-6 border-y border-rcl-copper/18 py-7 md:grid-cols-3">
             <div>
-              <p className="text-xs font-black uppercase text-rcl-dim">Category</p>
+              <p className="text-xs font-black uppercase text-rcl-dim">
+                Category
+              </p>
               <p className="mt-2 font-black uppercase text-white">
                 {project.categoryLabel}
               </p>
             </div>
             <div>
-              <p className="text-xs font-black uppercase text-rcl-dim">Status</p>
+              <p className="text-xs font-black uppercase text-rcl-dim">
+                Status
+              </p>
               <p className="mt-2 font-black uppercase text-white">
                 {getStatusLabel(project.status)}
               </p>
             </div>
             <div>
-              <p className="text-xs font-black uppercase text-rcl-dim">Platforms</p>
+              <p className="text-xs font-black uppercase text-rcl-dim">
+                Platforms
+              </p>
               <ul className="mt-2 flex flex-wrap gap-2" aria-label="Platforms">
                 {project.platforms.map((platform) => (
                   <li
@@ -162,9 +166,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </h2>
                 <ul className="mt-5 grid gap-3 text-base leading-7 text-rcl-muted">
                   {project.idealFor.map((item) => (
-                    <li key={item}>
-                      {item}
-                    </li>
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
               </div>
@@ -178,9 +180,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </h2>
                 <ul className="mt-5 grid gap-3 text-base leading-7 text-rcl-muted">
                   {project.usersCan.map((item) => (
-                    <li key={item}>
-                      {item}
-                    </li>
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
               </div>
@@ -205,7 +205,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ))}
         </div>
       </section>
-
     </main>
   );
 }

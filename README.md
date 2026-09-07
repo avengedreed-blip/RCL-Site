@@ -2,6 +2,15 @@
 
 Official static website for Reed Creative Labs.
 
+## Current Portfolio
+
+Forgefield leads as Launching Soon, followed by Phase Arcade Volume I in Final
+Testing, then Project Load Bearing and Static Drift in Active Development.
+These are not released-product or download claims. The shared register in
+`content/projects.ts` drives Home, Products, Press, routes and sitemap.
+See [September 2026 Portfolio Baseline](docs/SEPTEMBER_2026_PORTFOLIO.md) for
+verified product sources, withdrawn pages, current media and remaining boundaries.
+
 Built with:
 
 - Next.js App Router

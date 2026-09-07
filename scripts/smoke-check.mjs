@@ -15,7 +15,10 @@ const expectedFiles = [
 ];
 
 const forbiddenEverywhere = [
-  { pattern: ["@vercel", "analytics"].join("/"), label: "Vercel Analytics package" },
+  {
+    pattern: ["@vercel", "analytics"].join("/"),
+    label: "Vercel Analytics package",
+  },
   { pattern: "<" + "Analytics", label: "Analytics component" },
   { pattern: "googletagmanager.com", label: "Google Tag Manager" },
   { pattern: "google-analytics.com", label: "Google Analytics" },
@@ -26,12 +29,7 @@ const forbiddenEverywhere = [
   { pattern: "'unsafe" + "-eval'", label: "general eval-enabled CSP token" },
 ];
 
-const corsHeaderName = [
-  "Access",
-  "Control",
-  "Allow",
-  "Origin",
-].join("-");
+const corsHeaderName = ["Access", "Control", "Allow", "Origin"].join("-");
 
 const guardedSourceFiles = [
   "app/layout.tsx",
@@ -43,12 +41,11 @@ const guardedSourceFiles = [
   "vercel.json",
 ];
 
-const documentationFiles = [
-  "SECURITY.md",
-  "DEPLOYMENT_NOTES.md",
-];
+const documentationFiles = ["SECURITY.md", "DEPLOYMENT_NOTES.md"];
 
-const missingFiles = expectedFiles.filter((file) => !existsSync(join(root, file)));
+const missingFiles = expectedFiles.filter(
+  (file) => !existsSync(join(root, file)),
+);
 if (missingFiles.length > 0) {
   throw new Error(`Missing expected build output: ${missingFiles.join(", ")}`);
 }
@@ -93,13 +90,15 @@ for (const required of [
 }
 const layoutSource = readFileSync(join(root, "app/layout.tsx"), "utf8");
 if (!layoutSource.includes("<ProductionSpeedInsights />")) {
-  throw new Error("Root layout is missing the production Speed Insights boundary");
+  throw new Error(
+    "Root layout is missing the production Speed Insights boundary",
+  );
 }
 
 const llmsText = readFileSync(join(root, "out/llms.txt"), "utf8");
 for (const required of [
   "# Reed Creative Labs",
-  "https://reedcreativelabs.com/projects/forge",
+  "https://reedcreativelabs.com/projects/forgefield",
   "https://reedcreativelabs.com/services",
   "https://reedcreativelabs.com/contact",
   "https://reedcreativelabs.com/privacy",
@@ -154,10 +153,15 @@ for (const header of requiredProductionHeaders) {
 
 const homepage = readFileSync(join(root, "out/index.html"), "utf8");
 const h1 = homepage.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? "";
-const h1Text = h1.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+const h1Text = h1
+  .replace(/<[^>]+>/g, "")
+  .replace(/\s+/g, " ")
+  .trim();
 
 if (h1Text !== "Building software that explores complex systems.") {
-  throw new Error(`Homepage H1 does not match the approved V2 thesis: ${h1Text}`);
+  throw new Error(
+    `Homepage H1 does not match the approved V2 thesis: ${h1Text}`,
+  );
 }
 if (!homepage.includes("Reed Creative Labs")) {
   throw new Error("Homepage is missing the Reed Creative Labs identity");
@@ -169,7 +173,9 @@ const builtText = [
   "out/press.html",
   "out/privacy.html",
   "out/terms.html",
-].map((file) => readFileSync(join(root, file), "utf8")).join("\n");
+]
+  .map((file) => readFileSync(join(root, file), "utf8"))
+  .join("\n");
 
 if (
   builtText.includes(["@vercel", "analytics"].join("/")) ||

@@ -15,11 +15,11 @@ function projectImage(project: Project) {
 }
 
 function applicationCategory(project: Project) {
-  if (project.slug === "forge") {
-    return "DeveloperApplication";
+  if (project.slug === "static-drift") {
+    return "EntertainmentApplication";
   }
 
-  if (project.slug === "rcl-science-lab") {
+  if (project.slug === "project-load-bearing") {
     return "EducationalApplication";
   }
 

@@ -51,6 +51,31 @@
       "source": "/privacy-policy",
       "destination": "/privacy",
       "permanent": true
+    },
+    {
+      "source": "/projects/forge",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/projects/storm-lab",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/projects/rcl-science-lab",
+      "destination": "/products",
+      "permanent": false
+    },
+    {
+      "source": "/projects/forgefield-tv",
+      "destination": "/projects/static-drift",
+      "permanent": true
+    },
+    {
+      "source": "/projects/static-drift-tv",
+      "destination": "/projects/static-drift",
+      "permanent": true
     }
   ],
   "headers": [
