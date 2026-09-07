@@ -215,9 +215,9 @@ if (
   fail("Forgefield must use only the selected September native captures");
 }
 for (const capture of captures) {
-  if (!capture.alt || !capture.caption.includes("September 2026 pre-release")) {
+  if (!capture.alt || !capture.caption || capture.caption.length < 25) {
     fail(
-      "Forgefield captures must have accurate alt text and dated pre-release captions",
+      "Forgefield captures must describe the world shown, with meaningful alt text and captions",
     );
   }
 }
@@ -554,10 +554,62 @@ if (
 
 const productsPage = readFileSync(routeFile("/products"), "utf8");
 for (const project of featuredProjects) {
-  const label = `aria-label="View product: ${project.name}"`;
-  if (!homepage.includes(label) || !productsPage.includes(label)) {
+  const label = new RegExp(`aria-label="[^"]+: ${project.name}"`);
+  if (!label.test(homepage) || !label.test(productsPage)) {
     fail(`Missing unique featured-product accessible name for ${project.name}`);
   }
+}
+for (const [slug, treatment] of [
+  ["forgefield", "lead"],
+  ["phase-arcade-volume-1", "feature"],
+  ["project-load-bearing", "development"],
+  ["static-drift", "brief"],
+]) {
+  if (getProject(slug)?.chapterTreatment !== treatment)
+    fail(`Incorrect editorial weight for ${slug}`);
+  for (const html of [homepage, productsPage]) {
+    if (
+      !html.includes(
+        `data-product-slug="${slug}" data-treatment="${treatment}"`,
+      )
+    )
+      fail(`Missing rendered editorial weight for ${slug}`);
+  }
+}
+for (const slug of ["project-load-bearing", "static-drift"]) {
+  const html = readFileSync(routeFile(`/projects/${slug}`), "utf8");
+  if (html.includes('data-flagship-section="gallery"'))
+    fail(`${slug} must not have an empty gallery`);
+}
+const forgefieldHtml = readFileSync(routeFile("/projects/forgefield"), "utf8");
+if (!forgefieldHtml.includes("September 2026 pre-release Windows build"))
+  fail("Gallery must retain shared dated build context");
+if (!forgefieldHtml.includes('data-gallery-layout="worlds"'))
+  fail("Forgefield requires its world gallery");
+for (const label of [
+  "Verified product media",
+  "Current approved capture",
+  "Public media review",
+  "No concept imagery substituted",
+]) {
+  if (publicHtml.includes(label))
+    fail(`Internal media approval language leaked publicly: ${label}`);
+}
+if (
+  homepage.includes('class="v2-studio-statement"') ||
+  homepage.includes('id="research-title"')
+)
+  fail("Homepage should not reintroduce multiple closing statements");
+const servicesHtml = readFileSync(routeFile("/services"), "utf8");
+for (const text of [
+  "Internal RCL project",
+  "WebAssembly",
+  "reduced-motion",
+  "rcl-site-desktop-2026-09.webp",
+  "rcl-site-mobile-2026-09.webp",
+]) {
+  if (!servicesHtml.includes(text))
+    fail(`Internal case study missing provenance or context: ${text}`);
 }
 if (publicHtml.includes('href="/projects"')) {
   fail("A public link still targets the retired /projects catalog URL");

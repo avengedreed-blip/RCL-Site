@@ -25,7 +25,11 @@ export const metadata: Metadata = buildMetadata({
 
 export default function PressPage() {
   return (
-    <main id="main-content" tabIndex={-1} className="v2-info-page v2-press-page">
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className="v2-info-page v2-press-page"
+    >
       <PageHeader
         eyebrow="Press"
         title="Reed Creative Labs press information"
@@ -45,23 +49,25 @@ export default function PressPage() {
         <Reveal className="v2-press-boilerplate" delay={0.06}>
           <p className="v2-eyebrow">Studio boilerplate</p>
           <p>
-            Reed Creative Labs is an independent software and engineering
-            studio building tools, simulations, desktop software, games,
-            websites, and custom software with privacy, ownership, and lasting
-            value in mind. Current featured products include{" "}
-            {featuredProductNames}.
+            Reed Creative Labs is an independent software and engineering studio
+            building tools, simulations, desktop software, games, websites, and
+            custom software with privacy, ownership, and lasting value in mind.
+            Current featured products include {featuredProductNames}.
           </p>
         </Reveal>
       </section>
 
-      <section className="v2-section-band" aria-labelledby="press-references-title">
+      <section
+        className="v2-section-band"
+        aria-labelledby="press-references-title"
+      >
         <div className="v2-container v2-press-products">
           <Reveal className="v2-section-intro v2-section-intro--compact">
             <p className="v2-eyebrow">Featured references</p>
             <h2 id="press-references-title">Current product context.</h2>
             <p>
-              Each reference links to the current public product page and its
-              approved status language.
+              Each product page has a summary, current development status, and
+              images where available.
             </p>
           </Reveal>
           <ul className="v2-press-products__list">
@@ -72,7 +78,9 @@ export default function PressPage() {
                 style={{ animationDelay: `${index * 0.04}s` }}
               >
                 <Link href={project.route}>
-                  <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <span aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                   <div>
                     <p>{getProjectDateLabel(project)}</p>
                     <h3>{project.name}</h3>

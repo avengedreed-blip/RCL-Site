@@ -50,8 +50,8 @@ export default function ProductsPage() {
           <p className="v2-eyebrow">Products</p>
           <h1>Software, simulation, and games built around real systems.</h1>
           <p>
-            An evidence-led view of what the studio is building now, shown with
-            current public status and approved product media.
+            From procedural desktops to structural experiments: the products
+            moving toward release and the projects taking shape behind them.
           </p>
         </Reveal>
       </header>
@@ -65,7 +65,8 @@ export default function ProductsPage() {
             Featured products
           </h2>
           <p>
-            Selected work, presented with verified status and approved media.
+            Preparing to launch, completing testing, and exploring what comes
+            next.
           </p>
         </Reveal>
         <div className="v2-product-chapters">
@@ -108,7 +109,7 @@ export default function ProductsPage() {
         <div className="v2-catalog-ledger-section">
           <Reveal className="v2-section-intro v2-section-intro--compact">
             <p className="v2-eyebrow">Early work</p>
-            <h2 id="concept-products-title">Verified concepts.</h2>
+            <h2 id="concept-products-title">Early concepts.</h2>
           </Reveal>
           <ProductLedger
             projects={conceptProjects}

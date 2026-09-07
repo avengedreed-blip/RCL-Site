@@ -42,7 +42,9 @@ export async function generateMetadata({
 
   return buildMetadata({
     title: project.name,
-    description: project.shortDescription,
+    description: project.featured
+      ? `${getStatusLabel(project.status)}. ${project.shortDescription}`
+      : project.shortDescription,
     path: project.route,
     image: {
       url: getProjectSocialImage(project.slug),

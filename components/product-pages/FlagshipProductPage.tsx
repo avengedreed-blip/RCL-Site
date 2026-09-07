@@ -39,7 +39,7 @@ function getGallery(project: Project): readonly GalleryImage[] {
     return phaseArcadeGames.map((game) => ({
       src: game.image,
       alt: game.alt,
-      caption: `${game.name} — real desktop gameplay captured from the current build.`,
+      caption: `${game.name}. ${game.description}`,
     }));
   }
 
@@ -69,8 +69,8 @@ function ProjectRecord({ project }: { project: Project }) {
       </dl>
       <p className="v2-product-record__media">
         {project.showcaseMedia?.kind === "placeholder"
-          ? `${project.showcaseMedia.message} No concept imagery substituted.`
-          : "Approved product media"}
+          ? project.showcaseMedia.message
+          : "Product overview"}
       </p>
     </aside>
   );
@@ -115,6 +115,13 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             <ButtonLink href="/products" variant="secondary">
               All Products
             </ButtonLink>
+            {gallery.length > 0 ? (
+              <ButtonLink href="#gallery-title" variant="secondary">
+                {project.visual === "forgefield"
+                  ? "Explore the Worlds"
+                  : "See the Games"}
+              </ButtonLink>
+            ) : null}
             <ButtonLink href="/contact" variant="contact">
               Contact the Studio
             </ButtonLink>
@@ -182,9 +189,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         >
           <Reveal className="v2-product-section__intro">
             <p className="v2-eyebrow">Current focus</p>
-            <h2 id="current-focus-title">
-              What the studio is working through now.
-            </h2>
+            <h2 id="current-focus-title">In progress.</h2>
           </Reveal>
           <ol className="v2-fact-list">
             {project.currentFocus.map((item, index) => (
@@ -245,8 +250,8 @@ export function FlagshipProductPage({ project }: { project: Project }) {
               </p>
               <h2 id="features-title">
                 {isConcept
-                  ? "The verified direction for the product."
-                  : "The work the product is organized to support."}
+                  ? "Planned capabilities."
+                  : "Inside the current build."}
               </h2>
             </Reveal>
             {features.length ? (
@@ -294,17 +299,31 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         </FlagshipSection>
       ) : null}
 
-      <FlagshipSection
-        sectionName="gallery"
-        className="v2-container v2-product-section"
-        aria-labelledby="gallery-title"
-      >
-        <Reveal className="v2-product-section__intro">
-          <p className="v2-eyebrow">Gallery</p>
-          <h2 id="gallery-title">Verified product media.</h2>
-        </Reveal>
-        {gallery.length ? (
-          <div className="v2-product-gallery">
+      {gallery.length > 0 ? (
+        <FlagshipSection
+          sectionName="gallery"
+          className="v2-container v2-product-section"
+          aria-labelledby="gallery-title"
+        >
+          <Reveal className="v2-product-section__intro">
+            <p className="v2-eyebrow">Gallery</p>
+            <h2 id="gallery-title">
+              {project.visual === "forgefield"
+                ? "Worlds with their own character."
+                : "Three games. Three ways to play."}
+            </h2>
+            <p className="v2-gallery-context">
+              {project.visual === "forgefield"
+                ? "Six of the nine worlds, captured from the September 2026 pre-release Windows build."
+                : "Desktop gameplay from Phase Shift, Phase Breaker, and Phase Court. The collection also supports VR and is in final testing."}
+            </p>
+          </Reveal>
+          <div
+            className="v2-product-gallery"
+            data-gallery-layout={
+              project.visual === "forgefield" ? "worlds" : "gameplay"
+            }
+          >
             {gallery.map((image, index) => (
               <Reveal key={image.src} delay={Math.min(index * 0.04, 0.12)}>
                 <figure>
@@ -313,27 +332,33 @@ export function FlagshipProductPage({ project }: { project: Project }) {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      sizes="(min-width: 1024px) 58vw, 100vw"
+                      sizes={
+                        project.visual === "forgefield" && index > 1
+                          ? "(min-width: 768px) 46vw, 100vw"
+                          : "(min-width: 1440px) 1360px, 94vw"
+                      }
+                      loading="lazy"
                       className="object-contain"
                     />
                   </div>
                   {image.caption ? (
-                    <figcaption>{image.caption}</figcaption>
+                    <figcaption>
+                      <p>{image.caption}</p>
+                      <a
+                        className="text-link"
+                        href={image.src}
+                        aria-label={`View full size: ${image.alt}`}
+                      >
+                        View full size
+                      </a>
+                    </figcaption>
                   ) : null}
                 </figure>
               </Reveal>
             ))}
           </div>
-        ) : (
-          <Reveal>
-            <ProductMediaSurface
-              project={project}
-              variant="detail"
-              className="v2-product-gallery__placeholder"
-            />
-          </Reveal>
-        )}
-      </FlagshipSection>
+        </FlagshipSection>
+      ) : null}
 
       <FlagshipSection
         sectionName="final-cta"

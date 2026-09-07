@@ -15,43 +15,64 @@ export function FeaturedProductChapter({
   project,
   index,
 }: FeaturedProductChapterProps) {
-  const number = String(index + 1).padStart(2, "0");
-  const mediaApproved = project.showcaseMedia?.kind === "approved-image";
-  const currentFocus = project.currentFocus?.slice(0, 2) ?? [];
+  const hasMedia = project.showcaseMedia?.kind === "approved-image";
+  const treatment =
+    project.chapterTreatment ?? (hasMedia ? "feature" : "development");
+  const currentFocus =
+    treatment === "development"
+      ? (project.currentFocus?.slice(0, 2) ?? [])
+      : [];
+  const action =
+    treatment === "lead"
+      ? `Explore ${project.name}`
+      : treatment === "development" || treatment === "brief"
+        ? "View development"
+        : "Explore the collection";
 
   return (
     <article
       data-product-slug={project.slug}
+      data-treatment={treatment}
+      data-has-media={hasMedia}
       className={cn(
         "featured-product-chapter",
-        index % 2 === 1 && "featured-product-chapter--reverse",
+        hasMedia && index % 2 === 1 && "featured-product-chapter--reverse",
       )}
     >
       <div className="featured-product-chapter__copy">
         <div className="featured-product-chapter__index" aria-hidden="true">
-          {number}
+          {String(index + 1).padStart(2, "0")}
         </div>
         <p className="featured-product-chapter__category">
           {project.categoryLabel}
         </p>
         <h2>{project.name}</h2>
+        <p className="featured-product-chapter__status">
+          {getStatusLabel(project.status)}
+        </p>
         <p className="featured-product-chapter__description">
           {project.shortDescription}
         </p>
+      </div>
+      {hasMedia ? (
+        <div className="featured-product-chapter__media material-frame">
+          <ProductMediaSurface
+            project={project}
+            className="featured-product-chapter__surface"
+          />
+        </div>
+      ) : null}
+      <div className="featured-product-chapter__details">
         <dl className="featured-product-chapter__metadata">
-          <div>
-            <dt>Status</dt>
-            <dd>{getStatusLabel(project.status)}</dd>
-          </div>
           <div>
             <dt>Platform</dt>
             <dd>{project.platforms.join(" / ")}</dd>
           </div>
         </dl>
-        {project.technicalProfile ? (
+        {project.technicalProfile && treatment !== "brief" ? (
           <CompactTechnicalProfile profile={project.technicalProfile} />
         ) : null}
-        {currentFocus.length > 0 ? (
+        {currentFocus.length ? (
           <div className="featured-product-chapter__focus">
             <p>Current focus</p>
             <ul>
@@ -64,21 +85,11 @@ export function FeaturedProductChapter({
         <Link
           className="text-link"
           href={project.route}
-          aria-label={`View product: ${project.name}`}
+          aria-label={`${action}: ${project.name}`}
         >
-          View product
+          {action}
           <ArrowRight aria-hidden="true" />
         </Link>
-      </div>
-      <div className="featured-product-chapter__media material-frame">
-        <div className="featured-product-chapter__media-header">
-          <span>{mediaApproved ? "Verified product media" : "Evidence bay"}</span>
-          <span>{mediaApproved ? "Current approved capture" : "Media pending approval"}</span>
-        </div>
-        <ProductMediaSurface
-          project={project}
-          className="featured-product-chapter__surface"
-        />
       </div>
     </article>
   );

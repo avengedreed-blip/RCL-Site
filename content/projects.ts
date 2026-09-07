@@ -110,6 +110,7 @@ export type Project = {
   featured?: boolean;
   featuredOrder?: number;
   presentationTier?: "flagship" | "featured" | "catalog";
+  chapterTreatment?: "lead" | "feature" | "development" | "brief";
   showcaseMedia?: ProjectMedia;
   includedGames?: string[];
   parentProject?: string;
@@ -138,7 +139,7 @@ export const projects: Project[] = [
     tagline:
       "Nine procedural worlds. Live wallpaper and screensaver playback. Launching soon.",
     shortDescription:
-      "Launching soon: Forgefield is RCL's flagship Windows application for procedural live wallpapers and screensavers. Nine worlds evolve through native simulation and GPU rendering, from black-hole accretion and interacting galaxies to aurora, embers, and neural structures. Not yet publicly released.",
+      "Nine living worlds for the Windows desktop, from black-hole accretion to aurora and glowing embers. Forgefield generates live wallpapers and screensavers through native simulation and GPU rendering, not looping video.",
     longDescription:
       "Forgefield turns the Windows desktop into a continuously evolving procedural environment, not a repeating video. Its nine worlds span Eventide, Genesis, Gravitas, Abyssal, Synapse, Quantum Garden, Corona, Ember, and Polar Night. Modern Fortran coordinates the simulation and scene lifecycle, while OpenGL compute and rendering shaders produce the imagery in real time. A native Windows launcher manages world selection, preview, live wallpaper, and screensaver operation. Forgefield is RCL's flagship product and is launching soon. Public availability and a release date have not yet been announced.",
     platforms: ["Windows"],
@@ -151,12 +152,12 @@ export const projects: Project[] = [
     featured: true,
     featuredOrder: 1,
     presentationTier: "flagship",
+    chapterTreatment: "lead",
     showcaseMedia: {
       kind: "approved-image",
       src: "/images/projects/forgefield-eventide-2026-09.webp",
       alt: "Eventide in Forgefield: a bright black-hole accretion ring with flowing copper material and polar jets.",
-      caption:
-        "Eventide. Native Forgefield renderer capture, September 2026 pre-release build.",
+      caption: "Eventide, captured from the September 2026 Windows build.",
       fit: "cover",
     },
     currentFocus: [
@@ -203,7 +204,7 @@ export const projects: Project[] = [
       },
       {
         title: "Launching soon",
-        body: "Forgefield is approaching public release. The current images are real pre-release renderer captures, not a claim that downloads or purchases are available today. Release details will be published when confirmed.",
+        body: "Final preparation focuses on Windows hardware, long-running playback, and wallpaper and screensaver reliability. Release details will be published when confirmed.",
       },
     ],
   },
@@ -218,7 +219,7 @@ export const projects: Project[] = [
     tagline:
       "Phase Shift, Phase Breaker, and Phase Court in one arcade collection.",
     shortDescription:
-      "Phase Arcade Volume I is a three-game desktop and VR collection awaiting final testing before release. Phase Shift, Phase Breaker, and Phase Court explore motion, timing, positioning, and physical interaction through focused arcade play. The collection has not launched.",
+      "Phase Shift, Phase Breaker, and Phase Court in one desktop and VR collection. Three distinct takes on motion, timing, and positioning, built for short sessions and repeated practice.",
     longDescription:
       "Phase Arcade Volume I brings Phase Shift, Phase Breaker, and Phase Court into one desktop and VR collection. It is built for players who want focused mechanics and short sessions that reward timing, positioning, and repeated practice. Input response, visual readability, and consistent core rules connect traditional desktop play and VR without erasing each game's identity. The collection is awaiting final testing before release. It has not launched, and a release date has not been announced.",
     platforms: ["PC", "VR"],
@@ -232,6 +233,7 @@ export const projects: Project[] = [
     featured: true,
     featuredOrder: 2,
     presentationTier: "featured",
+    chapterTreatment: "feature",
     showcaseMedia: {
       kind: "approved-image",
       src: "/images/projects/phase-breaker-gameplay-01.webp",
@@ -303,7 +305,7 @@ export const projects: Project[] = [
     tagline:
       "A structural simulation in development, connecting hands-on construction to a native Fortran solver.",
     shortDescription:
-      "Project Load Bearing is a major RCL development focus: build and modify a steel frame, test it under load, inspect its response, and redesign it. The current Brace the Bay prototype connects an Unreal Engine construction environment to a native Fortran structural solver. In development, with no release date announced.",
+      "Build a steel frame, test it under load, inspect its response, and redesign it. The current Brace the Bay prototype connects hands-on construction in Unreal Engine to a native Fortran structural solver.",
     longDescription:
       "Project Load Bearing explores structural engineering through a build, test, inspect, and redesign loop. In the current Brace the Bay prototype, a steel-frame construction challenge is evaluated against authored gravity and lateral loads. A native Fortran solver calculates the initial elastic response and identifies the first member failure; Unreal Engine presents the structure, editing tools, and inspection views. The project is a primary RCL development focus, not an imminent release. Its current scope is a working vertical slice rather than a finished engineering simulator.",
     platforms: ["Windows"],
@@ -312,6 +314,7 @@ export const projects: Project[] = [
     featured: true,
     featuredOrder: 3,
     presentationTier: "featured",
+    chapterTreatment: "development",
     showcaseMedia: {
       kind: "placeholder",
       alt: "Project Load Bearing public screenshots are not yet approved.",
@@ -366,7 +369,7 @@ export const projects: Project[] = [
     tagline:
       "An offline ambient TV application built around evolving procedural worlds.",
     shortDescription:
-      "Static Drift is an ambient application in development for Android TV. Its native renderer creates evolving procedural worlds, with optional built-in sound, simple remote controls, and saved playback settings. It is not yet publicly released.",
+      "Procedural ambient worlds for Android TV, with optional built-in sound, simple remote controls, and locally saved playback settings. A quieter screen experience, still in development.",
     longDescription:
       "Static Drift brings procedural ambient visuals to the television without relying on looping video. The current application combines a native C++ renderer with Android TV controls, optional built-in sound, and local playback settings. Development is focused on sustained visual quality and a quiet, remote-friendly experience. Static Drift remains in development: visual and audio review, physical-TV testing, and release preparation are still ahead of public availability.",
     platforms: ["Android TV"],
@@ -375,6 +378,7 @@ export const projects: Project[] = [
     featured: true,
     featuredOrder: 4,
     presentationTier: "featured",
+    chapterTreatment: "brief",
     showcaseMedia: {
       kind: "placeholder",
       alt: "Static Drift public screenshots are not yet approved.",
@@ -405,7 +409,7 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "Ambient, not passive video",
-        body: "The native engine generates visual motion as the application runs. Current worlds are under review, so the public page does not substitute concepts or unfinished captures for approved product imagery.",
+        body: "The native engine generates visual motion during playback rather than repeating a movie. Visual quality and sustained playback are the current development focus.",
       },
       {
         title: "Built for a remote",

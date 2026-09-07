@@ -14,37 +14,35 @@ const projectScreenshots: Partial<
       src: "/images/projects/forgefield-eventide-2026-09.webp",
       alt: "Forgefield Eventide: A bright black-hole ring, flowing copper accretion material, and polar jets.",
       caption:
-        "Eventide. Native Forgefield renderer capture, September 2026 pre-release build.",
+        "Eventide. An accretion ring and polar jets around a black-hole core.",
     },
     {
       src: "/images/projects/forgefield-polar-night-2026-09.webp",
       alt: "Forgefield Polar Night: Aurora curtains above snow-covered mountains and a reflective dark surface.",
       caption:
-        "Polar Night. Native Forgefield renderer capture, September 2026 pre-release build.",
+        "Polar Night. Aurora curtains above snow-covered mountains and a reflective surface.",
     },
     {
       src: "/images/projects/forgefield-corona-2026-09.webp",
       alt: "Forgefield Corona: Luminous plasma loops rising from a textured solar surface.",
-      caption:
-        "Corona. Native Forgefield renderer capture, September 2026 pre-release build.",
+      caption: "Corona. Plasma loops rising from a textured solar surface.",
     },
     {
       src: "/images/projects/forgefield-gravitas-2026-09.webp",
       alt: "Forgefield Gravitas: Two interacting spiral galaxies with contrasting warm and cool material.",
       caption:
-        "Gravitas. Native Forgefield renderer capture, September 2026 pre-release build.",
+        "Gravitas. Two interacting spiral galaxies, traced in warm and cool material.",
     },
     {
       src: "/images/projects/forgefield-synapse-2026-09.webp",
       alt: "Forgefield Synapse: Branching neural structures with pale cell bodies and illuminated connections.",
       caption:
-        "Synapse. Native Forgefield renderer capture, September 2026 pre-release build.",
+        "Synapse. Branching neural structures with illuminated connections.",
     },
     {
       src: "/images/projects/forgefield-ember-2026-09.webp",
       alt: "Forgefield Ember: Glowing coals and flames in a procedural ember bed.",
-      caption:
-        "Ember. Native Forgefield renderer capture, September 2026 pre-release build.",
+      caption: "Ember. Flames and glowing coals in a procedural ember bed.",
     },
   ],
   "phase-arcade": [

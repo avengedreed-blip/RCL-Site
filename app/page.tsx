@@ -45,21 +45,6 @@ const capabilities = [
   },
 ];
 
-const technicalFocus = [
-  {
-    title: "Structural decisions",
-    body: "Connecting construction, load tests, and inspection so a design can be understood and improved through its response.",
-  },
-  {
-    title: "Procedural environments",
-    body: "Testing renderer-led desktop experiences that remain dynamic without relying on pre-recorded video loops.",
-  },
-  {
-    title: "Simulation as explanation",
-    body: "Using visible systems and controlled variables to make scientific and operational ideas easier to inspect.",
-  },
-];
-
 export default function Home() {
   return (
     <main id="main-content" tabIndex={-1} className="v2-home">
@@ -129,12 +114,11 @@ export default function Home() {
         <div className="v2-container v2-capabilities">
           <Reveal className="v2-section-intro v2-section-intro--compact">
             <p className="v2-eyebrow">Studio capabilities</p>
-            <h2 id="capabilities-title">
-              Engineering across software and systems.
-            </h2>
+            <h2 id="capabilities-title">From product work to your project.</h2>
             <p>
-              Product work and client services share the same standard: focused
-              scope, maintainable engineering, and direct communication.
+              The same systems thinking informs client work: define the problem,
+              build carefully, and verify behavior. Privacy, ownership, and
+              maintainability stay part of the brief.
             </p>
             <Link className="text-link" href="/services">
               Explore studio services
@@ -160,48 +144,13 @@ export default function Home() {
       </section>
 
       <section
-        className="v2-container v2-research"
-        aria-labelledby="research-title"
-      >
-        <Reveal className="v2-section-intro v2-section-intro--compact">
-          <p className="v2-eyebrow">Current technical focus</p>
-          <h2 id="research-title">The questions shaping the work.</h2>
-        </Reveal>
-        <div className="v2-research__grid">
-          {technicalFocus.map((focus, index) => (
-            <Reveal key={focus.title} delay={index * 0.05}>
-              <article className="v2-research-note">
-                <p aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
-                <h3>{focus.title}</h3>
-                <p>{focus.body}</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="v2-studio-statement">
-        <Reveal className="v2-container v2-studio-statement__layout">
-          <p className="v2-eyebrow">Reed Creative Labs</p>
-          <h2>Independent software, engineered with a clear point of view.</h2>
-          <p>
-            The studio works across tools, simulation, visualization, and games
-            without treating privacy, ownership, or maintainability as optional
-            extras.
-          </p>
-        </Reveal>
-      </section>
-
-      <section
         className="v2-container v2-contact-cta"
         aria-labelledby="contact-title"
       >
         <Reveal className="v2-contact-cta__layout">
           <div>
             <p className="v2-eyebrow">Start a conversation</p>
-            <h2 id="contact-title">
-              Products, engineering, and project inquiries.
-            </h2>
+            <h2 id="contact-title">Have a system worth building?</h2>
           </div>
           <ButtonLink href="/contact" variant="contact">
             Contact the Studio

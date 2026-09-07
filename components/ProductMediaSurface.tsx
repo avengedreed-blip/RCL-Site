@@ -51,12 +51,9 @@ export function ProductMediaSurface({
         </div>
         <div className="product-media-placeholder__rule" aria-hidden="true" />
         <div className="product-media-placeholder__content">
-          <p>Public media review</p>
+          <p>{project.name}</p>
           <span>{message}</span>
         </div>
-        <p className="product-media-placeholder__status">
-          No concept imagery substituted
-        </p>
       </div>
     );
   }

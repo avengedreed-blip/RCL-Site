@@ -81,7 +81,28 @@ try {
       await page.goto(base + route, { waitUntil: "networkidle" });
       const overflow = await page.evaluate(() => [...document.querySelectorAll("main h1, main h2, main h3, main p, main a, main li")].filter((e) => !e.closest('[aria-hidden="true"]') && !e.classList.contains("sr-only") && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden").filter((e) => { const b = e.getBoundingClientRect(); return b.left < -1 || b.right > innerWidth + 1 || e.scrollWidth > e.clientWidth + 2; }).map((e) => e.textContent.trim().slice(0, 80)));
       assert.deepEqual(overflow, [], `${route} at ${width}: overflow`);
+      if (route === "/services") {
+        const scopeCopy = await page.locator(".v2-services-boundaries__list li p").evaluateAll(elements => elements.map(e => getComputedStyle(e).display));
+        assert.ok(scopeCopy.length && scopeCopy.every(display => display !== "grid"), "Scope paragraphs must not place text in a nested number column");
+      }
+      if (width < 768 && (route === "/" || route === "/products")) {
+        const chapters = await page.locator('.featured-product-chapter[data-has-media="true"]').evaluateAll(elements => elements.map(element => {
+          const bottom = selector => element.querySelector(selector).getBoundingClientRect().bottom;
+          const top = selector => element.querySelector(selector).getBoundingClientRect().top;
+          return bottom(".featured-product-chapter__copy") <= top(".featured-product-chapter__media") &&
+            bottom(".featured-product-chapter__media") <= top(".featured-product-chapter__details");
+        }));
+        assert.ok(chapters.length && chapters.every(Boolean), `${route}: mobile must read intro, evidence, details`);
+      }
     }
+  }
+  for (const route of ["/", "/products", "/services", "/projects/forgefield"]) {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto(base + route, { waitUntil: "networkidle" });
+    await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    const overflow = await page.locator("main h1, main h2, main h3, main p, main a, main li").evaluateAll(elements => elements.filter(e => !e.closest('[aria-hidden="true"]') && !e.classList.contains("sr-only")).filter(e => { const b = e.getBoundingClientRect(); return b.left < -1 || b.right > innerWidth + 1 || e.scrollWidth > e.clientWidth + 2; }).map(e => e.textContent.trim().slice(0, 80)));
+    assert.deepEqual(overflow, [], `${route}: 200% text enlargement`);
   }
   await page.goto(base + "/products", { waitUntil: "networkidle" });
   for (const project of projects) {
