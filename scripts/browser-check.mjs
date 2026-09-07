@@ -4,7 +4,8 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { chromium, firefox, webkit } from "playwright";
 import { createRequire } from "node:module";
-import { featuredProjects, projects } from "../content/projects.ts";
+import { featuredProjects, getProject, projects } from "../content/projects.ts";
+import { phaseArcadeGames } from "../content/phase-arcade.ts";
 import { staticPagePaths } from "../lib/site-routes.ts";
 
 const require = createRequire(import.meta.url);
@@ -69,6 +70,59 @@ try {
       assert.equal(response.status(), 200, route);
       assert.equal(await page.locator("h1").count(), 1, route);
       assert.equal(await page.locator("main").count(), 1, route);
+      if (route === "/" || route === "/products") {
+        assert.deepEqual(
+          await page.locator(".featured-product-chapter").evaluateAll(elements => elements.map(element => element.dataset.productSlug)),
+          featuredProjects.map(project => project.slug),
+          `${route}: one chapter per featured product, with Forgefield first`,
+        );
+        assert.equal(await page.locator("#included-games-title").count(), 0, `${route}: no repeated games section`);
+        for (const game of phaseArcadeGames) {
+          assert.equal(await page.locator(`main a[href="${getProject(game.slug).route}"]`).count(), 0, `${route}: individual games belong on the collection page`);
+        }
+      }
+      if (route === "/projects/phase-arcade-volume-1") {
+        const figures = page.locator('.v2-product-gallery[data-gallery-layout="gameplay"] figure');
+        assert.equal(await figures.count(), phaseArcadeGames.length, "Exactly three included game explanations");
+        for (const [index, game] of phaseArcadeGames.entries()) {
+          const figure = figures.nth(index);
+          const link = figure.getByRole("heading", { level: 3, name: game.name, exact: true }).getByRole("link");
+          assert.equal(await link.getAttribute("href"), getProject(game.slug).route, `${game.name}: canonical detail route`);
+          assert.equal(await figure.locator("figcaption p").innerText(), `${game.description} ${game.identity}`, `${game.name}: existing verified gameplay and identity`);
+          const image = figure.locator("img");
+          assert.equal(await image.getAttribute("src"), game.image, `${game.name}: approved screenshot`);
+          assert.equal(await image.getAttribute("alt"), game.alt, `${game.name}: approved alternative`);
+          await image.scrollIntoViewIfNeeded();
+          const reserved = await image.locator("..").boundingBox();
+          await image.evaluate(element => element.decode());
+          assert.ok(await image.evaluate(element => element.naturalWidth > 0 && getComputedStyle(element).objectFit === "contain"), `${game.name}: uncropped decoded image`);
+          assert.equal((await image.locator("..").boundingBox()).height, reserved.height, `${game.name}: stable image frame`);
+          assert.ok((await link.boundingBox()).height >= 44, `${game.name}: comfortable link target`);
+          assert.equal(await figure.getByRole("link", { name: /^View full size:/ }).getAttribute("href"), game.image, `${game.name}: full-size media still available`);
+        }
+        await page.getByRole("link", { name: "See the Games", exact: true }).click();
+        await page.waitForURL(base + route + "#gallery-title");
+        assert.ok(await page.locator("#gallery-title").isVisible(), "Collection gallery anchor remains valid");
+      }
+      if (["/projects/project-load-bearing", "/projects/static-drift"].includes(route)) {
+        const images = page.locator(".v2-product-hero__media img, .v2-product-gallery img");
+        assert.equal(await images.count(), 4, `${route}: one cover and three gallery captures`);
+        for (const image of await images.all()) {
+          await image.scrollIntoViewIfNeeded();
+          const reserved = await image.locator("..").boundingBox();
+          await image.evaluate(element => element.decode());
+          const media = await image.evaluate(element => ({ width: element.naturalWidth, height: element.naturalHeight, alt: element.alt, fit: getComputedStyle(element).objectFit, gallery: Boolean(element.closest(".v2-product-gallery")) }));
+          assert.deepEqual([media.width, media.height], [2560, 1440], `${route}: full-resolution media`);
+          assert.ok(media.alt.length > 20, `${route}: descriptive media alternative`);
+          assert.equal(media.fit, media.gallery ? "contain" : "cover", `${route}: keep gallery screenshots whole and fill the responsive cover frame`);
+          const loaded = await image.locator("..").boundingBox();
+          assert.equal(loaded.height, reserved.height, `${route}: image decoding must not resize its frame`);
+        }
+        for (const figure of await page.locator(".v2-product-gallery figure").all()) {
+          assert.equal(await figure.locator("a").getAttribute("href"), await figure.locator("img").getAttribute("src"), `${route}: full-size link must open its capture`);
+        }
+        await page.evaluate(() => scrollTo(0, 0));
+      }
       assert.ok(await page.locator(".reveal-enter").evaluateAll((elements) => elements.every((element) => getComputedStyle(element).animationDelay === "0s")), route + ": reduced motion must not delay content");
       await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
       const violations = await page.evaluate(async () => (await window.axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"] }, rules: { "label-content-name-mismatch": { enabled: true } } })).violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })));
@@ -104,13 +158,16 @@ try {
     const overflow = await page.locator("main h1, main h2, main h3, main p, main a, main li").evaluateAll(elements => elements.filter(e => !e.closest('[aria-hidden="true"]') && !e.classList.contains("sr-only")).filter(e => { const b = e.getBoundingClientRect(); return b.left < -1 || b.right > innerWidth + 1 || e.scrollWidth > e.clientWidth + 2; }).map(e => e.textContent.trim().slice(0, 80)));
     assert.deepEqual(overflow, [], `${route}: 200% text enlargement`);
   }
-  await page.goto(base + "/products", { waitUntil: "networkidle" });
   for (const project of projects) {
+    const listingRoute = project.parentProject
+      ? getProject(project.parentProject).route
+      : "/products";
+    await page.goto(base + listingRoute, { waitUntil: "networkidle" });
     await page.locator(`main a[href="${project.route}"]`).first().click();
     await page.waitForURL(base + project.route);
     assert.equal((await page.locator("h1").innerText()).toLowerCase(), project.name.toLowerCase());
     await page.goBack({ waitUntil: "networkidle" });
-    await page.waitForURL(base + "/products");
+    await page.waitForURL(base + listingRoute);
     await page.waitForLoadState("networkidle");
   }
   await page.goto(base + "/contact", { waitUntil: "networkidle" });

@@ -78,23 +78,6 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <section className="v2-section-band">
-        <div className="v2-container v2-catalog-ledger-section">
-          <Reveal className="v2-section-intro v2-section-intro--compact">
-            <p className="v2-eyebrow">Phase Arcade Volume I</p>
-            <h2 id="included-games-title">Three included games.</h2>
-            <p>
-              Phase Shift, Phase Breaker, and Phase Court are parts of one
-              desktop and VR collection.
-            </p>
-          </Reveal>
-          <ProductLedger
-            projects={includedGames}
-            labelledBy="included-games-title"
-          />
-        </div>
-      </section>
-
       <section className="v2-container v2-catalog-ledgers">
         <div className="v2-catalog-ledger-section">
           <Reveal className="v2-section-intro v2-section-intro--compact">

@@ -1,7 +1,9 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { featuredProjects, getProject, projects } from "../content/projects.ts";
+import { phaseArcadeGames } from "../content/phase-arcade.ts";
 import {
+  getProjectGalleryCopy,
   getProjectScreenshots,
   getProjectSocialImage,
 } from "../lib/project-media.ts";
@@ -221,7 +223,23 @@ for (const capture of captures) {
     );
   }
 }
-for (const slug of ["project-load-bearing", "static-drift"]) {
+const developmentMedia = [
+  {
+    slug: "project-load-bearing",
+    cover: "/images/projects/load-bearing-braced-frame-2026-09.webp",
+    gallery: ["build", "engineering", "redesign"].map(
+      (state) => `/images/projects/load-bearing-${state}-2026-09.webp`,
+    ),
+  },
+  {
+    slug: "static-drift",
+    cover: "/images/projects/static-drift-prismatic-bloom-2026-09.webp",
+    gallery: ["prismatic-bloom", "energy-current", "aurora-veil"].map(
+      (world) => `/images/projects/static-drift-${world}-2026-09.webp`,
+    ),
+  },
+];
+for (const { slug, cover, gallery } of developmentMedia) {
   const project = getProject(slug);
   if (
     !project ||
@@ -231,11 +249,21 @@ for (const slug of ["project-load-bearing", "static-drift"]) {
     fail(`${slug} must remain in development, not near-release`);
   }
   if (
-    project.showcaseMedia?.kind !== "placeholder" ||
-    getProjectScreenshots(project.visual).length
+    project.showcaseMedia?.kind !== "approved-image" ||
+    project.showcaseMedia.src !== cover ||
+    project.showcaseMedia.fit !== "cover" ||
+    getProjectScreenshots(project.visual).map((image) => image.src).join(",") !==
+      gallery.join(",")
   ) {
-    fail(`${slug} must not publish unapproved development media`);
+    fail(`${slug} must retain the selected native development captures in order`);
   }
+  for (const image of [project.showcaseMedia, ...getProjectScreenshots(project.visual)]) {
+    if (!existsSync(join(root, "public", image.src)) || !image.alt || !image.caption)
+      fail(`${slug} media must exist with meaningful alt text and captions`);
+  }
+  const socialImage = `/images/social/${slug}-2026-09.jpg`;
+  if (getProjectSocialImage(slug) !== socialImage || !existsSync(join(root, "public", socialImage)))
+    fail(`${slug} must use its native capture for social previews`);
 }
 if (getProject("static-drift")?.name !== "Static Drift")
   fail("Static Drift canonical name changed");
@@ -553,6 +581,17 @@ if (
 }
 
 const productsPage = readFileSync(routeFile("/products"), "utf8");
+for (const [route, html] of [["/", homepage], ["/products", productsPage]]) {
+  if (html.includes('id="included-games-title"'))
+    fail(`${route} must not repeat the included-games section`);
+  if ((html.match(/data-product-slug="phase-arcade-volume-1"/g) ?? []).length !== 1)
+    fail(`${route} must present Phase Arcade as one collection`);
+  for (const game of phaseArcadeGames) {
+    if (html.includes(`href="${getProject(game.slug).route}"`) ||
+        html.includes(`data-product-slug="${game.slug}"`))
+      fail(`${route} must leave individual game exploration on the collection page`);
+  }
+}
 for (const project of featuredProjects) {
   const label = new RegExp(`aria-label="[^"]+: ${project.name}"`);
   if (!label.test(homepage) || !label.test(productsPage)) {
@@ -576,10 +615,18 @@ for (const [slug, treatment] of [
       fail(`Missing rendered editorial weight for ${slug}`);
   }
 }
-for (const slug of ["project-load-bearing", "static-drift"]) {
+for (const { slug, cover, gallery } of developmentMedia) {
   const html = readFileSync(routeFile(`/projects/${slug}`), "utf8");
-  if (html.includes('data-flagship-section="gallery"'))
-    fail(`${slug} must not have an empty gallery`);
+  const copy = getProjectGalleryCopy(getProject(slug).visual);
+  if (!html.includes('data-flagship-section="gallery"') || !html.includes('data-gallery-layout="development"'))
+    fail(`${slug} must render its development gallery`);
+  for (const src of [cover, ...gallery]) {
+    if (!html.includes(src)) fail(`${slug} must render its selected capture: ${src}`);
+  }
+  if (!copy || !html.includes(copy.title) || !html.includes(copy.context) || !html.includes(copy.action))
+    fail(`${slug} must use its own gallery copy and dated development context`);
+  if (html.includes("Three games. Three ways to play.") || html.includes("Images coming soon."))
+    fail(`${slug} must not inherit unrelated game or placeholder gallery copy`);
 }
 const forgefieldHtml = readFileSync(routeFile("/projects/forgefield"), "utf8");
 if (!forgefieldHtml.includes("September 2026 pre-release Windows build"))
@@ -668,6 +715,11 @@ const phaseArcadePage = readFileSync(
   routeFile("/projects/phase-arcade-volume-1"),
   "utf8",
 );
+for (const game of phaseArcadeGames) {
+  const route = getProject(game.slug)?.route;
+  if (!route || !phaseArcadePage.includes(`href="${route}"`))
+    fail(`Phase Arcade must retain a route to ${game.name}`);
+}
 for (const required of [
   "Phase Shift",
   "Phase Breaker",

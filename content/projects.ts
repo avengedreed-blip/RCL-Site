@@ -316,9 +316,11 @@ export const projects: Project[] = [
     presentationTier: "featured",
     chapterTreatment: "development",
     showcaseMedia: {
-      kind: "placeholder",
-      alt: "Project Load Bearing public screenshots are not yet approved.",
-      message: "Images coming soon.",
+      kind: "approved-image",
+      src: "/images/projects/load-bearing-braced-frame-2026-09.webp",
+      alt: "Project Load Bearing's Brace the Bay prototype: a steel frame with roof equipment and a diagonal brace.",
+      caption: "Brace the Bay. A braced frame in the current prototype.",
+      fit: "cover",
     },
     currentFocus: [
       "The Brace the Bay construction, testing, and redesign journey",
@@ -380,9 +382,11 @@ export const projects: Project[] = [
     presentationTier: "featured",
     chapterTreatment: "brief",
     showcaseMedia: {
-      kind: "placeholder",
-      alt: "Static Drift public screenshots are not yet approved.",
-      message: "Images coming soon.",
+      kind: "approved-image",
+      src: "/images/projects/static-drift-prismatic-bloom-2026-09.webp",
+      alt: "Static Drift Prismatic Bloom: a folded glass-like form with silver and warm reflections against black.",
+      caption: "Prismatic Bloom. Captured from the development renderer.",
+      fit: "cover",
     },
     currentFocus: [
       "Procedural world quality and long-duration playback",

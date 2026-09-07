@@ -127,8 +127,10 @@ space imagery. All nine worlds were captured for internal comparison; six
 were selected. The 17 stale/withdrawn public assets were removed after checking
 references. The separate homepage hero fallback is unchanged.
 
-Load Bearing and Static Drift media is withheld pending approval; existing
-honest placeholder components remain. No concepts replace missing evidence.
+At the baseline checkpoint, Load Bearing and Static Drift media was withheld
+pending approval. The subsequent owner-requested native capture pass replaces
+those placeholders; see [Development Media](SEPTEMBER_2026_DEVELOPMENT_MEDIA.md)
+for selection, build provenance and the unchanged development-status boundaries.
 Phase Arcade image bytes and mappings remain unchanged.
 
 ## Regression scope

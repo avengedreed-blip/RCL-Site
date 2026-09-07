@@ -138,7 +138,9 @@ unchanged. Pause/resume, reduced motion and the non-WebGL/no-JS paths remain
 part of the browser suite.
 
 Phase Arcade's actual gameplay captures are unchanged. Load Bearing and Static
-Drift imagery remains withheld pending approval. Forge, Storm Lab and the
+Drift imagery was withheld at this checkpoint; the subsequent owner-requested
+[native capture pass](SEPTEMBER_2026_DEVELOPMENT_MEDIA.md) supplies their media
+without changing product status. Forge, Storm Lab and the
 immature Science Lab rebuild remain absent. No stock or generated human image
 was added. Navigation, footer, contact method and existing restrained motion
 did not need another design pass.

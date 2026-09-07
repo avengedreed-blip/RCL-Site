@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { ProductMediaSurface } from "@/components/ProductMediaSurface";
@@ -6,8 +7,11 @@ import { Reveal } from "@/components/Reveal";
 import { StructuredData } from "@/components/StructuredData";
 import { TechnicalProfile } from "@/components/TechnicalProfile";
 import { phaseArcadeGames } from "@/content/phase-arcade";
-import { getStatusLabel, type Project } from "@/content/projects";
-import { getProjectScreenshots } from "@/lib/project-media";
+import { getProject, getStatusLabel, type Project } from "@/content/projects";
+import {
+  getProjectGalleryCopy,
+  getProjectScreenshots,
+} from "@/lib/project-media";
 import { projectJsonLd } from "@/lib/structured-data";
 import {
   flagshipSectionDensity,
@@ -18,6 +22,8 @@ type GalleryImage = {
   src: string;
   alt: string;
   caption?: string;
+  title?: string;
+  href?: string;
 };
 
 type FlagshipSectionProps = ComponentPropsWithoutRef<"section"> & {
@@ -39,7 +45,9 @@ function getGallery(project: Project): readonly GalleryImage[] {
     return phaseArcadeGames.map((game) => ({
       src: game.image,
       alt: game.alt,
-      caption: `${game.name}. ${game.description}`,
+      title: game.name,
+      href: getProject(game.slug)?.route,
+      caption: `${game.description} ${game.identity}`,
     }));
   }
 
@@ -78,6 +86,7 @@ function ProjectRecord({ project }: { project: Project }) {
 
 export function FlagshipProductPage({ project }: { project: Project }) {
   const gallery = getGallery(project);
+  const galleryCopy = getProjectGalleryCopy(project.visual);
   const hasApprovedHero = project.showcaseMedia?.kind === "approved-image";
   const features = project.features ?? project.usersCan ?? [];
   const isConcept = project.status === "concept";
@@ -117,9 +126,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
             </ButtonLink>
             {gallery.length > 0 ? (
               <ButtonLink href="#gallery-title" variant="secondary">
-                {project.visual === "forgefield"
-                  ? "Explore the Worlds"
-                  : "See the Games"}
+                {galleryCopy?.action ?? "View Gallery"}
               </ButtonLink>
             ) : null}
             <ButtonLink href="/contact" variant="contact">
@@ -308,20 +315,20 @@ export function FlagshipProductPage({ project }: { project: Project }) {
           <Reveal className="v2-product-section__intro">
             <p className="v2-eyebrow">Gallery</p>
             <h2 id="gallery-title">
-              {project.visual === "forgefield"
-                ? "Worlds with their own character."
-                : "Three games. Three ways to play."}
+              {galleryCopy?.title ?? "Inside the product."}
             </h2>
-            <p className="v2-gallery-context">
-              {project.visual === "forgefield"
-                ? "Six of the nine worlds, captured from the September 2026 pre-release Windows build."
-                : "Desktop gameplay from Phase Shift, Phase Breaker, and Phase Court. The collection also supports VR and is in final testing."}
-            </p>
+            {galleryCopy?.context ? (
+              <p className="v2-gallery-context">{galleryCopy.context}</p>
+            ) : null}
           </Reveal>
           <div
             className="v2-product-gallery"
             data-gallery-layout={
-              project.visual === "forgefield" ? "worlds" : "gameplay"
+              project.visual === "forgefield"
+                ? "worlds"
+                : project.visual === "phase-arcade"
+                  ? "gameplay"
+                  : "development"
             }
           >
             {gallery.map((image, index) => (
@@ -343,6 +350,11 @@ export function FlagshipProductPage({ project }: { project: Project }) {
                   </div>
                   {image.caption ? (
                     <figcaption>
+                      {image.title && image.href ? (
+                        <h3>
+                          <Link href={image.href}>{image.title}</Link>
+                        </h3>
+                      ) : null}
                       <p>{image.caption}</p>
                       <a
                         className="text-link"
