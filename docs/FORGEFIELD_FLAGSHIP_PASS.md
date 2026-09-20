@@ -199,3 +199,17 @@ images. The shipped static artifact has no Next.js server or image-optimization
 endpoint; that limits applicability of those specific server attack paths. It
 does not establish that the dependency tree or build tooling is vulnerability-free.
 A separately verified dependency update remains necessary.
+
+## Published result
+
+Implementation commit: `6c304f5aaf34b0a3c4b2aa2025d2a504ebd5b950`, pushed to
+`origin/main`. Vercel reports a successful deployment. Production HTTP checks
+confirm the new content on Home, Products, Forgefield, and archived Phase Arcade,
+plus the new Eventide asset; all return 200.
+
+[GitHub Actions run 35540762165](https://github.com/avengedreed-blip/RCL-Site/actions/runs/35540762165)
+failed during `npm ci`, before any validation steps, under Node 24.20.0 / npm
+11.19.0. It reports missing `@emnapi/runtime@1.11.3` and
+`@emnapi/core@1.11.3` entries in the unchanged lockfile. The dependency-install
+issue remains unresolved; local validation and successful Vercel deployment
+must not be presented as a passing GitHub Actions run.
