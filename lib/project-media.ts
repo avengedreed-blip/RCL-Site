@@ -11,36 +11,36 @@ const projectScreenshots: Partial<
 > = {
   forgefield: [
     {
-      src: "/images/projects/forgefield-eventide-2026-09.webp",
+      src: "/images/projects/forgefield-eventide-2026-09-20.webp",
       alt: "Forgefield Eventide: A bright black-hole ring, flowing copper accretion material, and polar jets.",
       caption:
         "Eventide. An accretion ring and polar jets around a black-hole core.",
     },
     {
-      src: "/images/projects/forgefield-polar-night-2026-09.webp",
+      src: "/images/projects/forgefield-polar-night-2026-09-20.webp",
       alt: "Forgefield Polar Night: Aurora curtains above snow-covered mountains and a reflective dark surface.",
       caption:
         "Polar Night. Aurora curtains above snow-covered mountains and a reflective surface.",
     },
     {
-      src: "/images/projects/forgefield-corona-2026-09.webp",
+      src: "/images/projects/forgefield-corona-2026-09-20.webp",
       alt: "Forgefield Corona: Luminous plasma loops rising from a textured solar surface.",
       caption: "Corona. Plasma loops rising from a textured solar surface.",
     },
     {
-      src: "/images/projects/forgefield-gravitas-2026-09.webp",
+      src: "/images/projects/forgefield-gravitas-2026-09-20.webp",
       alt: "Forgefield Gravitas: Two interacting spiral galaxies with contrasting warm and cool material.",
       caption:
         "Gravitas. Two interacting spiral galaxies, traced in warm and cool material.",
     },
     {
-      src: "/images/projects/forgefield-synapse-2026-09.webp",
+      src: "/images/projects/forgefield-synapse-2026-09-20.webp",
       alt: "Forgefield Synapse: Branching neural structures with pale cell bodies and illuminated connections.",
       caption:
         "Synapse. Branching neural structures with illuminated connections.",
     },
     {
-      src: "/images/projects/forgefield-ember-2026-09.webp",
+      src: "/images/projects/forgefield-ember-2026-09-20.webp",
       alt: "Forgefield Ember: Glowing coals and flames in a procedural ember bed.",
       caption: "Ember. Flames and glowing coals in a procedural ember bed.",
     },
@@ -105,7 +105,7 @@ const projectScreenshots: Partial<
 };
 
 const projectSocialImages: Record<string, string> = {
-  forgefield: "/images/social/forgefield-2026-09.jpg",
+  forgefield: "/images/social/forgefield-2026-09-20.jpg",
   "project-load-bearing": "/images/social/project-load-bearing-2026-09.jpg",
   "static-drift": "/images/social/static-drift-2026-09.jpg",
   "phase-arcade-volume-1": "/images/social/phase-arcade-volume-1.jpg",
@@ -122,13 +122,13 @@ const projectGalleryCopy: Partial<
   forgefield: {
     title: "Worlds with their own character.",
     context:
-      "Six of the nine worlds, captured from the September 2026 pre-release Windows build.",
+      "Six of the nine worlds, captured from the September 20, 2026 pre-release Windows build.",
     action: "Explore the Worlds",
   },
   "phase-arcade": {
     title: "Three games. Three ways to play.",
     context:
-      "Desktop gameplay from Phase Shift, Phase Breaker, and Phase Court. The collection also supports VR and is in final testing.",
+      "Desktop gameplay from Phase Shift, Phase Breaker, and Phase Court. The archived collection explores desktop and VR interaction.",
     action: "See the Games",
   },
   "load-bearing": {

@@ -91,7 +91,7 @@ export default function AboutPage() {
           </div>
           <div className="v2-about-mission__copy">
             <p>
-              The studio develops its own products and accepts carefully scoped
+              The studio is focused on Forgefield and accepts carefully scoped
               client work. In both cases, the standard is the same: direct
               purpose, maintainable engineering, clear interaction, and honest
               presentation.

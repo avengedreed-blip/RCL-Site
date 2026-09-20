@@ -1,21 +1,24 @@
 # Reed Creative Labs
 
-> Reed Creative Labs is a veteran-founded, family-built independent software and engineering studio in South Carolina. Its mission is to build software that explores complex systems through desktop tools, scientific simulation, procedural media, games, and focused client work.
+> Reed Creative Labs is a veteran-founded, family-built independent software and engineering studio in South Carolina. The studio builds unusual software and interactive systems, premium websites, and focused custom software. Forgefield is its primary product and current release focus.
 
-Products described as Launching Soon, Final Testing, Active Development, Prototype, Research, Private Beta, or Concept are not released products. Launching Soon indicates release preparation, not current availability. Final Testing indicates testing before release, not a completed launch. Product pages state the current public development status and known platform scope.
+Forgefield is in release preparation, not publicly available. No release date has been announced. Archived projects are retained as R&D or historical work, not upcoming releases or active commercial commitments. Smaller mobile projects remain secondary; their pages describe development, not availability.
 
-The public website is a static Next.js App Router application built with React and TypeScript. Its homepage includes a procedurally generated visualization whose canonical state system is authored in modern Fortran and compiled to WebAssembly; browser code handles lifecycle and rendering. Product pages distinguish working screenshots from abstract or unavailable media.
+The public website is a static Next.js App Router application built with React and TypeScript. Its signature black-hole visualization uses a modern Fortran state system compiled to WebAssembly, with browser lifecycle and rendering. Product media consists of native captures, not generated promotional art.
 
-## Primary Products
+## Primary Product
 
-- [Forgefield](https://reedcreativelabs.com/projects/forgefield): RCL's flagship Windows application for procedural live wallpapers and screensavers, with nine native-rendered worlds. Launching Soon; not yet released.
-- [Phase Arcade Volume I](https://reedcreativelabs.com/projects/phase-arcade-volume-1): Three focused arcade games for traditional desktop play and VR: Phase Shift, Phase Breaker, and Phase Court. Final Testing; not yet released.
-- [Project Load Bearing](https://reedcreativelabs.com/projects/project-load-bearing): A major development focus connecting a structural construction-and-testing prototype in Unreal Engine to a native Fortran static frame solver. Active Development for Windows; no release date announced.
-- [Static Drift](https://reedcreativelabs.com/projects/static-drift): An offline procedural ambient application with optional built-in sound and remote-friendly controls. Active Development for Android TV; not yet released.
+- [Forgefield](https://reedcreativelabs.com/projects/forgefield): RCL's primary Windows application for procedural live wallpapers and screensavers, with nine native-rendered worlds. Launching Soon; not yet released.
 
-## Products and Roadmap
+## Selected R&D
 
-- [All Products](https://reedcreativelabs.com/products): Current products, included games, active development, and planned work.
+- [Phase Arcade Volume I](https://reedcreativelabs.com/projects/phase-arcade-volume-1): Archived desktop and VR collection with Phase Shift, Phase Breaker, and Phase Court. A record of gameplay and interaction work, not a pending release.
+- [Project Load Bearing](https://reedcreativelabs.com/projects/project-load-bearing): Archived structural construction-and-testing prototype connecting Unreal Engine to a native Fortran static frame solver. Technical R&D, not certified engineering software.
+- [Static Drift](https://reedcreativelabs.com/projects/static-drift): Archived procedural ambient Android TV prototype with native rendering and remote controls. Not an upcoming store release.
+
+## More from RCL
+
+- [Products and Selected R&D](https://reedcreativelabs.com/products): Forgefield, secondary mobile projects, selected archived prototypes, and historical project records.
 
 ## Services
 
@@ -25,7 +28,7 @@ The public website is a static Next.js App Router application built with React a
 
 - [About Reed Creative Labs](https://reedcreativelabs.com/about): Studio purpose, engineering philosophy, and family-built context.
 - [Founder Story](https://reedcreativelabs.com/about/founder): Aaron and Katy Reed and the background behind the studio.
-- [Press Information](https://reedcreativelabs.com/press): Approved studio and product information for editorial use.
+- [Press Information](https://reedcreativelabs.com/press): Studio and product information for editorial use.
 - [Contact](https://reedcreativelabs.com/contact): The verified route for business, product, press, accessibility, security, and general inquiries.
 
 ## Policies

@@ -40,15 +40,3 @@ export function getTechnicalProfileRows(
       : [];
   });
 }
-
-export function getTechnicalProfileHighlights(
-  profile: TechnicalProfile,
-  limit = 6,
-): string[] {
-  const highlights = profile.compactFields.flatMap((key) => {
-    const values = profile[key];
-    return Array.isArray(values) ? values : [];
-  });
-
-  return [...new Set(highlights)].slice(0, limit);
-}

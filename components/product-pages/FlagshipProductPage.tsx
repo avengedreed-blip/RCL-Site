@@ -91,15 +91,17 @@ export function FlagshipProductPage({ project }: { project: Project }) {
   const features = project.features ?? project.usersCan ?? [];
   const isConcept = project.status === "concept";
   const statusDescription =
-    project.status === "launching-soon"
-      ? "Launching soon. The product has not yet been publicly released; availability and a release date have not been announced."
-      : project.status === "final-testing"
-        ? "Awaiting final testing before release. The collection has not launched and is not yet available to purchase or download."
-        : project.status === "prototype"
-          ? "This is a functioning development prototype, not a playable, downloadable, or release-ready public build."
-          : isConcept
-            ? "This project is in preproduction. Its public page describes a verified direction, not an implemented product."
-            : "The product is under active development. Public release timing has not been announced.";
+    project.status === "archived"
+      ? "Archived studio work, retained as a record of technical exploration. This project is not an active release commitment."
+      : project.status === "launching-soon"
+        ? "Launching soon. The product has not yet been publicly released; availability and a release date have not been announced."
+        : project.status === "final-testing"
+          ? "Awaiting final testing before release. The collection has not launched and is not yet available to purchase or download."
+          : project.status === "prototype"
+            ? "This is a functioning development prototype, not a playable, downloadable, or release-ready public build."
+            : isConcept
+              ? "This project is in preproduction. Its public page describes a verified direction, not an implemented product."
+              : "The product is under active development. Public release timing has not been announced.";
 
   return (
     <main
@@ -188,7 +190,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         </div>
       </FlagshipSection>
 
-      {project.currentFocus?.length ? (
+      {project.status !== "archived" && project.currentFocus?.length ? (
         <FlagshipSection
           sectionName="current-focus"
           className="v2-container v2-product-section"
@@ -215,7 +217,7 @@ export function FlagshipProductPage({ project }: { project: Project }) {
         </FlagshipSection>
       ) : null}
 
-      {project.milestones?.length ? (
+      {project.status !== "archived" && project.milestones?.length ? (
         <FlagshipSection
           sectionName="roadmap"
           className="v2-container v2-product-section"
@@ -258,7 +260,9 @@ export function FlagshipProductPage({ project }: { project: Project }) {
               <h2 id="features-title">
                 {isConcept
                   ? "Planned capabilities."
-                  : "Inside the current build."}
+                  : project.status === "archived"
+                    ? "Inside the prototype."
+                    : "Inside the current build."}
               </h2>
             </Reveal>
             {features.length ? (

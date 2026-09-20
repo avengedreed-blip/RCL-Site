@@ -39,7 +39,7 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     ...organization,
     description:
-      "Reed Creative Labs is an independent software and engineering studio building tools, simulations, desktop software, games, websites, and custom software with privacy, ownership, and lasting value in mind.",
+      "Reed Creative Labs is the independent software and engineering studio behind Forgefield, building procedural desktop worlds, premium websites, and focused custom software.",
   };
 }
 
@@ -81,6 +81,10 @@ export function projectJsonLd(project: Project) {
     publisher: organization,
     creator: organization,
   };
+
+  if (project.status === "archived") {
+    return { ...base, "@type": "CreativeWork", creativeWorkStatus: "Archived" };
+  }
 
   if (
     project.category === "software" ||

@@ -1,105 +1,100 @@
 import type { Metadata } from "next";
-import { getProjectSocialImage } from "@/lib/project-media";
-import { FeaturedProductChapter } from "@/components/FeaturedProductChapter";
+import { ForgefieldShowcase } from "@/components/ForgefieldShowcase";
 import { ProductLedger } from "@/components/ProductLedger";
 import { Reveal } from "@/components/Reveal";
-import {
-  featuredProjects,
-  includedGames,
-  projects,
-  roadmapDisclaimer,
-} from "@/content/projects";
+import { archivedProjects, mobileProjects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Products",
+  title: "Products & Selected R&D",
   description:
-    "Explore Reed Creative Labs software, games, tools, active development projects, and future roadmap.",
+    "Forgefield leads Reed Creative Labs: procedural worlds for Windows, with smaller mobile projects and archived technical experiments from the studio.",
   path: "/products",
   image: {
-    url: getProjectSocialImage(featuredProjects[0].slug),
-    alt:
-      featuredProjects[0].showcaseMedia?.alt ?? "Reed Creative Labs products",
+    url: "/images/social/forgefield-2026-09-20.jpg",
+    alt: "Eventide, a procedural world in Forgefield",
     width: 1200,
     height: 630,
   },
 });
 
 export default function ProductsPage() {
-  const featuredSlugs = new Set(
-    featuredProjects.map((project) => project.slug),
+  const selected = archivedProjects.filter(
+    (project) => project.technicalProfile,
   );
-  const includedSlugs = new Set(includedGames.map((project) => project.slug));
-  const currentProjects = projects.filter(
-    (project) =>
-      project.status === "active-development" &&
-      !featuredSlugs.has(project.slug) &&
-      !includedSlugs.has(project.slug),
+  const history = archivedProjects.filter(
+    (project) => !project.technicalProfile,
   );
-  const conceptProjects = projects.filter(
-    (project) =>
-      project.status === "concept" &&
-      !featuredSlugs.has(project.slug) &&
-      !includedSlugs.has(project.slug),
-  );
-
   return (
     <main id="main-content" tabIndex={-1} className="v2-catalog">
       <header className="v2-container v2-catalog-hero">
         <Reveal>
-          <p className="v2-eyebrow">Products</p>
-          <h1>Software, simulation, and games built around real systems.</h1>
+          <p className="v2-eyebrow">Products & selected R&D</p>
+          <h1>
+            Broad curiosity.
+            <br />
+            Deliberate focus.
+          </h1>
           <p>
-            From procedural desktops to structural experiments: the products
-            moving toward release and the projects taking shape behind them.
+            Forgefield is the studio’s primary product. Smaller mobile projects
+            and selected technical experiments show the range of the work behind
+            it.
           </p>
         </Reveal>
       </header>
-
       <section
-        className="v2-container v2-catalog-featured"
-        aria-labelledby="catalog-featured-title"
+        className="forgefield-catalog"
+        aria-labelledby="featured-products-title"
       >
-        <Reveal className="v2-catalog-featured__intro">
-          <h2 id="catalog-featured-title" className="v2-eyebrow">
-            Featured products
-          </h2>
-          <p>
-            Preparing to launch, completing testing, and exploring what comes
-            next.
-          </p>
-        </Reveal>
-        <div className="v2-product-chapters">
-          {featuredProjects.map((project, index) => (
-            <Reveal key={project.slug} delay={Math.min(index * 0.04, 0.12)}>
-              <FeaturedProductChapter project={project} index={index} />
-            </Reveal>
-          ))}
-        </div>
+        <ForgefieldShowcase includeWorldStudy={false} />
       </section>
-
-      <section className="v2-container v2-catalog-ledgers">
+      <section
+        className="v2-container v2-catalog-ledgers"
+        aria-label="More from Reed Creative Labs"
+      >
         <div className="v2-catalog-ledger-section">
-          <Reveal className="v2-section-intro v2-section-intro--compact">
-            <p className="v2-eyebrow">Current work</p>
-            <h2 id="active-products-title">Active development.</h2>
-          </Reveal>
+          <div className="v2-section-intro v2-section-intro--compact">
+            <p className="v2-eyebrow">Selected R&D</p>
+            <h2 id="research-products-title">Experiments with substance.</h2>
+            <p>
+              Archived prototypes in structural simulation, native rendering,
+              and desktop/VR interaction. Technical evidence, with no current
+              release commitment.
+            </p>
+          </div>
           <ProductLedger
-            projects={currentProjects}
-            labelledBy="active-products-title"
+            projects={selected}
+            labelledBy="research-products-title"
           />
         </div>
         <div className="v2-catalog-ledger-section">
-          <Reveal className="v2-section-intro v2-section-intro--compact">
-            <p className="v2-eyebrow">Early work</p>
-            <h2 id="concept-products-title">Early concepts.</h2>
-          </Reveal>
+          <div className="v2-section-intro v2-section-intro--compact">
+            <p className="v2-eyebrow">Smaller projects</p>
+            <h2 id="mobile-products-title">More from RCL.</h2>
+            <p>
+              Mobile work remains a smaller part of the studio. These projects
+              are not yet publicly released; availability is announced only when
+              confirmed.
+            </p>
+          </div>
           <ProductLedger
-            projects={conceptProjects}
-            labelledBy="concept-products-title"
+            projects={mobileProjects}
+            labelledBy="mobile-products-title"
           />
         </div>
-        <p className="v2-catalog-disclaimer">{roadmapDisclaimer}</p>
+        <details className="studio-archive">
+          <summary>
+            From the archive <span>Earlier concepts and project studies</span>
+          </summary>
+          <p id="archive-products-title">
+            Historical work, retained for context. No active release
+            commitments.
+          </p>
+          <ProductLedger
+            projects={history}
+            labelledBy="archive-products-title"
+          />
+        </details>
       </section>
     </main>
   );

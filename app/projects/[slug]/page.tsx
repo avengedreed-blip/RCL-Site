@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
+import { ForgefieldProductPage } from "@/components/product-pages/ForgefieldProductPage";
 import { FlagshipProductPage } from "@/components/product-pages/FlagshipProductPage";
 import { PhaseArcadeProductPage } from "@/components/product-pages/PhaseArcadeProductPage";
 import { ProductMediaSurface } from "@/components/ProductMediaSurface";
@@ -42,9 +43,7 @@ export async function generateMetadata({
 
   return buildMetadata({
     title: project.name,
-    description: project.featured
-      ? `${getStatusLabel(project.status)}. ${project.shortDescription}`
-      : project.shortDescription,
+    description: `${getStatusLabel(project.status)}. ${project.shortDescription}`,
     path: project.route,
     image: {
       url: getProjectSocialImage(project.slug),
@@ -62,6 +61,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) {
     notFound();
   }
+
+  if (project.slug === "forgefield")
+    return <ForgefieldProductPage project={project} />;
 
   if (project.slug === "phase-arcade-volume-1") {
     return <PhaseArcadeProductPage project={project} />;
@@ -176,7 +178,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <Reveal delay={0.06}>
               <div className="surface-panel rounded-[6px] border border-rcl-copper/18 bg-rcl-surface p-6">
                 <h2 className="text-2xl font-black uppercase text-white">
-                  What users can do
+                  {project.status === "archived"
+                    ? "Project direction"
+                    : "What users can do"}
                 </h2>
                 <ul className="mt-5 grid gap-3 text-base leading-7 text-rcl-muted">
                   {project.usersCan.map((item) => (

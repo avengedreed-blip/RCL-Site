@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { featuredProjects, getProject, projects } from "../content/projects.ts";
+import { featuredProjects, getProject, mobileProjects, projects } from "../content/projects.ts";
 import { phaseArcadeGames } from "../content/phase-arcade.ts";
 import {
   getProjectGalleryCopy,
@@ -74,12 +74,9 @@ for (const retired of retiredProducts) {
   }
 }
 
-const expectedFeatured = [
-  "forgefield",
-  "phase-arcade-volume-1",
-  "project-load-bearing",
-  "static-drift",
-];
+const expectedFeatured = ["forgefield"];
+if (mobileProjects.map(project => project.slug).join(",") !== "neon-drift,falling-from-the-sky,pigs-can-fly") fail("Preserve the owner-approved mobile selection");
+const technicalProjects = ["forgefield", "phase-arcade-volume-1", "project-load-bearing", "static-drift"];
 
 const expectedFlagshipDensity = {
   hero: "expansive",
@@ -107,7 +104,7 @@ if (
   expectedFeatured.join(",")
 ) {
   fail(
-    "Featured hierarchy must be Forgefield, Phase Arcade Volume I, Project Load Bearing, then Static Drift",
+    "Forgefield must be the only featured product",
   );
 }
 
@@ -119,7 +116,7 @@ function technicalValues(project) {
     .flatMap(([, value]) => value);
 }
 
-for (const slug of expectedFeatured) {
+for (const slug of technicalProjects) {
   const project = getProject(slug);
   const profile = project?.technicalProfile;
 
@@ -128,9 +125,6 @@ for (const slug of expectedFeatured) {
   }
   if (!profile.summary.trim() || !profile.verifiedOn.trim()) {
     fail(`${slug} is missing its technical summary or verification date`);
-  }
-  if (profile.compactFields.length === 0) {
-    fail(`${slug} has no compact technical fields for Home and Products`);
   }
 
   for (const [key, value] of Object.entries(profile)) {
@@ -193,7 +187,7 @@ if (
   forgefield.presentationTier !== "flagship" ||
   forgefield.showcaseMedia?.kind !== "approved-image" ||
   forgefield.showcaseMedia.src !==
-    "/images/projects/forgefield-eventide-2026-09.webp"
+    "/images/projects/forgefield-eventide-2026-09-20.webp"
 ) {
   fail(
     "Forgefield must lead with Launching Soon and current September native media",
@@ -208,7 +202,7 @@ const expectedWorlds = [
   "ember",
 ];
 const expectedCaptures = expectedWorlds.map(
-  (world) => `/images/projects/forgefield-${world}-2026-09.webp`,
+  (world) => `/images/projects/forgefield-${world}-2026-09-20.webp`,
 );
 const captures = getProjectScreenshots("forgefield");
 if (
@@ -243,10 +237,10 @@ for (const { slug, cover, gallery } of developmentMedia) {
   const project = getProject(slug);
   if (
     !project ||
-    project.status !== "active-development" ||
-    project.roadmapGroup !== "active-development"
+    project.status !== "archived" ||
+    project.roadmapGroup !== "archived"
   ) {
-    fail(`${slug} must remain in development, not near-release`);
+    fail(`${slug} must remain archived, with no release commitment`);
   }
   if (
     project.showcaseMedia?.kind !== "approved-image" ||
@@ -270,8 +264,8 @@ if (getProject("static-drift")?.name !== "Static Drift")
 
 const phaseArcade = getProject("phase-arcade-volume-1");
 if (!phaseArcade) fail("Phase Arcade Volume I is missing");
-if (phaseArcade.status !== "final-testing")
-  fail("Phase Arcade must remain in Final Testing");
+if (phaseArcade.status !== "archived")
+  fail("Phase Arcade must remain archived");
 if (
   phaseArcade.showcaseMedia?.src !==
   "/images/projects/phase-breaker-gameplay-01.webp"
@@ -296,7 +290,7 @@ if (
   fail("Phase Arcade Volume I must expose PC and VR support");
 }
 
-for (const slug of ["phase-arcade-volume-2", "pigs-can-fly"]) {
+for (const slug of ["pigs-can-fly"]) {
   const project = getProject(slug);
   if (
     !project ||
@@ -468,8 +462,7 @@ for (const project of projects) {
 
   if (
     expectedFeatured.includes(project.slug) &&
-    !html.includes("Project status") &&
-    !html.includes("PROJECT STATUS")
+    !html.includes("Release Status")
   ) {
     fail(
       `Featured product page is missing its project status section: ${project.route}`,
@@ -584,36 +577,17 @@ const productsPage = readFileSync(routeFile("/products"), "utf8");
 for (const [route, html] of [["/", homepage], ["/products", productsPage]]) {
   if (html.includes('id="included-games-title"'))
     fail(`${route} must not repeat the included-games section`);
-  if ((html.match(/data-product-slug="phase-arcade-volume-1"/g) ?? []).length !== 1)
-    fail(`${route} must present Phase Arcade as one collection`);
+  if (html.includes('data-product-slug="phase-arcade-volume-1"'))
+    fail(`${route} must not feature the archived collection as a product launch`);
   for (const game of phaseArcadeGames) {
     if (html.includes(`href="${getProject(game.slug).route}"`) ||
         html.includes(`data-product-slug="${game.slug}"`))
       fail(`${route} must leave individual game exploration on the collection page`);
   }
 }
-for (const project of featuredProjects) {
-  const label = new RegExp(`aria-label="[^"]+: ${project.name}"`);
-  if (!label.test(homepage) || !label.test(productsPage)) {
-    fail(`Missing unique featured-product accessible name for ${project.name}`);
-  }
-}
-for (const [slug, treatment] of [
-  ["forgefield", "lead"],
-  ["phase-arcade-volume-1", "feature"],
-  ["project-load-bearing", "development"],
-  ["static-drift", "brief"],
-]) {
-  if (getProject(slug)?.chapterTreatment !== treatment)
-    fail(`Incorrect editorial weight for ${slug}`);
-  for (const html of [homepage, productsPage]) {
-    if (
-      !html.includes(
-        `data-product-slug="${slug}" data-treatment="${treatment}"`,
-      )
-    )
-      fail(`Missing rendered editorial weight for ${slug}`);
-  }
+for (const html of [homepage, productsPage]) {
+  if (!html.includes('data-product-slug="forgefield" data-treatment="lead"')) fail("Missing Forgefield editorial lead");
+  if (!html.includes('href="/projects/forgefield"')) fail("Missing Forgefield detail action");
 }
 for (const { slug, cover, gallery } of developmentMedia) {
   const html = readFileSync(routeFile(`/projects/${slug}`), "utf8");
@@ -629,7 +603,7 @@ for (const { slug, cover, gallery } of developmentMedia) {
     fail(`${slug} must not inherit unrelated game or placeholder gallery copy`);
 }
 const forgefieldHtml = readFileSync(routeFile("/projects/forgefield"), "utf8");
-if (!forgefieldHtml.includes("September 2026 pre-release Windows build"))
+if (!forgefieldHtml.includes("September 20, 2026 pre-release Windows build"))
   fail("Gallery must retain shared dated build context");
 if (!forgefieldHtml.includes('data-gallery-layout="worlds"'))
   fail("Forgefield requires its world gallery");
@@ -681,15 +655,14 @@ const pressPage = readFileSync(routeFile("/press"), "utf8");
 const discovery = readFileSync(join(root, "public", "llms.txt"), "utf8");
 for (const [slug, status] of [
   ["forgefield", "Launching Soon"],
-  ["phase-arcade-volume-1", "Final Testing"],
-  ["project-load-bearing", "Active Development"],
-  ["static-drift", "Active Development"],
+  ["phase-arcade-volume-1", "Archived"],
+  ["project-load-bearing", "Archived"],
+  ["static-drift", "Archived"],
 ]) {
   const project = getProject(slug);
   for (const [label, html] of [
-    ["Home", homepage],
+    ...(slug === "forgefield" ? [["Home", homepage], ["Press", pressPage]] : []),
     ["Products", productsPage],
-    ["Press", pressPage],
     ["detail", readFileSync(routeFile(project.route), "utf8")],
   ]) {
     if (!html.includes(project.name) || !html.includes(status))
@@ -724,7 +697,7 @@ for (const required of [
   "Phase Shift",
   "Phase Breaker",
   "Phase Court",
-  "Final Testing",
+  "Archived",
   "Desktop and VR",
   "/images/projects/phase-shift-gameplay-01.webp",
   "/images/projects/phase-breaker-gameplay-01.webp",
@@ -733,6 +706,19 @@ for (const required of [
   if (!phaseArcadePage.includes(required))
     fail(`Phase Arcade page is missing ${required}`);
 }
+
+// Archived status must reach metadata and structured data, not just the visible badge.
+for (const project of projects.filter(project => project.status === "archived")) {
+  const html = readFileSync(routeFile(project.route), "utf8");
+  const schema = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map(match => JSON.parse(match[1])).find(record => record.name === project.name);
+  if (schema?.["@type"] !== "CreativeWork" || schema.creativeWorkStatus !== "Archived") fail(project.slug + ": archive schema");
+  if (!/name="description" content="Archived\./.test(html)) fail(project.slug + ": archive metadata");
+  if (/awaiting final testing|primary RCL development focus|in active development/i.test(project.longDescription)) fail(project.slug + ": stale release promise");
+}
+for (const slug of ["phase-arcade-volume-1", "project-load-bearing", "static-drift", "phase-arcade-volume-2", "darren-in-the-woods-2", "misread", "phase-shift", "phase-breaker", "phase-court"]) {
+  if (getProject(slug)?.status !== "archived") fail(slug + ": larger projects must be archived");
+}
+if (/awaiting final testing|future roadmap/i.test(homepage + productsPage + discovery)) fail("Stale public roadmap language");
 
 console.log(
   `Portfolio checks passed: ${projects.length} products, ${featuredProjects.length} featured.`,

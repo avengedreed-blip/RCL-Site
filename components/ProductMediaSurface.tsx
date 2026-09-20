@@ -22,7 +22,7 @@ export function ProductMediaSurface({
 
   if (!media || media.kind === "placeholder") {
     const message =
-      media?.kind === "placeholder" ? media.message : "Images coming soon.";
+      media?.kind === "placeholder" ? media.message : "No public imagery available.";
     const alt =
       media?.kind === "placeholder"
         ? media.alt

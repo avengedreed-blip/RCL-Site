@@ -52,7 +52,8 @@ export default function PressPage() {
             Reed Creative Labs is an independent software and engineering studio
             building tools, simulations, desktop software, games, websites, and
             custom software with privacy, ownership, and lasting value in mind.
-            Current featured products include {featuredProductNames}.
+            The studio’s primary product is {featuredProductNames}. Archived work
+            remains available as selected R&D, not a release roadmap.
           </p>
         </Reveal>
       </section>

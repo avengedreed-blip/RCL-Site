@@ -1,27 +1,5 @@
 import type { TechnicalProfile as TechnicalProfileData } from "@/content/projects";
-import {
-  getTechnicalProfileHighlights,
-  getTechnicalProfileRows,
-} from "@/lib/technical-profile";
-
-export function CompactTechnicalProfile({
-  profile,
-}: {
-  profile: TechnicalProfileData;
-}) {
-  const highlights = getTechnicalProfileHighlights(profile);
-
-  if (highlights.length === 0) {
-    return null;
-  }
-
-  return (
-    <dl className="technical-profile-compact">
-      <dt>Technology</dt>
-      <dd>{highlights.join(" · ")}</dd>
-    </dl>
-  );
-}
+import { getTechnicalProfileRows } from "@/lib/technical-profile";
 
 export function TechnicalProfile({
   profile,

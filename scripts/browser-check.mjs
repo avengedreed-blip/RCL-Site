@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
-import { readFile, readdir, stat } from "node:fs/promises";
+import { readFile, readdir, stat, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { chromium, firefox, webkit } from "playwright";
 import { createRequire } from "node:module";
@@ -46,6 +46,7 @@ await stat(path.join(root, "index.html"));
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const base = `http://127.0.0.1:${server.address().port}`;
 const errors = [];
+const consoleMessages = new Set();
 let browser;
 try {
   const engine = process.env.RCL_BROWSER_ENGINE ?? "chromium";
@@ -58,10 +59,15 @@ try {
       : { args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] }),
   });
   const page = await browser.newPage({ reducedMotion: "reduce" });
+  page.on("console", message => {
+    if (["warning", "error"].includes(message.type())) consoleMessages.add(`${message.type()}: ${message.text()}`);
+  });
   page.on("pageerror", (error) => errors.push(`${page.url()}: ${error.message}`));
   page.on("response", (response) => {
     if (response.status() >= 400 && !response.request().isNavigationRequest()) errors.push(response.status() + " " + response.url());
   });
+  const screenshotDir = process.env.RCL_BROWSER_SCREENSHOTS;
+  if (screenshotDir) await mkdir(screenshotDir, { recursive: true });
   const routes = [...staticPagePaths, ...projects.map((project) => project.route)];
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
@@ -72,7 +78,7 @@ try {
       assert.equal(await page.locator("main").count(), 1, route);
       if (route === "/" || route === "/products") {
         assert.deepEqual(
-          await page.locator(".featured-product-chapter").evaluateAll(elements => elements.map(element => element.dataset.productSlug)),
+          await page.locator(".forgefield-showcase").evaluateAll(elements => elements.map(element => element.dataset.productSlug)),
           featuredProjects.map(project => project.slug),
           `${route}: one chapter per featured product, with Forgefield first`,
         );
@@ -127,28 +133,76 @@ try {
       await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
       const violations = await page.evaluate(async () => (await window.axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"] }, rules: { "label-content-name-mismatch": { enabled: true } } })).violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })));
       assert.deepEqual(violations, [], `${route} at ${width}: accessibility`);
+      if (screenshotDir) {
+        await page.evaluate(() => scrollTo(0, 0));
+        await page.screenshot({ path: `${screenshotDir}/${route.replaceAll("/", "_")}-${width}.png`, fullPage: true });
+      }
     }
   }
-  for (const width of [320, 360, 430, 720, 768, 820, 1024, 1100, 1180, 1280, 1366, 1920, 2560]) {
+  for (const width of [320, 360, 430, 720, 768, 820, 1024, 1100, 1180, 1280, 1366, 1440, 1920, 2560]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of ["/", "/products", "/services", ...featuredProjects.map((project) => project.route)]) {
       await page.goto(base + route, { waitUntil: "networkidle" });
       const overflow = await page.evaluate(() => [...document.querySelectorAll("main h1, main h2, main h3, main p, main a, main li")].filter((e) => !e.closest('[aria-hidden="true"]') && !e.classList.contains("sr-only") && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden").filter((e) => { const b = e.getBoundingClientRect(); return b.left < -1 || b.right > innerWidth + 1 || e.scrollWidth > e.clientWidth + 2; }).map((e) => e.textContent.trim().slice(0, 80)));
       assert.deepEqual(overflow, [], `${route} at ${width}: overflow`);
+      if (screenshotDir && ["/", "/products", "/projects/forgefield"].includes(route)) {
+        for (const image of await page.locator(".forgefield-capture img").all()) {
+          await image.scrollIntoViewIfNeeded();
+          await image.evaluate(image => image.decode());
+        }
+        await page.evaluate(() => scrollTo(0, 0));
+        await page.screenshot({ path: `${screenshotDir}/${route.replaceAll("/", "_")}-${width}.png`, fullPage: true });
+      }
+      if (route === "/projects/forgefield") {
+        const values = await page.locator(".v2-technical-profile dd").evaluateAll(elements => elements.map(element => ({ width: element.getBoundingClientRect().width, overflow: element.scrollWidth > element.clientWidth + 2 })));
+        assert.ok(values.length && values.every(value => value.width >= 120 && !value.overflow), `Forgefield at ${width}: readable technical values`);
+      }
       if (route === "/services") {
         const scopeCopy = await page.locator(".v2-services-boundaries__list li p").evaluateAll(elements => elements.map(e => getComputedStyle(e).display));
         assert.ok(scopeCopy.length && scopeCopy.every(display => display !== "grid"), "Scope paragraphs must not place text in a nested number column");
       }
       if (width < 768 && (route === "/" || route === "/products")) {
-        const chapters = await page.locator('.featured-product-chapter[data-has-media="true"]').evaluateAll(elements => elements.map(element => {
+        const chapters = await page.locator(".forgefield-showcase").evaluateAll(elements => elements.map(element => {
           const bottom = selector => element.querySelector(selector).getBoundingClientRect().bottom;
           const top = selector => element.querySelector(selector).getBoundingClientRect().top;
-          return bottom(".featured-product-chapter__copy") <= top(".featured-product-chapter__media") &&
-            bottom(".featured-product-chapter__media") <= top(".featured-product-chapter__details");
+          return bottom(".forgefield-showcase__intro") <= top(".forgefield-wide") + 0.1 &&
+            bottom(".forgefield-wide") <= top(".forgefield-showcase__details") + 0.1;
         }));
         assert.ok(chapters.length && chapters.every(Boolean), `${route}: mobile must read intro, evidence, details`);
       }
     }
+  }
+  for (const width of [360, 768, 1280, 2560]) {
+    // Fresh contexts prevent desktop cache reuse from masking mobile source selection.
+    const mediaPage = await browser.newPage({ viewport: { width, height: 600 }, reducedMotion: "reduce" });
+    for (const route of ["/", "/products", "/projects/forgefield"]) {
+      await mediaPage.goto(base + route, { waitUntil: "networkidle" });
+      const captures = mediaPage.locator(".forgefield-capture");
+      assert.equal(await captures.count(), route === "/projects/forgefield" ? 6 : route === "/products" ? 1 : 2);
+      for (const capture of await captures.all()) {
+        const image = capture.locator("img");
+        await image.scrollIntoViewIfNeeded();
+        const reserved = await image.boundingBox();
+        await image.evaluate(image => image.decode());
+        const media = await image.evaluate(image => ({ width: image.naturalWidth, height: image.naturalHeight, src: image.currentSrc, fit: getComputedStyle(image).objectFit }));
+        assert.ok(Math.abs(media.width / media.height - 2560 / 1421) < 0.01, "Native capture proportions preserved");
+        assert.equal(media.fit, "contain");
+        assert.equal((await image.boundingBox()).height, reserved.height, "Image decoding does not shift the layout");
+        if (width === 360) assert.match(media.src, /-960\.webp$/, "Mobile receives responsive media");
+        const link = capture.getByRole("link");
+        assert.equal(await link.getAttribute("href"), await image.getAttribute("src"), "Full native capture remains accessible");
+        await link.focus();
+        assert.notEqual(await link.evaluate(el => getComputedStyle(el).outlineStyle), "none", "Visible image focus ring");
+        assert.ok((await link.boundingBox()).height >= 44, "Image touch target");
+      }
+      assert.ok(await mediaPage.getByRole("link", { name: "Services", exact: true }).first().isVisible(), "Services stays discoverable on short displays");
+      if (route === "/projects/forgefield") {
+        await mediaPage.getByRole("link", { name: "Release Status", exact: true }).click();
+        await mediaPage.waitForURL(base + route + "#availability-title");
+        assert.ok(await mediaPage.locator("#availability-title").isVisible());
+      }
+    }
+    await mediaPage.close();
   }
   for (const route of ["/", "/products", "/services", "/projects/forgefield"]) {
     await page.setViewportSize({ width: 1280, height: 800 });
@@ -163,7 +217,9 @@ try {
       ? getProject(project.parentProject).route
       : "/products";
     await page.goto(base + listingRoute, { waitUntil: "networkidle" });
-    await page.locator(`main a[href="${project.route}"]`).first().click();
+    const projectLink = page.locator(`main a[href="${project.route}"]`).first();
+    if (!await projectLink.isVisible()) await page.locator(".studio-archive summary").click();
+    await projectLink.click();
     await page.waitForURL(base + project.route);
     assert.equal((await page.locator("h1").innerText()).toLowerCase(), project.name.toLowerCase());
     await page.goBack({ waitUntil: "networkidle" });
@@ -248,6 +304,7 @@ try {
   await noJS.goto(base + "/");
   assert.equal(await noJS.locator(".hero-system-field__image").count(), 1);
   assert.equal((await noJS.locator(".fortran-flow-hero__caption").innerText()).toLowerCase(), "simulation field\ndeterministic renderer still");
+  console.log("Console messages on valid routes:", JSON.stringify([...consoleMessages]));
   await page.goto(base + "/does-not-exist");
   assert.match(await page.locator("h1").innerText(), /route ends/i);
   assert.equal(await page.locator('link[rel="canonical"]').count(), 0);

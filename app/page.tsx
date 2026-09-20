@@ -2,17 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
-import { FeaturedProductChapter } from "@/components/FeaturedProductChapter";
+import { ForgefieldShowcase } from "@/components/ForgefieldShowcase";
 import { FortranFlowHero } from "@/components/FortranFlowHero";
 import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
-import { featuredProjects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Reed Creative Labs | Software, Simulation & Interactive Systems",
   description:
-    "An independent studio building original software, simulations, desktop tools, games, premium websites, and focused custom software.",
+    "The studio behind Forgefield, living procedural worlds for Windows. Reed Creative Labs builds unusual software, premium websites, and focused custom systems.",
   path: "/",
   image: {
     url: "/og-image.jpg",
@@ -61,12 +60,12 @@ export default function Home() {
             </p>
             <h1>Building software that explores complex systems.</h1>
             <p className="v2-hero__body v2-hero__services-copy">
-              Original software, simulations, and games, alongside premium
-              websites and focused custom software.
+              The studio behind Forgefield. Original software and real-time
+              systems, alongside premium websites and focused custom software.
             </p>
             <div className="v2-action-row">
               <ButtonLink href="#featured-products">
-                Explore Products
+                Explore Forgefield
               </ButtonLink>
               <ButtonLink href="/services" variant="secondary">
                 View Services
@@ -82,29 +81,17 @@ export default function Home() {
 
       <section
         id="featured-products"
-        className="v2-container v2-featured-products"
+        className="forgefield-home"
         aria-labelledby="featured-products-title"
       >
-        <Reveal className="v2-section-intro">
-          <p className="v2-eyebrow">Selected work</p>
-          <h2 id="featured-products-title">
-            Products built around real systems.
-          </h2>
+        <ForgefieldShowcase />
+        <div className="v2-container forgefield-more">
           <p>
-            Forgefield is launching soon. Phase Arcade is awaiting final
-            testing. Project Load Bearing and Static Drift are in development.
+            Explore the studio’s range through selected R&amp;D and smaller
+            mobile projects.
           </p>
-        </Reveal>
-        <div className="v2-product-chapters">
-          {featuredProjects.map((project, index) => (
-            <Reveal key={project.slug} delay={Math.min(index * 0.04, 0.12)}>
-              <FeaturedProductChapter project={project} index={index} />
-            </Reveal>
-          ))}
-        </div>
-        <div className="v2-inline-action">
           <Link className="text-link" href="/products">
-            View the complete product catalog
+            More from RCL
             <ArrowRight aria-hidden="true" />
           </Link>
         </div>

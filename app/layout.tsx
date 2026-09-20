@@ -18,10 +18,8 @@ export const metadata: Metadata = {
   keywords: [
     "Reed Creative Labs",
     "Forgefield",
-    "Phase Arcade",
-    "Project Load Bearing",
-    "Static Drift",
-    "VR arcade games",
+    "procedural live wallpapers",
+    "Windows screensavers",
     "offline-first software",
     "privacy-first software",
     "local-first software",
@@ -30,7 +28,7 @@ export const metadata: Metadata = {
     "websites",
     "small business websites",
     "custom tools",
-    "independent game studio",
+    "software engineering studio",
   ],
   icons: {
     icon: [

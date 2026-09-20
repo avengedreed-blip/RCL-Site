@@ -4,7 +4,7 @@ export const siteUrl = "https://reedcreativelabs.com";
 export const siteName = "Reed Creative Labs";
 
 const defaultDescription =
-  "Independent software and engineering studio building procedural environments, scientific simulations, desktop software, games, and focused digital products.";
+  "The independent studio behind Forgefield. Procedural worlds for Windows, premium websites, and focused custom software by Reed Creative Labs.";
 
 type SeoOptions = {
   title: string;
@@ -33,7 +33,7 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
     width: 1920,
     height: 1080,
   },
-  "/images/social/forgefield-2026-09.jpg": { width: 1200, height: 630 },
+  "/images/social/forgefield-2026-09-20.jpg": { width: 1200, height: 630 },
   "/images/social/phase-arcade-volume-1.jpg": { width: 1200, height: 630 },
   "/images/social/phase-shift.jpg": { width: 1200, height: 630 },
   "/images/social/phase-breaker.jpg": { width: 1200, height: 630 },

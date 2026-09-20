@@ -11,7 +11,11 @@ export type ProjectStatus =
   | "archived";
 
 export type RoadmapGroup =
-  "coming-soon" | "active-development" | "planned" | "included-game";
+  | "coming-soon"
+  | "active-development"
+  | "planned"
+  | "included-game"
+  | "archived";
 
 export type ProjectCategory =
   | "software"
@@ -76,7 +80,6 @@ export type TechnicalProfileKey =
 export type TechnicalProfile = {
   summary: string;
   verifiedOn: string;
-  compactFields: TechnicalProfileKey[];
   languages?: string[];
   nativeCore?: string[];
   engine?: string[];
@@ -108,9 +111,7 @@ export type Project = {
   route: string;
   visual: ProjectVisual;
   featured?: boolean;
-  featuredOrder?: number;
   presentationTier?: "flagship" | "featured" | "catalog";
-  chapterTreatment?: "lead" | "feature" | "development" | "brief";
   showcaseMedia?: ProjectMedia;
   includedGames?: string[];
   parentProject?: string;
@@ -123,9 +124,6 @@ export type Project = {
     body: string;
   }[];
 };
-
-export const roadmapDisclaimer =
-  "Projects and priorities may evolve as development continues. Availability and platform support are subject to change.";
 
 export const projects: Project[] = [
   {
@@ -150,14 +148,12 @@ export const projects: Project[] = [
     route: "/projects/forgefield",
     visual: "forgefield",
     featured: true,
-    featuredOrder: 1,
     presentationTier: "flagship",
-    chapterTreatment: "lead",
     showcaseMedia: {
       kind: "approved-image",
-      src: "/images/projects/forgefield-eventide-2026-09.webp",
+      src: "/images/projects/forgefield-eventide-2026-09-20.webp",
       alt: "Eventide in Forgefield: a bright black-hole accretion ring with flowing copper material and polar jets.",
-      caption: "Eventide, captured from the September 2026 Windows build.",
+      caption: "Eventide, captured from the September 20, 2026 Windows build.",
       fit: "cover",
     },
     currentFocus: [
@@ -175,7 +171,6 @@ export const projects: Project[] = [
       summary:
         "Modern Fortran owns the product model and procedural scene lifecycle. Narrow C and Win32/WGL boundaries support an OpenGL 4.6 renderer, including compute shaders. A self-contained WPF launcher manages world selection, preview, live wallpaper, and screensaver operation.",
       verifiedOn: "2026-09-06",
-      compactFields: ["languages", "renderer", "gpu"],
       languages: ["Fortran 2018", "C11", "C#"],
       nativeCore: [
         "Fortran simulation and product model",
@@ -211,8 +206,8 @@ export const projects: Project[] = [
   {
     name: "Phase Arcade Volume I",
     slug: "phase-arcade-volume-1",
-    status: "final-testing",
-    roadmapGroup: "coming-soon",
+    status: "archived",
+    roadmapGroup: "archived",
     category: "game-collection",
     categoryLabel: "Desktop & VR Arcade Game Collection",
     headline: "Three focused arcade games for desktop and VR.",
@@ -221,7 +216,7 @@ export const projects: Project[] = [
     shortDescription:
       "Phase Shift, Phase Breaker, and Phase Court in one desktop and VR collection. Three distinct takes on motion, timing, and positioning, built for short sessions and repeated practice.",
     longDescription:
-      "Phase Arcade Volume I brings Phase Shift, Phase Breaker, and Phase Court into one desktop and VR collection. It is built for players who want focused mechanics and short sessions that reward timing, positioning, and repeated practice. Input response, visual readability, and consistent core rules connect traditional desktop play and VR without erasing each game's identity. The collection is awaiting final testing before release. It has not launched, and a release date has not been announced.",
+      "An archived collection of Phase Shift, Phase Breaker, and Phase Court. The three games explore timing, positioning, and repeated practice through a shared desktop and VR shell. Input response, visual readability, and consistent core rules connect the collection while preserving each game’s identity. Retained as interaction R&D, with no current release commitment.",
     platforms: ["PC", "VR"],
     usersCan: [
       "Play three distinct arcade games in one collection.",
@@ -230,10 +225,7 @@ export const projects: Project[] = [
     ],
     route: "/projects/phase-arcade-volume-1",
     visual: "phase-arcade",
-    featured: true,
-    featuredOrder: 2,
     presentationTier: "featured",
-    chapterTreatment: "feature",
     showcaseMedia: {
       kind: "approved-image",
       src: "/images/projects/phase-breaker-gameplay-01.webp",
@@ -244,11 +236,6 @@ export const projects: Project[] = [
       position: "center",
     },
     includedGames: ["phase-shift", "phase-breaker", "phase-court"],
-    currentFocus: [
-      "Desktop and VR play across all three included games",
-      "Readability, input response, and short-session pacing",
-      "Final testing before public release",
-    ],
     features: [
       "Exactly three included games: Phase Shift, Phase Breaker, and Phase Court",
       "Traditional desktop play",
@@ -259,13 +246,6 @@ export const projects: Project[] = [
       summary:
         "Godot 4.7 runs the three-game collection in GDScript, using Forward+ for rendering and OpenXR for the PCVR path. Desktop and VR share the collection shell and local save and settings system.",
       verifiedOn: "2026-07-23",
-      compactFields: [
-        "languages",
-        "engine",
-        "renderer",
-        "interfaces",
-        "platforms",
-      ],
       languages: ["GDScript"],
       engine: ["Godot 4.7"],
       renderer: ["Godot Forward+"],
@@ -274,11 +254,6 @@ export const projects: Project[] = [
       interfaces: ["OpenXR"],
       packaging: ["Godot Windows desktop export"],
     },
-    milestones: [
-      { title: "Three-game collection structure", state: "complete" },
-      { title: "Desktop and VR validation", state: "current" },
-      { title: "Public release", state: "planned" },
-    ],
     pageSections: [
       {
         title: "Included games",
@@ -286,35 +261,32 @@ export const projects: Project[] = [
       },
       {
         title: "Desktop and VR",
-        body: "The collection supports traditional desktop play and VR. Specific headset support and release details have not been announced.",
+        body: "The collection supports traditional desktop play and VR. Platform references describe the prototype, not a public release.",
       },
       {
-        title: "Final testing",
-        body: "The three-game collection is awaiting final testing before release, with attention to input response, readable feedback, and consistent behavior across desktop and VR. It is not yet available to purchase or download.",
+        title: "Archived collection",
+        body: "Preserved as selected R&D in input response, readable feedback, and desktop/VR interaction. No public release is currently planned.",
       },
     ],
   },
   {
     name: "Project Load Bearing",
     slug: "project-load-bearing",
-    status: "active-development",
-    roadmapGroup: "active-development",
+    status: "archived",
+    roadmapGroup: "archived",
     category: "simulation",
     categoryLabel: "Structural Engineering Simulation",
     headline: "Build a structure. Test the decisions holding it together.",
     tagline:
-      "A structural simulation in development, connecting hands-on construction to a native Fortran solver.",
+      "An archived structural prototype connecting hands-on construction to a native Fortran solver.",
     shortDescription:
       "Build a steel frame, test it under load, inspect its response, and redesign it. The current Brace the Bay prototype connects hands-on construction in Unreal Engine to a native Fortran structural solver.",
     longDescription:
-      "Project Load Bearing explores structural engineering through a build, test, inspect, and redesign loop. In the current Brace the Bay prototype, a steel-frame construction challenge is evaluated against authored gravity and lateral loads. A native Fortran solver calculates the initial elastic response and identifies the first member failure; Unreal Engine presents the structure, editing tools, and inspection views. The project is a primary RCL development focus, not an imminent release. Its current scope is a working vertical slice rather than a finished engineering simulator.",
+      "An archived structural-engineering prototype built around construction, testing, inspection, and redesign. Brace the Bay evaluates a steel frame against authored gravity and lateral loads. A native Fortran solver calculates initial elastic response and first-member failure; Unreal Engine presents the structure and editing tools. The working vertical slice is retained as selected R&D, with no current release commitment.",
     platforms: ["Windows"],
     route: "/projects/project-load-bearing",
     visual: "load-bearing",
-    featured: true,
-    featuredOrder: 3,
     presentationTier: "featured",
-    chapterTreatment: "development",
     showcaseMedia: {
       kind: "approved-image",
       src: "/images/projects/load-bearing-braced-frame-2026-09.webp",
@@ -322,11 +294,6 @@ export const projects: Project[] = [
       caption: "Brace the Bay. A braced frame in the current prototype.",
       fit: "cover",
     },
-    currentFocus: [
-      "The Brace the Bay construction, testing, and redesign journey",
-      "Clear explanations of structural response and model limits",
-      "Hands-on usability and product validation",
-    ],
     features: [
       "Steel-frame construction and editing in a working prototype",
       "Authored gravity and lateral load tests",
@@ -337,7 +304,6 @@ export const projects: Project[] = [
       summary:
         "Unreal Engine 5.8 and C++ provide construction tools and presentation. A native Fortran solver evaluates linear-elastic static frame response through a C ABI. The current challenge stops after the first member removal and one static re-equilibrium; it does not model general dynamic collapse.",
       verifiedOn: "2026-09-06",
-      compactFields: ["languages", "engine", "nativeCore"],
       languages: ["Fortran", "C++"],
       nativeCore: ["Linear-elastic static frame solver"],
       engine: ["Unreal Engine 5.8"],
@@ -355,32 +321,29 @@ export const projects: Project[] = [
         body: "The current solver uses a linear-elastic static frame model. It does not claim dynamic collapse, plasticity, fracture, earthquake simulation, or certified building design. The project is an interactive simulation, not a tool for real-world structural safety decisions.",
       },
       {
-        title: "In development",
-        body: "The current vertical slice is being developed and reviewed. Hands-on usability, presentation, and broader product scope still require validation. No release window has been announced.",
+        title: "Archived prototype",
+        body: "The preserved vertical slice demonstrates construction, inspection, and redesign within a bounded structural model. It is selected R&D, with no current release commitment.",
       },
     ],
   },
   {
     name: "Static Drift",
     slug: "static-drift",
-    status: "active-development",
-    roadmapGroup: "active-development",
+    status: "archived",
+    roadmapGroup: "archived",
     category: "app",
     categoryLabel: "Procedural Ambient TV Application",
     headline: "A quieter kind of screen time.",
     tagline:
       "An offline ambient TV application built around evolving procedural worlds.",
     shortDescription:
-      "Procedural ambient worlds for Android TV, with optional built-in sound, simple remote controls, and locally saved playback settings. A quieter screen experience, still in development.",
+      "Procedural ambient worlds for Android TV, with optional built-in sound, simple remote controls, and locally saved playback settings. An archived exploration of ambient rendering and remote interaction.",
     longDescription:
-      "Static Drift brings procedural ambient visuals to the television without relying on looping video. The current application combines a native C++ renderer with Android TV controls, optional built-in sound, and local playback settings. Development is focused on sustained visual quality and a quiet, remote-friendly experience. Static Drift remains in development: visual and audio review, physical-TV testing, and release preparation are still ahead of public availability.",
+      "An archived procedural ambient TV prototype. A native C++ renderer connects to Android TV controls, optional built-in sound, and local playback settings. The work explores sustained visual quality and a quiet, remote-friendly experience. Physical-TV behavior and the final visual and audio experience were not established as release-ready. Retained as rendering R&D, with no current release commitment.",
     platforms: ["Android TV"],
     route: "/projects/static-drift",
     visual: "static-drift",
-    featured: true,
-    featuredOrder: 4,
     presentationTier: "featured",
-    chapterTreatment: "brief",
     showcaseMedia: {
       kind: "approved-image",
       src: "/images/projects/static-drift-prismatic-bloom-2026-09.webp",
@@ -388,11 +351,6 @@ export const projects: Project[] = [
       caption: "Prismatic Bloom. Captured from the development renderer.",
       fit: "cover",
     },
-    currentFocus: [
-      "Procedural world quality and long-duration playback",
-      "Remote-control usability and optional ambient sound",
-      "Physical-TV validation and owner review",
-    ],
     features: [
       "Procedural ambient worlds generated during playback",
       "Optional built-in sound, including silence",
@@ -403,7 +361,6 @@ export const projects: Project[] = [
       summary:
         "A C++20 rendering core produces procedural visuals through OpenGL and GLSL. The Android TV application connects Kotlin controls to the native engine through JNI. A Windows host supports development and review; it is not an announced consumer platform.",
       verifiedOn: "2026-09-06",
-      compactFields: ["languages", "renderer", "platforms"],
       languages: ["C++20", "Kotlin"],
       renderer: ["OpenGL", "GLSL"],
       interfaces: ["JNI"],
@@ -413,15 +370,15 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "Ambient, not passive video",
-        body: "The native engine generates visual motion during playback rather than repeating a movie. Visual quality and sustained playback are the current development focus.",
+        body: "The native engine generates visual motion during playback rather than repeating a movie. The prototype explores visual quality and sustained playback.",
       },
       {
         title: "Built for a remote",
         body: "Playback controls support D-pad navigation, scene selection, brightness, sound, and volume. Settings persist locally, and the visuals can run without audio.",
       },
       {
-        title: "In development",
-        body: "Static Drift is not a store release. Physical-TV behavior and the final visual and audio experience still need review. No release date, universal performance target, or HDR support is being promised.",
+        title: "Archived prototype",
+        body: "Static Drift is retained as rendering R&D, not a store release or an upcoming product. Physical-TV behavior remains unverified; no universal performance target or HDR support is claimed.",
       },
     ],
   },
@@ -429,7 +386,7 @@ export const projects: Project[] = [
     name: "Neon Drift",
     slug: "neon-drift",
     status: "active-development",
-    roadmapGroup: "coming-soon",
+    roadmapGroup: "active-development",
     category: "game",
     categoryLabel: "Mobile Arcade Game",
     headline: "Forward motion under pressure.",
@@ -462,7 +419,7 @@ export const projects: Project[] = [
     name: "Falling From The Sky",
     slug: "falling-from-the-sky",
     status: "active-development",
-    roadmapGroup: "coming-soon",
+    roadmapGroup: "active-development",
     category: "game",
     categoryLabel: "Mobile Action Platformer",
     headline: "Freeform aerial movement.",
@@ -494,7 +451,7 @@ export const projects: Project[] = [
   {
     name: "Phase Shift",
     slug: "phase-shift",
-    status: "active-development",
+    status: "archived",
     roadmapGroup: "included-game",
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
@@ -504,7 +461,7 @@ export const projects: Project[] = [
     shortDescription:
       "Phase Shift is a tunnel runner where forward motion, lane control, and switching between measured and unmeasured states determine each run.",
     longDescription:
-      "Phase Shift is one of the three games included in Phase Arcade Volume I. Players move through a neon corridor, read incoming gates, and switch state at the right moment to keep the run alive.",
+      "Archived studio work. Phase Shift is one of the three games included in Phase Arcade Volume I. Players move through a neon corridor, read incoming gates, and switch state at the right moment to keep the run alive. This project is retained as R&D and is not an active release commitment.",
     platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-shift",
@@ -532,7 +489,7 @@ export const projects: Project[] = [
   {
     name: "Phase Breaker",
     slug: "phase-breaker",
-    status: "active-development",
+    status: "archived",
     roadmapGroup: "included-game",
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
@@ -541,7 +498,7 @@ export const projects: Project[] = [
     shortDescription:
       "Phase Breaker is a reflector survival game where the player redirects energy through a containment chamber while managing pressure and positioning.",
     longDescription:
-      "Phase Breaker is one of the three games included in Phase Arcade Volume I. Its contained arena, readable targets, and reflector-driven play give it a distinct identity within the collection.",
+      "Archived studio work. Phase Breaker is one of the three games included in Phase Arcade Volume I. Its contained arena, readable targets, and reflector-driven play give it a distinct identity within the collection. This project is retained as R&D and is not an active release commitment.",
     platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-breaker",
@@ -569,7 +526,7 @@ export const projects: Project[] = [
   {
     name: "Phase Court",
     slug: "phase-court",
-    status: "active-development",
+    status: "archived",
     roadmapGroup: "included-game",
     category: "included-game",
     categoryLabel: "Included Game in Phase Arcade Volume I",
@@ -579,7 +536,7 @@ export const projects: Project[] = [
     shortDescription:
       "Phase Court is an arcade paddle duel where court positioning, reaction speed, and the angle of each return shape the rally.",
     longDescription:
-      "Phase Court is one of the three games included in Phase Arcade Volume I. Opposing cyan and magenta sides keep the competitive relationship clear while each rally rewards timing and control.",
+      "Archived studio work. Phase Court is one of the three games included in Phase Arcade Volume I. Opposing cyan and magenta sides keep the competitive relationship clear while each rally rewards timing and control. This project is retained as R&D and is not an active release commitment.",
     platforms: ["PC", "VR"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-court",
@@ -644,24 +601,24 @@ export const projects: Project[] = [
   {
     name: "Phase Arcade Volume II",
     slug: "phase-arcade-volume-2",
-    status: "active-development",
-    roadmapGroup: "active-development",
+    status: "archived",
+    roadmapGroup: "archived",
     category: "game-collection",
     categoryLabel: "VR Arcade Game Collection",
-    headline: "The next Phase Arcade collection.",
-    tagline: "A VR-focused follow-up collection in active development.",
+    headline: "An exploration of a shared VR arcade framework.",
+    tagline: "An archived VR collection experiment.",
     shortDescription:
-      "Phase Arcade Volume II is a VR-focused follow-up collection currently being built on a shared Phase Arcade framework.",
+      "Phase Arcade Volume II is archived R&D in a shared VR arcade framework.",
     longDescription:
-      "Phase Arcade Volume II continues the Phase Arcade identity in a VR-focused collection. Its final lineup, release timing, and detailed platform support have not been announced.",
+      "An archived exploration of a shared VR arcade framework. The project extended Phase Arcade’s interaction and presentation language into a follow-up collection. Retained as historical work, with no current release commitment.",
     platforms: ["VR"],
     idealFor: [
       "VR arcade players",
       "Players interested in focused short-session games",
     ],
     usersCan: [
-      "Follow development of the next Phase Arcade collection.",
-      "Expect distinct games to share a consistent Phase Arcade interaction and presentation framework.",
+      "Explore the direction of the archived collection.",
+      "A shared interaction and presentation framework was the design direction.",
     ],
     route: "/projects/phase-arcade-volume-2",
     visual: "phase-arcade-2",
@@ -672,15 +629,15 @@ export const projects: Project[] = [
       },
       {
         title: "Development state",
-        body: "The collection is in active development. Its included games, final platforms, pricing, and release timing have not been announced.",
+        body: "The collection is archived. Its shared framework remains useful as a record of VR experimentation.",
       },
     ],
   },
   {
     name: "Darren In The Woods 2",
     slug: "darren-in-the-woods-2",
-    status: "active-development",
-    roadmapGroup: "active-development",
+    status: "archived",
+    roadmapGroup: "archived",
     category: "game",
     categoryLabel: "Atmospheric Horror Game",
     headline: "Atmospheric Appalachian horror.",
@@ -689,7 +646,7 @@ export const projects: Project[] = [
     shortDescription:
       "Darren In The Woods 2 is a stylized horror experience inspired by Appalachian folklore, wilderness exploration, environmental storytelling, and psychological tension.",
     longDescription:
-      "Darren In The Woods 2 focuses on atmosphere, discovery, and unsettling encounters rather than constant combat. The project is built around wilderness exploration, environmental storytelling, and psychological tension.",
+      "Archived studio work. Darren In The Woods 2 focuses on atmosphere, discovery, and unsettling encounters rather than constant combat. The project is built around wilderness exploration, environmental storytelling, and psychological tension. This project is retained as R&D and is not an active release commitment.",
     platforms: ["PC"],
     usersCan: [
       "Explore a stylized wilderness horror setting.",
@@ -712,8 +669,8 @@ export const projects: Project[] = [
   {
     name: "Talk To Me AAC",
     slug: "talk-to-me",
-    status: "active-development",
-    roadmapGroup: "active-development",
+    status: "archived",
+    roadmapGroup: "archived",
     category: "app",
     categoryLabel: "Accessibility & Communication Software",
     headline: "Communication support built for real use.",
@@ -722,7 +679,7 @@ export const projects: Project[] = [
     shortDescription:
       "Talk To Me AAC is an augmentative and alternative communication application for nonverbal and minimally verbal users.",
     longDescription:
-      "Talk To Me AAC is accessibility and communication software designed to help nonverbal and minimally verbal users communicate through customizable visual and speech-based tools. The project focuses on accessibility, usability, affordability, and real-world family needs.",
+      "An archived exploration of accessible communication software for nonverbal and minimally verbal users. The direction centered on customizable visual and speech-based tools, usability, affordability, and family needs. Retained as a project study, with no current release commitment.",
     platforms: ["Android", "iOS", "Tablets"],
     idealFor: [
       "Nonverbal users",
@@ -740,7 +697,7 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "What it is",
-        body: "Talk To Me AAC is an augmentative and alternative communication application in active development for accessibility and everyday communication support. It is not medical treatment or an emergency service.",
+        body: "Talk To Me AAC is an archived augmentative and alternative communication concept for accessibility and everyday communication support. It is not medical treatment or an emergency service.",
       },
       {
         title: "Who it is for",
@@ -751,17 +708,16 @@ export const projects: Project[] = [
   {
     name: "Bloom",
     slug: "bloom",
-    status: "concept",
-    roadmapGroup: "planned",
+    status: "archived",
+    roadmapGroup: "archived",
     category: "app",
     categoryLabel: "Recovery & Sobriety Support App",
     headline: "Support for recovery milestones.",
-    tagline:
-      "A sobriety and recovery support app being developed by Aaron and Katy.",
+    tagline: "An archived sobriety and recovery support app concept.",
     shortDescription:
-      "Bloom is a sobriety and recovery support application being developed by Aaron and Katy.",
+      "Bloom is an archived sobriety and recovery support application concept.",
     longDescription:
-      "Bloom is planned to help users track progress, build healthier habits, celebrate milestones, and stay motivated during long-term recovery journeys.",
+      "Archived studio work. Bloom explored how to help users track progress, build healthier habits, celebrate milestones, and stay motivated during long-term recovery journeys. This project is retained as R&D and is not an active release commitment.",
     platforms: ["Android", "iOS"],
     usersCan: [
       "Track recovery progress.",
@@ -773,7 +729,7 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "What it is",
-        body: "Bloom is a planned personal recovery and sobriety support application being developed by Aaron and Katy. It is not treatment, crisis support, or a replacement for professional care.",
+        body: "Bloom is an archived personal recovery and sobriety support application concept. It is not treatment, crisis support, or a replacement for professional care.",
       },
       {
         title: "Who it is for",
@@ -784,8 +740,8 @@ export const projects: Project[] = [
   {
     name: "Misread",
     slug: "misread",
-    status: "concept",
-    roadmapGroup: "planned",
+    status: "archived",
+    roadmapGroup: "archived",
     category: "game",
     categoryLabel: "Narrative Psychological Experience",
     headline: "What people mean. What others hear.",
@@ -794,7 +750,7 @@ export const projects: Project[] = [
     shortDescription:
       "Misread is a narrative-focused project exploring perception, communication, misunderstanding, memory, and human psychology.",
     longDescription:
-      "Misread is intended as one of Reed Creative Labs' largest creative efforts. The project explores how people interpret what is said, what is remembered, what is misunderstood, and what is left unsaid.",
+      "An archived narrative concept about perception, communication, memory, and misunderstanding. The project explored how people interpret what is said, what is remembered, and what is left unsaid. Retained as a creative study, with no current release commitment.",
     platforms: ["PC"],
     usersCan: [
       "Experience a narrative centered on interpretation and uncertainty.",
@@ -810,49 +766,29 @@ export const projects: Project[] = [
       },
       {
         title: "Creative direction",
-        body: "The project is planned as a major creative effort for Reed Creative Labs, with emphasis on interpretation, ambiguity, and psychological tension.",
+        body: "The archived creative direction explored interpretation, ambiguity, and psychological tension.",
       },
     ],
   },
 ];
 
-export const featuredProjectSlugs = [
-  "forgefield",
-  "phase-arcade-volume-1",
-  "project-load-bearing",
-  "static-drift",
-] as const;
+export const featuredProjectSlugs = ["forgefield"] as const;
 
 export const featuredProjects = featuredProjectSlugs
   .map((slug) => getProject(slug))
   .filter((project): project is Project => Boolean(project));
 
-const featuredProjectSlugSet = new Set<string>(featuredProjectSlugs);
-
-export const includedGames = projects.filter(
-  (project) => project.roadmapGroup === "included-game",
+export const includedGames = projects.filter((project) =>
+  Boolean(project.parentProject),
 );
 
-export const comingSoonProjects = projects.filter(
-  (project) => project.roadmapGroup === "coming-soon",
+export const archivedProjects = projects.filter(
+  (project) => project.status === "archived" && !project.parentProject,
 );
 
-export const activeDevelopmentProjects = projects.filter(
-  (project) => project.roadmapGroup === "active-development",
+export const mobileProjects = projects.filter((project) =>
+  ["neon-drift", "falling-from-the-sky", "pigs-can-fly"].includes(project.slug),
 );
-
-export const plannedProjects = projects.filter(
-  (project) => project.roadmapGroup === "planned",
-);
-
-export const comingSoonRoadmapProjects = comingSoonProjects.filter(
-  (project) => !featuredProjectSlugSet.has(project.slug),
-);
-
-export const activeDevelopmentRoadmapProjects =
-  activeDevelopmentProjects.filter(
-    (project) => !featuredProjectSlugSet.has(project.slug),
-  );
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
