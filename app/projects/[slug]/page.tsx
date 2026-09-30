@@ -1,3 +1,4 @@
+import { forgefieldLaunchSummary } from "@/content/forgefield";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ButtonLink";
@@ -42,8 +43,13 @@ export async function generateMetadata({
   }
 
   return buildMetadata({
-    title: project.name,
-    description: `${getStatusLabel(project.status)}. ${project.shortDescription}`,
+    title: project.launch
+      ? `${project.name} | ${getProjectDateLabel(project)}`
+      : project.name,
+    description:
+      project.slug === "forgefield"
+        ? `${forgefieldLaunchSummary} Real-time generative particle worlds for Windows 11: nine living scenes, live wallpapers, and screensavers.`
+        : `${getProjectDateLabel(project)}. ${project.shortDescription}`,
     path: project.route,
     image: {
       url: getProjectSocialImage(project.slug),

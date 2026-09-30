@@ -2,13 +2,13 @@
 
 > Reed Creative Labs is a veteran-founded, family-built independent software and engineering studio in South Carolina. The studio builds unusual software and interactive systems, premium websites, and focused custom software. Forgefield is its primary product and current release focus.
 
-Forgefield is in release preparation, not publicly available. No release date has been announced. Archived projects are retained as R&D or historical work, not upcoming releases or active commercial commitments. Smaller mobile projects remain secondary; their pages describe development, not availability.
+Forgefield is scheduled to launch on Steam on October 14, 2026 for $4.99 USD. A public Steam store URL has not yet been added. Archived projects are retained as R&D or historical work, not upcoming releases or active commercial commitments. Smaller mobile projects remain secondary; their pages describe development, not availability.
 
 The public website is a static Next.js App Router application built with React and TypeScript. Its signature black-hole visualization uses a modern Fortran state system compiled to WebAssembly, with browser lifecycle and rendering. Product media consists of native captures, not generated promotional art.
 
 ## Primary Product
 
-- [Forgefield](https://reedcreativelabs.com/projects/forgefield): RCL's primary Windows application for procedural live wallpapers and screensavers, with nine native-rendered worlds. Launching Soon; not yet released.
+- [Forgefield](https://reedcreativelabs.com/projects/forgefield): RCL's flagship generative particle simulation for Windows 11 x64, with nine native-rendered worlds and live wallpaper/screensaver playback. Steam release: October 14, 2026. Launch price: $4.99 USD.
 
 ## Selected R&D
 

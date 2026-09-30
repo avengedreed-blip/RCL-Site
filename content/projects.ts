@@ -1,9 +1,18 @@
+import {
+  forgefieldLaunch,
+  forgefieldLaunchSummary,
+  forgefieldWorlds,
+  formatLaunchDate,
+  type ProductLaunch,
+} from "./forgefield.ts";
+
 export type ProjectStatus =
   | "concept"
   | "research"
   | "prototype"
   | "active-development"
   | "launching-soon"
+  | "scheduled"
   | "final-testing"
   | "private-beta"
   | "public-release"
@@ -98,6 +107,7 @@ export type Project = {
   name: string;
   slug: string;
   status: ProjectStatus;
+  launch?: ProductLaunch;
   roadmapGroup: RoadmapGroup;
   category: ProjectCategory;
   categoryLabel: string;
@@ -129,18 +139,16 @@ export const projects: Project[] = [
   {
     name: "Forgefield",
     slug: "forgefield",
-    status: "launching-soon",
+    status: "scheduled",
+    launch: forgefieldLaunch,
     roadmapGroup: "coming-soon",
     category: "software",
-    categoryLabel: "Procedural Live Wallpapers & Screensavers",
-    headline: "Living worlds for the Windows desktop.",
-    tagline:
-      "Nine procedural worlds. Live wallpaper and screensaver playback. Launching soon.",
-    shortDescription:
-      "Nine living worlds for the Windows desktop, from black-hole accretion to aurora and glowing embers. Forgefield generates live wallpapers and screensavers through native simulation and GPU rendering, not looping video.",
-    longDescription:
-      "Forgefield turns the Windows desktop into a continuously evolving procedural environment, not a repeating video. Its nine worlds span Eventide, Genesis, Gravitas, Abyssal, Synapse, Quantum Garden, Corona, Ember, and Polar Night. Modern Fortran coordinates the simulation and scene lifecycle, while OpenGL compute and rendering shaders produce the imagery in real time. A native Windows launcher manages world selection, preview, live wallpaper, and screensaver operation. Forgefield is RCL's flagship product and is launching soon. Public availability and a release date have not yet been announced.",
-    platforms: ["Windows"],
+    categoryLabel: "Real-Time Generative Particle Worlds",
+    headline: "Real-time generative particle worlds.",
+    tagline: `Nine procedural worlds. Live wallpaper and screensaver playback. ${forgefieldLaunchSummary}`,
+    shortDescription: `Real-time generative particle worlds for the Windows desktop. Native simulation, GPU rendering, live wallpapers, and screensavers. ${forgefieldLaunchSummary}`,
+    longDescription: `Forgefield turns the Windows desktop into a continuously evolving particle universe. Its nine worlds span ${forgefieldWorlds.join(", ")}. Modern Fortran coordinates simulation and scene lifecycle; OpenGL compute and rendering shaders generate the imagery live. A native Windows launcher manages world selection, preview, live wallpaper, and screensaver playback. Particle counts vary by world and quality preset, with million-particle systems. ${forgefieldLaunchSummary}`,
+    platforms: ["Windows 11 x64"],
     idealFor: [
       "Windows users who want procedural desktop environments",
       "People who prefer renderer-driven visuals over looping video",
@@ -170,7 +178,7 @@ export const projects: Project[] = [
     technicalProfile: {
       summary:
         "Modern Fortran owns the product model and procedural scene lifecycle. Narrow C and Win32/WGL boundaries support an OpenGL 4.6 renderer, including compute shaders. A self-contained WPF launcher manages world selection, preview, live wallpaper, and screensaver operation.",
-      verifiedOn: "2026-09-06",
+      verifiedOn: "2026-09-30",
       languages: ["Fortran 2018", "C11", "C#"],
       nativeCore: [
         "Fortran simulation and product model",
@@ -179,7 +187,7 @@ export const projects: Project[] = [
       frameworks: [".NET 10 / WPF"],
       renderer: ["OpenGL 4.6 Core", "GLSL"],
       gpu: ["OpenGL compute shaders"],
-      platforms: ["Windows 10/11 x64"],
+      platforms: ["Windows 11 x64"],
       interfaces: ["Win32 live-wallpaper host", "Windows screensaver (.scr)"],
       packaging: ["Self-contained WPF launcher"],
     },
@@ -195,11 +203,11 @@ export const projects: Project[] = [
       },
       {
         title: "A desktop application",
-        body: "The Windows launcher brings world selection, live preview, wallpaper operation, screensaver settings, and quality presets together. Windows 10/11 x64 and an OpenGL 4.6-capable GPU are the current technical baseline.",
+        body: "The Windows launcher brings world selection, live preview, wallpaper operation, screensaver settings, and quality presets together. Windows 11 x64 and an OpenGL 4.6-capable GPU are the current technical baseline.",
       },
       {
-        title: "Launching soon",
-        body: "Final preparation focuses on Windows hardware, long-running playback, and wallpaper and screensaver reliability. Release details will be published when confirmed.",
+        title: "Steam release",
+        body: forgefieldLaunchSummary,
       },
     ],
   },
@@ -801,6 +809,7 @@ export function getStatusLabel(status: ProjectStatus) {
     prototype: "Prototype",
     "active-development": "Active Development",
     "launching-soon": "Launching Soon",
+    scheduled: "Scheduled Release",
     "final-testing": "Final Testing",
     "private-beta": "Private Beta",
     "public-release": "Public Release",
@@ -812,5 +821,7 @@ export function getStatusLabel(status: ProjectStatus) {
 }
 
 export function getProjectDateLabel(project: Project) {
-  return getStatusLabel(project.status);
+  return project.launch
+    ? `${project.launch.storefront} Release: ${formatLaunchDate(project.launch)}`
+    : getStatusLabel(project.status);
 }

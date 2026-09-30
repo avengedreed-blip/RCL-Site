@@ -48,6 +48,7 @@ const allowedStatuses = new Set([
   "prototype",
   "active-development",
   "launching-soon",
+  "scheduled",
   "final-testing",
   "private-beta",
   "public-release",
@@ -183,14 +184,14 @@ for (const prohibited of [
 const forgefield = getProject("forgefield");
 if (
   !forgefield ||
-  forgefield.status !== "launching-soon" ||
+  forgefield.status !== "scheduled" ||
   forgefield.presentationTier !== "flagship" ||
   forgefield.showcaseMedia?.kind !== "approved-image" ||
   forgefield.showcaseMedia.src !==
     "/images/projects/forgefield-eventide-2026-09-20.webp"
 ) {
   fail(
-    "Forgefield must lead with Launching Soon and current September native media",
+    "Forgefield must lead with its scheduled Steam release and current September native media",
   );
 }
 const expectedWorlds = [
@@ -654,7 +655,7 @@ for (const screenshot of expectedCaptures) {
 const pressPage = readFileSync(routeFile("/press"), "utf8");
 const discovery = readFileSync(join(root, "public", "llms.txt"), "utf8");
 for (const [slug, status] of [
-  ["forgefield", "Launching Soon"],
+  ["forgefield", "October 14"],
   ["phase-arcade-volume-1", "Archived"],
   ["project-load-bearing", "Archived"],
   ["static-drift", "Archived"],

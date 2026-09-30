@@ -1,3 +1,11 @@
+import { ForgefieldLaunch } from "@/components/ForgefieldLaunch";
+import {
+  forgefieldLaunch,
+  forgefieldReleaseDate,
+  forgefieldPrice,
+  forgefieldWorlds,
+  getSteamStoreUrl,
+} from "@/content/forgefield";
 import { ButtonLink } from "@/components/ButtonLink";
 import { ForgefieldCapture } from "@/components/ForgefieldShowcase";
 import { StructuredData } from "@/components/StructuredData";
@@ -17,27 +25,26 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
     >
       <StructuredData data={projectJsonLd(project)} />
       <header className="v2-container forgefield-opening">
-        <p className="v2-eyebrow">
-          Reed Creative Labs · Windows · Launching Soon
-        </p>
+        <p className="v2-eyebrow">RCL flagship · Windows 11</p>
         <h1>Forgefield</h1>
         <div className="forgefield-opening__summary">
           <p className="forgefield-deck">
-            Living worlds for the Windows desktop.
+            Real-time generative particle worlds.
           </p>
           <p>
-            Nine procedural worlds. Native live wallpaper and screensaver
-            playback. A continuously evolving scene, rendered on your GPU.
+            Millions of particles form a living universe on your desktop. Nine
+            procedural worlds, generated live on your GPU, for wallpaper and
+            screensaver playback.
           </p>
         </div>
+        <ForgefieldLaunch productPage />
       </header>
       <div className="forgefield-wide">
         <ForgefieldCapture image={eventide} priority />
       </div>
       <div className="v2-container forgefield-opening__actions">
-        <p>In release preparation. Not yet publicly available.</p>
+        <p>A desktop simulation and screensaver. Launching on Steam.</p>
         <div className="v2-action-row">
-          <ButtonLink href="#gallery-title">Explore the Worlds</ButtonLink>
           <ButtonLink href="#availability-title" variant="secondary">
             Release Status
           </ButtonLink>
@@ -93,10 +100,19 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
             />
           ))}
         </div>
-        <p className="forgefield-gallery__note">
-          Also in the nine-world collection: Genesis, Abyssal, and Quantum
-          Garden.
-        </p>
+        <ul
+          className="forgefield-world-index"
+          aria-label="All nine Forgefield worlds"
+        >
+          {forgefieldWorlds.map((world, index) => (
+            <li key={world}>
+              <span aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              {world}
+            </li>
+          ))}
+        </ul>
       </section>
       <section
         className="v2-section-band"
@@ -113,7 +129,10 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
             <p>
               Fortran coordinates the scene lifecycle; OpenGL compute and
               rendering shaders produce the imagery. The native launcher
-              connects those worlds to the Windows desktop.
+              connects those worlds to the Windows desktop. Particle counts vary
+              by world and quality preset; Eventide’s highest preset uses two
+              million particles. This is a simulation scale, not a frame-rate
+              guarantee.
             </p>
           </div>
           <TechnicalProfile
@@ -127,17 +146,27 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
         aria-labelledby="availability-title"
       >
         <div>
-          <p className="v2-eyebrow">Windows 10/11 x64 · OpenGL 4.6</p>
-          <h2 id="availability-title">Launching Soon.</h2>
+          <p className="v2-eyebrow">Windows 11 x64 · OpenGL 4.6</p>
+          <h2 id="availability-title">Coming to Steam.</h2>
         </div>
         <div>
           <p>
-            Final preparation focuses on representative Windows hardware,
-            long-running playback, and wallpaper and screensaver reliability.
-            Public availability and a release date have not been announced.
+            Scheduled for{" "}
+            <time dateTime={forgefieldLaunch.releaseDate}>
+              {forgefieldReleaseDate}
+            </time>{" "}
+            at {forgefieldPrice} USD.
+            {getSteamStoreUrl(forgefieldLaunch)
+              ? " Visit the Steam page for store details."
+              : " The Steam store link will be added here when it is available."}
           </p>
-          <ButtonLink href="/contact" variant="contact">
-            Ask About Forgefield
+          <ButtonLink
+            href={getSteamStoreUrl(forgefieldLaunch) ?? "/contact"}
+            variant="contact"
+          >
+            {getSteamStoreUrl(forgefieldLaunch)
+              ? "View on Steam"
+              : "Ask About Forgefield"}
           </ButtonLink>
         </div>
       </section>

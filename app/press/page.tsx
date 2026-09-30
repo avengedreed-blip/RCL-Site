@@ -1,3 +1,4 @@
+import { forgefieldLaunchSummary } from "@/content/forgefield";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -52,8 +53,9 @@ export default function PressPage() {
             Reed Creative Labs is an independent software and engineering studio
             building tools, simulations, desktop software, games, websites, and
             custom software with privacy, ownership, and lasting value in mind.
-            The studio’s primary product is {featuredProductNames}. Archived work
-            remains available as selected R&D, not a release roadmap.
+            The studio’s primary product is {featuredProductNames}.{" "}
+            {forgefieldLaunchSummary} Archived work remains available as
+            selected R&D, not a release roadmap.
           </p>
         </Reveal>
       </section>
@@ -67,7 +69,7 @@ export default function PressPage() {
             <p className="v2-eyebrow">Featured references</p>
             <h2 id="press-references-title">Current product context.</h2>
             <p>
-              Each product page has a summary, current development status, and
+              Each product page has a summary, current release status, and
               images where available.
             </p>
           </Reveal>

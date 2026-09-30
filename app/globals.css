@@ -5741,3 +5741,112 @@ a {
     transition: none;
   }
 }
+/* A static release masthead keeps the launch prominent without another renderer. */
+.forgefield-hero-launch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-block: 1.25rem 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-accent-copper);
+  color: var(--color-text-primary);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+.forgefield-hero-launch > span {
+  flex-basis: 100%;
+  color: var(--color-accent-gold);
+  font: 0.65rem/1.6 var(--v2-mono-font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.forgefield-hero-launch strong {
+  color: var(--color-accent-gold);
+  font-weight: 600;
+}
+.forgefield-launch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 1.5rem 2.5rem;
+  margin-bottom: 2rem;
+  padding-block: 1.75rem;
+  border-block: 1px solid var(--v2-hairline-strong);
+}
+.forgefield-launch__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.forgefield-launch__date time {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--v2-display-font);
+  font-size: clamp(2rem, 3.7vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.forgefield-launch__price > p:last-child {
+  margin-top: 0.75rem;
+  color: var(--color-accent-gold);
+  font-family: var(--v2-display-font);
+  font-size: clamp(2rem, 3.4vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+.forgefield-opening .forgefield-launch {
+  margin-top: 2.5rem;
+  margin-bottom: 0;
+}
+.forgefield-world-index {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 2rem;
+  margin-top: 2.5rem;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--v2-hairline);
+}
+.forgefield-world-index li {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--v2-hairline);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+}
+.forgefield-world-index span {
+  color: var(--v2-copy-dim);
+  font: 0.6rem/1.6 var(--v2-mono-font);
+}
+@media (max-width: 1023px) {
+  .forgefield-launch {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .forgefield-launch__actions {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+@media (max-width: 600px) {
+  .forgefield-launch {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.35rem;
+  }
+  .forgefield-launch__price {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .forgefield-launch__price > p:last-child { margin-top: 0; }
+  .forgefield-world-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1rem;
+  }
+  .forgefield-world-index li { gap: 0.6rem; font-size: 0.8rem; }
+}

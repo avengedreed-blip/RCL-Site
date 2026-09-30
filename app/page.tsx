@@ -1,3 +1,9 @@
+import {
+  forgefieldLaunch,
+  forgefieldReleaseDate,
+  forgefieldPrice,
+  forgefieldLaunchSummary,
+} from "@/content/forgefield";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -10,8 +16,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Reed Creative Labs | Software, Simulation & Interactive Systems",
-  description:
-    "The studio behind Forgefield, living procedural worlds for Windows. Reed Creative Labs builds unusual software, premium websites, and focused custom systems.",
+  description: `Forgefield: real-time generative particle worlds. ${forgefieldLaunchSummary} From Reed Creative Labs, a software and creative technology studio.`,
   path: "/",
   image: {
     url: "/og-image.jpg",
@@ -58,10 +63,18 @@ export default function Home() {
             <p className="v2-eyebrow">
               Reed Creative Labs · Software Engineering Studio · South Carolina
             </p>
+            <p className="forgefield-hero-launch">
+              <span>Forgefield · Steam release</span>
+              <time dateTime={forgefieldLaunch.releaseDate}>
+                {forgefieldReleaseDate}
+              </time>
+              <strong>{forgefieldPrice} USD</strong>
+            </p>
             <h1>Building software that explores complex systems.</h1>
             <p className="v2-hero__body v2-hero__services-copy">
-              The studio behind Forgefield. Original software and real-time
-              systems, alongside premium websites and focused custom software.
+              The studio behind Forgefield: real-time generative particle worlds
+              for your desktop. We also build premium websites and focused
+              custom software.
             </p>
             <div className="v2-action-row">
               <ButtonLink href="#featured-products">

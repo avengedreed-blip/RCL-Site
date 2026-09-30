@@ -1,3 +1,4 @@
+import { getSteamStoreUrl } from "@/content/forgefield";
 import type { Project } from "@/content/projects";
 import { getProjectSocialImage } from "@/lib/project-media";
 import { absoluteUrl, siteName, siteUrl } from "@/lib/seo";
@@ -81,6 +82,28 @@ export function projectJsonLd(project: Project) {
     publisher: organization,
     creator: organization,
   };
+
+  if (project.launch) {
+    const steamUrl = getSteamStoreUrl(project.launch);
+    return {
+      ...base,
+      "@type": ["SoftwareApplication", "Product"],
+      applicationCategory: "EntertainmentApplication",
+      operatingSystem: project.platforms.join(", "),
+      releaseDate: project.launch.releaseDate,
+      ...(steamUrl
+        ? {
+            offers: {
+              "@type": "Offer",
+              price: project.launch.price.toFixed(2),
+              priceCurrency: project.launch.currency,
+              validFrom: project.launch.releaseDate,
+              url: steamUrl,
+            },
+          }
+        : {}),
+    };
+  }
 
   if (project.status === "archived") {
     return { ...base, "@type": "CreativeWork", creativeWorkStatus: "Archived" };

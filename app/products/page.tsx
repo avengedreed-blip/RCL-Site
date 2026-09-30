@@ -1,3 +1,4 @@
+import { forgefieldLaunchSummary } from "@/content/forgefield";
 import type { Metadata } from "next";
 import { ForgefieldShowcase } from "@/components/ForgefieldShowcase";
 import { ProductLedger } from "@/components/ProductLedger";
@@ -7,8 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Products & Selected R&D",
-  description:
-    "Forgefield leads Reed Creative Labs: procedural worlds for Windows, with smaller mobile projects and archived technical experiments from the studio.",
+  description: `${forgefieldLaunchSummary} Explore RCL’s generative particle worlds, smaller mobile projects, and selected archived R&D.`,
   path: "/products",
   image: {
     url: "/images/social/forgefield-2026-09-20.jpg",

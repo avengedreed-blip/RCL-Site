@@ -9,6 +9,7 @@
     "check:fortran": "node scripts/check-fortran-hero.mjs",
     "check:hero": "npm run check:fortran && node scripts/check-fortran-hero-integration.mjs",
     "check:color": "node scripts/check-v2-color-system.mjs",
+    "check:launch": "node --no-warnings --experimental-strip-types scripts/launch-check.mjs",
     "check:portfolio": "node --no-warnings --experimental-strip-types scripts/portfolio-check.mjs",
     "check:commercial": "node scripts/commercial-check.mjs",
     "check:trust": "node scripts/trust-check.mjs",
@@ -16,7 +17,7 @@
     "check:browser": "node --no-warnings --experimental-strip-types scripts/browser-check.mjs",
     "start": "next start",
     "lint": "eslint .",
-    "smoke": "node scripts/smoke-check.mjs && npm run check:portfolio && npm run check:commercial && npm run check:trust && npm run check:hero && npm run check:color && npm run check:privacy",
+    "smoke": "node scripts/smoke-check.mjs && npm run check:portfolio && npm run check:launch && npm run check:commercial && npm run check:trust && npm run check:hero && npm run check:color && npm run check:privacy",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

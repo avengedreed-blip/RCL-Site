@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ButtonLink } from "@/components/ButtonLink";
+import { ForgefieldLaunch } from "@/components/ForgefieldLaunch";
 import {
   getProjectScreenshots,
   type ProjectScreenshot,
@@ -58,17 +58,20 @@ export function ForgefieldShowcase({
       <div className="v2-container forgefield-showcase__intro">
         <div>
           <p className="v2-eyebrow">
-            From the studio · Windows · Launching Soon
+            RCL flagship · Real-time generative simulation
           </p>
           <h2 id="featured-products-title">Forgefield</h2>
         </div>
         <div className="forgefield-showcase__thesis">
-          <p className="forgefield-deck">A desktop with a life of its own.</p>
+          <p className="forgefield-deck">Your desktop, alive.</p>
           <p>
-            Nine procedural worlds, evolving in real time. Live wallpapers and
-            screensavers shaped by simulation, light, and motion.
+            Millions of particles. Nine living worlds. A generative universe for
+            your desktop, with live wallpaper and screensaver playback.
           </p>
         </div>
+      </div>
+      <div className="v2-container">
+        <ForgefieldLaunch />
       </div>
       <div className="forgefield-wide">
         <ForgefieldCapture image={eventide} />
@@ -77,6 +80,7 @@ export function ForgefieldShowcase({
         <p>
           Modern Fortran drives the simulation. OpenGL compute and rendering
           shaders bring each world to the screen. Every frame is generated live.
+          Particle counts vary by world and quality preset.
         </p>
         <dl className="forgefield-facts">
           <div>
@@ -85,14 +89,13 @@ export function ForgefieldShowcase({
           </div>
           <div>
             <dt>Platform</dt>
-            <dd>Windows 10/11 x64</dd>
+            <dd>Windows 11 x64</dd>
           </div>
           <div>
             <dt>Playback</dt>
             <dd>Wallpaper & screensaver</dd>
           </div>
         </dl>
-        <ButtonLink href="/projects/forgefield">Explore Forgefield</ButtonLink>
       </div>
       {includeWorldStudy ? (
         <div className="v2-container forgefield-world-study">

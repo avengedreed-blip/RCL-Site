@@ -177,6 +177,21 @@ try {
     const mediaPage = await browser.newPage({ viewport: { width, height: 600 }, reducedMotion: "reduce" });
     for (const route of ["/", "/products", "/projects/forgefield"]) {
       await mediaPage.goto(base + route, { waitUntil: "networkidle" });
+      if (route === "/") {
+        const announcement = await mediaPage.locator(".forgefield-hero-launch time").boundingBox();
+        assert.ok(announcement.y + announcement.height <= 600, "Home release date visible in initial short viewport");
+      }
+      const launch = mediaPage.locator(".forgefield-launch");
+      assert.equal(await launch.count(), 1);
+      assert.match(await launch.innerText(), /October 14, 2026/);
+      assert.match(await launch.innerText(), /\$4\.99/);
+      const date = launch.locator("time");
+      assert.equal(await date.getAttribute("datetime"), "2026-10-14");
+      assert.ok(await date.evaluate(el => parseFloat(getComputedStyle(el).fontSize) >= 30), "Prominent release date");
+      const action = launch.getByRole("link").first();
+      assert.ok((await action.boundingBox()).height >= 44, "Launch action touch target");
+      await action.focus();
+      assert.notEqual(await action.evaluate(el => getComputedStyle(el).outlineStyle), "none", "Launch action focus");
       const captures = mediaPage.locator(".forgefield-capture");
       assert.equal(await captures.count(), route === "/projects/forgefield" ? 6 : route === "/products" ? 1 : 2);
       for (const capture of await captures.all()) {

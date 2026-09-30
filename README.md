@@ -4,10 +4,14 @@ Official static website for Reed Creative Labs.
 
 ## Current Portfolio
 
-Forgefield is the primary product, in release preparation. Archived work is
+Forgefield is the primary product, scheduled for Steam on October 14, 2026 at
+$4.99 USD. Launch facts and the future verified Steam URL are centralized in
+`content/forgefield.ts`; keep `public/llms.txt` aligned (checked by `check:launch`).
+Windows 11 x64 is the current product boundary. Archived work is
 retained as selected R&D; smaller mobile projects remain secondary. The shared
 register in `content/projects.ts` drives public status, routes and sitemap.
-See [Flagship Art Direction](docs/FORGEFIELD_FLAGSHIP_PASS.md) for this pass.
+See [Steam Launch Pass](docs/FORGEFIELD_STEAM_LAUNCH.md) for release facts and validation,
+and [Flagship Art Direction](docs/FORGEFIELD_FLAGSHIP_PASS.md) for the underlying visual pass.
 Earlier September documents are historical snapshots.
 
 Built with:
