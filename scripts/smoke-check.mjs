@@ -158,9 +158,9 @@ const h1Text = h1
   .replace(/\s+/g, " ")
   .trim();
 
-if (h1Text !== "Building software that explores complex systems.") {
+if (h1Text !== "FORGEFIELD") {
   throw new Error(
-    `Homepage H1 does not match the approved V2 thesis: ${h1Text}`,
+    `Homepage H1 does not match the flagship launch heading: ${h1Text}`,
   );
 }
 if (!homepage.includes("Reed Creative Labs")) {

@@ -8,6 +8,8 @@ import { featuredProjects, getProject, projects } from "../content/projects.ts";
 import { phaseArcadeGames } from "../content/phase-arcade.ts";
 import { staticPagePaths } from "../lib/site-routes.ts";
 
+import { forgefieldLaunch, forgefieldCampaign } from "../content/forgefield.ts";
+
 const require = createRequire(import.meta.url);
 const root = path.resolve("out");
 // Windows exports nest segment files; Vercel's Linux build flattens these URLs.
@@ -76,6 +78,29 @@ try {
       assert.equal(response.status(), 200, route);
       assert.equal(await page.locator("h1").count(), 1, route);
       assert.equal(await page.locator("main").count(), 1, route);
+      if (["/", "/products", "/projects/forgefield"].includes(route)) {
+        const steamLinks = page.locator("a.forgefield-steam-cta");
+        assert.equal(await steamLinks.count(), route === "/products" ? 1 : 2, route + ": wishlist entry points");
+        for (const link of await steamLinks.all()) {
+          assert.equal(await link.getAttribute("href"), forgefieldLaunch.steamUrl);
+          assert.equal((await link.textContent()).trim(), forgefieldCampaign.ctaLabel);
+          assert.equal(await link.getAttribute("rel"), "noopener noreferrer");
+          assert.ok((await link.boundingBox()).height >= 44, "Steam touch target");
+          await link.focus();
+          assert.notEqual(await link.evaluate(el => getComputedStyle(el).outlineStyle), "none");
+        }
+        await page.evaluate(() => scrollTo(0, 0));
+        if (route !== "/products") {
+          const first = await steamLinks.first().boundingBox();
+          assert.ok(first.y + first.height <= 900, route + ": first-screen Steam CTA");
+        }
+        // Exercise navigation with a local route stub; never change a user's Steam wishlist.
+        await page.route(forgefieldLaunch.steamUrl, route => route.fulfill({ status: 200, contentType: "text/html", body: "<!doctype html><title>Steam destination check</title>" }));
+        await steamLinks.first().click();
+        await page.waitForURL(forgefieldLaunch.steamUrl);
+        await page.unroute(forgefieldLaunch.steamUrl);
+        await page.goto(base + route, { waitUntil: "networkidle" });
+      }
       if (route === "/" || route === "/products") {
         assert.deepEqual(
           await page.locator(".forgefield-showcase").evaluateAll(elements => elements.map(element => element.dataset.productSlug)),
@@ -180,13 +205,15 @@ try {
       if (route === "/") {
         const announcement = await mediaPage.locator(".forgefield-hero-launch time").boundingBox();
         assert.ok(announcement.y + announcement.height <= 600, "Home release date visible in initial short viewport");
+        const steamAction = await mediaPage.locator(".v2-hero .forgefield-steam-cta").boundingBox();
+        assert.ok(steamAction.y + steamAction.height <= 600, "Home Steam CTA visible in initial short viewport");
       }
       const launch = mediaPage.locator(".forgefield-launch");
       assert.equal(await launch.count(), 1);
-      assert.match(await launch.innerText(), /October 14, 2026/);
+      assert.match(await launch.innerText(), /October 19, 2026/);
       assert.match(await launch.innerText(), /\$4\.99/);
       const date = launch.locator("time");
-      assert.equal(await date.getAttribute("datetime"), "2026-10-14");
+      assert.equal(await date.getAttribute("datetime"), "2026-10-19");
       assert.ok(await date.evaluate(el => parseFloat(getComputedStyle(el).fontSize) >= 30), "Prominent release date");
       const action = launch.getByRole("link").first();
       assert.ok((await action.boundingBox()).height >= 44, "Launch action touch target");
@@ -212,9 +239,9 @@ try {
       }
       assert.ok(await mediaPage.getByRole("link", { name: "Services", exact: true }).first().isVisible(), "Services stays discoverable on short displays");
       if (route === "/projects/forgefield") {
-        await mediaPage.getByRole("link", { name: "Release Status", exact: true }).click();
-        await mediaPage.waitForURL(base + route + "#availability-title");
-        assert.ok(await mediaPage.locator("#availability-title").isVisible());
+        assert.equal(await mediaPage.locator(".forgefield-world-index li").count(), 9);
+        await mediaPage.locator(".forgefield-availability").scrollIntoViewIfNeeded();
+        assert.ok(await mediaPage.locator(".forgefield-availability .forgefield-steam-cta").isVisible());
       }
     }
     await mediaPage.close();
@@ -311,7 +338,7 @@ try {
   });
   await noGraphics.goto(base + "/");
   await noGraphics.waitForFunction(() => document.querySelector(".fortran-flow-hero")?.dataset.heroMode === "fallback");
-  assert.match(await noGraphics.locator("h1").innerText(), /complex systems/);
+  assert.match(await noGraphics.locator("h1").innerText(), /FORGEFIELD/);
   const noJS = await browser.newPage({ javaScriptEnabled: false });
   await noJS.goto(base + "/services");
   assert.match(await noJS.locator("h1").innerText(), /Custom software/);

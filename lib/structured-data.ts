@@ -91,7 +91,8 @@ export function projectJsonLd(project: Project) {
       applicationCategory: "EntertainmentApplication",
       operatingSystem: project.platforms.join(", "),
       releaseDate: project.launch.releaseDate,
-      ...(steamUrl
+      ...(steamUrl ? { sameAs: steamUrl } : {}),
+      ...(steamUrl && project.launch.state === "released"
         ? {
             offers: {
               "@type": "Offer",

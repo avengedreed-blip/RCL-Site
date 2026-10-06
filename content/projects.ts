@@ -2,7 +2,7 @@ import {
   forgefieldLaunch,
   forgefieldLaunchSummary,
   forgefieldWorlds,
-  formatLaunchDate,
+  getLaunchCampaign,
   type ProductLaunch,
 } from "./forgefield.ts";
 
@@ -20,6 +20,7 @@ export type ProjectStatus =
   | "archived";
 
 export type RoadmapGroup =
+  | "released"
   | "coming-soon"
   | "active-development"
   | "planned"
@@ -139,9 +140,11 @@ export const projects: Project[] = [
   {
     name: "Forgefield",
     slug: "forgefield",
-    status: "scheduled",
+    status:
+      forgefieldLaunch.state === "released" ? "public-release" : "scheduled",
     launch: forgefieldLaunch,
-    roadmapGroup: "coming-soon",
+    roadmapGroup:
+      forgefieldLaunch.state === "released" ? "released" : "coming-soon",
     category: "software",
     categoryLabel: "Real-Time Generative Particle Worlds",
     headline: "Real-time generative particle worlds.",
@@ -822,6 +825,6 @@ export function getStatusLabel(status: ProjectStatus) {
 
 export function getProjectDateLabel(project: Project) {
   return project.launch
-    ? `${project.launch.storefront} Release: ${formatLaunchDate(project.launch)}`
+    ? getLaunchCampaign(project.launch).statusLabel
     : getStatusLabel(project.status);
 }

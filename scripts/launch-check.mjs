@@ -6,16 +6,36 @@ import {
   forgefieldPrice,
   forgefieldWorlds,
   getSteamStoreUrl,
+  getLaunchCampaign,
+  forgefieldCampaign,
 } from "../content/forgefield.ts";
 import { getProject, getProjectDateLabel } from "../content/projects.ts";
 
 const project = getProject("forgefield");
-assert.equal(project.status, "scheduled");
+assert.equal(
+  project.status,
+  forgefieldCampaign.released ? "public-release" : "scheduled",
+);
 assert.equal(project.launch, forgefieldLaunch);
-assert.equal(forgefieldLaunch.releaseDate, "2026-10-14");
+assert.equal(forgefieldLaunch.releaseDate, "2026-10-19");
 assert.equal(forgefieldLaunch.price, 4.99);
 assert.equal(forgefieldLaunch.currency, "USD");
-assert.equal(getProjectDateLabel(project), "Steam Release: October 14, 2026");
+assert.equal(getProjectDateLabel(project), forgefieldCampaign.statusLabel);
+assert.equal(
+  getSteamStoreUrl(forgefieldLaunch),
+  "https://store.steampowered.com/app/5356880/FORGEFIELD/",
+);
+const released = getLaunchCampaign({ ...forgefieldLaunch, state: "released" });
+assert.equal(released.ctaLabel, "Get FORGEFIELD on Steam");
+assert.equal(released.heading, "Available now on Steam");
+assert.doesNotMatch(released.summary, /Coming|Wishlist/);
+const pastButUnreleased = getLaunchCampaign({
+  ...forgefieldLaunch,
+  releaseDate: "2000-01-01",
+  state: "coming-soon",
+});
+assert.equal(pastButUnreleased.released, false);
+assert.equal(pastButUnreleased.ctaLabel, "Wishlist FORGEFIELD on Steam");
 assert.deepEqual(project.platforms, ["Windows 11 x64"]);
 assert.equal(forgefieldWorlds.length, 9);
 assert.ok(forgefieldWorlds.includes("Corona"));
@@ -44,19 +64,30 @@ assert.equal(
 
 for (const route of ["index", "products", "projects/forgefield", "press"]) {
   const html = readFileSync(`out/${route}.html`, "utf8");
-  assert.ok(html.includes(forgefieldReleaseDate), `${route}: release date`);
+  if (route !== "press" || !forgefieldCampaign.released)
+    assert.ok(html.includes(forgefieldReleaseDate), `${route}: release date`);
   assert.ok(html.includes(forgefieldPrice), `${route}: price`);
   assert.doesNotMatch(
     html,
-    /Launching Soon|No release date has been announced|a release date have not|Windows 10\/11|Wishlist on Steam/i,
+    /Launching Soon|No release date has been announced|a release date have not|Windows 10\/11|October 14, 2026|2026-10-14/i,
   );
   if (route !== "press")
     assert.ok(
       html.includes(`dateTime="${forgefieldLaunch.releaseDate}"`),
       `${route}: semantic date`,
     );
-  if (!getSteamStoreUrl(forgefieldLaunch))
-    assert.doesNotMatch(html, /href="https:\/\/store\.steampowered\.com/);
+  if (route !== "press") {
+    assert.ok(
+      html.includes(forgefieldCampaign.ctaLabel),
+      route + ": launch CTA",
+    );
+    assert.ok(
+      html.includes('href="' + getSteamStoreUrl(forgefieldLaunch) + '"'),
+      route + ": canonical Steam URL",
+    );
+  }
+  if (!forgefieldCampaign.released)
+    assert.doesNotMatch(html, /Available now|Get FORGEFIELD on Steam|Buy now/);
 }
 const detail = readFileSync("out/projects/forgefield.html", "utf8");
 const schema = [
@@ -72,18 +103,38 @@ assert.equal(schema.operatingSystem, "Windows 11 x64");
 assert.equal(schema.applicationCategory, "EntertainmentApplication");
 assert.equal(schema.aggregateRating, undefined);
 assert.equal(schema.review, undefined);
-if (!getSteamStoreUrl(forgefieldLaunch))
+assert.equal(schema.sameAs, getSteamStoreUrl(forgefieldLaunch));
+if (!forgefieldCampaign.released)
   assert.equal(
     schema.offers,
     undefined,
-    "No storefront offer before a verified store URL",
+    "No purchase offer before confirmed release",
   );
+if (forgefieldCampaign.released) {
+  assert.equal(schema.offers.price, forgefieldLaunch.price.toFixed(2));
+  assert.equal(schema.offers.priceCurrency, forgefieldLaunch.currency);
+  assert.equal(schema.offers.url, forgefieldLaunch.steamUrl);
+}
 for (const world of forgefieldWorlds) assert.ok(detail.includes(world), world);
 const llms = readFileSync("out/llms.txt", "utf8");
 assert.ok(
-  llms.includes(forgefieldReleaseDate) && llms.includes(forgefieldPrice),
-  "Static discovery copy matches central release data",
+  llms.includes("https://reedcreativelabs.com/projects/forgefield") &&
+    !llms.includes("October 14"),
+  "Discovery copy points to current product availability",
 );
 console.log(
   "Steam launch checks passed: date, price, platforms, worlds, metadata, and store-link gating.",
 );
+
+assert.match(detail, /rel="noopener noreferrer"/);
+assert.match(
+  detail,
+  /rel="canonical" href="https:\/\/reedcreativelabs\.com\/projects\/forgefield"/,
+);
+for (const property of [
+  "og:title",
+  "og:description",
+  "og:image",
+  "twitter:card",
+])
+  assert.ok(detail.includes(property), property);

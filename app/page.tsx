@@ -3,7 +3,9 @@ import {
   forgefieldReleaseDate,
   forgefieldPrice,
   forgefieldLaunchSummary,
+  forgefieldCampaign,
 } from "@/content/forgefield";
+import { ForgefieldSteamLink } from "@/components/ForgefieldSteamLink";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -19,8 +21,8 @@ export const metadata: Metadata = buildMetadata({
   description: `Forgefield: real-time generative particle worlds. ${forgefieldLaunchSummary} From Reed Creative Labs, a software and creative technology studio.`,
   path: "/",
   image: {
-    url: "/og-image.jpg",
-    alt: "Reed Creative Labs social preview with dark, silver, and gold branding.",
+    url: "/images/social/forgefield-2026-09-20.jpg",
+    alt: "Forgefield Eventide: a live-rendered black-hole world from Reed Creative Labs.",
     width: 1200,
     height: 630,
   },
@@ -52,7 +54,7 @@ const capabilities = [
 export default function Home() {
   return (
     <main id="main-content" tabIndex={-1} className="v2-home">
-      <section className="v2-hero">
+      <section className="v2-hero forgefield-campaign-hero">
         <div className="v2-container v2-hero__layout">
           <div className="v2-hero__copy v2-hero__copy--enter">
             <Logo
@@ -60,32 +62,33 @@ export default function Home() {
               imageClassName="v2-hero__logo-image"
               priority
             />
-            <p className="v2-eyebrow">
-              Reed Creative Labs · Software Engineering Studio · South Carolina
+            <p className="v2-eyebrow">RCL flagship · Windows 11</p>
+            <h1>FORGEFIELD</h1>
+            <p className="forgefield-deck">Nine worlds. Your desktop, alive.</p>
+            <p className="v2-hero__body">
+              Real-time animated wallpapers and screensavers for Windows.
+              Procedural worlds, rendered live on your desktop.
             </p>
             <p className="forgefield-hero-launch">
-              <span>Forgefield · Steam release</span>
+              <span>{forgefieldCampaign.dateLabel}</span>
               <time dateTime={forgefieldLaunch.releaseDate}>
                 {forgefieldReleaseDate}
               </time>
               <strong>{forgefieldPrice} USD</strong>
             </p>
-            <h1>Building software that explores complex systems.</h1>
-            <p className="v2-hero__body v2-hero__services-copy">
-              The studio behind Forgefield: real-time generative particle worlds
-              for your desktop. We also build premium websites and focused
-              custom software.
-            </p>
             <div className="v2-action-row">
-              <ButtonLink href="#featured-products">
-                Explore Forgefield
-              </ButtonLink>
-              <ButtonLink href="/services" variant="secondary">
-                View Services
+              <ForgefieldSteamLink />
+              <ButtonLink
+                href="/projects/forgefield"
+                variant="ghost"
+                prefetch={false}
+              >
+                Explore the Worlds
               </ButtonLink>
             </div>
             <p className="v2-hero__principle">
-              Runtime simulation, not pre-rendered media.
+              Original software from RCL.{" "}
+              <Link href="/services">Explore studio services</Link>.
             </p>
           </div>
           <FortranFlowHero />

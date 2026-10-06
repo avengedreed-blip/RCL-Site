@@ -1,12 +1,12 @@
+import { ForgefieldSteamLink } from "@/components/ForgefieldSteamLink";
 import { ForgefieldLaunch } from "@/components/ForgefieldLaunch";
 import {
   forgefieldLaunch,
   forgefieldReleaseDate,
   forgefieldPrice,
   forgefieldWorlds,
-  getSteamStoreUrl,
+  forgefieldCampaign,
 } from "@/content/forgefield";
-import { ButtonLink } from "@/components/ButtonLink";
 import { ForgefieldCapture } from "@/components/ForgefieldShowcase";
 import { StructuredData } from "@/components/StructuredData";
 import { TechnicalProfile } from "@/components/TechnicalProfile";
@@ -28,27 +28,17 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
         <p className="v2-eyebrow">RCL flagship · Windows 11</p>
         <h1>Forgefield</h1>
         <div className="forgefield-opening__summary">
-          <p className="forgefield-deck">
-            Real-time generative particle worlds.
-          </p>
+          <p className="forgefield-deck">Your desktop, alive.</p>
           <p>
-            Millions of particles form a living universe on your desktop. Nine
-            procedural worlds, generated live on your GPU, for wallpaper and
-            screensaver playback.
+            Nine distinct procedural worlds for Windows wallpapers and
+            screensavers. Simulated and rendered in real time, not prerecorded
+            video.
           </p>
         </div>
         <ForgefieldLaunch productPage />
       </header>
       <div className="forgefield-wide">
         <ForgefieldCapture image={eventide} priority />
-      </div>
-      <div className="v2-container forgefield-opening__actions">
-        <p>A desktop simulation and screensaver. Launching on Steam.</p>
-        <div className="v2-action-row">
-          <ButtonLink href="#availability-title" variant="secondary">
-            Release Status
-          </ButtonLink>
-        </div>
       </div>
       <section
         className="v2-container forgefield-world-study"
@@ -129,10 +119,10 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
             <p>
               Fortran coordinates the scene lifecycle; OpenGL compute and
               rendering shaders produce the imagery. The native launcher
-              connects those worlds to the Windows desktop. Particle counts vary
-              by world and quality preset; Eventide’s highest preset uses two
-              million particles. This is a simulation scale, not a frame-rate
-              guarantee.
+              connects those worlds to the Windows desktop. Particle-heavy GPU
+              worlds evolve during playback; their scale varies by world and
+              quality preset. Normal wallpaper and screensaver playback runs
+              locally, offline.
             </p>
           </div>
           <TechnicalProfile
@@ -147,27 +137,21 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
       >
         <div>
           <p className="v2-eyebrow">Windows 11 x64 · OpenGL 4.6</p>
-          <h2 id="availability-title">Coming to Steam.</h2>
+          <h2 id="availability-title">{forgefieldCampaign.heading}.</h2>
         </div>
         <div>
           <p>
-            Scheduled for{" "}
+            {forgefieldCampaign.released ? "Released " : "Planned launch: "}
             <time dateTime={forgefieldLaunch.releaseDate}>
               {forgefieldReleaseDate}
-            </time>{" "}
-            at {forgefieldPrice} USD.
-            {getSteamStoreUrl(forgefieldLaunch)
-              ? " Visit the Steam page for store details."
-              : " The Steam store link will be added here when it is available."}
+            </time>
+            {" · "}
+            {forgefieldPrice} USD.
+            {forgefieldCampaign.released
+              ? " Explore all nine worlds on Steam."
+              : " Add FORGEFIELD to your Steam wishlist today."}
           </p>
-          <ButtonLink
-            href={getSteamStoreUrl(forgefieldLaunch) ?? "/contact"}
-            variant="contact"
-          >
-            {getSteamStoreUrl(forgefieldLaunch)
-              ? "View on Steam"
-              : "Ask About Forgefield"}
-          </ButtonLink>
+          <ForgefieldSteamLink />
         </div>
       </section>
     </main>

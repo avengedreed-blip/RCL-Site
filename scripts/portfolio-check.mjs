@@ -184,7 +184,7 @@ for (const prohibited of [
 const forgefield = getProject("forgefield");
 if (
   !forgefield ||
-  forgefield.status !== "scheduled" ||
+  forgefield.status !== (forgefield.launch.state === "released" ? "public-release" : "scheduled") ||
   forgefield.presentationTier !== "flagship" ||
   forgefield.showcaseMedia?.kind !== "approved-image" ||
   forgefield.showcaseMedia.src !==
@@ -463,7 +463,7 @@ for (const project of projects) {
 
   if (
     expectedFeatured.includes(project.slug) &&
-    !html.includes("Release Status")
+    !html.includes(project.slug === "forgefield" ? 'id="availability-title"' : "Release Status")
   ) {
     fail(
       `Featured product page is missing its project status section: ${project.route}`,
@@ -655,7 +655,7 @@ for (const screenshot of expectedCaptures) {
 const pressPage = readFileSync(routeFile("/press"), "utf8");
 const discovery = readFileSync(join(root, "public", "llms.txt"), "utf8");
 for (const [slug, status] of [
-  ["forgefield", "October 14"],
+  ["forgefield", forgefield.launch.state === "released" ? "Available now" : "October 19"],
   ["phase-arcade-volume-1", "Archived"],
   ["project-load-bearing", "Archived"],
   ["static-drift", "Archived"],
