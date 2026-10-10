@@ -9,22 +9,20 @@ emits inline bootstrap scripts and inline style behavior. The policy does not
 allow eval-based script execution, third-party script domains, tracking pixels,
 advertising cookies, or external analytics origins.
 
-The production build is configured with only the official
-`@vercel/speed-insights` package. Vercel injects its script and intake routes
-through randomized same-origin paths, so the existing same-origin script and
-connection policy remains sufficient. The component is omitted unless
-`VERCEL_ENV` is `production`.
+Production uses the official `@vercel/speed-insights` and `@vercel/analytics`
+packages. Both are gated on `VERCEL_ENV=production` and use same-origin Vercel
+script/intake paths, without widening the Content Security Policy.
 
-The telemetry filter allows only canonical, published page paths, strips queries
-and fragments, and drops unknown or credential-bearing URLs. Do Not Track and
-Global Privacy Control suppress performance records.
+Filters allow only canonical published page URLs, strip queries and fragments,
+and reject unknown, foreign-origin or credential-bearing URLs. Do Not Track and
+Global Privacy Control suppress records. Web Analytics rejects custom events.
 
-Vercel Web Analytics is intentionally not installed. It creates a daily visitor
-hash and groups page views into sessions, which does not meet the studio's
-stricter no-fingerprinting standard. Custom analytics events, advertising
-analytics, session recording, heatmaps, and cross-site tracking remain
-prohibited. Any expansion beyond anonymous aggregate performance metrics
-requires a new privacy, legal, security, and data-minimization review.
+On October 9, 2026, the owner approved Vercel's daily visitor hash and technical
+metadata for aggregate visits and popular-page reporting. This replaces the
+previous no-fingerprinting requirement specifically for Vercel Web Analytics.
+Advertising, session replay, heatmaps, custom click tracking, and cross-site
+profiles remain excluded. Provider-side hashing and metadata collection are not
+removed by the URL filter; see `/privacy` for disclosure.
 
 Public vulnerability-reporting guidance is available at `/security`, with a
 machine-readable contact at `/.well-known/security.txt`. The security.txt

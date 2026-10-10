@@ -48,3 +48,14 @@ jobs:
 
       - name: Browser and accessibility regression checks
         run: npm run check:browser
+
+      - name: Analytics excluded outside production
+        run: npm run check:analytics-browser
+
+      - name: Build production analytics boundary
+        run: npm run build
+        env:
+          VERCEL_ENV: production
+
+      - name: Analytics privacy browser checks
+        run: npm run check:analytics-browser -- --production

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { sanitizePerformanceEvent } from "../lib/privacy-metrics.ts";
+import { sanitizePerformanceEvent, sanitizeAnalyticsEvent } from "../lib/privacy-metrics.ts";
 import { staticPagePaths } from "../lib/site-routes.ts";
 import { projects } from "../content/projects.ts";
 
@@ -12,6 +12,13 @@ for (const route of paths) {
   assert.equal(result.url, origin + route);
   assert.equal(result.route, route);
   assert.ok(event.url.includes("?"), "Filtering must not mutate the SDK event");
+  const pageview = { ...event, type: "pageview", email: "private@example.com" };
+  assert.deepEqual(sanitizeAnalyticsEvent(pageview, paths, origin), {
+    type: "pageview", url: origin + route,
+  }, "Only the clean URL and pageview type may leave the analytics filter");
+  assert.equal(sanitizeAnalyticsEvent(pageview, paths, origin, { doNotTrack: "1" }), null);
+  assert.equal(sanitizeAnalyticsEvent(pageview, paths, origin, { globalPrivacyControl: true }), null);
+  assert.equal(sanitizeAnalyticsEvent({ ...pageview, type: "event" }, paths, origin), null);
 }
 for (const url of [
   "not-a-url",
@@ -23,6 +30,7 @@ for (const url of [
   "http://reedcreativelabs.com/contact",
 ]) {
   assert.equal(sanitizePerformanceEvent({ url }, paths, origin), null);
+  assert.equal(sanitizeAnalyticsEvent({ type: "pageview", url }, paths, origin), null);
 }
 const llms = readFileSync(new URL("../public/llms.txt", import.meta.url), "utf8").replace(/\r\n/g, "\n");
 assert.ok(llms.startsWith("# Reed Creative Labs\n"));

@@ -29,10 +29,13 @@ only when `VERCEL_ENV=production`. Enable Speed Insights for the Vercel project
 before deployment so Vercel provisions its randomized same-origin script and
 intake routes.
 
-Do not enable Vercel Web Analytics for this project. Its daily visitor hash and
-session grouping do not meet the studio's no-fingerprinting requirement. Do not
-add custom events, advertising trackers, session recording, heatmaps, or other
-visitor profiling without a new explicit privacy and legal decision.
+Enable Web Analytics for `rcl-site` in the Reed Creative Labs Vercel team. The
+owner approved basic aggregate traffic analytics on October 9, 2026, including
+Vercel's daily visitor hash and technical metadata. The production-only SDK
+reports published page URLs with queries/fragments removed, rejects custom
+events, and honors DNT/GPC. Do not add custom events, advertising trackers,
+session recording, heatmaps, or cross-site profiles. Verify the dashboard
+service is enabled and production page-view intake succeeds after deployment.
 
 The public disclosure is maintained in `/privacy`; the technical decision and
 data inventory are in

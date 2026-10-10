@@ -15,11 +15,6 @@ const expectedFiles = [
 ];
 
 const forbiddenEverywhere = [
-  {
-    pattern: ["@vercel", "analytics"].join("/"),
-    label: "Vercel Analytics package",
-  },
-  { pattern: "<" + "Analytics", label: "Analytics component" },
   { pattern: "googletagmanager.com", label: "Google Tag Manager" },
   { pattern: "google-analytics.com", label: "Google Analytics" },
   { pattern: "connect.facebook.net", label: "Meta tracking script" },
@@ -37,6 +32,8 @@ const guardedSourceFiles = [
   "components/SiteFooter.tsx",
   "components/ProductionSpeedInsights.tsx",
   "components/PrivacySpeedInsights.tsx",
+  "components/ProductionAnalytics.tsx",
+  "components/PrivacyAnalytics.tsx",
   "package.json",
   "vercel.json",
 ];
@@ -56,8 +53,8 @@ const packageJson = JSON.parse(
 if (!packageJson.dependencies?.["@vercel/speed-insights"]) {
   throw new Error("Official Vercel Speed Insights dependency is missing");
 }
-if (packageJson.dependencies?.["@vercel/analytics"]) {
-  throw new Error("Vercel Web Analytics must remain uninstalled");
+if (!packageJson.dependencies?.["@vercel/analytics"]) {
+  throw new Error("Official Vercel Web Analytics dependency is missing");
 }
 
 const insightsSource = readFileSync(
@@ -167,21 +164,13 @@ if (!homepage.includes("Reed Creative Labs")) {
   throw new Error("Homepage is missing the Reed Creative Labs identity");
 }
 
-const builtText = [
-  "out/index.html",
-  "out/contact.html",
-  "out/press.html",
-  "out/privacy.html",
-  "out/terms.html",
-]
-  .map((file) => readFileSync(join(root, file), "utf8"))
-  .join("\n");
-
-if (
-  builtText.includes(["@vercel", "analytics"].join("/")) ||
-  builtText.includes("<" + "Analytics")
-) {
-  throw new Error("Analytics reference found in build output");
+const analyticsSource = readFileSync(join(root, "components/ProductionAnalytics.tsx"), "utf8");
+if (!analyticsSource.includes('process.env.VERCEL_ENV !== "production"') ||
+    !layoutSource.includes("<ProductionAnalytics />")) {
+  throw new Error("Web Analytics production boundary is missing");
 }
-
+const analyticsPrivacy = readFileSync(join(root, "components/PrivacyAnalytics.tsx"), "utf8");
+for (const required of ["@vercel/analytics/next", "beforeSend", "sanitizeAnalyticsEvent", "doNotTrack", "globalPrivacyControl"]) {
+  if (!analyticsPrivacy.includes(required)) throw new Error("Web Analytics privacy boundary is missing " + required);
+}
 console.log("Smoke checks passed.");

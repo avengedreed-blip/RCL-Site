@@ -15,6 +15,7 @@ their own review.
 | React | 19.2.6 | MIT | https://react.dev |
 | React DOM | 19.2.6 | MIT | https://react.dev |
 | Lucide React | 1.17.0 | ISC | https://lucide.dev |
+| Vercel Web Analytics (added October 9, 2026) | 2.0.1 | MIT | https://github.com/vercel/analytics |
 
 ## Build and development dependencies
 

@@ -1,31 +1,40 @@
 # Privacy Analytics and LLM Discoverability
 
-Last reviewed: September 5, 2026
+Last reviewed: October 9, 2026
 
 ## Decision
 
-Reed Creative Labs enables Vercel Speed Insights only on production deployments.
-Vercel Web Analytics is intentionally excluded.
+On October 9, 2026, the owner approved Vercel Web Analytics after reviewing its
+daily visitor hash and technical metadata. This supersedes the earlier decision
+to exclude it. Production now includes the official Web Analytics and Speed
+Insights integrations. Local development and preview deployments omit both.
 
-This is a data-minimization decision, not a claim that every product described as
-privacy-friendly is interchangeable. The studio's public standard prohibits
-fingerprinting, advertising tracking, cross-site tracking, behavioral profiles,
-and unnecessary visitor-level data.
+Web Analytics is limited to aggregate visitor totals, page views, and popular
+pages. There are no custom click events, advertising trackers, replay, heatmaps,
+cross-site profiles, or application-supplied personal identifiers.
 
-## Ethics Assessment
+## Web Analytics Data Inventory and Limits
 
-| Capability | Decision | Reason |
-| --- | --- | --- |
-| Vercel Web Analytics | Rejected | It identifies a daily visitor with a hash created from incoming request data and groups page views into sessions. That mechanism is privacy-oriented compared with advertising analytics, but it does not meet RCL's stricter no-fingerprinting rule. |
-| Vercel Speed Insights | Approved with boundaries | Vercel states that performance records are anonymous, are not tied to an individual visitor or IP address, and cannot reconstruct a browsing session. The data is used to aggregate Web Vitals. |
-| Custom analytics events | Prohibited | They are unnecessary for the stated performance objective and could create behavioral measurement. |
-| Cookies or browser storage | Prohibited | The approved integration does not require RCL to set analytics cookies or write analytics identifiers to local or session storage. |
-| Advertising and session-replay tools | Prohibited | They conflict directly with the studio's public privacy position. |
+Vercel documents a request-derived visitor hash that resets daily, with the
+visitor session discarded after 24 hours. This does not mean aggregate records
+are deleted after 24 hours. Its data points may include event time, URL, dynamic
+path, referrer, filtered query parameters, approximate geolocation, browser and
+OS versions, device type, and SDK version. RCL strips page URL queries/fragments,
+allows only published paths, and rejects custom events. Provider-derived
+metadata and hashing are not removed by that filter. This is not zero-data
+collection or a promise of no fingerprinting.
 
-The closest privacy-preserving alternative to Web Analytics is aggregate
-server/CDN request counts already available to the hosting operator, reviewed
-only when operationally necessary. This repository does not add a visitor
-analytics script for traffic, referrer, demographic, or conversion reporting.
+`components/ProductionAnalytics.tsx` gates the integration.
+`components/PrivacyAnalytics.tsx` uses the official Next.js SDK and
+`sanitizeAnalyticsEvent` in `lib/privacy-metrics.ts`. Only clean page-view events
+are returned. Unknown, foreign-origin and credential-bearing URLs are dropped.
+DNT and GPC suppress records; scripts may still load and normal hosting data is
+still processed. Failure or blocking of analytics does not affect navigation.
+
+The SDK uses same-origin Vercel intake, retaining the existing CSP. No database,
+custom collector, analytics cookies, or application-written browser identifiers
+are introduced. Aggregate page popularity indicates interest in pages; it does
+not measure social-button clicks or prove purchase intent.
 
 ## Speed Insights Data Inventory
 
@@ -81,11 +90,12 @@ or product functionality.
 ## Operations
 
 1. Enable Speed Insights for the production project in the Vercel dashboard.
-2. Do not enable Web Analytics.
+2. Enable Web Analytics for the same project, within the existing plan.
 3. Deploy through the normal Vercel Git integration.
 4. Confirm the production document requests a randomized same-origin Speed
    Insights script and sends Web Vitals to its same-origin intake route.
-5. Confirm development and preview environments do not request the script.
+5. Confirm Web Analytics page-view intake succeeds and the dashboard shows data.
+   Confirm development and preview environments do not request either script.
 6. Re-review this decision if Vercel changes its collected fields, identifier
    behavior, retention, subprocessors, or intake architecture.
 
@@ -99,6 +109,22 @@ rendered /privacy page. `README.md`, `SECURITY.md`, and `DEPLOYMENT_NOTES.md` do
 the engineering and operational boundaries.
 
 ## Local Verification
+
+October 9: production and preview builds passed. The Web Analytics browser
+check verified SDK initialization, the registered beforeSend filter, clean
+published URLs, rejection of unknown pages/custom events, DNT/GPC suppression,
+and no app-written cookies/local/session storage. The preview build requested
+no Web Analytics script. Provider scripts were stubbed, so these checks do not
+prove Vercel collector or dashboard activation. Repeat with:
+
+- `npm run check:privacy`
+- `VERCEL_ENV=production npm run build`, then `npm run check:analytics-browser -- --production`
+- `VERCEL_ENV=preview npm run build`, then `npm run check:analytics-browser`
+
+Set environment variables using the syntax for your shell. On Windows, set
+`RCL_BROWSER_CHANNEL=msedge` if using installed Edge instead of bundled Chromium.
+CI runs both browser checks with the downloaded Chromium runtime.
+
 
 The September 5 quality pass built both the normal export and a local
 `VERCEL_ENV=production` export. The normal build made no Speed Insights script

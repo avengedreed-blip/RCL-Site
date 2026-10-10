@@ -63,25 +63,22 @@ see `docs/SITE_QUALITY_AUDIT.md` for the verified scope and limitations.
 The production output is static. Do not use `next start` to serve the export;
 use `npm run dev` for local review or the normal Vercel deployment for hosting.
 
-## Privacy-Preserving Performance Measurement
+## Privacy and Analytics
 
-The production deployment is configured to use the official
-`@vercel/speed-insights` integration for anonymous aggregate Web Vitals. The
-component is omitted unless `VERCEL_ENV=production`, so local development and
-preview deployments do not initialize it.
+Production uses official `@vercel/speed-insights` for aggregate Web Vitals and
+`@vercel/analytics` for visitor totals, page views, and popular pages. Both are
+omitted unless `VERCEL_ENV=production`.
 
-Reed Creative Labs does not use Vercel Web Analytics. That product creates a
-daily visitor hash and groups page views into sessions, which does not satisfy
-the studio's stricter no-fingerprinting standard. Query strings and URL
-fragments are removed before metrics are sent. No custom analytics events,
-advertising trackers, cookies, session recording, heatmaps, or cross-site
-profiles are used.
+The owner approved Vercel Web Analytics on October 9, 2026, including its daily
+visitor hash and technical metadata. This supersedes the earlier rejection of
+that mechanism; it is not zero-data collection. No analytics cookies, custom
+click events, advertising, session replay, or cross-site profiles are added.
+Only published page URLs are reported, with queries and fragments removed.
+Do Not Track and Global Privacy Control suppress records. Provider script
+requests and normal hosting processing still occur.
 
-Only published page paths are eligible for performance records. Unknown URLs
-are dropped, and Do Not Track or Global Privacy Control suppresses records.
-
-The implementation decision, data inventory, and operating boundaries are
-documented in [Privacy Analytics and LLM Discoverability](docs/PRIVACY_ANALYTICS_AND_LLM_DISCOVERABILITY.md).
+See [Privacy Analytics and LLM Discoverability](docs/PRIVACY_ANALYTICS_AND_LLM_DISCOVERABILITY.md)
+for the data inventory, verification boundaries, and operating instructions.
 
 ## LLM Discoverability
 
@@ -98,4 +95,4 @@ Deploy on Vercel as a Next.js project. The production domain is:
 reedcreativelabs.com
 ```
 
-Speed Insights must also be enabled for the project in the Vercel dashboard. The repository does not enable Vercel Web Analytics.
+Enable Speed Insights and Web Analytics for the project in the Vercel dashboard. Code installation alone does not enable either dashboard service.

@@ -14,6 +14,7 @@
     "check:commercial": "node scripts/commercial-check.mjs",
     "check:trust": "node scripts/trust-check.mjs",
     "check:privacy": "node --no-warnings --experimental-strip-types scripts/privacy-check.mjs",
+    "check:analytics-browser": "node scripts/analytics-browser-check.mjs",
     "check:browser": "node --no-warnings --experimental-strip-types scripts/browser-check.mjs",
     "start": "next start",
     "lint": "eslint .",
@@ -21,6 +22,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "lucide-react": "1.17.0",
     "next": "16.2.12",

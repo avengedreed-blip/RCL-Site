@@ -130,8 +130,10 @@ for (const phrase of [
   "Vercel",
   "Cookies, storage, and analytics",
   "Vercel Speed Insights",
-  "does not use Vercel Web Analytics",
-  "no-fingerprinting standard",
+  "Vercel Web Analytics",
+  "daily visitor hash",
+  "24 hours",
+  "not zero-data collection",
   "Children and families",
   "separately distributed products",
 ]) {
