@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
+import { ButtonLink } from "@/components/ButtonLink";
 import { studioEmail, studioEmailHref } from "@/content/contact";
 
 const studioLinks = [
@@ -69,6 +70,14 @@ export function SiteFooter() {
           >
             {studioEmail}
           </a>
+          <nav className="footer-shell__social" aria-label="Follow Reed Creative Labs">
+            <ButtonLink href="https://www.tiktok.com/@reedcreativelabs" variant="secondary">
+              TikTok
+            </ButtonLink>
+            <ButtonLink href="https://www.facebook.com/profile.php?id=61593075719365" variant="secondary">
+              Facebook
+            </ButtonLink>
+          </nav>
         </div>
       </div>
       <div className="v2-container footer-shell__base">

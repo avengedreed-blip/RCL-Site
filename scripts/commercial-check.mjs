@@ -112,14 +112,19 @@ for (const prohibitedReference of [
   }
 }
 
+// Owner-confirmed profiles may appear; keep rejecting unverified accounts.
+const bundleWithoutVerifiedProfiles = publicBundle
+  .replaceAll("https://www.tiktok.com/@reedcreativelabs", "")
+  .replaceAll("https://www.facebook.com/profile.php?id=61593075719365", "");
 for (const unverifiedProfile of [
   "linkedin.com/",
   "facebook.com/",
+  "tiktok.com/",
   "instagram.com/",
   "x.com/",
   "twitter.com/",
 ]) {
-  if (publicBundle.includes(unverifiedProfile)) {
+  if (bundleWithoutVerifiedProfiles.includes(unverifiedProfile)) {
     fail(`Public bundle contains an unverified social profile: ${unverifiedProfile}`);
   }
 }
