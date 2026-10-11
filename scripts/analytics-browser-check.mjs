@@ -39,7 +39,9 @@ try {
       scripts.push(new URL(route.request().url()).pathname);
       return route.fulfill({ contentType: "text/javascript", body: "/* Provider stub; telemetry disabled. */" });
     });
-    await page.goto(base, { waitUntil: "networkidle" });
+    // Analytics lives in the shared layout; use a static route so this check
+    // does not depend on the homepage graphics workload on CI runners.
+    await page.goto(base + "/contact", { waitUntil: "networkidle" });
     assert.equal(scripts.includes("/_vercel/insights/script.js"), expected);
     if (expected) {
       const result = await page.evaluate(() => {

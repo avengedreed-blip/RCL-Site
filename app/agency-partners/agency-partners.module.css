@@ -83,7 +83,7 @@
   .service > div { grid-column: 2; }
   .models { grid-template-columns: 1fr; gap: 1.5rem; }
   .models h3 { margin-top: 0.5rem; }
-  .contextCta { align-items: flex-start; flex-direction: column; gap: 0; }
+  .contextCta { align-items: flex-start; flex-direction: column; gap: 0.5rem; }
   .closing > div:last-child { justify-self: start; }
 }
 @media (max-width: 399px) {

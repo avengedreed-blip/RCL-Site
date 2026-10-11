@@ -2072,6 +2072,27 @@ a {
   border-top: 1px solid var(--v2-hairline);
 }
 
+.v2-capabilities > .v2-section-intro {
+  align-content: start;
+}
+
+.v2-capabilities__partner {
+  display: grid;
+  justify-items: start;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.v2-capabilities__partner p {
+  color: var(--v2-copy);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.v2-capabilities__partner .text-link {
+  margin-top: 0;
+}
+
 .v2-capability-row {
   display: grid;
   grid-template-columns: 48px minmax(150px, 0.7fr) minmax(0, 1fr);
