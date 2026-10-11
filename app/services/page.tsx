@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
+import { AgencyPartnershipCallout } from "@/components/AgencyPartnershipCallout";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { buildMetadata } from "@/lib/seo";
@@ -219,6 +220,8 @@ export default function ServicesPage() {
         body="Reed Creative Labs works with small businesses, independent professionals, creators, and organizations on focused digital projects that need clear design, maintainable engineering, and direct technical communication."
       />
 
+      <AgencyPartnershipCallout />
+
       <section className="v2-container v2-services-intro">
         <Reveal className="v2-services-intro__layout">
           <p className="v2-eyebrow">Internal RCL project</p>
@@ -348,7 +351,7 @@ export default function ServicesPage() {
           </h2>
           <p>
             RCL is a small independent studio. Clients work directly with the
-            people designing and building the project.
+            founder responsible for designing and building the project.
           </p>
         </Reveal>
         <div className="v2-services-fit__layout">

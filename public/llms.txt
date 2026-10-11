@@ -23,6 +23,7 @@ The public website is a static Next.js App Router application built with React a
 ## Services
 
 - [Studio Services](https://reedcreativelabs.com/services): Premium websites and focused custom software for small businesses, organizations, professionals, and independent creators.
+- [Agency Partnerships](https://reedcreativelabs.com/agency-partners): White-label web development, design implementation, and project-based technical collaboration for creative agencies and design studios, directly with the founder.
 
 ## Studio
 
@@ -33,7 +34,7 @@ The public website is a static Next.js App Router application built with React a
 
 ## Policies
 
-- [Privacy Policy](https://reedcreativelabs.com/privacy): Current website data practices, including production-only anonymous aggregate Web Vitals through Vercel Speed Insights and the explicit exclusion of visitor analytics and fingerprinting.
+- [Privacy Policy](https://reedcreativelabs.com/privacy): Current website data practices, including production-only Vercel Speed Insights and basic Vercel Web Analytics with a daily visitor hash, URL filtering, and browser privacy-signal handling.
 - [Website Terms](https://reedcreativelabs.com/terms): Terms for the public informational website.
 - [Accessibility](https://reedcreativelabs.com/accessibility): Accessibility approach, limitations, and feedback path.
 - [Security](https://reedcreativelabs.com/security): Security posture and vulnerability-reporting guidance.

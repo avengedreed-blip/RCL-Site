@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CopyEmailButton } from "@/components/CopyEmailButton";
+import { AgencyPartnershipCallout } from "@/components/AgencyPartnershipCallout";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { studioEmail, studioEmailHref } from "@/content/contact";
@@ -8,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
   description:
-    "Discuss a website or custom software project with Reed Creative Labs, or contact the studio for product, press, accessibility, and security inquiries.",
+    "Discuss a website, custom software project, or agency development partnership with Reed Creative Labs. Direct contact with the studio.",
   path: "/contact",
   image: {
     url: "/social-preview.jpg",
@@ -76,6 +77,8 @@ export default function ContactPage() {
           </ul>
         </Reveal>
       </section>
+
+      <AgencyPartnershipCallout inquiry />
 
       <section className="v2-section-band" aria-labelledby="contact-paths-title">
         <div className="v2-container v2-contact-paths">

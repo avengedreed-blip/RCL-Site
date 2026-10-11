@@ -127,6 +127,9 @@ export default function Home() {
               Explore studio services
               <ArrowRight aria-hidden="true" />
             </Link>
+            <p>
+              Building for a client? <Link className="text-link" href="/agency-partners">Explore agency partnerships</Link>
+            </p>
           </Reveal>
           <div className="v2-capabilities__list">
             {capabilities.map((capability, index) => (

@@ -1,0 +1,8 @@
+.section { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2rem 3rem; margin-block: 3rem; padding-block: 2.5rem; border-block: 1px solid var(--v2-hairline); scroll-margin-top: 180px; }
+.copy { max-width: 48rem; }
+.copy h2 { margin-top: 0.8rem; font-family: var(--v2-display-font); font-size: clamp(1.65rem, 2.6vw, 2.25rem); line-height: 1.17; font-weight: 650; letter-spacing: -0.03em; text-wrap: balance; }
+.copy > p:last-child { margin-top: 1rem; color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.7; }
+.action { max-width: 22rem; }
+.action p { margin-top: 0.8rem; color: var(--color-text-muted); font-size: 0.78rem; line-height: 1.6; }
+@media (max-width: 1023px) { .section { grid-template-columns: 1fr; } }
+@media (max-width: 399px) { .action > a { padding-inline: 1rem; font-size: 0.73rem; } }

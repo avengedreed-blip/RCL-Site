@@ -6,6 +6,7 @@ import { studioEmail, studioEmailHref } from "@/content/contact";
 const studioLinks = [
   { href: "/products", label: "Products" },
   { href: "/services", label: "Services" },
+  { href: "/agency-partners", label: "Agency Partnerships" },
   { href: "/about", label: "About" },
   { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },

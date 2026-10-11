@@ -52,6 +52,9 @@ jobs:
       - name: Analytics excluded outside production
         run: npm run check:analytics-browser
 
+      - name: Agency partnership journey and accessibility
+        run: npm run check:agency
+
       - name: Build production analytics boundary
         run: npm run build
         env:
