@@ -236,7 +236,7 @@ export const projects: Project[] = [
     presentationTier: "featured",
     showcaseMedia: {
       kind: "approved-image",
-      src: "/images/projects/phase-breaker-gameplay-01.webp",
+      src: "/images/projects/phase-breaker-2026-10-12.webp",
       alt: "Phase Breaker gameplay from Phase Arcade inside a cyan and magenta containment chamber.",
       caption:
         "Phase Breaker gameplay captured from the current desktop build.",
@@ -467,7 +467,7 @@ export const projects: Project[] = [
     visual: "phase-shift",
     showcaseMedia: {
       kind: "approved-image",
-      src: "/images/projects/phase-shift-gameplay-01.webp",
+      src: "/images/projects/phase-shift-2026-10-12.webp",
       alt: "Phase Shift gameplay with a photon moving through a cyan and magenta tunnel.",
       caption:
         "Real desktop gameplay captured from the current Phase Shift build.",
@@ -502,7 +502,7 @@ export const projects: Project[] = [
     visual: "phase-breaker",
     showcaseMedia: {
       kind: "approved-image",
-      src: "/images/projects/phase-breaker-gameplay-01.webp",
+      src: "/images/projects/phase-breaker-2026-10-12.webp",
       alt: "Phase Breaker gameplay inside a cyan and magenta containment chamber.",
       caption:
         "Real desktop gameplay captured from the current Phase Breaker build.",
@@ -537,7 +537,7 @@ export const projects: Project[] = [
     visual: "phase-court",
     showcaseMedia: {
       kind: "approved-image",
-      src: "/images/projects/phase-court-gameplay-02.webp",
+      src: "/images/projects/phase-court-2026-10-12.webp",
       alt: "Phase Court desktop gameplay showing a cyan player paddle returning the glowing ball across the magenta court.",
       caption:
         "Native desktop gameplay captured from the current Phase Court build.",

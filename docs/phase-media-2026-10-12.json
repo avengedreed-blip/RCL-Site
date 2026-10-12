@@ -1,0 +1,69 @@
+[
+  {
+    "source": "phase_breaker_gameplay_1920x1080.png",
+    "sourceSha256": "00feb930df1fad7bf41729f1a0a70be706dd0ec86269dc4599929058d606986e",
+    "outputs": [
+      {
+        "file": "public/images/projects/phase-breaker-2026-10-12.webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 126978,
+        "sha256": "44d1947e46f858797993e45efda9f32fc7d165904a5e224c28f1b34e1c067813"
+      },
+      {
+        "file": "public/images/social/phase-breaker-2026-10-12.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 120149,
+        "sha256": "b3ecf3aa6b748882285c4f0a92eec9790ec2d344069a1e6f14e2a17be7fe6a9c"
+      },
+      {
+        "file": "public/images/social/phase-arcade-2026-10-12.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 120149,
+        "sha256": "b3ecf3aa6b748882285c4f0a92eec9790ec2d344069a1e6f14e2a17be7fe6a9c"
+      }
+    ]
+  },
+  {
+    "source": "phase_shift_gameplay_1920x1080.png",
+    "sourceSha256": "3880986501b4377972e9c8164ccbb3e7254cc4bd99d9698c6c47252ec301d620",
+    "outputs": [
+      {
+        "file": "public/images/projects/phase-shift-2026-10-12.webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 112546,
+        "sha256": "0c5548c494f3b965f0b7ac1c38c6d9fe47b0fadd55061a190a2d71d550e1d988"
+      },
+      {
+        "file": "public/images/social/phase-shift-2026-10-12.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 77796,
+        "sha256": "2fe3e2394836ccea75c216b8b0d960566487a5eb26ee38b92bb264c1f9b31974"
+      }
+    ]
+  },
+  {
+    "source": "phase_court_gameplay_1920x1080.png",
+    "sourceSha256": "50bc597cd9427921d52e7a1b6cec9744e1e4d6238958ffeb34ae554befe30092",
+    "outputs": [
+      {
+        "file": "public/images/projects/phase-court-2026-10-12.webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 238540,
+        "sha256": "63666add618a4452579ade66ee426f8fa308c3c35ce6e5a79aab1c3adc70c2e3"
+      },
+      {
+        "file": "public/images/social/phase-court-2026-10-12.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 149604,
+        "sha256": "f50a84b6e89525c410db4fab310dadb00577bf5b84ca665c1946279dd8ede72d"
+      }
+    ]
+  }
+]

@@ -84,19 +84,19 @@ const projectScreenshots: Partial<
   ],
   "phase-arcade": [
     {
-      src: "/images/projects/phase-shift-gameplay-01.webp",
+      src: "/images/projects/phase-shift-2026-10-12.webp",
       alt: "Phase Shift gameplay with a photon moving through a cyan and magenta tunnel.",
       caption:
         "Phase Shift — desktop gameplay captured from the current build.",
     },
     {
-      src: "/images/projects/phase-breaker-gameplay-01.webp",
+      src: "/images/projects/phase-breaker-2026-10-12.webp",
       alt: "Phase Breaker gameplay inside a cyan and magenta containment chamber.",
       caption:
         "Phase Breaker — desktop gameplay captured from the current build.",
     },
     {
-      src: "/images/projects/phase-court-gameplay-02.webp",
+      src: "/images/projects/phase-court-2026-10-12.webp",
       alt: "Phase Court desktop gameplay showing a cyan player paddle returning the glowing ball across the magenta court.",
       caption:
         "Phase Court — native desktop gameplay captured from the current build.",
@@ -108,10 +108,10 @@ const projectSocialImages: Record<string, string> = {
   forgefield: "/images/social/forgefield-2026-09-20.jpg",
   "project-load-bearing": "/images/social/project-load-bearing-2026-09.jpg",
   "static-drift": "/images/social/static-drift-2026-09.jpg",
-  "phase-arcade-volume-1": "/images/social/phase-arcade-volume-1.jpg",
-  "phase-shift": "/images/social/phase-shift.jpg",
-  "phase-breaker": "/images/social/phase-breaker.jpg",
-  "phase-court": "/images/social/phase-court.jpg",
+  "phase-arcade-volume-1": "/images/social/phase-arcade-2026-10-12.jpg",
+  "phase-shift": "/images/social/phase-shift-2026-10-12.jpg",
+  "phase-breaker": "/images/social/phase-breaker-2026-10-12.jpg",
+  "phase-court": "/images/social/phase-court-2026-10-12.jpg",
   "phase-arcade-volume-2": "/images/social/phase-arcade-volume-2.jpg",
   "pigs-can-fly": "/images/social/pigs-can-fly.jpg",
 };

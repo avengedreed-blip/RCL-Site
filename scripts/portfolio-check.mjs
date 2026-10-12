@@ -269,7 +269,7 @@ if (phaseArcade.name !== "Phase Arcade" || phaseArcade.status !== "launching-soo
   fail("Phase Arcade must reflect the owner-approved upcoming collection");
 if (
   phaseArcade.showcaseMedia?.src !==
-  "/images/projects/phase-breaker-gameplay-01.webp"
+  "/images/projects/phase-breaker-2026-10-12.webp"
 ) {
   fail("Phase Arcade must retain its approved Phase Breaker showcase");
 }
@@ -703,9 +703,9 @@ for (const required of [
   "Phase Arcade is currently targeting a late-October release on Windows, with Android and iOS versions planned afterward.",
   "Explore the Games",
   "Explore More from Reed Creative Labs",
-  "/images/projects/phase-shift-gameplay-01.webp",
-  "/images/projects/phase-breaker-gameplay-01.webp",
-  "/images/projects/phase-court-gameplay-02.webp",
+  "/images/projects/phase-shift-2026-10-12.webp",
+  "/images/projects/phase-breaker-2026-10-12.webp",
+  "/images/projects/phase-court-2026-10-12.webp",
 ]) {
   if (!phaseArcadePage.includes(required))
     fail(`Phase Arcade page is missing ${required}`);

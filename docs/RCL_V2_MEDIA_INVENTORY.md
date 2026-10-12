@@ -15,9 +15,9 @@ evidence.
 
 | Asset | Product | Source | Authentic | Public use | Alt text | Ownership |
 | --- | --- | --- | --- | --- | --- | --- |
-| `/images/projects/phase-shift-gameplay-01.webp` | Phase Shift / Phase Arcade Volume I | Owner-provided capture from the current desktop build | Yes | Homepage chapter, product pages, gallery, social composition | Phase Shift gameplay with a photon moving through a cyan and magenta tunnel. | Reed Creative Labs |
-| `/images/projects/phase-breaker-gameplay-01.webp` | Phase Breaker / Phase Arcade Volume I | Owner-provided capture from the current desktop build | Yes | Product pages, gallery, social composition | Phase Breaker gameplay inside a cyan and magenta containment chamber. | Reed Creative Labs |
-| `/images/projects/phase-court-gameplay-02.webp` | Phase Court / Phase Arcade Volume I | Native Godot 4.7 capture from the current desktop build | Yes | Product pages, gallery, social composition | Phase Court desktop gameplay showing a cyan player paddle returning the glowing ball across the magenta court. | Reed Creative Labs |
+| `/images/projects/phase-shift-2026-10-12.webp` | Phase Shift / Phase Arcade Volume I | Native Godot 4.7 capture of October 12 candidate production scenes | Yes | Homepage chapter, product pages, gallery, social composition | Phase Shift gameplay with a photon moving through a cyan and magenta tunnel. | Reed Creative Labs |
+| `/images/projects/phase-breaker-2026-10-12.webp` | Phase Breaker / Phase Arcade Volume I | Native Godot 4.7 capture of October 12 candidate production scenes | Yes | Product pages, gallery, social composition | Phase Breaker gameplay inside a cyan and magenta containment chamber. | Reed Creative Labs |
+| `/images/projects/phase-court-2026-10-12.webp` | Phase Court / Phase Arcade Volume I | Native Godot 4.7 capture of October 12 candidate production scenes | Yes | Product pages, gallery, social composition | Phase Court desktop gameplay showing a cyan player paddle returning the glowing ball across the magenta court. | Reed Creative Labs |
 | `/images/projects/rcl-science-lab-observatory.jpg` | RCL Science Lab | Owner-provided capture from the current application | Yes | Homepage chapter, product hero, gallery | RCL Science Lab observatory launch screen with simulation and learning-path navigation. | Reed Creative Labs |
 | `/images/projects/rcl-science-lab-protostar-formation.jpg` | RCL Science Lab | Owner-provided capture from the current application | Yes | Product gallery | RCL Science Lab protostar formation simulation interface. | Reed Creative Labs |
 | `/images/projects/rcl-science-lab-catalog-browser.jpg` | RCL Science Lab | Owner-provided capture from the current application | Yes | Product gallery | RCL Science Lab simulation catalog browser interface. | Reed Creative Labs |
@@ -41,11 +41,11 @@ evidence.
 | `/images/rcl-logo-mark.png` | Studio | Official RCL brand asset | Yes | Favicons, social avatars, and other compact brand contexts | Preserve without alteration. | Reed Creative Labs |
 | `/images/social/forge.jpg` | Forge | 1200 x 630 crop of the isolated clean-session current-build capture | Yes | Open Graph and Twitter preview | Contains no chat history, conversation, or repository data. | Reed Creative Labs |
 | `/images/social/forgefield.jpg` | Forgefield | 1200 x 630 crop of the Eventide current-build renderer capture | Yes | Open Graph and Twitter preview | Authentic procedural output from the current Windows build. | Reed Creative Labs |
-| `/images/social/phase-arcade-volume-1.jpg` | Phase Arcade Volume I | RCL composition derived from real product captures | Yes | Open Graph, Twitter, collection preview | Must remain consistent with the current public status language. | Reed Creative Labs |
+| `/images/social/phase-arcade-2026-10-12.jpg` | Phase Arcade Volume I | RCL composition derived from real product captures | Yes | Open Graph, Twitter, collection preview | Must remain consistent with the current public status language. | Reed Creative Labs |
 | `/images/social/rcl-science-lab.jpg` | RCL Science Lab | RCL composition using a real application capture | Yes | Open Graph and Twitter preview | Product UI is authentic. | Reed Creative Labs |
-| `/images/social/phase-shift.jpg` | Phase Shift | RCL composition using a real gameplay capture | Yes | Open Graph and Twitter preview | Product gameplay is authentic. | Reed Creative Labs |
-| `/images/social/phase-breaker.jpg` | Phase Breaker | RCL composition using a real gameplay capture | Yes | Open Graph and Twitter preview | Product gameplay is authentic. | Reed Creative Labs |
-| `/images/social/phase-court.jpg` | Phase Court | RCL composition using a real gameplay capture | Yes | Open Graph and Twitter preview | Product gameplay is authentic. | Reed Creative Labs |
+| `/images/social/phase-shift-2026-10-12.jpg` | Phase Shift | RCL composition using a real gameplay capture | Yes | Open Graph and Twitter preview | Product gameplay is authentic. | Reed Creative Labs |
+| `/images/social/phase-breaker-2026-10-12.jpg` | Phase Breaker | RCL composition using a real gameplay capture | Yes | Open Graph and Twitter preview | Product gameplay is authentic. | Reed Creative Labs |
+| `/images/social/phase-court-2026-10-12.jpg` | Phase Court | RCL composition using a real gameplay capture | Yes | Open Graph and Twitter preview | Product gameplay is authentic. | Reed Creative Labs |
 | `/images/social/phase-arcade-volume-2.jpg` | Phase Arcade Volume II | RCL typographic social treatment | Brand-authentic, not product evidence | Social preview only | Do not present as gameplay or a product screenshot. | Reed Creative Labs |
 | `/images/social/pigs-can-fly.jpg` | Pigs Can Fly? | RCL typographic social treatment | Brand-authentic, not product evidence | Social preview only | Do not present as gameplay or a product screenshot. | Reed Creative Labs |
 
@@ -122,3 +122,5 @@ documented in `docs/FORTRAN_HERO_VISUALIZATION.md`.
 Product captures should be reverified whenever the visible interface or
 gameplay meaning changes. New media is approved only after its source build,
 caption, alt text, and public-use status are recorded here.
+
+Phase Arcade images were refreshed on October 12, 2026. See `OCTOBER_2026_PHASE_ARCADE_MEDIA.md` and `phase-media-2026-10-12.json` for capture provenance and export hashes. Superseded screenshot files remain available only for older external links.

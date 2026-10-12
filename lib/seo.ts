@@ -21,23 +21,23 @@ type SeoOptions = {
 const imageDimensions: Record<string, { width: number; height: number }> = {
   "/og-image.jpg": { width: 1200, height: 630 },
   "/social-preview.jpg": { width: 1200, height: 630 },
-  "/images/projects/phase-shift-gameplay-01.webp": {
+  "/images/projects/phase-shift-2026-10-12.webp": {
     width: 1920,
     height: 1080,
   },
-  "/images/projects/phase-breaker-gameplay-01.webp": {
+  "/images/projects/phase-breaker-2026-10-12.webp": {
     width: 1920,
     height: 1080,
   },
-  "/images/projects/phase-court-gameplay-02.webp": {
+  "/images/projects/phase-court-2026-10-12.webp": {
     width: 1920,
     height: 1080,
   },
   "/images/social/forgefield-2026-09-20.jpg": { width: 1200, height: 630 },
-  "/images/social/phase-arcade-volume-1.jpg": { width: 1200, height: 630 },
-  "/images/social/phase-shift.jpg": { width: 1200, height: 630 },
-  "/images/social/phase-breaker.jpg": { width: 1200, height: 630 },
-  "/images/social/phase-court.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-arcade-2026-10-12.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-shift-2026-10-12.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-breaker-2026-10-12.jpg": { width: 1200, height: 630 },
+  "/images/social/phase-court-2026-10-12.jpg": { width: 1200, height: 630 },
   "/images/social/phase-arcade-volume-2.jpg": { width: 1200, height: 630 },
   "/images/social/pigs-can-fly.jpg": { width: 1200, height: 630 },
 };
