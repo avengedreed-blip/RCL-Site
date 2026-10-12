@@ -47,7 +47,7 @@ function getGallery(project: Project): readonly GalleryImage[] {
       alt: game.alt,
       title: game.name,
       href: getProject(game.slug)?.route,
-      caption: `${game.description} ${game.identity}`,
+      caption: game.description,
     }));
   }
 

@@ -126,10 +126,10 @@ const projectGalleryCopy: Partial<
     action: "Explore the Worlds",
   },
   "phase-arcade": {
-    title: "Three games. Three ways to play.",
+    title: "The games",
     context:
-      "Desktop gameplay from Phase Shift, Phase Breaker, and Phase Court. The archived collection explores desktop and VR interaction.",
-    action: "See the Games",
+      "Development gameplay captures from Phase Breaker, Phase Shift, and Phase Court.",
+    action: "Explore the Games",
   },
   "load-bearing": {
     title: "Build, inspect, redesign.",

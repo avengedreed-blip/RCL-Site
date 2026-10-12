@@ -113,13 +113,13 @@ try {
         }
       }
       if (route === "/projects/phase-arcade-volume-1") {
-        const figures = page.locator('.v2-product-gallery[data-gallery-layout="gameplay"] figure');
+        const figures = page.locator('[data-gallery-layout="gameplay"] figure');
         assert.equal(await figures.count(), phaseArcadeGames.length, "Exactly three included game explanations");
         for (const [index, game] of phaseArcadeGames.entries()) {
           const figure = figures.nth(index);
           const link = figure.getByRole("heading", { level: 3, name: game.name, exact: true }).getByRole("link");
           assert.equal(await link.getAttribute("href"), getProject(game.slug).route, `${game.name}: canonical detail route`);
-          assert.equal(await figure.locator("figcaption p").innerText(), `${game.description} ${game.identity}`, `${game.name}: existing verified gameplay and identity`);
+          assert.equal(await figure.locator("figcaption p").innerText(), game.description, `${game.name}: verified gameplay description`);
           const image = figure.locator("img");
           assert.equal(await image.getAttribute("src"), game.image, `${game.name}: approved screenshot`);
           assert.equal(await image.getAttribute("alt"), game.alt, `${game.name}: approved alternative`);
@@ -131,7 +131,7 @@ try {
           assert.ok((await link.boundingBox()).height >= 44, `${game.name}: comfortable link target`);
           assert.equal(await figure.getByRole("link", { name: /^View full size:/ }).getAttribute("href"), game.image, `${game.name}: full-size media still available`);
         }
-        await page.getByRole("link", { name: "See the Games", exact: true }).click();
+        await page.getByRole("link", { name: "Explore the Games", exact: true }).click();
         await page.waitForURL(base + route + "#gallery-title");
         assert.ok(await page.locator("#gallery-title").isVisible(), "Collection gallery anchor remains valid");
       }

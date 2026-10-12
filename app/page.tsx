@@ -11,6 +11,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { ForgefieldShowcase } from "@/components/ForgefieldShowcase";
+import { PhaseArcadeShowcase } from "@/components/PhaseArcadeShowcase";
 import { FortranFlowHero } from "@/components/FortranFlowHero";
 import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
@@ -112,6 +113,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      <PhaseArcadeShowcase />
 
       <section className="v2-section-band" aria-labelledby="capabilities-title">
         <div className="v2-container v2-capabilities">

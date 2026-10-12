@@ -5,6 +5,7 @@ import {
   getLaunchCampaign,
   type ProductLaunch,
 } from "./forgefield.ts";
+import { phaseArcadeCopy, phaseArcadeGames } from "./phase-arcade.ts";
 
 export type ProjectStatus =
   | "concept"
@@ -215,24 +216,20 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: "Phase Arcade Volume I",
+    name: phaseArcadeCopy.name,
     slug: "phase-arcade-volume-1",
-    status: "archived",
-    roadmapGroup: "archived",
+    status: "launching-soon",
+    roadmapGroup: "coming-soon",
     category: "game-collection",
-    categoryLabel: "Desktop & VR Arcade Game Collection",
-    headline: "Three focused arcade games for desktop and VR.",
-    tagline:
-      "Phase Shift, Phase Breaker, and Phase Court in one arcade collection.",
-    shortDescription:
-      "Phase Shift, Phase Breaker, and Phase Court in one desktop and VR collection. Three distinct takes on motion, timing, and positioning, built for short sessions and repeated practice.",
-    longDescription:
-      "An archived collection of Phase Shift, Phase Breaker, and Phase Court. The three games explore timing, positioning, and repeated practice through a shared desktop and VR shell. Input response, visual readability, and consistent core rules connect the collection while preserving each game’s identity. Retained as interaction R&D, with no current release commitment.",
-    platforms: ["PC", "VR"],
+    categoryLabel: "Arcade Game Collection",
+    headline: phaseArcadeCopy.tagline,
+    tagline: phaseArcadeCopy.hero,
+    shortDescription: `${phaseArcadeCopy.introduction} ${phaseArcadeCopy.release}`,
+    longDescription: `${phaseArcadeCopy.hero} ${phaseArcadeCopy.lineup} ${phaseArcadeCopy.release}`,
+    platforms: ["Windows"],
     usersCan: [
       "Play three distinct arcade games in one collection.",
-      "Practice short-session gameplay built around replayable score-chasing loops.",
-      "Play Phase Shift, Phase Breaker, and Phase Court through traditional desktop play or VR.",
+      "Practice timing, positioning, and control in short sessions.",
     ],
     route: "/projects/phase-arcade-volume-1",
     visual: "phase-arcade",
@@ -240,43 +237,37 @@ export const projects: Project[] = [
     showcaseMedia: {
       kind: "approved-image",
       src: "/images/projects/phase-breaker-gameplay-01.webp",
-      alt: "Phase Breaker gameplay from Phase Arcade Volume I inside a cyan and magenta containment chamber.",
+      alt: "Phase Breaker gameplay from Phase Arcade inside a cyan and magenta containment chamber.",
       caption:
         "Phase Breaker gameplay captured from the current desktop build.",
       fit: "cover",
       position: "center",
     },
-    includedGames: ["phase-shift", "phase-breaker", "phase-court"],
+    includedGames: phaseArcadeGames.map((game) => game.slug),
     features: [
-      "Exactly three included games: Phase Shift, Phase Breaker, and Phase Court",
-      "Traditional desktop play",
-      "VR support",
-      "Short-session arcade structure and replayable score chasing",
+      "Phase Breaker, Phase Shift, and Phase Court",
+      "Windows desktop play",
+      "Local challenges and technique records",
     ],
     technicalProfile: {
       summary:
-        "Godot 4.7 runs the three-game collection in GDScript, using Forward+ for rendering and OpenXR for the PCVR path. Desktop and VR share the collection shell and local save and settings system.",
-      verifiedOn: "2026-07-23",
+        "Godot 4.7 runs the three-game collection in GDScript, using Forward+ for rendering and local saves and settings. Windows desktop is the initial release target; VR development is deferred.",
+      verifiedOn: "2026-10-12",
       languages: ["GDScript"],
       engine: ["Godot 4.7"],
       renderer: ["Godot Forward+"],
       storage: ["Godot user:// local saves"],
-      platforms: ["Windows PC", "PCVR"],
-      interfaces: ["OpenXR"],
+      platforms: ["Windows PC"],
       packaging: ["Godot Windows desktop export"],
     },
     pageSections: [
       {
         title: "Included games",
-        body: "Volume I includes exactly three games: Phase Shift, Phase Breaker, and Phase Court. Each has its own arcade focus while remaining part of one collection.",
+        body: phaseArcadeCopy.lineup,
       },
       {
-        title: "Desktop and VR",
-        body: "The collection supports traditional desktop play and VR. Platform references describe the prototype, not a public release.",
-      },
-      {
-        title: "Archived collection",
-        body: "Preserved as selected R&D in input response, readable feedback, and desktop/VR interaction. No public release is currently planned.",
+        title: "Release plans",
+        body: phaseArcadeCopy.release,
       },
     ],
   },
@@ -462,18 +453,15 @@ export const projects: Project[] = [
   {
     name: "Phase Shift",
     slug: "phase-shift",
-    status: "archived",
+    status: "launching-soon",
     roadmapGroup: "included-game",
     category: "included-game",
-    categoryLabel: "Included Game in Phase Arcade Volume I",
-    headline: "Movement and timing.",
-    tagline:
-      "A neon tunnel runner built around movement, timing, and state switching.",
-    shortDescription:
-      "Phase Shift is a tunnel runner where forward motion, lane control, and switching between measured and unmeasured states determine each run.",
-    longDescription:
-      "Archived studio work. Phase Shift is one of the three games included in Phase Arcade Volume I. Players move through a neon corridor, read incoming gates, and switch state at the right moment to keep the run alive. This project is retained as R&D and is not an active release commitment.",
-    platforms: ["PC", "VR"],
+    categoryLabel: "Included Game in Phase Arcade",
+    headline: "Phase Shift",
+    tagline: phaseArcadeGames[1].description,
+    shortDescription: phaseArcadeGames[1].description,
+    longDescription: `Included in Phase Arcade. ${phaseArcadeCopy.release}`,
+    platforms: ["Windows"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-shift",
     visual: "phase-shift",
@@ -489,28 +477,26 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "Collection context",
-        body: "Phase Shift is part of Phase Arcade Volume I alongside Phase Breaker and Phase Court.",
+        body: "Phase Shift is part of Phase Arcade alongside Phase Breaker and Phase Court.",
       },
       {
-        title: "Core focus",
-        body: "The game emphasizes forward movement, lane control, timing, and switching between measured and unmeasured states inside a short-session arcade format.",
+        title: "Routes and control",
+        body: "Wide paths provide room for recovery. Narrow apertures require precision, while Release lenses affect the steering target.",
       },
     ],
   },
   {
     name: "Phase Breaker",
     slug: "phase-breaker",
-    status: "archived",
+    status: "launching-soon",
     roadmapGroup: "included-game",
     category: "included-game",
-    categoryLabel: "Included Game in Phase Arcade Volume I",
-    headline: "Redirect energy. Hold the chamber.",
-    tagline: "A reflector survival game built around positioning and pressure.",
-    shortDescription:
-      "Phase Breaker is a reflector survival game where the player redirects energy through a containment chamber while managing pressure and positioning.",
-    longDescription:
-      "Archived studio work. Phase Breaker is one of the three games included in Phase Arcade Volume I. Its contained arena, readable targets, and reflector-driven play give it a distinct identity within the collection. This project is retained as R&D and is not an active release commitment.",
-    platforms: ["PC", "VR"],
+    categoryLabel: "Included Game in Phase Arcade",
+    headline: "Phase Breaker",
+    tagline: phaseArcadeGames[0].description,
+    shortDescription: phaseArcadeGames[0].description,
+    longDescription: `Included in Phase Arcade. ${phaseArcadeCopy.release}`,
+    platforms: ["Windows"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-breaker",
     visual: "phase-breaker",
@@ -526,29 +512,26 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "Collection context",
-        body: "Phase Breaker is part of Phase Arcade Volume I alongside Phase Shift and Phase Court.",
+        body: "Phase Breaker is part of Phase Arcade alongside Phase Shift and Phase Court.",
       },
       {
-        title: "Core focus",
-        body: "The game centers on redirecting energy, maintaining control of the chamber, and surviving mounting arcade pressure.",
+        title: "Chamber objectives",
+        body: "Clear the three numbered targets in each chamber. Reflector position and movement shape each return; not every remaining tile needs to be cleared.",
       },
     ],
   },
   {
     name: "Phase Court",
     slug: "phase-court",
-    status: "archived",
+    status: "launching-soon",
     roadmapGroup: "included-game",
     category: "included-game",
-    categoryLabel: "Included Game in Phase Arcade Volume I",
-    headline: "Competition and reaction.",
-    tagline:
-      "An arcade paddle duel focused on positioning, angles, and reaction speed.",
-    shortDescription:
-      "Phase Court is an arcade paddle duel where court positioning, reaction speed, and the angle of each return shape the rally.",
-    longDescription:
-      "Archived studio work. Phase Court is one of the three games included in Phase Arcade Volume I. Opposing cyan and magenta sides keep the competitive relationship clear while each rally rewards timing and control. This project is retained as R&D and is not an active release commitment.",
-    platforms: ["PC", "VR"],
+    categoryLabel: "Included Game in Phase Arcade",
+    headline: "Phase Court",
+    tagline: phaseArcadeGames[2].description,
+    shortDescription: phaseArcadeGames[2].description,
+    longDescription: `Included in Phase Arcade. ${phaseArcadeCopy.release}`,
+    platforms: ["Windows"],
     parentProject: "phase-arcade-volume-1",
     route: "/projects/phase-court",
     visual: "phase-court",
@@ -564,11 +547,11 @@ export const projects: Project[] = [
     pageSections: [
       {
         title: "Collection context",
-        body: "Phase Court is part of Phase Arcade Volume I alongside Phase Shift and Phase Breaker.",
+        body: "Phase Court is part of Phase Arcade alongside Phase Shift and Phase Breaker.",
       },
       {
-        title: "Core focus",
-        body: "The game emphasizes competitive arcade play, court positioning, return angles, reaction speed, and control.",
+        title: "Returns and rallies",
+        body: "State selection takes effect at the next paddle contact. The central mirror reverses the lateral direction of eligible Release shots.",
       },
     ],
   },
@@ -811,7 +794,7 @@ export function getStatusLabel(status: ProjectStatus) {
     research: "Research",
     prototype: "Prototype",
     "active-development": "Active Development",
-    "launching-soon": "Launching Soon",
+    "launching-soon": "Coming Soon",
     scheduled: "Scheduled Release",
     "final-testing": "Final Testing",
     "private-beta": "Private Beta",

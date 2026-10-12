@@ -152,7 +152,7 @@ const technicalExpectations = new Map([
   ["static-drift", ["C++20", "Kotlin", "OpenGL", "GLSL", "JNI", "Android TV"]],
   [
     "phase-arcade-volume-1",
-    ["GDScript", "Godot 4.7", "Godot Forward+", "OpenXR", "Windows PC", "PCVR"],
+    ["GDScript", "Godot 4.7", "Godot Forward+", "Windows PC"],
   ],
 ]);
 
@@ -264,9 +264,9 @@ if (getProject("static-drift")?.name !== "Static Drift")
   fail("Static Drift canonical name changed");
 
 const phaseArcade = getProject("phase-arcade-volume-1");
-if (!phaseArcade) fail("Phase Arcade Volume I is missing");
-if (phaseArcade.status !== "archived")
-  fail("Phase Arcade must remain archived");
+if (!phaseArcade) fail("Phase Arcade is missing");
+if (phaseArcade.name !== "Phase Arcade" || phaseArcade.status !== "launching-soon" || phaseArcade.roadmapGroup !== "coming-soon")
+  fail("Phase Arcade must reflect the owner-approved upcoming collection");
 if (
   phaseArcade.showcaseMedia?.src !==
   "/images/projects/phase-breaker-gameplay-01.webp"
@@ -275,20 +275,19 @@ if (
 }
 if (
   phaseArcade.includedGames?.join(",") !==
-  "phase-shift,phase-breaker,phase-court"
+  "phase-breaker,phase-shift,phase-court"
 ) {
   fail(
-    "Phase Arcade Volume I must contain Phase Shift, Phase Breaker, and Phase Court in order",
+    "Phase Arcade must contain Phase Breaker, Phase Shift, and Phase Court in order",
   );
 }
 if (phaseArcade.includedGames.length !== 3) {
   fail("Phase Arcade Volume I must contain exactly three games");
 }
 if (
-  !phaseArcade.platforms.includes("PC") ||
-  !phaseArcade.platforms.includes("VR")
+  phaseArcade.platforms.join(",") !== "Windows"
 ) {
-  fail("Phase Arcade Volume I must expose PC and VR support");
+  fail("Phase Arcade must advertise Windows for the initial release");
 }
 
 for (const slug of ["pigs-can-fly"]) {
@@ -578,8 +577,10 @@ const productsPage = readFileSync(routeFile("/products"), "utf8");
 for (const [route, html] of [["/", homepage], ["/products", productsPage]]) {
   if (html.includes('id="included-games-title"'))
     fail(`${route} must not repeat the included-games section`);
-  if (html.includes('data-product-slug="phase-arcade-volume-1"'))
-    fail(`${route} must not feature the archived collection as a product launch`);
+  if ((html.match(/data-product-slug="phase-arcade-volume-1"/g) ?? []).length !== 1)
+    fail(`${route} must present the Phase Arcade collection exactly once`);
+  if (!html.includes("Three arcade games. One collection.") || !html.includes("Coming Soon | Windows") || !html.includes("Explore Phase Arcade"))
+    fail(`${route} must use the approved Phase Arcade introduction and action`);
   for (const game of phaseArcadeGames) {
     if (html.includes(`href="${getProject(game.slug).route}"`) ||
         html.includes(`data-product-slug="${game.slug}"`))
@@ -656,7 +657,7 @@ const pressPage = readFileSync(routeFile("/press"), "utf8");
 const discovery = readFileSync(join(root, "public", "llms.txt"), "utf8");
 for (const [slug, status] of [
   ["forgefield", forgefield.launch.state === "released" ? "Available now" : "October 19"],
-  ["phase-arcade-volume-1", "Archived"],
+  ["phase-arcade-volume-1", "Coming Soon"],
   ["project-load-bearing", "Archived"],
   ["static-drift", "Archived"],
 ]) {
@@ -698,8 +699,10 @@ for (const required of [
   "Phase Shift",
   "Phase Breaker",
   "Phase Court",
-  "Archived",
-  "Desktop and VR",
+  "Windows release targeted for late October 2026. Android and iOS to follow.",
+  "Phase Arcade is currently targeting a late-October release on Windows, with Android and iOS versions planned afterward.",
+  "Explore the Games",
+  "Explore More from Reed Creative Labs",
   "/images/projects/phase-shift-gameplay-01.webp",
   "/images/projects/phase-breaker-gameplay-01.webp",
   "/images/projects/phase-court-gameplay-02.webp",
@@ -716,8 +719,16 @@ for (const project of projects.filter(project => project.status === "archived"))
   if (!/name="description" content="Archived\./.test(html)) fail(project.slug + ": archive metadata");
   if (/awaiting final testing|primary RCL development focus|in active development/i.test(project.longDescription)) fail(project.slug + ": stale release promise");
 }
-for (const slug of ["phase-arcade-volume-1", "project-load-bearing", "static-drift", "phase-arcade-volume-2", "darren-in-the-woods-2", "misread", "phase-shift", "phase-breaker", "phase-court"]) {
+for (const slug of ["project-load-bearing", "static-drift", "phase-arcade-volume-2", "darren-in-the-woods-2", "misread"]) {
   if (getProject(slug)?.status !== "archived") fail(slug + ": larger projects must be archived");
+}
+for (const slug of ["phase-arcade-volume-1", ...phaseArcadeGames.map(game => game.slug)]) {
+  const project = getProject(slug);
+  const html = readFileSync(routeFile(project.route), "utf8");
+  if (project.status !== "launching-soon" || project.platforms.join(",") !== "Windows") fail(`${slug}: upcoming Windows scope`);
+  if (/Archived studio work|not an active release commitment|The arcade is almost open|Endless pursuit|Endless possibilities|revolutionary|groundbreaking/i.test(html)) fail(`${slug}: outdated or exaggerated copy`);
+  const schema = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map(match => JSON.parse(match[1])).find(record => record.name === project.name);
+  if (schema?.["@type"] !== "VideoGame" || schema.releaseDate || schema.offers) fail(`${slug}: upcoming game schema must not invent an exact release or purchase offer`);
 }
 if (/awaiting final testing|future roadmap/i.test(homepage + productsPage + discovery)) fail("Stale public roadmap language");
 

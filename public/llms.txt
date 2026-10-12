@@ -10,15 +10,18 @@ The public website is a static Next.js App Router application built with React a
 
 - [Forgefield](https://reedcreativelabs.com/projects/forgefield): RCL's flagship generative particle simulation for Windows 11 x64, with nine native-rendered worlds and live wallpaper/screensaver playback. Current launch details and the official Steam link are maintained on the product page.
 
+## Upcoming collection
+
+- [Phase Arcade](https://reedcreativelabs.com/projects/phase-arcade-volume-1): An upcoming collection featuring Phase Breaker, Phase Shift, and Phase Court. Windows release targeted for late October 2026. Android and iOS versions are planned afterward.
+
 ## Selected R&D
 
-- [Phase Arcade Volume I](https://reedcreativelabs.com/projects/phase-arcade-volume-1): Archived desktop and VR collection with Phase Shift, Phase Breaker, and Phase Court. A record of gameplay and interaction work, not a pending release.
 - [Project Load Bearing](https://reedcreativelabs.com/projects/project-load-bearing): Archived structural construction-and-testing prototype connecting Unreal Engine to a native Fortran static frame solver. Technical R&D, not certified engineering software.
 - [Static Drift](https://reedcreativelabs.com/projects/static-drift): Archived procedural ambient Android TV prototype with native rendering and remote controls. Not an upcoming store release.
 
 ## More from RCL
 
-- [Products and Selected R&D](https://reedcreativelabs.com/products): Forgefield, secondary mobile projects, selected archived prototypes, and historical project records.
+- [Products and Selected R&D](https://reedcreativelabs.com/products): Forgefield, Phase Arcade, secondary mobile projects, selected archived prototypes, and historical project records.
 
 ## Services
 

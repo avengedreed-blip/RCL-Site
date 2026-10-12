@@ -1,6 +1,7 @@
 import { forgefieldLaunchSummary } from "@/content/forgefield";
 import type { Metadata } from "next";
 import { ForgefieldShowcase } from "@/components/ForgefieldShowcase";
+import { PhaseArcadeShowcase } from "@/components/PhaseArcadeShowcase";
 import { ProductLedger } from "@/components/ProductLedger";
 import { Reveal } from "@/components/Reveal";
 import { archivedProjects, mobileProjects } from "@/content/projects";
@@ -8,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Products & Selected R&D",
-  description: `${forgefieldLaunchSummary} Explore RCL’s generative particle worlds, smaller mobile projects, and selected archived R&D.`,
+  description: `${forgefieldLaunchSummary} Explore Phase Arcade, an upcoming Windows arcade collection, plus mobile projects and selected archived R&D.`,
   path: "/products",
   image: {
     url: "/images/social/forgefield-2026-09-20.jpg",
@@ -36,9 +37,9 @@ export default function ProductsPage() {
             Deliberate focus.
           </h1>
           <p>
-            Forgefield is the studio’s primary product. Smaller mobile projects
-            and selected technical experiments show the range of the work behind
-            it.
+            Forgefield is the studio’s primary product. Explore the upcoming
+            Phase Arcade collection, smaller mobile projects, and selected
+            technical experiments.
           </p>
         </Reveal>
       </header>
@@ -48,6 +49,7 @@ export default function ProductsPage() {
       >
         <ForgefieldShowcase includeWorldStudy={false} />
       </section>
+      <PhaseArcadeShowcase />
       <section
         className="v2-container v2-catalog-ledgers"
         aria-label="More from Reed Creative Labs"
