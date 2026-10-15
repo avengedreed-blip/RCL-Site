@@ -9,6 +9,7 @@ type ButtonLinkProps = {
   variant?: "primary" | "secondary" | "ghost" | "contact";
   className?: string;
   prefetch?: boolean;
+  "aria-label"?: string;
 };
 
 export function ButtonLink({
@@ -17,11 +18,13 @@ export function ButtonLink({
   variant = "primary",
   className,
   prefetch,
+  "aria-label": ariaLabel,
 }: ButtonLinkProps) {
   return (
     <Link
       href={href}
       prefetch={prefetch}
+      aria-label={ariaLabel}
       rel={/^https?:\/\//.test(href) ? "noopener noreferrer" : undefined}
       className={cn(
         "exhibit-button material-control group inline-flex h-12 items-center justify-center gap-3 whitespace-nowrap rounded-[3px] px-7 text-sm font-black uppercase transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-gold",

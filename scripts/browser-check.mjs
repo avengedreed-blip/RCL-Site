@@ -8,7 +8,7 @@ import { featuredProjects, getProject, projects } from "../content/projects.ts";
 import { phaseArcadeGames } from "../content/phase-arcade.ts";
 import { staticPagePaths } from "../lib/site-routes.ts";
 
-import { forgefieldLaunch, forgefieldCampaign } from "../content/forgefield.ts";
+import { forgefieldLaunch, forgefieldCampaign, forgefieldItch, forgefieldTrailer } from "../content/forgefield.ts";
 
 const require = createRequire(import.meta.url);
 const root = path.resolve("out");
@@ -22,6 +22,7 @@ for (const entry of await readdir(root, { recursive: true, withFileTypes: true }
   if (start >= 0) segmentAliases.set("/" + relative.slice(0, start) + relative.slice(start).replaceAll("/", "."), file);
 }
 const mime = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".txt": "text/plain", ".xml": "application/xml", ".wasm": "application/wasm", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".svg": "image/svg+xml" };
+const deploymentHeaders = JSON.parse(await readFile("vercel.json", "utf8")).headers[0].headers;
 const server = createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
@@ -39,6 +40,7 @@ const server = createServer(async (req, res) => {
       res.statusCode = 404;
     }
     res.setHeader("Content-Type", mime[path.extname(target)] || "application/octet-stream");
+    for (const header of deploymentHeaders) res.setHeader(header.key, header.value);
     res.end(body);
   } catch {
     res.writeHead(500).end();
@@ -61,6 +63,10 @@ try {
       : { args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] }),
   });
   const page = await browser.newPage({ reducedMotion: "reduce" });
+  const thirdPartyMedia = [];
+  page.on("request", request => {
+    if (/youtube|ytimg|googlevideo/.test(new URL(request.url()).hostname)) thirdPartyMedia.push(request.url());
+  });
   page.on("console", message => {
     if (["warning", "error"].includes(message.type())) consoleMessages.add(`${message.type()}: ${message.text()}`);
   });
@@ -79,6 +85,12 @@ try {
       assert.equal(await page.locator("h1").count(), 1, route);
       assert.equal(await page.locator("main").count(), 1, route);
       if (["/", "/products", "/projects/forgefield"].includes(route)) {
+        const itchLinks = page.locator("a.forgefield-itch-cta");
+        assert.equal(await itchLinks.count(), route === "/products" ? 1 : 2);
+        for (const link of await itchLinks.all()) {
+          assert.equal(await link.getAttribute("href"), forgefieldItch.url);
+          assert.ok((await link.boundingBox()).height >= 44, "itch.io touch target");
+        }
         const steamLinks = page.locator("a.forgefield-steam-cta");
         assert.equal(await steamLinks.count(), route === "/products" ? 1 : 2, route + ": wishlist entry points");
         for (const link of await steamLinks.all()) {
@@ -100,6 +112,34 @@ try {
         await page.waitForURL(forgefieldLaunch.steamUrl);
         await page.unroute(forgefieldLaunch.steamUrl);
         await page.goto(base + route, { waitUntil: "networkidle" });
+      }
+      if (route === "/projects/forgefield") {
+        assert.deepEqual(thirdPartyMedia, [], "No third-party media requests before consent");
+        assert.equal(await page.locator("iframe").count(), 0);
+        const load = page.getByRole("button", { name: "Load official trailer", exact: true });
+        await load.scrollIntoViewIfNeeded();
+        const before = await load.boundingBox();
+        // CI verifies activation and layout with a stub; actual playback is checked separately.
+        await page.route(forgefieldTrailer.embedUrl, route => route.fulfill({ contentType: "text/html", body: "<!doctype html><title>Trailer frame boundary check</title>" }));
+        await load.focus();
+        await page.keyboard.press("Enter");
+        const frame = page.locator(`iframe[title="${forgefieldTrailer.title}"]`);
+        await frame.waitFor();
+        assert.equal(await frame.getAttribute("src"), forgefieldTrailer.embedUrl);
+        const after = await frame.boundingBox();
+        assert.ok(Math.abs(after.width / after.height - 16 / 9) < 0.02);
+        assert.ok(Math.abs(before.height - after.height) <= 2, "No player layout shift");
+        assert.equal(await page.getByRole("link", { name: "Watch on YouTube", exact: true }).getAttribute("href"), forgefieldTrailer.watchUrl);
+        await page.unroute(forgefieldTrailer.embedUrl);
+        await page.goto(base + route, { waitUntil: "networkidle" });
+        thirdPartyMedia.length = 0;
+      }
+      for (const [label, href] of [
+        ["TikTok", "https://www.tiktok.com/@reedcreativelabs"],
+        ["Facebook", "https://www.facebook.com/profile.php?id=61593075719365"],
+        ["Reed Creative Labs YouTube channel", "https://www.youtube.com/@ReedCreativeLabs"],
+      ]) {
+        assert.equal(await page.locator("footer").getByRole("link", { name: label, exact: true }).getAttribute("href"), href);
       }
       if (route === "/" || route === "/products") {
         assert.deepEqual(
@@ -205,16 +245,17 @@ try {
       if (route === "/") {
         const announcement = await mediaPage.locator(".forgefield-hero-launch time").boundingBox();
         assert.ok(announcement.y + announcement.height <= 600, "Home release date visible in initial short viewport");
-        const steamAction = await mediaPage.locator(".v2-hero .forgefield-steam-cta").boundingBox();
-        assert.ok(steamAction.y + steamAction.height <= 600, "Home Steam CTA visible in initial short viewport");
+        const purchaseAction = await mediaPage.locator(".v2-hero .forgefield-itch-cta").boundingBox();
+        assert.ok(purchaseAction.y + purchaseAction.height <= 600, "Home primary itch.io CTA visible in initial short viewport");
       }
-      const launch = mediaPage.locator(".forgefield-launch");
-      assert.equal(await launch.count(), 1);
+      const launches = mediaPage.locator(".forgefield-launch");
+      assert.equal(await launches.count(), route === "/projects/forgefield" ? 2 : 1);
+      const launch = launches.first();
       assert.match(await launch.innerText(), /October 19, 2026/);
       assert.match(await launch.innerText(), /\$4\.99/);
       const date = launch.locator("time");
       assert.equal(await date.getAttribute("datetime"), "2026-10-19");
-      assert.ok(await date.evaluate(el => parseFloat(getComputedStyle(el).fontSize) >= 30), "Prominent release date");
+      assert.ok(await launch.locator(".forgefield-available").evaluate(el => parseFloat(getComputedStyle(el).fontSize) >= 22), "Prominent itch.io availability");
       const action = launch.getByRole("link").first();
       assert.ok((await action.boundingBox()).height >= 44, "Launch action touch target");
       await action.focus();

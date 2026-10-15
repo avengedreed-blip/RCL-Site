@@ -1,4 +1,4 @@
-import { getSteamStoreUrl } from "@/content/forgefield";
+import { forgefieldItch, forgefieldTrailer, getSteamStoreUrl } from "@/content/forgefield";
 import type { Project } from "@/content/projects";
 import { getProjectSocialImage } from "@/lib/project-media";
 import { absoluteUrl, siteName, siteUrl } from "@/lib/seo";
@@ -90,8 +90,21 @@ export function projectJsonLd(project: Project) {
       "@type": ["SoftwareApplication", "Product"],
       applicationCategory: "EntertainmentApplication",
       operatingSystem: project.platforms.join(", "),
-      releaseDate: project.launch.releaseDate,
-      ...(steamUrl ? { sameAs: steamUrl } : {}),
+      ...(project.slug === "forgefield" ? {
+        sameAs: [forgefieldItch.url, ...(steamUrl ? [steamUrl] : [])],
+        offers: {
+          "@type": "Offer",
+          url: forgefieldItch.url,
+          price: forgefieldItch.price.toFixed(2),
+          priceCurrency: forgefieldItch.currency,
+          availability: "https://schema.org/InStock",
+        },
+        // A publication timestamp has not been verified, so do not invent VideoObject data.
+        subjectOf: { "@type": "CreativeWork", name: forgefieldTrailer.title, url: forgefieldTrailer.watchUrl },
+      } : {
+        releaseDate: project.launch.releaseDate,
+        ...(steamUrl ? { sameAs: steamUrl } : {}),
+      }),
       ...(steamUrl && project.launch.state === "released"
         ? {
             offers: {

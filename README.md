@@ -4,12 +4,13 @@ Official static website for Reed Creative Labs.
 
 ## Current Portfolio
 
-Forgefield is the primary product, planned for Steam on October 19, 2026 at
-$4.99 USD, with wishlisting available now. The verified store URL, planned date,
-price, and manual release state live in `content/forgefield.ts`.
+Forgefield is the primary product, available now on itch.io for $4.99 USD or more,
+and planned for Steam on October 19, 2026 at $4.99 USD. The verified storefront
+URLs, planned Steam date, prices, and trailer configuration live in `content/forgefield.ts`.
 After confirming the product is actually released on Steam, change `state` from
-`"coming-soon"` to `"released"` and rebuild. CTAs, page copy, project status,
-metadata, and structured data follow that switch; no browser clock triggers it.
+`"coming-soon"` to `"released"` and rebuild. Steam CTAs, copy, and offer data
+follow that switch; no browser clock triggers it. Overall product status is
+already Public Release because itch.io availability is independent of Steam.
 The date has no authoritative time of day, so there is no countdown.
 `public/llms.txt` points to the product page for changing availability details.
 Windows 11 x64 is the current product boundary. Archived work is

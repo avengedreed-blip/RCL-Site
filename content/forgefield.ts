@@ -16,8 +16,21 @@ export const forgefieldLaunch: ProductLaunch = {
   price: 4.99,
   currency: "USD",
   storefront: "Steam",
-  steamUrl: "https://store.steampowered.com/app/5356880/FORGEFIELD/",
+  steamUrl: "https://store.steampowered.com/app/5356880/",
 };
+
+// Owner-supplied destinations; itch.io purchase listing verified October 14, 2026.
+export const forgefieldItch = {
+  url: "https://reed-creative-labs.itch.io/forgefield",
+  price: 4.99,
+  currency: "USD",
+} as const;
+
+export const forgefieldTrailer = {
+  title: "FORGEFIELD | Official Launch Trailer | 9 Living Worlds",
+  watchUrl: "https://www.youtube.com/watch?v=IoJ5lge2tWI",
+  embedUrl: "https://www.youtube-nocookie.com/embed/IoJ5lge2tWI?autoplay=0&playsinline=1&rel=0",
+} as const;
 
 export function formatLaunchDate(launch: ProductLaunch) {
   return new Intl.DateTimeFormat("en-US", {
@@ -65,7 +78,7 @@ export function getLaunchCampaign(launch: ProductLaunch) {
     priceLabel: released ? "Price · USD" : "Launch price · USD",
     ctaLabel: released
       ? "Get FORGEFIELD on Steam"
-      : "Wishlist FORGEFIELD on Steam",
+      : "Wishlist on Steam",
     summary: released
       ? `Available now on Steam for ${price} USD.`
       : `Coming to Steam ${date} for ${price} USD. Wishlist now.`,
@@ -74,7 +87,7 @@ export function getLaunchCampaign(launch: ProductLaunch) {
 }
 
 export const forgefieldCampaign = getLaunchCampaign(forgefieldLaunch);
-export const forgefieldLaunchSummary = forgefieldCampaign.summary;
+export const forgefieldLaunchSummary = `Available now on itch.io. ${forgefieldCampaign.summary}`;
 
 // Verified against Forgefield's built-in scene catalog, 2026-09-30.
 // Strange Attractors is a legacy alias for Corona, not an additional world.

@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
+  forgefieldItch,
+  forgefieldTrailer,
   forgefieldLaunch,
   forgefieldReleaseDate,
   forgefieldPrice,
@@ -14,16 +16,16 @@ import { getProject, getProjectDateLabel } from "../content/projects.ts";
 const project = getProject("forgefield");
 assert.equal(
   project.status,
-  forgefieldCampaign.released ? "public-release" : "scheduled",
+  "public-release",
 );
 assert.equal(project.launch, forgefieldLaunch);
 assert.equal(forgefieldLaunch.releaseDate, "2026-10-19");
 assert.equal(forgefieldLaunch.price, 4.99);
 assert.equal(forgefieldLaunch.currency, "USD");
-assert.equal(getProjectDateLabel(project), forgefieldCampaign.statusLabel);
+assert.equal(getProjectDateLabel(project), "Available on itch.io");
 assert.equal(
   getSteamStoreUrl(forgefieldLaunch),
-  "https://store.steampowered.com/app/5356880/FORGEFIELD/",
+  "https://store.steampowered.com/app/5356880/",
 );
 const released = getLaunchCampaign({ ...forgefieldLaunch, state: "released" });
 assert.equal(released.ctaLabel, "Get FORGEFIELD on Steam");
@@ -35,7 +37,7 @@ const pastButUnreleased = getLaunchCampaign({
   state: "coming-soon",
 });
 assert.equal(pastButUnreleased.released, false);
-assert.equal(pastButUnreleased.ctaLabel, "Wishlist FORGEFIELD on Steam");
+assert.equal(pastButUnreleased.ctaLabel, "Wishlist on Steam");
 assert.deepEqual(project.platforms, ["Windows 11 x64"]);
 assert.equal(forgefieldWorlds.length, 9);
 assert.ok(forgefieldWorlds.includes("Corona"));
@@ -76,7 +78,9 @@ for (const route of ["index", "products", "projects/forgefield", "press"]) {
       html.includes(`dateTime="${forgefieldLaunch.releaseDate}"`),
       `${route}: semantic date`,
     );
+  assert.ok(html.includes("Available now on itch.io") || html.includes("Available Now on itch.io"));
   if (route !== "press") {
+    assert.ok(html.includes(`href="${forgefieldItch.url}"`), `${route}: itch.io purchase link`);
     assert.ok(
       html.includes(forgefieldCampaign.ctaLabel),
       route + ": launch CTA",
@@ -87,7 +91,7 @@ for (const route of ["index", "products", "projects/forgefield", "press"]) {
     );
   }
   if (!forgefieldCampaign.released)
-    assert.doesNotMatch(html, /Available now|Get FORGEFIELD on Steam|Buy now/);
+    assert.doesNotMatch(html, /Available now on Steam|Get FORGEFIELD on Steam/);
 }
 const detail = readFileSync("out/projects/forgefield.html", "utf8");
 const schema = [
@@ -98,18 +102,18 @@ const schema = [
   .map((match) => JSON.parse(match[1]))
   .find((data) => data.name === "Forgefield");
 assert.deepEqual(schema["@type"], ["SoftwareApplication", "Product"]);
-assert.equal(schema.releaseDate, forgefieldLaunch.releaseDate);
+assert.equal(schema.releaseDate, undefined, "Do not present Steam date as the overall release date");
 assert.equal(schema.operatingSystem, "Windows 11 x64");
 assert.equal(schema.applicationCategory, "EntertainmentApplication");
 assert.equal(schema.aggregateRating, undefined);
 assert.equal(schema.review, undefined);
-assert.equal(schema.sameAs, getSteamStoreUrl(forgefieldLaunch));
-if (!forgefieldCampaign.released)
-  assert.equal(
-    schema.offers,
-    undefined,
-    "No purchase offer before confirmed release",
-  );
+assert.deepEqual(schema.sameAs, [forgefieldItch.url, getSteamStoreUrl(forgefieldLaunch)]);
+assert.equal(schema.subjectOf.url, forgefieldTrailer.watchUrl);
+if (!forgefieldCampaign.released) {
+  assert.equal(schema.offers.url, forgefieldItch.url);
+  assert.equal(schema.offers.availability, "https://schema.org/InStock");
+  assert.equal(schema.offers.price, forgefieldItch.price.toFixed(2));
+}
 if (forgefieldCampaign.released) {
   assert.equal(schema.offers.price, forgefieldLaunch.price.toFixed(2));
   assert.equal(schema.offers.priceCurrency, forgefieldLaunch.currency);

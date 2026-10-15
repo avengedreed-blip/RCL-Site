@@ -141,11 +141,9 @@ export const projects: Project[] = [
   {
     name: "Forgefield",
     slug: "forgefield",
-    status:
-      forgefieldLaunch.state === "released" ? "public-release" : "scheduled",
+    status: "public-release",
     launch: forgefieldLaunch,
-    roadmapGroup:
-      forgefieldLaunch.state === "released" ? "released" : "coming-soon",
+    roadmapGroup: "released",
     category: "software",
     categoryLabel: "Real-Time Generative Particle Worlds",
     headline: "Real-time generative particle worlds.",
@@ -169,7 +167,7 @@ export const projects: Project[] = [
       fit: "cover",
     },
     currentFocus: [
-      "Final release preparation",
+      "Steam release preparation",
       "Representative Windows hardware and long-running playback validation",
       "Live wallpaper and screensaver reliability",
     ],
@@ -197,8 +195,8 @@ export const projects: Project[] = [
     },
     milestones: [
       { title: "Nine-world procedural collection", state: "complete" },
-      { title: "Final release preparation and validation", state: "current" },
-      { title: "Public release", state: "planned" },
+      { title: "itch.io release", state: "complete" },
+      { title: "Steam release", state: "planned" },
     ],
     pageSections: [
       {
@@ -210,7 +208,7 @@ export const projects: Project[] = [
         body: "The Windows launcher brings world selection, live preview, wallpaper operation, screensaver settings, and quality presets together. Windows 11 x64 and an OpenGL 4.6-capable GPU are the current technical baseline.",
       },
       {
-        title: "Steam release",
+        title: "Availability",
         body: forgefieldLaunchSummary,
       },
     ],
@@ -807,6 +805,7 @@ export function getStatusLabel(status: ProjectStatus) {
 }
 
 export function getProjectDateLabel(project: Project) {
+  if (project.slug === "forgefield") return "Available on itch.io";
   return project.launch
     ? getLaunchCampaign(project.launch).statusLabel
     : getStatusLabel(project.status);

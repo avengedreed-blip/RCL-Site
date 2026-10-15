@@ -10,7 +10,7 @@ export function ForgefieldSteamLink() {
   const href = getSteamStoreUrl(forgefieldLaunch);
   if (!href) return null;
   return (
-    <ButtonLink href={href} className="forgefield-steam-cta" prefetch={false}>
+    <ButtonLink href={href} variant="secondary" className="forgefield-steam-cta" prefetch={false}>
       {forgefieldCampaign.ctaLabel}
     </ButtonLink>
   );

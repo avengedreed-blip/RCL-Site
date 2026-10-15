@@ -2,7 +2,7 @@ import { studioEmail } from "@/content/contact";
 
 export const policyDates = {
   effective: "August 6, 2026",
-  lastUpdated: "October 9, 2026",
+  lastUpdated: "October 14, 2026",
 } as const;
 
 export type LegalSection = {
@@ -52,7 +52,8 @@ export const privacySections: LegalSection[] = [
   {
     title: "Third-party destinations",
     body: [
-      "Links to storefronts, model providers, app stores, social platforms, or other services are governed by the destination's own terms and privacy practices after you leave this site. The current website does not intentionally embed third-party video, advertising, or social-media widgets.",
+      "Links to storefronts, model providers, app stores, social platforms, or other services are governed by the destination's own terms and privacy practices after you leave this site. Forgefield purchases and downloads on itch.io are handled on that storefront; Steam availability is separate.",
+      "The Forgefield trailer uses an optional YouTube player. The site loads a local poster first and makes no YouTube requests until you select Load official trailer. This loads a player from youtube-nocookie.com; YouTube then receives connection and playback information, including your IP address, and its own privacy and storage practices apply. You can instead follow Watch on YouTube. Loading the player does not start playback automatically.",
     ],
   },
   {
@@ -118,6 +119,7 @@ export const termsSections: LegalSection[] = [
     body: [
       "Third-party links are provided for convenience. Reed Creative Labs is not responsible for the destination's content, availability, security, or practices.",
       "If a product is distributed through a third-party storefront, that store generally handles payment, delivery, taxes, accounts, and refunds under its own terms unless Reed Creative Labs states otherwise. This website does not currently offer direct checkout.",
+      "Forgefield is available through itch.io. Its Steam listing has a separate release schedule. The optional trailer player and YouTube channel are third-party services governed by their own terms.",
     ],
   },
   {

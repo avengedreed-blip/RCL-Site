@@ -7,7 +7,10 @@ static deployment. The Content Security Policy intentionally allows
 `'unsafe-inline'` for scripts and styles because the current static Next export
 emits inline bootstrap scripts and inline style behavior. The policy does not
 allow eval-based script execution, third-party script domains, tracking pixels,
-advertising cookies, or external analytics origins.
+external analytics origins in the parent document. The only third-party frame
+origin is `https://www.youtube-nocookie.com`, created after the visitor selects
+the trailer button. That frame has its own third-party data and storage behavior,
+disclosed on `/privacy`. Fullscreen is delegated only to self and that origin.
 
 Production uses the official `@vercel/speed-insights` and `@vercel/analytics`
 packages. Both are gated on `VERCEL_ENV=production` and use same-origin Vercel

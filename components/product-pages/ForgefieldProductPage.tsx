@@ -1,11 +1,7 @@
-import { ForgefieldSteamLink } from "@/components/ForgefieldSteamLink";
+import { ForgefieldTrailer } from "@/components/ForgefieldTrailer";
 import { ForgefieldLaunch } from "@/components/ForgefieldLaunch";
 import {
-  forgefieldLaunch,
-  forgefieldReleaseDate,
-  forgefieldPrice,
   forgefieldWorlds,
-  forgefieldCampaign,
 } from "@/content/forgefield";
 import { ForgefieldCapture } from "@/components/ForgefieldShowcase";
 import { StructuredData } from "@/components/StructuredData";
@@ -28,7 +24,7 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
         <p className="v2-eyebrow">RCL flagship · Windows 11</p>
         <h1>Forgefield</h1>
         <div className="forgefield-opening__summary">
-          <p className="forgefield-deck">Your desktop, alive.</p>
+          <p className="forgefield-deck">Living simulations for your desktop.</p>
           <p>
             Nine distinct procedural worlds for Windows wallpapers and
             screensavers. Simulated and rendered in real time, not prerecorded
@@ -40,6 +36,7 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
       <div className="forgefield-wide">
         <ForgefieldCapture image={eventide} priority />
       </div>
+      <ForgefieldTrailer />
       <section
         className="v2-container forgefield-world-study"
         aria-labelledby="playback-title"
@@ -137,22 +134,10 @@ export function ForgefieldProductPage({ project }: { project: Project }) {
       >
         <div>
           <p className="v2-eyebrow">Windows 11 x64 · OpenGL 4.6</p>
-          <h2 id="availability-title">{forgefieldCampaign.heading}.</h2>
+          <h2 id="availability-title">Get Forgefield</h2>
         </div>
-        <div>
-          <p>
-            {forgefieldCampaign.released ? "Released " : "Planned launch: "}
-            <time dateTime={forgefieldLaunch.releaseDate}>
-              {forgefieldReleaseDate}
-            </time>
-            {" · "}
-            {forgefieldPrice} USD.
-            {forgefieldCampaign.released
-              ? " Explore all nine worlds on Steam."
-              : " Add FORGEFIELD to your Steam wishlist today."}
-          </p>
-          <ForgefieldSteamLink />
-        </div>
+        <ForgefieldLaunch productPage />
+
       </section>
     </main>
   );

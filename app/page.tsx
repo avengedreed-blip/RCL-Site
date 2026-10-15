@@ -6,6 +6,7 @@ import {
   forgefieldCampaign,
 } from "@/content/forgefield";
 import { ForgefieldSteamLink } from "@/components/ForgefieldSteamLink";
+import { ForgefieldItchLink } from "@/components/ForgefieldItchLink";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -70,14 +71,16 @@ export default function Home() {
               Real-time animated wallpapers and screensavers for Windows.
               Procedural worlds, rendered live on your desktop.
             </p>
+            <p className="forgefield-available">Available Now on itch.io</p>
             <p className="forgefield-hero-launch">
-              <span>{forgefieldCampaign.dateLabel}</span>
+              <span>{forgefieldCampaign.heading}</span>
               <time dateTime={forgefieldLaunch.releaseDate}>
                 {forgefieldReleaseDate}
               </time>
               <strong>{forgefieldPrice} USD</strong>
             </p>
             <div className="v2-action-row">
+              <ForgefieldItchLink />
               <ForgefieldSteamLink />
               <ButtonLink
                 href="/projects/forgefield"

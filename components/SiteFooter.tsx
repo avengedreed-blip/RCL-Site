@@ -78,6 +78,9 @@ export function SiteFooter() {
             <ButtonLink href="https://www.facebook.com/profile.php?id=61593075719365" variant="secondary">
               Facebook
             </ButtonLink>
+            <ButtonLink href="https://www.youtube.com/@ReedCreativeLabs" variant="secondary" aria-label="Reed Creative Labs YouTube channel">
+              YouTube
+            </ButtonLink>
           </nav>
         </div>
       </div>

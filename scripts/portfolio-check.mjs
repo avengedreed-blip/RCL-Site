@@ -184,14 +184,14 @@ for (const prohibited of [
 const forgefield = getProject("forgefield");
 if (
   !forgefield ||
-  forgefield.status !== (forgefield.launch.state === "released" ? "public-release" : "scheduled") ||
+  forgefield.status !== "public-release" ||
   forgefield.presentationTier !== "flagship" ||
   forgefield.showcaseMedia?.kind !== "approved-image" ||
   forgefield.showcaseMedia.src !==
     "/images/projects/forgefield-eventide-2026-09-20.webp"
 ) {
   fail(
-    "Forgefield must lead with its scheduled Steam release and current September native media",
+    "Forgefield must lead with its itch.io release and existing September native media",
   );
 }
 const expectedWorlds = [

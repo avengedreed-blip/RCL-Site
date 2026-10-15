@@ -1,6 +1,6 @@
 # Privacy Analytics and LLM Discoverability
 
-Last reviewed: October 9, 2026
+Last reviewed: October 14, 2026
 
 ## Decision
 
@@ -176,3 +176,14 @@ A new review is required before:
   cross-site measurement;
 - changing the production environment gate;
 - changing the public privacy disclosure.
+
+## Optional Forgefield Trailer
+
+The owner requested the official YouTube trailer on October 14, 2026. A local
+poster and native button render first; there are no YouTube scripts, thumbnails,
+preconnects, or iframe requests before activation. Activation creates a
+`youtube-nocookie.com` iframe with autoplay disabled. No consent is persisted.
+YouTube receives ordinary connection and player data once activated; its storage
+and privacy practices apply. The direct watch link works without JavaScript.
+CSP permits only this frame origin, and Permissions-Policy delegates fullscreen
+to it. Storefront links stay direct, with checkout and downloads on itch.io.

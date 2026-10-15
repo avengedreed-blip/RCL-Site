@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ButtonLink";
 import { ForgefieldSteamLink } from "@/components/ForgefieldSteamLink";
+import { ForgefieldItchLink } from "@/components/ForgefieldItchLink";
 import {
   forgefieldLaunch,
   forgefieldPrice,
@@ -13,18 +14,17 @@ export function ForgefieldLaunch({
   productPage?: boolean;
 }) {
   return (
-    <div className="forgefield-launch" aria-label="Forgefield Steam launch">
+    <div className="forgefield-launch" aria-label="Forgefield availability">
       <div className="forgefield-launch__date">
-        <p className="v2-eyebrow">{forgefieldCampaign.dateLabel}</p>
-        <time dateTime={forgefieldLaunch.releaseDate}>
-          {forgefieldReleaseDate}
-        </time>
-      </div>
-      <div className="forgefield-launch__price">
-        <p className="v2-eyebrow">{forgefieldCampaign.priceLabel}</p>
-        <p>{forgefieldPrice}</p>
+        <p className="forgefield-available">Available Now on itch.io</p>
+        <p className="forgefield-steam-schedule">
+          {forgefieldCampaign.heading}{" "}
+          <time dateTime={forgefieldLaunch.releaseDate}>{forgefieldReleaseDate}</time>
+          {" · "}{forgefieldPrice} USD
+        </p>
       </div>
       <div className="forgefield-launch__actions">
+        <ForgefieldItchLink productPage={productPage} />
         <ForgefieldSteamLink />
         {!productPage ? (
           <ButtonLink

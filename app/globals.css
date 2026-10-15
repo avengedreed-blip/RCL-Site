@@ -5886,7 +5886,8 @@ a {
 }
 .forgefield-campaign-hero .forgefield-deck { margin-top: 1.25rem; }
 .forgefield-campaign-hero .v2-hero__body { margin-top: 1rem; max-width: 35rem; }
-.forgefield-steam-cta.exhibit-button {
+.forgefield-steam-cta.exhibit-button,
+.forgefield-itch-cta.exhibit-button {
   height: auto;
   min-height: 3rem;
   max-width: 100%;
@@ -5896,6 +5897,19 @@ a {
   text-align: center;
 }
 .forgefield-steam-cta > svg { flex-shrink: 0; }
+.forgefield-itch-cta > svg { flex-shrink: 0; }
+.forgefield-available { color: var(--color-accent-gold); font-weight: 600; }
+.forgefield-campaign-hero .forgefield-available { margin-top: 1.25rem; }
+.forgefield-launch { grid-template-columns: minmax(0, 1fr) auto; }
+.forgefield-launch .forgefield-available { font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.25; }
+.forgefield-steam-schedule { margin-top: 0.8rem; color: var(--color-text-secondary); }
+.forgefield-launch__date .forgefield-steam-schedule time { display: inline; font: inherit; letter-spacing: normal; }
+.forgefield-availability .forgefield-launch { grid-template-columns: minmax(0, 1fr); border: 0; padding: 0; margin: 0; min-width: 0; }
+.forgefield-availability .forgefield-available { margin-top: 0; color: var(--color-accent-gold); }
+.forgefield-availability .exhibit-button { margin-top: 0; }
+@media (max-width: 600px) {
+  .forgefield-launch { grid-template-columns: minmax(0, 1fr); }
+}
 .forgefield-launch__actions { max-width: 21rem; }
 .forgefield-campaign-hero .v2-hero__principle a {
   display: inline-flex;
