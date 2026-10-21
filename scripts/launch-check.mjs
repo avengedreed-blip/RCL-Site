@@ -22,7 +22,7 @@ assert.equal(project.launch, forgefieldLaunch);
 assert.equal(forgefieldLaunch.releaseDate, "2026-10-19");
 assert.equal(forgefieldLaunch.price, 4.99);
 assert.equal(forgefieldLaunch.currency, "USD");
-assert.equal(getProjectDateLabel(project), "Available on itch.io");
+assert.equal(getProjectDateLabel(project), forgefieldCampaign.released ? "Available on Steam and itch.io" : "Available on itch.io");
 assert.equal(
   getSteamStoreUrl(forgefieldLaunch),
   "https://store.steampowered.com/app/5356880/",
@@ -92,6 +92,10 @@ for (const route of ["index", "products", "projects/forgefield", "press"]) {
   }
   if (!forgefieldCampaign.released)
     assert.doesNotMatch(html, /Available now on Steam|Get FORGEFIELD on Steam/);
+  else {
+    assert.ok(html.includes("Available now on Steam"), `${route}: Steam availability`);
+    assert.doesNotMatch(html, /Coming to Steam|Launching on Steam|Wishlist on Steam|Wishlist now/);
+  }
 }
 const detail = readFileSync("out/projects/forgefield.html", "utf8");
 const schema = [

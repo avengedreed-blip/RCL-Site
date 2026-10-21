@@ -167,7 +167,7 @@ export const projects: Project[] = [
       fit: "cover",
     },
     currentFocus: [
-      "Steam release preparation",
+      "Windows playback maintenance",
       "Representative Windows hardware and long-running playback validation",
       "Live wallpaper and screensaver reliability",
     ],
@@ -196,7 +196,7 @@ export const projects: Project[] = [
     milestones: [
       { title: "Nine-world procedural collection", state: "complete" },
       { title: "itch.io release", state: "complete" },
-      { title: "Steam release", state: "planned" },
+      { title: "Steam release", state: "complete" },
     ],
     pageSections: [
       {
@@ -805,7 +805,7 @@ export function getStatusLabel(status: ProjectStatus) {
 }
 
 export function getProjectDateLabel(project: Project) {
-  if (project.slug === "forgefield") return "Available on itch.io";
+  if (project.slug === "forgefield") return forgefieldLaunch.state === "released" ? "Available on Steam and itch.io" : "Available on itch.io";
   return project.launch
     ? getLaunchCampaign(project.launch).statusLabel
     : getStatusLabel(project.status);

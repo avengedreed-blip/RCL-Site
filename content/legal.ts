@@ -2,7 +2,7 @@ import { studioEmail } from "@/content/contact";
 
 export const policyDates = {
   effective: "August 6, 2026",
-  lastUpdated: "October 14, 2026",
+  lastUpdated: "October 20, 2026",
 } as const;
 
 export type LegalSection = {
@@ -119,7 +119,7 @@ export const termsSections: LegalSection[] = [
     body: [
       "Third-party links are provided for convenience. Reed Creative Labs is not responsible for the destination's content, availability, security, or practices.",
       "If a product is distributed through a third-party storefront, that store generally handles payment, delivery, taxes, accounts, and refunds under its own terms unless Reed Creative Labs states otherwise. This website does not currently offer direct checkout.",
-      "Forgefield is available through itch.io. Its Steam listing has a separate release schedule. The optional trailer player and YouTube channel are third-party services governed by their own terms.",
+      "Forgefield is available through Steam and itch.io. Each storefront handles its own purchases and downloads. The optional trailer player and YouTube channel are third-party services governed by their own terms.",
     ],
   },
   {

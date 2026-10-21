@@ -7,11 +7,10 @@ export type ProductLaunch = {
   steamUrl: string | null;
 };
 
-// Owner-announced planned date; no launch time has been confirmed.
-// Change state to "released" only after verifying actual public Steam availability.
-// A scheduled date does not automatically switch the site to "available now".
+// Steam purchase availability and October 19 release verified October 20, 2026.
+// Release state is verified manually, never inferred from the date alone.
 export const forgefieldLaunch: ProductLaunch = {
-  state: "coming-soon",
+  state: "released",
   releaseDate: "2026-10-19",
   price: 4.99,
   currency: "USD",

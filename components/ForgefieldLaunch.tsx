@@ -18,7 +18,7 @@ export function ForgefieldLaunch({
       <div className="forgefield-launch__date">
         <p className="forgefield-available">Available Now on itch.io</p>
         <p className="forgefield-steam-schedule">
-          {forgefieldCampaign.heading}{" "}
+          {forgefieldCampaign.heading}{forgefieldCampaign.released ? " · Released " : " "}
           <time dateTime={forgefieldLaunch.releaseDate}>{forgefieldReleaseDate}</time>
           {" · "}{forgefieldPrice} USD
         </p>
