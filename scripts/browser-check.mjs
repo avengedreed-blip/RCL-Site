@@ -4,7 +4,7 @@ import { readFile, readdir, stat, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { chromium, firefox, webkit } from "playwright";
 import { createRequire } from "node:module";
-import { featuredProjects, getProject, projects } from "../content/projects.ts";
+import { featuredProjects, getProject, projects, productPages } from "../content/projects.ts";
 import { phaseArcadeGames } from "../content/phase-arcade.ts";
 import { staticPagePaths } from "../lib/site-routes.ts";
 
@@ -22,10 +22,13 @@ for (const entry of await readdir(root, { recursive: true, withFileTypes: true }
   if (start >= 0) segmentAliases.set("/" + relative.slice(0, start) + relative.slice(start).replaceAll("/", "."), file);
 }
 const mime = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".txt": "text/plain", ".xml": "application/xml", ".wasm": "application/wasm", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".svg": "image/svg+xml" };
-const deploymentHeaders = JSON.parse(await readFile("vercel.json", "utf8")).headers[0].headers;
+const deploymentConfig = JSON.parse(await readFile("vercel.json", "utf8"));
+const deploymentHeaders = deploymentConfig.headers[0].headers;
 const server = createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
+    const redirect = deploymentConfig.redirects.find(rule => !rule.has && rule.source === pathname);
+    if (redirect) { res.writeHead(redirect.permanent ? 308 : 307, { Location: redirect.destination }).end(); return; }
     let target = segmentAliases.get(pathname) ?? path.resolve(root, "." + pathname);
     if (target !== root && !target.startsWith(root + path.sep)) {
       res.writeHead(403).end();
@@ -76,7 +79,7 @@ try {
   });
   const screenshotDir = process.env.RCL_BROWSER_SCREENSHOTS;
   if (screenshotDir) await mkdir(screenshotDir, { recursive: true });
-  const routes = [...staticPagePaths, ...projects.map((project) => project.route)];
+  const routes = [...staticPagePaths, ...productPages.map((project) => project.route)];
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {
@@ -84,7 +87,7 @@ try {
       assert.equal(response.status(), 200, route);
       assert.equal(await page.locator("h1").count(), 1, route);
       assert.equal(await page.locator("main").count(), 1, route);
-      if (["/", "/products", "/projects/forgefield"].includes(route)) {
+      if (["/products", "/projects/forgefield"].includes(route)) {
         const itchLinks = page.locator("a.forgefield-itch-cta");
         assert.equal(await itchLinks.count(), route === "/products" ? 1 : 2);
         for (const link of await itchLinks.all()) {
@@ -141,7 +144,7 @@ try {
       ]) {
         assert.equal(await page.locator("footer").getByRole("link", { name: label, exact: true }).getAttribute("href"), href);
       }
-      if (route === "/" || route === "/products") {
+      if (route === "/products") {
         assert.deepEqual(
           await page.locator(".forgefield-showcase").evaluateAll(elements => elements.map(element => element.dataset.productSlug)),
           featuredProjects.map(project => project.slug),
@@ -157,8 +160,8 @@ try {
         assert.equal(await figures.count(), phaseArcadeGames.length, "Exactly three included game explanations");
         for (const [index, game] of phaseArcadeGames.entries()) {
           const figure = figures.nth(index);
-          const link = figure.getByRole("heading", { level: 3, name: game.name, exact: true }).getByRole("link");
-          assert.equal(await link.getAttribute("href"), getProject(game.slug).route, `${game.name}: canonical detail route`);
+          assert.equal(await figure.getAttribute("id"), game.slug, `${game.name}: collection anchor`);
+          assert.equal(await figure.getByRole("heading", { level: 3, name: game.name, exact: true }).count(), 1);
           assert.equal(await figure.locator("figcaption p").innerText(), game.description, `${game.name}: verified gameplay description`);
           const image = figure.locator("img");
           assert.equal(await image.getAttribute("src"), game.image, `${game.name}: approved screenshot`);
@@ -168,31 +171,11 @@ try {
           await image.evaluate(element => element.decode());
           assert.ok(await image.evaluate(element => element.naturalWidth > 0 && getComputedStyle(element).objectFit === "contain"), `${game.name}: uncropped decoded image`);
           assert.equal((await image.locator("..").boundingBox()).height, reserved.height, `${game.name}: stable image frame`);
-          assert.ok((await link.boundingBox()).height >= 44, `${game.name}: comfortable link target`);
           assert.equal(await figure.getByRole("link", { name: /^View full size:/ }).getAttribute("href"), game.image, `${game.name}: full-size media still available`);
         }
         await page.getByRole("link", { name: "Explore the Games", exact: true }).click();
         await page.waitForURL(base + route + "#gallery-title");
         assert.ok(await page.locator("#gallery-title").isVisible(), "Collection gallery anchor remains valid");
-      }
-      if (["/projects/project-load-bearing", "/projects/static-drift"].includes(route)) {
-        const images = page.locator(".v2-product-hero__media img, .v2-product-gallery img");
-        assert.equal(await images.count(), 4, `${route}: one cover and three gallery captures`);
-        for (const image of await images.all()) {
-          await image.scrollIntoViewIfNeeded();
-          const reserved = await image.locator("..").boundingBox();
-          await image.evaluate(element => element.decode());
-          const media = await image.evaluate(element => ({ width: element.naturalWidth, height: element.naturalHeight, alt: element.alt, fit: getComputedStyle(element).objectFit, gallery: Boolean(element.closest(".v2-product-gallery")) }));
-          assert.deepEqual([media.width, media.height], [2560, 1440], `${route}: full-resolution media`);
-          assert.ok(media.alt.length > 20, `${route}: descriptive media alternative`);
-          assert.equal(media.fit, media.gallery ? "contain" : "cover", `${route}: keep gallery screenshots whole and fill the responsive cover frame`);
-          const loaded = await image.locator("..").boundingBox();
-          assert.equal(loaded.height, reserved.height, `${route}: image decoding must not resize its frame`);
-        }
-        for (const figure of await page.locator(".v2-product-gallery figure").all()) {
-          assert.equal(await figure.locator("a").getAttribute("href"), await figure.locator("img").getAttribute("src"), `${route}: full-size link must open its capture`);
-        }
-        await page.evaluate(() => scrollTo(0, 0));
       }
       assert.ok(await page.locator(".reveal-enter").evaluateAll((elements) => elements.every((element) => getComputedStyle(element).animationDelay === "0s")), route + ": reduced motion must not delay content");
       await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
@@ -210,7 +193,7 @@ try {
       await page.goto(base + route, { waitUntil: "networkidle" });
       const overflow = await page.evaluate(() => [...document.querySelectorAll("main h1, main h2, main h3, main p, main a, main li")].filter((e) => !e.closest('[aria-hidden="true"]') && !e.classList.contains("sr-only") && e.getClientRects().length && getComputedStyle(e).visibility !== "hidden").filter((e) => { const b = e.getBoundingClientRect(); return b.left < -1 || b.right > innerWidth + 1 || e.scrollWidth > e.clientWidth + 2; }).map((e) => e.textContent.trim().slice(0, 80)));
       assert.deepEqual(overflow, [], `${route} at ${width}: overflow`);
-      if (screenshotDir && ["/", "/products", "/projects/forgefield"].includes(route)) {
+      if (screenshotDir && ["/products", "/projects/forgefield"].includes(route)) {
         for (const image of await page.locator(".forgefield-capture img").all()) {
           await image.scrollIntoViewIfNeeded();
           await image.evaluate(image => image.decode());
@@ -223,10 +206,10 @@ try {
         assert.ok(values.length && values.every(value => value.width >= 120 && !value.overflow), `Forgefield at ${width}: readable technical values`);
       }
       if (route === "/services") {
-        const scopeCopy = await page.locator(".v2-services-boundaries__list li p").evaluateAll(elements => elements.map(e => getComputedStyle(e).display));
+        const scopeCopy = await page.locator(".commercial-two-column p").evaluateAll(elements => elements.map(e => getComputedStyle(e).display));
         assert.ok(scopeCopy.length && scopeCopy.every(display => display !== "grid"), "Scope paragraphs must not place text in a nested number column");
       }
-      if (width < 768 && (route === "/" || route === "/products")) {
+      if (width < 768 && route === "/products") {
         const chapters = await page.locator(".forgefield-showcase").evaluateAll(elements => elements.map(element => {
           const bottom = selector => element.querySelector(selector).getBoundingClientRect().bottom;
           const top = selector => element.querySelector(selector).getBoundingClientRect().top;
@@ -243,10 +226,9 @@ try {
     for (const route of ["/", "/products", "/projects/forgefield"]) {
       await mediaPage.goto(base + route, { waitUntil: "networkidle" });
       if (route === "/") {
-        const announcement = await mediaPage.locator(".forgefield-hero-launch time").boundingBox();
-        assert.ok(announcement.y + announcement.height <= 600, "Home release date visible in initial short viewport");
-        const purchaseAction = await mediaPage.locator(".v2-hero .forgefield-itch-cta").boundingBox();
-        assert.ok(purchaseAction.y + purchaseAction.height <= 600, "Home primary itch.io CTA visible in initial short viewport");
+        assert.ok(await mediaPage.locator('.v2-hero a[href="/contact"]').isVisible());
+        assert.match(await mediaPage.locator("h1").innerText(), /Software that looks exceptional/);
+        continue; // Storefront detail and native captures remain on product routes.
       }
       const launches = mediaPage.locator(".forgefield-launch");
       assert.equal(await launches.count(), route === "/projects/forgefield" ? 2 : 1);
@@ -278,7 +260,8 @@ try {
         assert.notEqual(await link.evaluate(el => getComputedStyle(el).outlineStyle), "none", "Visible image focus ring");
         assert.ok((await link.boundingBox()).height >= 44, "Image touch target");
       }
-      assert.ok(await mediaPage.getByRole("link", { name: "Services", exact: true }).first().isVisible(), "Services stays discoverable on short displays");
+      await mediaPage.locator(".commercial-nav:visible summary").filter({ hasText: "Hire RCL" }).click();
+      assert.ok(await mediaPage.locator(".commercial-nav:visible").getByRole("link", { name: "Services", exact: true }).isVisible(), "Services is discoverable in Hire RCL");
       if (route === "/projects/forgefield") {
         assert.equal(await mediaPage.locator(".forgefield-world-index li").count(), 9);
         await mediaPage.locator(".forgefield-availability").scrollIntoViewIfNeeded();
@@ -295,7 +278,7 @@ try {
     const overflow = await page.locator("main h1, main h2, main h3, main p, main a, main li").evaluateAll(elements => elements.filter(e => !e.closest('[aria-hidden="true"]') && !e.classList.contains("sr-only")).filter(e => { const b = e.getBoundingClientRect(); return b.left < -1 || b.right > innerWidth + 1 || e.scrollWidth > e.clientWidth + 2; }).map(e => e.textContent.trim().slice(0, 80)));
     assert.deepEqual(overflow, [], `${route}: 200% text enlargement`);
   }
-  for (const project of projects) {
+  for (const project of productPages) {
     const listingRoute = project.parentProject
       ? getProject(project.parentProject).route
       : "/products";
@@ -309,13 +292,24 @@ try {
     await page.waitForURL(base + listingRoute);
     await page.waitForLoadState("networkidle");
   }
+  for (const project of projects.filter(project => !productPages.includes(project))) {
+    const redirect = deploymentConfig.redirects.find(rule => rule.source === project.route);
+    const response = await page.request.get(base + project.route, { maxRedirects: 0 });
+    assert.equal(response.status(), 308, `${project.slug}: permanent legacy redirect`);
+    assert.equal(response.headers().location, redirect.destination);
+    await page.goto(base + project.route, { waitUntil: "networkidle" });
+    assert.equal(page.url(), base + redirect.destination);
+    assert.equal(await page.locator("h1").count(), 1);
+    const anchor = redirect.destination.split("#")[1];
+    if (anchor) assert.ok(await page.locator(`[id="${anchor}"]`).isVisible(), `${project.slug}: visible redirect destination`);
+  }
   await page.goto(base + "/contact", { waitUntil: "networkidle" });
   await page.evaluate(() => Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: () => Promise.reject(new Error("Permission denied")) } }));
   await page.getByRole("button", { name: /copy email/i }).click();
-  assert.match(await page.getByRole("status").innerText(), /Copy unavailable/);
+  assert.match(await page.locator(".commercial-contact-aside").getByRole("status").innerText(), /Copy unavailable/);
   await page.evaluate(() => Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async () => {} } }));
   await page.getByRole("button", { name: /copy email/i }).click();
-  assert.match(await page.getByRole("status").innerText(), /copied/);
+  assert.match(await page.locator(".commercial-contact-aside").getByRole("status").innerText(), /copied/);
   await page.goto(base + "/", { waitUntil: "networkidle" });
   if (engine === "webkit" && process.platform === "win32") {
     console.log("Windows WebKit: native Tab traversal is unavailable in this runner; testing skip-link keyboard activation.");
@@ -379,14 +373,14 @@ try {
   });
   await noGraphics.goto(base + "/");
   await noGraphics.waitForFunction(() => document.querySelector(".fortran-flow-hero")?.dataset.heroMode === "fallback");
-  assert.match(await noGraphics.locator("h1").innerText(), /FORGEFIELD/);
+  assert.match(await noGraphics.locator("h1").innerText(), /Software that looks exceptional/);
   const noJS = await browser.newPage({ javaScriptEnabled: false });
   await noJS.goto(base + "/services");
-  assert.match(await noJS.locator("h1").innerText(), /Custom software/);
+  assert.match(await noJS.locator("h1").innerText(), /Websites and software/);
   assert.ok(await noJS.locator('a[href="/contact"]').count());
   await noJS.goto(base + "/");
   assert.equal(await noJS.locator(".hero-system-field__image").count(), 1);
-  assert.equal((await noJS.locator(".fortran-flow-hero__caption").innerText()).toLowerCase(), "simulation field\ndeterministic renderer still");
+  assert.match(await noJS.locator("h1").innerText(), /Software that looks exceptional/);
   console.log("Console messages on valid routes:", JSON.stringify([...consoleMessages]));
   await page.goto(base + "/does-not-exist");
   assert.match(await page.locator("h1").innerText(), /route ends/i);

@@ -1,20 +1,21 @@
 type PerformanceEvent = { url: string; route?: string };
 
-// Web Analytics deliberately accepts page views only, with no custom payloads.
+// Page views by default. Optional conversion events use fixed names at the caller.
 export function sanitizeAnalyticsEvent(
   event: { type: string; url: string },
   allowedPaths: readonly string[],
   origin: string,
   privacy: { doNotTrack?: string | null; globalPrivacyControl?: unknown } = {},
-): { type: "pageview"; url: string } | null {
+  conversionEvents = false,
+): { type: "pageview" | "event"; url: string } | null {
   if (
-    event.type !== "pageview" ||
+    (event.type !== "pageview" && !(conversionEvents && event.type === "event")) ||
     privacy.doNotTrack === "1" ||
     privacy.globalPrivacyControl === true
   ) return null;
 
   const clean = sanitizePerformanceEvent(event, allowedPaths, origin);
-  return clean ? { type: "pageview", url: clean.url } : null;
+  return clean ? { type: event.type as "pageview" | "event", url: clean.url } : null;
 }
 
 // Only published page paths are eligible; arbitrary 404 URLs can contain PII.

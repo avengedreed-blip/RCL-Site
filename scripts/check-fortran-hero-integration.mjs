@@ -89,7 +89,7 @@ const requirements = [
     'className="fortran-flow-hero__visual" aria-hidden="true"',
     "decorative canvas accessibility",
   ],
-  [page, "FORGEFIELD", "flagship launch heading"],
+  [page, "Software that looks exceptional.", "commercial studio heading"],
   [page, "<FortranFlowHero />", "homepage integration"],
   [
     styles,

@@ -1,5 +1,5 @@
 import { PrivacySpeedInsights } from "@/components/PrivacySpeedInsights";
-import { projects } from "@/content/projects";
+import { productPages } from "@/content/projects";
 import { staticPagePaths } from "@/lib/site-routes";
 
 export function ProductionSpeedInsights() {
@@ -10,7 +10,7 @@ export function ProductionSpeedInsights() {
   return (
     <PrivacySpeedInsights allowedPaths={[
       ...staticPagePaths,
-      ...projects.map((project) => project.route),
+      ...productPages.map((project) => project.route),
     ]} />
   );
 }

@@ -50,9 +50,10 @@ export default function PressPage() {
         <Reveal className="v2-press-boilerplate" delay={0.06}>
           <p className="v2-eyebrow">Studio boilerplate</p>
           <p>
-            Reed Creative Labs is an independent software and engineering studio
-            building tools, simulations, desktop software, games, websites, and
-            custom software with privacy, ownership, and lasting value in mind.
+            Reed Creative Labs is an independent creative technology and software
+            development studio serving US businesses and creative agencies nationwide.
+            Its services include websites, front-end applications, automation,
+            agency implementation, and technical visualization.
             The studio’s primary product is {featuredProductNames}.{" "}
             {forgefieldLaunchSummary} Archived work remains available as
             selected R&D, not a release roadmap.

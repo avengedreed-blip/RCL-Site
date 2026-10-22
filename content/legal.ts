@@ -2,7 +2,7 @@ import { studioEmail } from "@/content/contact";
 
 export const policyDates = {
   effective: "August 6, 2026",
-  lastUpdated: "October 20, 2026",
+  lastUpdated: "October 21, 2026",
 } as const;
 
 export type LegalSection = {
@@ -20,7 +20,7 @@ export const privacySections: LegalSection[] = [
   {
     title: "Information processed when you visit",
     body: [
-      "The website does not require accounts and does not intentionally collect personal information through forms, newsletters, purchases, or user profiles.",
+      "The website does not require accounts. The project inquiry form prepares an email draft locally on your device; it does not submit details to a server, save them in browser storage, or confirm delivery. You decide whether to send the email through your email provider.",
       "The site is hosted by Vercel. Vercel may process ordinary technical information needed to deliver and protect the site, such as an IP address, browser and device information, requested URLs, timestamps, and security or error logs. Reed Creative Labs may review limited hosting logs when operating or troubleshooting the site.",
     ],
   },
@@ -31,8 +31,8 @@ export const privacySections: LegalSection[] = [
       "Speed Insights uses native browser performance APIs and first-party Vercel intake routes. Reed Creative Labs does not use cookies, local storage, session storage, advertising identifiers, custom analytics events, or visitor profiles for this measurement.",
       "Performance records are limited to published page paths. Unknown URLs, including mistyped addresses, are excluded. Records are also suppressed when the browser signals Do Not Track or Global Privacy Control.",
       "The production website is also configured to use Vercel Web Analytics for aggregate visitor totals, page views, and popular pages. Vercel uses a daily visitor hash derived from incoming requests to group page views; the visitor session is discarded after 24 hours. This measurement is not zero-data collection. Vercel may process timestamps, page URLs, referrers, approximate location, browser and operating-system versions, device type, and SDK version. It does not use analytics cookies or identifiers that track visitors across different days or websites.",
-      "Web Analytics page URLs are limited to published paths with query strings and fragments removed. Unknown URLs and custom events are dropped, and Do Not Track or Global Privacy Control suppresses page-view records. These signals do not prevent the analytics script request or ordinary hosting processing. Reed Creative Labs does not send names, email addresses, form contents, account IDs, or custom click events to analytics. The site does not use advertising analytics, tracking pixels, behavioral advertising, session recording, heatmaps, or cross-site tracking.",
-      "The copy-email control uses the browser Clipboard API only after you select it and does not send clipboard contents to Reed Creative Labs.",
+      "Web Analytics page URLs are limited to published paths with query strings and fragments removed. Unknown URLs are dropped. Optional conversion measurement, disabled unless configured for a supported Vercel plan, counts contact clicks, partnership inquiry clicks, and product storefront clicks using fixed event names without additional properties. A click or prepared email is not a confirmed inquiry submission. Names, email addresses, company names, budgets, form contents, and destination query strings are never sent as analytics properties. Do Not Track or Global Privacy Control suppresses page-view and conversion records. These signals do not prevent the analytics script request or ordinary hosting processing. The site does not use advertising analytics, tracking pixels, behavioral advertising, session recording, heatmaps, or cross-site tracking.",
+      "Copy Email and Copy Draft use the browser Clipboard API only after you select them. The site does not read your clipboard. Preparing a draft leaves the information on the page until you navigate away; opening your email app passes the draft to that app.",
     ],
   },
   {

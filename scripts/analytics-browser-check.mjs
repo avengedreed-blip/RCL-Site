@@ -6,6 +6,7 @@ import { chromium } from "playwright";
 
 // Run against an existing export. Stub provider scripts: never send test telemetry.
 const expected = process.argv.includes("--production");
+const conversions = process.argv.includes("--conversions");
 const root = path.resolve("out");
 const server = createServer(async (req, res) => {
   try {
@@ -58,7 +59,22 @@ try {
       });
       assert.deepEqual(result.clean, signal === "none" ? { type: "pageview", url: "https://reedcreativelabs.com/contact" } : null);
       assert.equal(result.unknown, null);
-      assert.equal(result.custom, null);
+      assert.deepEqual(result.custom, conversions && signal === "none" ? { type: "event", url: "https://reedcreativelabs.com/" } : null);
+      if (conversions) {
+        const events = await page.evaluate(() => {
+          // Prevent navigation at window after the document tracking listener.
+          window.addEventListener("click", event => event.preventDefault(), { once: true });
+          const link = document.createElement("a");
+          link.href = "/contact#agency-inquiry";
+          document.body.append(link); link.click(); link.remove();
+          return window.vaq.filter(([type]) => type === "event").map(([, payload]) => payload);
+        });
+        if (signal === "none") {
+          assert.equal(events.length, 1);
+          assert.equal(events[0].name, "partnership_inquiry");
+          assert.ok(!events[0].data || Object.keys(events[0].data).length === 0);
+        } else assert.deepEqual(events, []);
+      }
       assert.ok(result.pageviews >= 1, "Next.js SDK must queue the page view");
       assert.equal(result.local, 0);
       assert.equal(result.session, 0);

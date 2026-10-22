@@ -3,13 +3,18 @@ import { Logo } from "@/components/Logo";
 import { ButtonLink } from "@/components/ButtonLink";
 import { studioEmail, studioEmailHref } from "@/content/contact";
 
-const studioLinks = [
-  { href: "/products", label: "Products" },
+const hireLinks = [
   { href: "/services", label: "Services" },
   { href: "/agency-partners", label: "Agency Partnerships" },
+  { href: "/work", label: "Work / Portfolio" },
+  { href: "/contact", label: "Start a Project" },
+];
+
+const studioLinks = [
+  { href: "/products", label: "Games & Products" },
+  { href: "/science-lab", label: "Science Lab" },
   { href: "/about", label: "About" },
   { href: "/press", label: "Press" },
-  { href: "/contact", label: "Contact" },
 ];
 
 const legalLinks = [
@@ -17,14 +22,6 @@ const legalLinks = [
   { href: "/terms", label: "Terms" },
   { href: "/accessibility", label: "Accessibility" },
   { href: "/security", label: "Security" },
-];
-
-const disciplines = [
-  "Software development",
-  "Scientific simulation",
-  "AI solutions",
-  "Interactive media",
-  "Websites",
 ];
 
 export function SiteFooter() {
@@ -38,19 +35,19 @@ export function SiteFooter() {
             engineering studio.
           </p>
           <p className="footer-shell__location">
-            South Carolina · Remote inquiries
+            South Carolina · Remote-first · US nationwide
           </p>
         </div>
         <div className="footer-shell__column">
-          <p className="footer-shell__label">Core disciplines</p>
-          <ul className="footer-shell__disciplines">
-            {disciplines.map((discipline) => (
-              <li key={discipline}>{discipline}</li>
+          <p className="footer-shell__label">Hire RCL</p>
+          <nav className="footer-shell__nav" aria-label="Hire RCL links">
+            {hireLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="footer-shell__link">{link.label}</Link>
             ))}
-          </ul>
+          </nav>
         </div>
         <div className="footer-shell__column">
-          <p className="footer-shell__label">Studio</p>
+          <p className="footer-shell__label">Explore RCL</p>
           <nav className="footer-shell__nav" aria-label="Studio links">
             {studioLinks.map((link) => (
               <Link

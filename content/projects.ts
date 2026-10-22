@@ -766,6 +766,12 @@ export const projects: Project[] = [
 
 export const featuredProjectSlugs = ["forgefield"] as const;
 
+// Portfolio references are retained in the registry without publishing detail pages.
+export const productPageSlugs = ["forgefield", "phase-arcade-volume-1"] as const;
+export const productPages = projects.filter((project) =>
+  productPageSlugs.some((slug) => slug === project.slug),
+);
+
 export const featuredProjects = featuredProjectSlugs
   .map((slug) => getProject(slug))
   .filter((project): project is Project => Boolean(project));

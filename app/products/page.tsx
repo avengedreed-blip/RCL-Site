@@ -32,14 +32,12 @@ export default function ProductsPage() {
         <Reveal>
           <p className="v2-eyebrow">Products & selected R&D</p>
           <h1>
-            Broad curiosity.
-            <br />
-            Deliberate focus.
+            Games & software.
           </h1>
           <p>
-            Forgefield is the studio’s primary product. Explore the upcoming
-            Phase Arcade collection, smaller mobile projects, and selected
-            technical experiments.
+            Forgefield is available now for Windows. Phase Arcade is an upcoming
+            collection of three arcade games. Earlier work and technical studies
+            are collected below as studio references.
           </p>
         </Reveal>
       </header>
@@ -57,7 +55,7 @@ export default function ProductsPage() {
         <div className="v2-catalog-ledger-section">
           <div className="v2-section-intro v2-section-intro--compact">
             <p className="v2-eyebrow">Selected R&D</p>
-            <h2 id="research-products-title">Experiments with substance.</h2>
+            <h2 id="research-products-title">Technical studies.</h2>
             <p>
               Archived prototypes in structural simulation, native rendering,
               and desktop/VR interaction. Technical evidence, with no current
@@ -84,7 +82,7 @@ export default function ProductsPage() {
             labelledBy="mobile-products-title"
           />
         </div>
-        <details className="studio-archive">
+        <details id="studio-archive" className="studio-archive">
           <summary>
             From the archive <span>Earlier concepts and project studies</span>
           </summary>

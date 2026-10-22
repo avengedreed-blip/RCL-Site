@@ -2,10 +2,13 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { sanitizePerformanceEvent, sanitizeAnalyticsEvent } from "../lib/privacy-metrics.ts";
 import { staticPagePaths } from "../lib/site-routes.ts";
-import { projects } from "../content/projects.ts";
+import { productPages, projects } from "../content/projects.ts";
 
 const origin = "https://reedcreativelabs.com";
-const paths = [...staticPagePaths, ...projects.map((project) => project.route)];
+const paths = [...staticPagePaths, ...productPages.map((project) => project.route)];
+for (const project of projects.filter(project => !productPages.includes(project))) {
+  assert.equal(sanitizeAnalyticsEvent({ type: "pageview", url: origin + project.route }, paths, origin), null, `${project.slug}: removed pages must not be tracked`);
+}
 for (const route of paths) {
   const event = { type: "vital", url: origin + route + "?email=private@example.com#secret", route: "/private" };
   const result = sanitizePerformanceEvent(event, paths, origin);

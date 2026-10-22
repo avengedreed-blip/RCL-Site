@@ -22,8 +22,8 @@ export const metadata: Metadata = buildMetadata({
 
 const disciplines = [
   {
-    title: "AI and engineering tools",
-    body: "Systems that help inspect, plan, build, audit, and maintain complex technical work.",
+    title: "Websites and business tools",
+    body: "Business websites, front-end applications, and practical automation for companies and creative agencies nationwide.",
   },
   {
     title: "Scientific software",
@@ -71,7 +71,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="One studio for software, simulation, and interactive systems."
-        body="Reed Creative Labs is a veteran-founded, family-built independent software and engineering studio. The work spans different disciplines because the same underlying questions appear across them: how systems behave, how people understand them, and how software can remain useful over time."
+        body="Reed Creative Labs is a veteran-founded, family-built creative technology and software development studio. We build websites, front-end applications, practical automation, and technical visualizations for US clients nationwide. Our own games and software remain an important part of the studio’s work."
       />
 
       <section className="v2-container v2-about-mission">
@@ -91,16 +91,16 @@ export default function AboutPage() {
           </div>
           <div className="v2-about-mission__copy">
             <p>
-              The studio is focused on Forgefield and accepts carefully scoped
-              client work. In both cases, the standard is the same: direct
-              purpose, maintainable engineering, clear interaction, and honest
-              presentation.
+              Client services and agency implementation are the studio’s commercial
+              focus. Original products, including Forgefield and Phase Arcade,
+              give the same engineering practice room to explore simulation,
+              graphics, and interaction.
             </p>
             <p>
-              AI tools, scientific simulation, desktop software, visualization,
-              and games belong together here because each asks people to reason
-              about a system. The interface may change. The engineering problem
-              is still one of state, feedback, constraints, and consequences.
+              A business website needs people to find the right information and
+              take the next step. A simulation needs people to understand what
+              they are seeing and how it responds. In both, the interface and
+              the implementation need to support each other.
             </p>
           </div>
         </Reveal>
@@ -182,7 +182,7 @@ export default function AboutPage() {
           </Link>
         </Reveal>
         <ButtonLink href="/contact" variant="contact">
-          Contact the Studio
+          Start a Project
         </ButtonLink>
       </section>
     </main>

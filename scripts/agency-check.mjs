@@ -81,7 +81,7 @@ try {
     await page.screenshot({ path: `${output}/agency-${width}.png`, fullPage: true });
     if (width === 1440) await page.screenshot({ path: `${output}/agency-hero.png` });
     measurements.push({ width, height: await page.locator("main").evaluate(e => e.offsetHeight), axeViolations: violations.length });
-    const discuss = page.getByRole("link", { name: "Discuss a Partnership", exact: true });
+    const discuss = page.getByRole("link", { name: "Discuss a Partnership", exact: true }).first();
     await discuss.focus();
     assert.notEqual(await discuss.evaluate(e => getComputedStyle(e).outlineStyle), "none");
     await page.keyboard.press("Tab");
@@ -137,7 +137,7 @@ try {
   }
   const noJS = await browser.newPage({ javaScriptEnabled: false });
   await noJS.goto(base + "/agency-partners");
-  assert.ok(await noJS.getByRole("link", { name: "Discuss a Partnership", exact: true }).isVisible());
+  assert.ok(await noJS.getByRole("link", { name: "Discuss a Partnership", exact: true }).first().isVisible());
   assert.ok(await noJS.getByRole("heading", { name: "Your vision. Our technical execution." }).isVisible());
   assert.deepEqual(errors, []);
   await writeFile(`${output}/results.json`, JSON.stringify(measurements, null, 2));

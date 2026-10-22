@@ -1,10 +1,9 @@
-import { forgefieldLaunchSummary } from "@/content/forgefield";
 import type { Metadata } from "next";
 
 export const siteUrl = "https://reedcreativelabs.com";
 export const siteName = "Reed Creative Labs";
 
-const defaultDescription = `The independent studio behind Forgefield. ${forgefieldLaunchSummary} Premium websites and focused custom software by Reed Creative Labs.`;
+const defaultDescription = "Reed Creative Labs builds business websites, front-end applications, practical automation, and technical visualizations for companies and creative agencies nationwide.";
 
 type SeoOptions = {
   title: string;

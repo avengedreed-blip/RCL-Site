@@ -69,12 +69,77 @@
     },
     {
       "source": "/projects/forgefield-tv",
-      "destination": "/projects/static-drift",
+      "destination": "/products#static-drift",
       "permanent": true
     },
     {
       "source": "/projects/static-drift-tv",
-      "destination": "/projects/static-drift",
+      "destination": "/products#static-drift",
+      "permanent": true
+    },
+    {
+      "source": "/projects/project-load-bearing",
+      "destination": "/products#project-load-bearing",
+      "permanent": true
+    },
+    {
+      "source": "/projects/static-drift",
+      "destination": "/products#static-drift",
+      "permanent": true
+    },
+    {
+      "source": "/projects/neon-drift",
+      "destination": "/products#neon-drift",
+      "permanent": true
+    },
+    {
+      "source": "/projects/falling-from-the-sky",
+      "destination": "/products#falling-from-the-sky",
+      "permanent": true
+    },
+    {
+      "source": "/projects/phase-shift",
+      "destination": "/projects/phase-arcade-volume-1#phase-shift",
+      "permanent": true
+    },
+    {
+      "source": "/projects/phase-breaker",
+      "destination": "/projects/phase-arcade-volume-1#phase-breaker",
+      "permanent": true
+    },
+    {
+      "source": "/projects/phase-court",
+      "destination": "/projects/phase-arcade-volume-1#phase-court",
+      "permanent": true
+    },
+    {
+      "source": "/projects/pigs-can-fly",
+      "destination": "/products#pigs-can-fly",
+      "permanent": true
+    },
+    {
+      "source": "/projects/phase-arcade-volume-2",
+      "destination": "/products#studio-archive",
+      "permanent": true
+    },
+    {
+      "source": "/projects/darren-in-the-woods-2",
+      "destination": "/products#studio-archive",
+      "permanent": true
+    },
+    {
+      "source": "/projects/talk-to-me",
+      "destination": "/products#studio-archive",
+      "permanent": true
+    },
+    {
+      "source": "/projects/bloom",
+      "destination": "/products#studio-archive",
+      "permanent": true
+    },
+    {
+      "source": "/projects/misread",
+      "destination": "/products#studio-archive",
       "permanent": true
     }
   ],

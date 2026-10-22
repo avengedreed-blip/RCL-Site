@@ -3,6 +3,8 @@ export const staticPagePaths = [
   "/products",
   "/services",
   "/agency-partners",
+  "/work",
+  "/science-lab",
   "/about",
   "/about/founder",
   "/press",

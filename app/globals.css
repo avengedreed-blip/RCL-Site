@@ -2353,7 +2353,7 @@ a {
 .product-ledger__row {
   display: grid;
   min-height: 126px;
-  grid-template-columns: 38px minmax(150px, 0.58fr) minmax(220px, 1fr) minmax(120px, auto) 20px;
+  grid-template-columns: 38px minmax(150px, 0.58fr) minmax(220px, 1fr) minmax(120px, auto);
   gap: 1.5rem;
   align-items: center;
   color: var(--color-text-primary);
@@ -2362,7 +2362,7 @@ a {
     background-color 220ms var(--v2-ease);
 }
 
-.product-ledger__row:hover {
+a.product-ledger__row:hover {
   color: var(--color-rcl-gold);
   background: rgb(var(--color-accent-gold-rgb) / 0.025);
 }
@@ -3696,11 +3696,10 @@ a {
 
 .v2-about-disciplines__list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   border-top: 1px solid var(--v2-hairline-strong);
 }
 
-.v2-about-disciplines__list article,
 .v2-contact-paths__list article {
   min-height: 210px;
   padding: 1.5rem;
@@ -3711,11 +3710,17 @@ a {
     var(--color-graphite-850);
 }
 
-.v2-about-disciplines__list > div:nth-child(odd) article {
-  border-left: 1px solid var(--v2-hairline);
+.v2-about-disciplines__list article {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: .75rem 1rem;
+  padding-block: 1.75rem;
+  border-bottom: 1px solid var(--v2-hairline);
 }
 
-.v2-about-disciplines__list h3,
+.v2-about-disciplines__list h3 { margin: 0; }
+.v2-about-disciplines__list p { grid-column: 2; }
+
 .v2-contact-paths__list h3 {
   margin-top: 2.2rem;
 }

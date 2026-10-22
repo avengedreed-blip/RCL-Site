@@ -64,7 +64,8 @@ assert.equal(
   "https://store.steampowered.com/app/123/Example/",
 );
 
-for (const route of ["index", "products", "projects/forgefield", "press"]) {
+// The commercial homepage links to the product; detailed storefront state stays on product surfaces.
+for (const route of ["products", "projects/forgefield", "press"]) {
   const html = readFileSync(`out/${route}.html`, "utf8");
   if (route !== "press" || !forgefieldCampaign.released)
     assert.ok(html.includes(forgefieldReleaseDate), `${route}: release date`);

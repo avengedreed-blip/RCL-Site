@@ -1,9 +1,8 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { featuredProjects, getProject, mobileProjects, projects } from "../content/projects.ts";
+import { featuredProjects, getProject, mobileProjects, projects, productPages } from "../content/projects.ts";
 import { phaseArcadeGames } from "../content/phase-arcade.ts";
 import {
-  getProjectGalleryCopy,
   getProjectScreenshots,
   getProjectSocialImage,
 } from "../lib/project-media.ts";
@@ -322,8 +321,8 @@ const requiredRedirects = new Map([
   ["/projects/phase-defense", "/products"],
   ["/projects/forge", "/products"],
   ["/projects/storm-lab", "/products"],
-  ["/projects/forgefield-tv", "/projects/static-drift"],
-  ["/projects/static-drift-tv", "/projects/static-drift"],
+  ["/projects/forgefield-tv", "/products#static-drift"],
+  ["/projects/static-drift-tv", "/products#static-drift"],
   ["/privacy-policy", "/privacy"],
 ]);
 
@@ -440,7 +439,7 @@ if (existsSync(routeFile("/projects"))) {
   fail("A duplicate static /projects catalog output was generated");
 }
 
-for (const project of projects) {
+for (const project of productPages) {
   const pageFile = routeFile(project.route);
   if (!existsSync(pageFile))
     fail(`Missing product route output: ${project.route}`);
@@ -533,7 +532,7 @@ const heroMediaSource = readFileSync(
   "utf8",
 );
 const expectedHomeTitle =
-  "<title>Reed Creative Labs | Software, Simulation &amp; Interactive Systems</title>";
+  "<title>Reed Creative Labs | Websites &amp; Creative Technology</title>";
 
 if (!homepage.includes(expectedHomeTitle)) {
   fail("Homepage title does not match the approved post-launch title");
@@ -560,21 +559,13 @@ if (
     "Decorative hero fallback image must remain hidden from assistive technology",
   );
 }
-const positions = expectedFeatured.map((slug) =>
-  homepage.indexOf(`data-product-slug="${slug}"`),
-);
-if (positions.some((position) => position < 0))
-  fail("Homepage is missing a required featured product");
-if (
-  positions.some(
-    (position, index) => index > 0 && position <= positions[index - 1],
-  )
-) {
-  fail("Homepage featured products are not in the required order");
+for (const required of ['href="/contact"', 'href="/work"', 'href="/products"', 'href="/science-lab"', 'href="/projects/forgefield"', 'Client work / Business website', 'Original RCL product / Released']) {
+  if (!homepage.includes(required)) fail(`Commercial homepage missing ${required}`);
 }
+if (homepage.indexOf('id="services-title"') > homepage.indexOf('id="work-title"')) fail("Services must precede work on the commercial homepage");
 
 const productsPage = readFileSync(routeFile("/products"), "utf8");
-for (const [route, html] of [["/", homepage], ["/products", productsPage]]) {
+for (const [route, html] of [["/products", productsPage]]) {
   if (html.includes('id="included-games-title"'))
     fail(`${route} must not repeat the included-games section`);
   if ((html.match(/data-product-slug="phase-arcade-volume-1"/g) ?? []).length !== 1)
@@ -587,22 +578,9 @@ for (const [route, html] of [["/", homepage], ["/products", productsPage]]) {
       fail(`${route} must leave individual game exploration on the collection page`);
   }
 }
-for (const html of [homepage, productsPage]) {
+for (const html of [productsPage]) {
   if (!html.includes('data-product-slug="forgefield" data-treatment="lead"')) fail("Missing Forgefield editorial lead");
   if (!html.includes('href="/projects/forgefield"')) fail("Missing Forgefield detail action");
-}
-for (const { slug, cover, gallery } of developmentMedia) {
-  const html = readFileSync(routeFile(`/projects/${slug}`), "utf8");
-  const copy = getProjectGalleryCopy(getProject(slug).visual);
-  if (!html.includes('data-flagship-section="gallery"') || !html.includes('data-gallery-layout="development"'))
-    fail(`${slug} must render its development gallery`);
-  for (const src of [cover, ...gallery]) {
-    if (!html.includes(src)) fail(`${slug} must render its selected capture: ${src}`);
-  }
-  if (!copy || !html.includes(copy.title) || !html.includes(copy.context) || !html.includes(copy.action))
-    fail(`${slug} must use its own gallery copy and dated development context`);
-  if (html.includes("Three games. Three ways to play.") || html.includes("Images coming soon."))
-    fail(`${slug} must not inherit unrelated game or placeholder gallery copy`);
 }
 const forgefieldHtml = readFileSync(routeFile("/projects/forgefield"), "utf8");
 if (!forgefieldHtml.includes("September 20, 2026 pre-release Windows build"))
@@ -623,15 +601,15 @@ if (
   homepage.includes('id="research-title"')
 )
   fail("Homepage should not reintroduce multiple closing statements");
-const servicesHtml = readFileSync(routeFile("/services"), "utf8");
+const workHtml = readFileSync(routeFile("/work"), "utf8");
 for (const text of [
   "Internal RCL project",
   "WebAssembly",
   "reduced-motion",
-  "rcl-site-desktop-2026-09.webp",
-  "rcl-site-mobile-2026-09.webp",
+  "rcl-studio-desktop-2026-10-21.jpg",
+  "rcl-studio-mobile-2026-10-21.jpg",
 ]) {
-  if (!servicesHtml.includes(text))
+  if (!workHtml.includes(text))
     fail(`Internal case study missing provenance or context: ${text}`);
 }
 if (publicHtml.includes('href="/projects"')) {
@@ -665,12 +643,12 @@ for (const [slug, status] of [
   for (const [label, html] of [
     ...(slug === "forgefield" ? [["Home", homepage], ["Press", pressPage]] : []),
     ["Products", productsPage],
-    ["detail", readFileSync(routeFile(project.route), "utf8")],
+    ...(productPages.includes(project) ? [["detail", readFileSync(routeFile(project.route), "utf8")]] : []),
   ]) {
     if (!html.includes(project.name) || !html.includes(status))
       fail(`${label} omits ${project.name} or ${status}`);
   }
-  if (!discovery.includes(`https://reedcreativelabs.com${project.route}`))
+  if (!discovery.includes(`https://reedcreativelabs.com${productPages.includes(project) ? project.route : `/products#${slug}`}`))
     fail(`llms.txt omits ${project.route}`);
 }
 for (const retired of retiredProducts) {
@@ -691,9 +669,8 @@ const phaseArcadePage = readFileSync(
   "utf8",
 );
 for (const game of phaseArcadeGames) {
-  const route = getProject(game.slug)?.route;
-  if (!route || !phaseArcadePage.includes(`href="${route}"`))
-    fail(`Phase Arcade must retain a route to ${game.name}`);
+  if (!phaseArcadePage.includes(`id="${game.slug}"`) || phaseArcadePage.includes(`href="/projects/${game.slug}"`))
+    fail(`Phase Arcade must present ${game.name} within its collection page`);
 }
 for (const required of [
   "Phase Shift",
@@ -711,18 +688,22 @@ for (const required of [
     fail(`Phase Arcade page is missing ${required}`);
 }
 
-// Archived status must reach metadata and structured data, not just the visible badge.
-for (const project of projects.filter(project => project.status === "archived")) {
-  const html = readFileSync(routeFile(project.route), "utf8");
-  const schema = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map(match => JSON.parse(match[1])).find(record => record.name === project.name);
-  if (schema?.["@type"] !== "CreativeWork" || schema.creativeWorkStatus !== "Archived") fail(project.slug + ": archive schema");
-  if (!/name="description" content="Archived\./.test(html)) fail(project.slug + ": archive metadata");
-  if (/awaiting final testing|primary RCL development focus|in active development/i.test(project.longDescription)) fail(project.slug + ": stale release promise");
+// Reference-only products must have neither output pages nor indexed/dead links.
+for (const project of projects.filter(project => !productPages.includes(project))) {
+  if (existsSync(routeFile(project.route)) || sitemap.includes(`https://reedcreativelabs.com${project.route}<`)) fail(`${project.slug}: unexpected detail page`);
+  if (publicHtml.includes(`href="${project.route}"`) || publicHtml.includes(`"url":"https://reedcreativelabs.com${project.route}"`)) fail(`${project.slug}: stale public link or schema URL`);
+  const redirect = vercelConfig.redirects.find(entry => entry.source === project.route);
+  if (!redirect?.permanent) fail(`${project.slug}: missing legacy redirect`);
+  const [target, anchor] = redirect.destination.split("#");
+  if (!existsSync(routeFile(target))) fail(`${project.slug}: redirect target missing`);
+  if (anchor && !readFileSync(routeFile(target), "utf8").includes(`id="${anchor}"`)) fail(`${project.slug}: redirect anchor missing`);
+  if (project.status === "archived" && /awaiting final testing|primary RCL development focus|in active development/i.test(project.longDescription)) fail(project.slug + ": stale release promise");
 }
+if (productPages.map(project => project.slug).sort().join(",") !== "forgefield,phase-arcade-volume-1") fail("Only Forgefield and Phase Arcade may publish product pages");
 for (const slug of ["project-load-bearing", "static-drift", "phase-arcade-volume-2", "darren-in-the-woods-2", "misread"]) {
   if (getProject(slug)?.status !== "archived") fail(slug + ": larger projects must be archived");
 }
-for (const slug of ["phase-arcade-volume-1", ...phaseArcadeGames.map(game => game.slug)]) {
+for (const slug of ["phase-arcade-volume-1"]) {
   const project = getProject(slug);
   const html = readFileSync(routeFile(project.route), "utf8");
   if (project.status !== "launching-soon" || project.platforms.join(",") !== "Windows") fail(`${slug}: upcoming Windows scope`);
@@ -733,5 +714,5 @@ for (const slug of ["phase-arcade-volume-1", ...phaseArcadeGames.map(game => gam
 if (/awaiting final testing|future roadmap/i.test(homepage + productsPage + discovery)) fail("Stale public roadmap language");
 
 console.log(
-  `Portfolio checks passed: ${projects.length} products, ${featuredProjects.length} featured.`,
+  `Portfolio checks passed: ${productPages.length} product pages, ${projects.length - productPages.length} reference-only records.`,
 );

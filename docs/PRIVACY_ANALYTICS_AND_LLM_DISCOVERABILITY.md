@@ -1,6 +1,6 @@
 # Privacy Analytics and LLM Discoverability
 
-Last reviewed: October 14, 2026
+Last reviewed: October 21, 2026
 
 ## Decision
 
@@ -9,9 +9,13 @@ daily visitor hash and technical metadata. This supersedes the earlier decision
 to exclude it. Production now includes the official Web Analytics and Speed
 Insights integrations. Local development and preview deployments omit both.
 
-Web Analytics is limited to aggregate visitor totals, page views, and popular
-pages. There are no custom click events, advertising trackers, replay, heatmaps,
-cross-site profiles, or application-supplied personal identifiers.
+Web Analytics measures aggregate visitor totals, page views, and popular pages.
+The October 21 brief also authorizes optional fixed conversion events. These
+remain disabled by default; RCL_CONVERSION_EVENTS=1 enables them on a supported
+Pro/Enterprise plan. Names: contact_click, partnership_inquiry, product_outbound.
+No event properties are supplied. These are click counts, not confirmed leads
+or purchases. No advertising, replay, heatmaps, cross-site profiles, or
+application-supplied personal identifiers are added.
 
 ## Web Analytics Data Inventory and Limits
 
@@ -20,14 +24,13 @@ visitor session discarded after 24 hours. This does not mean aggregate records
 are deleted after 24 hours. Its data points may include event time, URL, dynamic
 path, referrer, filtered query parameters, approximate geolocation, browser and
 OS versions, device type, and SDK version. RCL strips page URL queries/fragments,
-allows only published paths, and rejects custom events. Provider-derived
+allows only published paths, and rejects custom events unless explicitly enabled. Provider-derived
 metadata and hashing are not removed by that filter. This is not zero-data
 collection or a promise of no fingerprinting.
 
 `components/ProductionAnalytics.tsx` gates the integration.
 `components/PrivacyAnalytics.tsx` uses the official Next.js SDK and
-`sanitizeAnalyticsEvent` in `lib/privacy-metrics.ts`. Only clean page-view events
-are returned. Unknown, foreign-origin and credential-bearing URLs are dropped.
+`sanitizeAnalyticsEvent` in `lib/privacy-metrics.ts`. Only clean page-view URLs and, when enabled, clean conversion URLs are returned. Unknown, foreign-origin and credential-bearing URLs are dropped.
 DNT and GPC suppress records; scripts may still load and normal hosting data is
 still processed. Failure or blocking of analytics does not affect navigation.
 

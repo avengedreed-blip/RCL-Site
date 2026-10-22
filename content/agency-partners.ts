@@ -15,9 +15,9 @@ export const partnershipServices = [
     details: "Performance investigations · Accessibility improvements · Technical remediation",
   },
   {
-    title: "Custom software & internal tools",
-    body: "Focused dashboards, desktop utilities, workflow tools, and data-driven interfaces for clearly defined business needs. Automation where it makes the work simpler.",
-    details: "Defined workflows · Practical scope · Documented handoff",
+    title: "Components, tools & technical visualization",
+    body: "Custom components, dashboards, interactive data views, and focused automation built around existing APIs and managed platforms. Extra implementation capacity for a defined piece of work.",
+    details: "Front-end implementation · Minimal backend infrastructure · Documented handoff",
   },
 ];
 

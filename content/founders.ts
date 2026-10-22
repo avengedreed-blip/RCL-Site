@@ -43,7 +43,7 @@ export const founderStory = {
       "Explore the products in development, share the studio, or get in touch about the work.",
     ctas: [
       { label: "View Products", href: "/products", variant: "primary" },
-      { label: "Contact the Studio", href: "/contact", variant: "secondary" },
+      { label: "Start a Project", href: "/contact", variant: "secondary" },
     ],
   },
 } as const;

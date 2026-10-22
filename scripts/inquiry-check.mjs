@@ -1,0 +1,28 @@
+import assert from "node:assert/strict";
+import { prepareInquiry } from "../lib/inquiry.ts";
+import { conversionForLink } from "../lib/conversion-events.ts";
+import { sanitizeAnalyticsEvent } from "../lib/privacy-metrics.ts";
+
+const values = { name: "Test & Review", email: "review@example.org", company: "Test Company", brief: "A focused website project with a clear contact path.", type: "Business website", budget: "Under $1,000", timeline: "Flexible / exploring", acknowledgment: "on" };
+const data = (overrides = {}) => { const form = new FormData(); for (const [k, v] of Object.entries({ ...values, ...overrides })) form.set(k, v); return form; };
+const draft = prepareInquiry(data());
+assert.ok(!("error" in draft));
+const url = new URL(draft.href);
+assert.equal(url.protocol, "mailto:");
+assert.equal(url.pathname, "reedcreativelabs@gmail.com");
+assert.equal(url.searchParams.get("body"), draft.body);
+assert.equal(url.searchParams.get("subject"), "Project inquiry: Business website");
+assert.equal(new URL(prepareInquiry(data({ type: "Agency partnership" })).href).searchParams.get("subject"), "Agency partnership inquiry");
+for (const invalid of [{ name: " " }, { name: "Header\nInjection" }, { email: "invalid" }, { brief: "short" }, { brief: "a".repeat(1501) }, { acknowledgment: "" }, { website: "spam" }, { type: "invented" }, { budget: "fake" }, { timeline: "fake" }]) assert.ok("error" in prepareInquiry(data(invalid)), JSON.stringify(invalid).slice(0, 50));
+const origin = "https://reedcreativelabs.com";
+assert.equal(conversionForLink(draft.href, origin), "contact_click");
+assert.equal(conversionForLink("/contact#agency-inquiry", origin), "partnership_inquiry");
+assert.equal(conversionForLink("https://store.steampowered.com/app/5356880/", origin), "product_outbound");
+for (const href of ["https://store.steampowered.com.evil.org/", "mailto:another@example.org", "/work", "https://foreign.org/contact"]) assert.equal(conversionForLink(href, origin), null);
+const event = { type: "event", url: origin + "/contact?email=private#secret", email: "private", properties: values };
+assert.equal(sanitizeAnalyticsEvent(event, ["/contact"], origin), null);
+assert.deepEqual(sanitizeAnalyticsEvent(event, ["/contact"], origin, {}, true), { type: "event", url: origin + "/contact" });
+assert.equal(sanitizeAnalyticsEvent(event, ["/contact"], origin, { doNotTrack: "1" }, true), null);
+assert.equal(sanitizeAnalyticsEvent(event, ["/contact"], origin, { globalPrivacyControl: true }, true), null);
+assert.equal(sanitizeAnalyticsEvent({ ...event, url: origin + "/unknown" }, ["/contact"], origin, {}, true), null);
+console.log("Inquiry validation, encoded email drafts, fixed conversion names, opt-in gating, URL filtering, and DNT/GPC passed.");

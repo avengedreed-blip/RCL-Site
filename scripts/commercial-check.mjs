@@ -19,6 +19,9 @@ function walk(directory) {
 const requiredPages = [
   "index.html",
   "services.html",
+  "work.html",
+  "science-lab.html",
+  "agency-partners.html",
   "about.html",
   "about/founder.html",
   "contact.html",
@@ -38,10 +41,11 @@ for (const page of requiredPages) {
 
 const services = readFileSync(join(out, "services.html"), "utf8");
 for (const discipline of [
-  "Premium Websites",
-  "Custom Software",
-  "Desktop Applications",
-  "Data Visualization",
+  "Business websites",
+  "Front-end applications",
+  "Business automation",
+  "Agency implementation",
+  "Scientific &amp; technical visualization",
 ]) {
   if (!services.includes(discipline)) {
     fail(`Services page is missing discipline: ${discipline}`);
@@ -49,8 +53,8 @@ for (const discipline of [
 }
 for (const boundary of [
   "written scope",
-  "Regulated medical, legal, or financial systems",
-  "always-on cloud infrastructure",
+  "regulated healthcare or financial systems",
+  "minimal custom backend infrastructure",
   "scoped separately",
 ]) {
   if (!services.includes(boundary)) {
@@ -62,14 +66,17 @@ const contact = readFileSync(join(out, "contact.html"), "utf8");
 for (const contactRequirement of [
   "mailto:reedcreativelabs@gmail.com",
   "reedcreativelabs@gmail.com",
-  "Direct contact without an on-site form",
+  "This form prepares an email draft on your device",
+  "Prepare Email Draft",
+  "Approximate budget",
+  "Desired timeline",
 ]) {
   if (!contact.includes(contactRequirement)) {
     fail(`Contact page is missing: ${contactRequirement}`);
   }
 }
-if (/<form[\s>]/i.test(contact)) {
-  fail("Contact page unexpectedly contains an on-site form");
+if (!/<form[\s>]/i.test(contact)) {
+  fail("Contact page is missing the email inquiry form");
 }
 
 const htmlFiles = walk(out).filter((file) => file.endsWith(".html"));

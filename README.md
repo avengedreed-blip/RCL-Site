@@ -69,8 +69,8 @@ omitted unless `VERCEL_ENV=production`.
 
 The owner approved Vercel Web Analytics on October 9, 2026, including its daily
 visitor hash and technical metadata. This supersedes the earlier rejection of
-that mechanism; it is not zero-data collection. No analytics cookies, custom
-click events, advertising, session replay, or cross-site profiles are added.
+that mechanism; it is not zero-data collection. No analytics cookies, advertising, session replay, or cross-site profiles are added.
+Optional fixed conversion events are disabled by default; see the commercial handoff.
 Only published page URLs are reported, with queries and fragments removed.
 Do Not Track and Global Privacy Control suppress records. Provider script
 requests and normal hosting processing still occur.
@@ -94,3 +94,9 @@ reedcreativelabs.com
 ```
 
 Enable Speed Insights and Web Analytics for the project in the Vercel dashboard. Code installation alone does not enable either dashboard service.
+
+## Commercial studio presentation
+
+See [Commercial repositioning handoff](docs/COMMERCIAL_REPOSITIONING.md) for the
+route map, evidence, email-draft inquiry flow, optional conversion configuration,
+and checks. Production deployment requires owner authorization.

@@ -40,7 +40,7 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     ...organization,
     description:
-      "Reed Creative Labs is the independent software and engineering studio behind Forgefield, building procedural desktop worlds, premium websites, and focused custom software.",
+      "Reed Creative Labs builds websites, front-end applications, automation, and technical visualizations for US businesses and creative agencies, alongside original games and software.",
   };
 }
 
@@ -148,7 +148,7 @@ export function projectJsonLd(project: Project) {
           .split("-")
           .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
           .join(" "),
-        url: absoluteUrl(`/projects/${slug}`),
+        url: absoluteUrl(`${project.route}#${slug}`),
       })),
     };
   }

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { StructuredData } from "@/components/StructuredData";
 import { phaseArcadeCopy, phaseArcadeGames } from "@/content/phase-arcade";
@@ -27,12 +26,12 @@ export function PhaseArcadeProductPage({ project }: { project: Project }) {
         <h2 id="gallery-title" className="v2-eyebrow">The games</h2>
         <div data-gallery-layout="gameplay">
           {phaseArcadeGames.map((game) => (
-            <figure key={game.slug} className={styles.game}>
+            <figure key={game.slug} id={game.slug} className={styles.game}>
               <div className={styles.capture}>
                 <Image src={game.image} alt={game.alt} fill sizes="(min-width: 1024px) 60vw, 94vw" className="object-contain" />
               </div>
               <figcaption>
-                <h3><Link href={`/projects/${game.slug}`}>{game.name}</Link></h3>
+                <h3>{game.name}</h3>
                 <p>{game.description}</p>
                 <a className="text-link" href={game.image} aria-label={`View full size: ${game.alt}`}>View full size</a>
               </figcaption>

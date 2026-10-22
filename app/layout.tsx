@@ -7,6 +7,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { defaultSeo, siteUrl } from "@/lib/seo";
 import "./globals.css";
+import "./commercial.css";
 
 export const metadata: Metadata = {
   ...defaultSeo,
