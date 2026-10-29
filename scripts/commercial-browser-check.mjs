@@ -26,7 +26,10 @@ const server = createServer(async (req, res) => {
     }
     if (target === root) target = path.join(root, "index.html");
     else if (!path.extname(target)) target += ".html";
-    let body = await readFile(target).catch(() => null);
+    let body = await readFile(target).catch(error => {
+      console.error(`Preview read failed: ${pathname} -> ${target} (${error.code})`);
+      return null;
+    });
     if (!body) {
       target = path.join(root, "404.html");
       body = await readFile(target);
@@ -44,15 +47,35 @@ await stat(path.join(root, "index.html"));
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const base = `http://127.0.0.1:${server.address().port}`;
 
-const output = "output/playwright/commercial";
+const output = process.env.RCL_COMMERCIAL_SCREENSHOTS ?? "output/playwright/commercial";
 await mkdir(output, { recursive: true });
 let browser;
 try {
   browser = await chromium.launch({ headless: true, ...(process.env.RCL_BROWSER_CHANNEL ? { channel: process.env.RCL_BROWSER_CHANNEL } : {}) });
   const errors = [], results = [];
   const routes = ["/", "/services", "/agency-partners", "/work", "/science-lab", "/contact"];
-  for (const width of [320, 390, 768, 1024, 1440]) {
+  const widths = [320, 375, 390, 430, 768, 1024, 1440, 1920];
+  for (const width of widths) {
     const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: "reduce" });
+    await page.addInitScript(() => {
+      window.refinementMetrics = { cls: 0, lcpMs: null };
+      let sessionStart = 0, lastShift = 0, sessionValue = 0;
+      new PerformanceObserver(list => {
+        for (const entry of list.getEntries()) {
+          if (entry.hadRecentInput) continue;
+          if (entry.startTime - lastShift > 1000 || entry.startTime - sessionStart > 5000) {
+            sessionStart = entry.startTime;
+            sessionValue = 0;
+          }
+          sessionValue += entry.value;
+          lastShift = entry.startTime;
+          window.refinementMetrics.cls = Math.max(window.refinementMetrics.cls, sessionValue);
+        }
+      }).observe({ type: "layout-shift", buffered: true });
+      new PerformanceObserver(list => {
+        window.refinementMetrics.lcpMs = list.getEntries().at(-1)?.startTime ?? null;
+      }).observe({ type: "largest-contentful-paint", buffered: true });
+    });
     page.on("pageerror", e => errors.push(e.message));
     page.on("response", r => { if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
     for (const route of routes) {
@@ -64,11 +87,23 @@ try {
       assert.deepEqual(overflow, [], `${route} at ${width}: overflow`);
       await page.evaluate(() => scrollTo({ top: 0, left: 0, behavior: "instant" }));
       await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
-      const violations = await page.evaluate(async () => (await axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] } })).violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) })));
+      const violations = await page.evaluate(async () => (await axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] }, rules: { "label-content-name-mismatch": { enabled: true } } })).violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) })));
       assert.deepEqual(violations, [], `${route} at ${width}: axe`);
       await page.screenshot({ path: `${output}/${route === "/" ? "home" : route.slice(1)}-${width}.png`, fullPage: true });
       if (route === "/") await page.screenshot({ path: `${output}/hero-${width}.png` });
-      results.push({ route, width, axeViolations: 0, overflow: 0 });
+      if (route === "/" && [375, 768, 1440].includes(width)) {
+        await page.locator(".commercial-work--client").screenshot({ path: `${output}/client-work-${width}.png`, style: ".site-header { visibility: hidden; }" });
+      }
+      const metrics = await page.evaluate(() => ({
+        ...window.refinementMetrics,
+        resourceBytes: performance.getEntriesByType("resource").reduce((total, entry) => total + entry.encodedBodySize, 0),
+      }));
+      const frames = await page.locator(".project-frame__screen img").evaluateAll(images => images.map(img => {
+        const bounds = img.getBoundingClientRect();
+        return { src: img.getAttribute("src"), complete: img.complete && img.naturalWidth > 0, ratioError: Math.abs(bounds.width / bounds.height - img.naturalWidth / img.naturalHeight), fit: getComputedStyle(img).objectFit };
+      }));
+      assert.ok(frames.every(frame => frame.complete && frame.ratioError < .025 && frame.fit === "contain"), `${route} at ${width}: preserve complete capture proportions`);
+      results.push({ route, width, axeViolations: 0, overflow: 0, metrics, frames });
     }
     await page.goto(base, { waitUntil: "networkidle" });
     const nav = page.locator(".commercial-nav:visible");
@@ -87,6 +122,22 @@ try {
     assert.equal(await page.locator('[name="type"]').inputValue(), "Agency partnership");
     await page.close();
   }
+  const hoverPage = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
+  await hoverPage.goto(base + "/services", { waitUntil: "networkidle" });
+  const offer = hoverPage.locator("#websites");
+  const spark = offer.locator(".commercial-service-icon__spark");
+  assert.equal(await spark.evaluate(e => getComputedStyle(e).animationName), "none", "Icon spark is idle until interaction");
+  await offer.hover();
+  assert.equal(await spark.evaluate(e => getComputedStyle(e).animationName), "service-icon-spark");
+  const initialOffset = await spark.evaluate(e => getComputedStyle(e).strokeDashoffset);
+  await hoverPage.waitForFunction(initial => getComputedStyle(document.querySelector("#websites .commercial-service-icon__spark")).strokeDashoffset !== initial, initialOffset);
+  await offer.screenshot({ path: `${output}/service-hover-1440.png`, style: ".site-header { visibility: hidden; }" });
+  await hoverPage.emulateMedia({ reducedMotion: "reduce" });
+  // Chromium applies the media preference and computed opacity on separate frames.
+  await hoverPage.waitForFunction(() => getComputedStyle(document.querySelector("#websites .commercial-service-icon__spark")).opacity === "0", null, { timeout: 2000 });
+  assert.equal(await spark.evaluate(e => getComputedStyle(e).animationName), "none", "Reduced motion uses a static icon highlight");
+  assert.equal(await spark.evaluate(e => getComputedStyle(e).opacity), "0");
+  await hoverPage.close();
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
   await page.goto(base + "/contact", { waitUntil: "networkidle" });
   const outgoing = [];
@@ -106,6 +157,8 @@ try {
   await page.locator('[name="acknowledgment"]').check();
   await page.getByRole("button", { name: "Prepare Email Draft" }).click();
   assert.match(await page.locator(".inquiry-form [role=status]").innerText(), /Nothing has been sent/);
+  // The existing form intentionally transfers focus on the next animation frame.
+  await page.waitForFunction(() => document.querySelector(".inquiry-result") === document.activeElement, null, { timeout: 2000 });
   assert.ok(await page.locator(".inquiry-result").evaluate(e => e === document.activeElement));
   const href = await page.getByRole("link", { name: "Open Email App", exact: true }).getAttribute("href");
   assert.equal(new URL(href).pathname, "reedcreativelabs@gmail.com");
@@ -136,7 +189,7 @@ try {
   await noJS.goto(base);
   await noJS.locator(".commercial-nav:visible summary").filter({ hasText: "Explore RCL" }).click();
   assert.ok(await noJS.locator(".commercial-nav:visible").getByRole("link", { name: "Science Lab" }).isVisible());
-  assert.deepEqual(errors, []);
   await writeFile(`${output}/results.json`, JSON.stringify({ results, form: "validation, draft, clipboard success/failure, edit invalidation, no network/storage", navigation: "keyboard, Escape, partnership selection, no-JS", errors }, null, 2));
-  console.log("Commercial browser checks passed: 6 routes × 5 widths, axe, images, metadata, keyboard, inquiry states, privacy, zoom, and no-JS fallback.");
+  assert.deepEqual(errors, []);
+  console.log(`Commercial browser checks passed: ${routes.length} routes × ${widths.length} widths, axe, images, metadata, keyboard, inquiry states, privacy, zoom, and no-JS fallback.`);
 } finally { await browser?.close(); server.close(); }

@@ -1,3 +1,4 @@
+import { FrameGlint } from "@/components/FrameGlint";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -18,7 +19,8 @@ export function ForgefieldCapture({
 }) {
   return (
     <figure className="forgefield-capture">
-      <a href={image.src} aria-label={`View full size: ${image.alt}`}>
+      <a className="metal-frame" href={image.src} aria-label={`View full size: ${image.alt}`}>
+        <FrameGlint />
         <picture>
           <source
             srcSet={`${image.src.replace(".webp", "-960.webp")} 960w, ${image.src.replace(".webp", "-1600.webp")} 1600w, ${image.src} 2560w`}

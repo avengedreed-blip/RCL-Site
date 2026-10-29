@@ -1,3 +1,4 @@
+import { FrameGlint } from "@/components/FrameGlint";
 import Image from "next/image";
 import { ButtonLink } from "@/components/ButtonLink";
 import { phaseArcadeCopy, phaseArcadeGames } from "@/content/phase-arcade";
@@ -14,7 +15,8 @@ export function PhaseArcadeShowcase() {
         <p className={styles.status}>{phaseArcadeCopy.status}</p>
         <ButtonLink href={phaseArcadeCopy.route} variant="secondary">Explore Phase Arcade</ButtonLink>
       </div>
-      <div className={styles.capture}>
+      <div className={`${styles.capture} metal-frame`}>
+        <FrameGlint />
         <Image src={game.image} alt={game.alt} fill sizes="(min-width: 1024px) 55vw, 94vw" className="object-contain" />
       </div>
     </section>

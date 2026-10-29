@@ -27,7 +27,7 @@ export function ButtonLink({
       aria-label={ariaLabel}
       rel={/^https?:\/\//.test(href) ? "noopener noreferrer" : undefined}
       className={cn(
-        "exhibit-button material-control group inline-flex h-12 items-center justify-center gap-3 whitespace-nowrap rounded-[3px] px-7 text-sm font-black uppercase transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-gold",
+        "exhibit-button material-control group inline-flex h-12 items-center justify-center gap-3 whitespace-nowrap rounded-[3px] px-7 text-sm font-semibold transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rcl-gold",
         "relative overflow-hidden",
         variant === "primary" &&
           "exhibit-button--primary text-white hover:text-white",

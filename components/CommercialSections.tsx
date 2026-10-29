@@ -2,13 +2,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { services, processSteps } from "@/content/commercial";
+import { ProjectFrame } from "@/components/ProjectFrame";
+import { PanelsTopLeft, Braces, Workflow, Layers3, Orbit } from "lucide-react";
+
+const serviceIcons = [PanelsTopLeft, Braces, Workflow, Layers3, Orbit];
 
 export function ServiceOffers({ detailed = false }: { detailed?: boolean }) {
   return (
     <div className={`commercial-offers${detailed ? " commercial-offers--detailed" : ""}`}>
-      {services.map((service, index) => (
+      {services.map((service, index) => {
+        const Icon = serviceIcons[index];
+        return (
         <article id={service.id} key={service.id}>
-          <p className="commercial-index">0{index + 1}</p>
+          <div className="commercial-offer-mark">
+            <p className="commercial-index">0{index + 1}</p>
+            <span className="commercial-service-icon" aria-hidden="true">
+              <Icon size={22} strokeWidth={1.25} />
+              <Icon className="commercial-service-icon__spark" size={22} strokeWidth={1.75} />
+            </span>
+          </div>
           <div className="commercial-offer-heading">
             <h3>{service.title}</h3>
             {detailed && <p className="commercial-range">Planning range<br />{service.range}</p>}
@@ -23,7 +35,8 @@ export function ServiceOffers({ detailed = false }: { detailed?: boolean }) {
             </Link>
           )}
         </article>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -31,11 +44,11 @@ export function ServiceOffers({ detailed = false }: { detailed?: boolean }) {
 export function WorkPreview() {
   return <div className="commercial-work-grid">
     <article className="commercial-work commercial-work--client">
-      <a href="https://www.brotherhoodcoffeeco.com/" className="commercial-client-capture" aria-label="Explore the Brotherhood Coffee website" rel="noopener noreferrer"><Image src="/images/work/brotherhood-website-2026-10-21.jpg" width={1440} height={1000} alt="Brotherhood Coffee’s website, showing its roastery story, product navigation, and ordering link." sizes="(min-width: 800px) 52vw, 92vw" /></a>
+      <a href="https://www.brotherhoodcoffeeco.com/" className="commercial-client-capture" rel="noopener noreferrer"><ProjectFrame label="brotherhoodcoffeeco.com"><Image src="/images/work/brotherhood-website-2026-10-21.jpg" width={1440} height={1000} alt="Brotherhood Coffee’s website, showing its roastery story, product navigation, and ordering link." sizes="(min-width: 1440px) 800px, (min-width: 1000px) 60vw, 92vw" /></ProjectFrame></a>
       <div className="commercial-work-copy"><p className="v2-eyebrow">Client work / Business website</p><h3>Brotherhood Coffee Co.</h3><p>A roastery website with a coffee catalog, company story, wholesale inquiries, and ordering through its existing Square storefront.</p><p className="commercial-note">HTML, CSS, JavaScript · Managed checkout</p><a className="commercial-text-link" href="https://www.brotherhoodcoffeeco.com/" rel="noopener noreferrer">Visit the website <span aria-hidden="true">↗</span></a></div>
     </article>
     <article className="commercial-work">
-      <Link href="/projects/forgefield" aria-label="Explore Forgefield"><Image src="/images/projects/forgefield-eventide-2026-09-20-960.webp" width={960} height={533} alt="Eventide in Forgefield, with a copper accretion disk around a dark center." sizes="(min-width: 800px) 45vw, 92vw" /></Link>
+      <Link href="/projects/forgefield"><ProjectFrame kind="application" label="Forgefield / Eventide"><Image src="/images/projects/forgefield-eventide-2026-09-20-960.webp" width={960} height={533} alt="Eventide in Forgefield, with a copper accretion disk around a dark center." sizes="(min-width: 1440px) 660px, (min-width: 1000px) 50vw, 92vw" /></ProjectFrame></Link>
       <div className="commercial-work-copy"><p className="v2-eyebrow">Original RCL product / Released</p><h3>Forgefield</h3><p>Procedural desktop worlds built with modern Fortran and OpenGL. Available now on Steam and itch.io.</p><p className="commercial-note">Native Windows application · September 2026 build capture</p><Link className="commercial-text-link" href="/projects/forgefield">Explore Forgefield <span aria-hidden="true">↗</span></Link></div>
     </article>
   </div>;

@@ -1,3 +1,4 @@
+import { FrameGlint } from "@/components/FrameGlint";
 import Image from "next/image";
 import { ButtonLink } from "@/components/ButtonLink";
 import { StructuredData } from "@/components/StructuredData";
@@ -18,7 +19,8 @@ export function PhaseArcadeProductPage({ project }: { project: Project }) {
           <p className={styles.status}>{phaseArcadeCopy.release}</p>
           <ButtonLink href="#gallery-title" variant="secondary">Explore the Games</ButtonLink>
         </div>
-        <div className={styles.capture}>
+        <div className={`${styles.capture} metal-frame`}>
+        <FrameGlint />
           <Image src={phaseArcadeGames[0].image} alt={phaseArcadeGames[0].alt} fill priority sizes="(min-width: 1024px) 55vw, 94vw" className="object-contain" />
         </div>
       </section>
@@ -27,7 +29,8 @@ export function PhaseArcadeProductPage({ project }: { project: Project }) {
         <div data-gallery-layout="gameplay">
           {phaseArcadeGames.map((game) => (
             <figure key={game.slug} id={game.slug} className={styles.game}>
-              <div className={styles.capture}>
+              <div className={`${styles.capture} metal-frame`}>
+        <FrameGlint />
                 <Image src={game.image} alt={game.alt} fill sizes="(min-width: 1024px) 60vw, 94vw" className="object-contain" />
               </div>
               <figcaption>

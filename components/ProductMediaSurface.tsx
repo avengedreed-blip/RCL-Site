@@ -1,3 +1,4 @@
+import { FrameGlint } from "@/components/FrameGlint";
 import Image from "next/image";
 import type { Project } from "@/content/projects";
 import { cn } from "@/lib/utils";
@@ -62,12 +63,13 @@ export function ProductMediaSurface({
     <figure
       data-media-state="approved-image"
       className={cn(
-        "product-media-surface product-media-surface--image",
+        "product-media-surface product-media-surface--image metal-frame",
         "material-media-frame",
         isDetail && "product-media-surface--detail",
         className,
       )}
     >
+      <FrameGlint />
       <Image
         src={media.src}
         alt={media.alt}

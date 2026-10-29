@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { Reveal } from "@/components/Reveal";
+import { ProjectFrame } from "@/components/ProjectFrame";
 import { StructuredData } from "@/components/StructuredData";
 import { partnershipModels, partnershipProcess, partnershipServices } from "@/content/agency-partners";
 import { forgefieldLaunchSummary } from "@/content/forgefield";
@@ -66,9 +67,10 @@ export default function AgencyPartnersPage() {
         </div>
         <div className={styles.workGrid}>
           <article className={styles.work}>
-            <Link href="/" className={styles.workImage} aria-label="Explore the RCL website">
+            <Link href="/" className={styles.workImage}>
+              <ProjectFrame label="reedcreativelabs.com">
               <Image src="/images/work/rcl-studio-desktop-2026-10-21.jpg" width={1440} height={1000} sizes="(min-width: 768px) 46vw, 92vw" alt="The RCL studio homepage, with its custom black-hole visualization and commercial services introduction." />
-              <span aria-hidden="true"><ArrowUpRight size={22} /></span>
+              </ProjectFrame>
             </Link>
             <p className={styles.workType}>Live studio website / RCL-owned</p>
             <h3>Reed Creative Labs</h3>
@@ -77,9 +79,10 @@ export default function AgencyPartnersPage() {
             <Link href="/" className="text-link">Explore the live website <ArrowUpRight aria-hidden="true" /></Link>
           </article>
           <article className={styles.work}>
-            <Link href="/projects/forgefield" className={styles.workImage} aria-label="Explore Forgefield technical work">
+            <Link href="/projects/forgefield" className={styles.workImage}>
+              <ProjectFrame kind="application" label="Forgefield / Eventide">
               <Image src="/images/projects/forgefield-eventide-2026-09-20.webp" width={2560} height={1440} sizes="(min-width: 768px) 46vw, 92vw" alt="Eventide in Forgefield: a copper accretion ring and polar jets rendered by the native Windows application." />
-              <span aria-hidden="true"><ArrowUpRight size={22} /></span>
+              </ProjectFrame>
             </Link>
             <p className={styles.workType}>Original product / RCL-owned</p>
             <h3>Forgefield</h3>

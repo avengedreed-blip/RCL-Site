@@ -49,7 +49,7 @@
   --color-accent-copper-bright-rgb: 238 152 113;
   --color-accent-copper-dark-rgb: 81 39 29;
   --color-border-subtle: rgb(255 255 255 / 0.1);
-  --color-border-accent: rgb(var(--color-accent-gold-rgb) / 0.34);
+  --color-border-accent: rgb(var(--color-accent-gold-rgb) / 0.44);
   --color-focus: var(--color-accent-gold-bright);
   --color-glow-gold: rgb(var(--color-accent-gold-rgb) / 0.18);
   --color-glow-copper: rgb(var(--color-accent-copper-rgb) / 0.12);
@@ -61,14 +61,22 @@
   --v2-container: 1320px;
   --v2-gutter: clamp(1rem, 3vw, 2rem);
   --v2-section-space: clamp(5rem, 9vw, 9rem);
-  --v2-hairline: rgb(var(--color-accent-gold-rgb) / 0.24);
-  --v2-hairline-strong: rgb(var(--color-accent-gold-rgb) / 0.58);
+  --v2-hairline: rgb(var(--color-accent-gold-rgb) / 0.34);
+  --v2-hairline-strong: rgb(var(--color-accent-gold-rgb) / 0.66);
   --v2-copy: var(--color-text-secondary);
   --v2-copy-dim: var(--color-text-muted);
   --v2-display-font: "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
   --v2-text-font: "Segoe UI Variable Text", "Segoe UI", Arial, sans-serif;
   --v2-mono-font: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   --v2-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --studio-interactive: var(--color-accent-copper-bright);
+  --studio-rule: rgb(var(--color-accent-copper-rgb) / 0.46);
+  --studio-section-space: clamp(4rem, 7.5vw, 7.5rem);
+  --studio-reading-width: 60ch;
+  --studio-heading-size: clamp(1.85rem, 3vw, 2.8rem);
+  --studio-motion-fast: 180ms;
+  --studio-motion-slow: 420ms;
+  --studio-metal-grain: url("/images/raw-metal.svg");
   --material-graphite-base: var(--color-graphite-900);
   --material-graphite-base-highlight: rgba(255, 255, 255, 0.032);
   --material-graphite-base-shadow: var(--color-graphite-950);
@@ -126,10 +134,12 @@ body {
   overflow-x: clip;
   overflow-y: visible;
   background:
+    var(--studio-metal-grain) 0 0 / 384px 384px,
     radial-gradient(circle at 1px 1px, rgba(255, 255, 255, var(--material-grain-page)) 0 0.5px, transparent 0.8px) 0 0 / 7px 11px,
     radial-gradient(circle at 2px 3px, rgba(255, 255, 255, 0.004) 0 0.45px, transparent 0.75px) 0 0 / 13px 17px,
     radial-gradient(ellipse at 50% -20%, rgba(255, 255, 255, 0.045), transparent 40%),
     linear-gradient(180deg, var(--color-graphite-850) 0%, var(--color-graphite-900) 46%, var(--color-true-black) 100%);
+  background-blend-mode: soft-light, normal, normal, normal, normal;
   color: var(--color-text-primary);
   font-family: var(--v2-text-font);
   letter-spacing: 0;
@@ -1414,11 +1424,11 @@ a {
 }
 
 .v2-eyebrow {
-  color: var(--color-rcl-gold);
+  color: var(--color-accent-copper-bright);
   font-family: var(--v2-mono-font);
   font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   line-height: 1.5;
   text-transform: uppercase;
 }
@@ -3070,8 +3080,8 @@ a.product-ledger__row:hover {
   z-index: 1;
   display: grid;
   max-width: var(--v2-container);
-  gap: 1.35rem;
-  padding-block: clamp(5rem, 8vw, 7rem) clamp(3.5rem, 5vw, 5rem);
+  gap: 1.5rem;
+  padding-block: clamp(3.5rem, 7vw, 6rem) clamp(3rem, 5vw, 4.5rem);
 }
 
 .v2-page-hero h1,
@@ -3088,8 +3098,8 @@ a.product-ledger__row:hover {
 
 .v2-page-hero h1 {
   max-width: 1040px;
-  font-size: clamp(3.6rem, 6.4vw, 7.4rem);
-  line-height: 0.92;
+  font-size: clamp(2.5rem, 4.6vw, 4.5rem);
+  line-height: 1.02;
   overflow-wrap: normal;
   word-break: normal;
 }
@@ -4215,7 +4225,7 @@ a.product-ledger__row:hover {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.055),
     0 14px 30px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(10px);
 }
 
 .site-header::after {
@@ -4817,8 +4827,10 @@ a.product-ledger__row:hover {
   }
 
   .v2-page-hero__inner {
-    padding-block: 5.25rem 4.5rem;
+    padding-block: 3.5rem 3rem;
   }
+
+  .v2-page-hero h1 { font-size: clamp(2.4rem, 9.5vw, 3.8rem); line-height: 1.06; }
 
   .v2-services-intro__layout,
   .v2-about-mission__layout,
@@ -5943,4 +5955,75 @@ a.product-ledger__row:hover {
   .forgefield-campaign-hero .v2-hero__layout { min-height: 0; }
   .forgefield-campaign-hero .v2-hero__layout { padding-block: 2rem; }
   .forgefield-campaign-hero .v2-hero__logo { display: none; }
+}
+
+/* Shared studio chrome: quiet surfaces leave the original product media intact. */
+.site-header { background: rgb(7 9 12 / .97); border-bottom-color: var(--color-border-subtle); box-shadow: none; }
+.site-header::after { display: none; }
+.exhibit-button { border: 1px solid var(--color-border-subtle); background: var(--color-surface-graphite); box-shadow: none; font-weight: 600; letter-spacing: .005em; transition: transform var(--studio-motion-fast) ease, border-color var(--studio-motion-fast) ease, background-color var(--studio-motion-fast) ease; }
+.exhibit-button--primary, .exhibit-button--contact { border-color: var(--color-accent-copper-bright); background: var(--color-bg-elevated); }
+.exhibit-button--ghost { border: 0; background: transparent; }
+.exhibit-button:hover { background: var(--color-surface-raised); border-color: var(--studio-interactive); color: var(--color-text-primary); box-shadow: none; }
+.exhibit-button::before { display: none; }
+.footer-shell { background: var(--studio-metal-grain) 0 0 / 384px 384px, var(--color-surface-footer); background-blend-mode: soft-light; border-top-color: var(--studio-rule); box-shadow: none; }
+.footer-shell__grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .7fr) minmax(0, .7fr) minmax(0, 1fr); gap: 2.5rem; padding-block: clamp(3rem, 5vw, 5rem); }
+.footer-shell__label { color: var(--studio-interactive); font-size: .7rem; letter-spacing: .1em; }
+.footer-shell__link, .footer-shell__email { min-height: 44px; font-family: var(--v2-text-font); font-size: .875rem; font-weight: 400; text-transform: none; letter-spacing: 0; }
+.footer-shell__link:hover, .footer-shell__email:hover { color: var(--studio-interactive); }
+.footer-shell__brand p { font-size: .9rem; }
+.footer-shell__brand .footer-shell__location { font-size: .68rem; color: var(--color-text-muted); }
+.footer-shell__base p { font-size: .68rem; text-transform: none; }
+.footer-shell__social { gap: .5rem; }
+.footer-shell__social .exhibit-button { padding-inline: .8rem; height: 44px; font-size: .8rem; gap: .5rem; }
+.footer-shell__base { border-color: var(--color-border-subtle); }
+.footer-shell__legal .footer-shell__link { min-height: 44px; }
+.v2-page-hero { background: var(--color-bg-secondary); border-color: var(--color-border-subtle); }
+.v2-page-hero::after { display: none; }
+@media (min-width: 1024px) {
+  .v2-page-hero__inner { grid-template-columns: minmax(0, 1.3fr) minmax(0, .8fr); column-gap: clamp(3rem, 6vw, 6rem); align-items: end; }
+  .v2-page-hero__inner > .v2-eyebrow { grid-column: 1 / -1; }
+  .v2-page-hero__inner > p:last-child { max-width: 50ch; padding-bottom: .3rem; }
+  .v2-page-hero h1 { font-size: clamp(2.75rem, 4.6vw, 4.5rem); font-weight: 550; }
+}
+@media (max-width: 1100px) {
+  .footer-shell__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .footer-shell__grid { gap: 2rem 1.5rem; }
+  .footer-shell__brand, .footer-shell__contact { grid-column: 1 / -1; }
+  .footer-shell__nav { grid-template-columns: 1fr; }
+  .footer-shell__brand p { max-width: 40ch; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exhibit-button:hover, .exhibit-button:hover svg { transform: none; }
+}
+
+/* Supporting headings share a quieter scale than the main page title. */
+.v2-info-page .v2-section-intro h2,
+.v2-about-mission h2,
+.v2-about-principles h2,
+.v2-about-people h2,
+.v2-family-studio h2,
+.v2-founder-support h2,
+.v2-press-contact h2 { font-size: var(--studio-heading-size); line-height: 1.12; letter-spacing: -.035em; }
+.v2-founder-profile__identity h3 { font-size: clamp(1.8rem, 3vw, 2.7rem); line-height: 1.12; }
+
+/* Grain is blended into the original backgrounds, never used as a new surface color. */
+
+/* A small light follows the frame perimeter; media and hit targets stay untouched. */
+.metal-frame.metal-frame { position: relative; border-color: rgb(var(--color-accent-copper-bright-rgb) / .52); }
+.metal-frame.project-frame--application, .forgefield-capture > .metal-frame { border-color: rgb(var(--color-accent-gold-rgb) / .5); }
+.frame-glint { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; overflow: visible; opacity: 0; pointer-events: none; }
+.frame-glint rect { width: calc(100% - 2px); height: calc(100% - 2px); rx: 5px; fill: none; stroke: var(--color-accent-gold-bright); stroke-width: 1.5px; stroke-linecap: round; stroke-dasharray: 7 93; }
+.project-frame--phone .frame-glint rect { rx: 12px; }
+.metal-frame:focus-within { border-color: var(--color-accent-copper-bright); }
+@keyframes frame-perimeter-glint { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@media (hover: hover) {
+  .metal-frame.metal-frame:hover { border-color: var(--color-accent-copper-bright); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .metal-frame:is(:hover, :focus-within) > .frame-glint,
+  a:focus-visible > .metal-frame > .frame-glint { opacity: 1; }
+  .metal-frame:is(:hover, :focus-within) > .frame-glint rect,
+  a:focus-visible > .metal-frame > .frame-glint rect { animation: frame-perimeter-glint 2800ms linear infinite; }
 }
